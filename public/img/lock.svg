@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" overflow="visible" preserveAspectRatio="none" viewBox="0 0 21 24" width="19" height="22">
+<desc>Black lock icon</desc>
+<g transform="translate(1 1)">
+<path d="M9.5 0C6 0 3.167 2.813 3.167 6.286v3.143H0V22h19V9.429h-3.167V6.286C15.833 2.813 13 0 9.5 0zm0 3.143c1.884 0 3.167 1.273 3.167 3.143v3.143H6.333V6.286c0-1.87 1.283-3.143 3.167-3.143z" vector-effect="non-scaling-stroke" fill="#000" fill-rule="nonzero"/>
+</g>
+</svg>
