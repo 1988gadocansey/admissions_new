@@ -1,0 +1,288 @@
+{% extends 'base.html.twig' %}
+{% form_theme form 'forms/semantic-ui-form-theme.html.twig' %}
+
+
+{% block body_id 'dashboard' %}
+
+{% block header %}
+&nbsp;
+
+<div class="ui two column stackable grid">
+    <div class="column">
+        <h1 class="ui header">
+
+            <img class="ui medium circular image" style="width: 50px"  src="{{ asset('public/albums/thumbnails/'~ app.user.formNo ~'.jpg') }}">
+
+            <div class="content" style='font-size:16px'>
+
+                <small style='color:red'> fields marked in red asteriks(*) are required</small>
+
+
+            </div>
+        </h1>
+    </div>
+    {% if(app.user.formCompleted==1) %}
+    <div class="middle aligned column">
+        <a href="{{ path('preview') }}" class="ui right floated basic button">Are you done with filling the form? Click to
+            preview and print.</a>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}
+
+{% block main %}
+
+<div class="step1">
+
+
+
+    <div class="ui ignored positive message">
+        <center>1. SSSCE/WASSSCE RESULT UPLOADS</center>
+
+    </div>
+    <div class="ui ignored warning message">
+      <center><small>All Awaiting Result Applicants are not supposed to upload results. The system will be open for you to
+        upload your results as soon as they are released by the exam council. Thanks</small></center>
+
+               <div id="horizontal-list">
+                   <p></p>
+               <center>
+                     <p>1. Fill all the fields in the forms</p>
+                     <p>2. Click on save to add your results</p>
+                     <p>3. Repeat this process to add all your results</p>
+               </center>
+               </div>
+
+    </div>
+    <hr>
+    <div class="ui form">
+        {{ form_errors(form) }}
+        {{ form_start(form ) }}
+        <div class="equal width fields ">
+
+            <table id="paymentTable" class="ui table"border="0"   align="center">
+                <tr id="paymentRow" payment_row="payment_row">
+                    <td valign="top" class="required">
+                        {{ form_row(form.indexNo) }}
+                    </td>
+                    <td valign="top" class="required">
+                        {{ form_row(form.center) }}
+
+                    </td>
+                    <td valign="top" class="required">
+                        {{ form_row(form.month) }}
+
+                    </td>
+                    <td valign="top" class="required">
+                        {{ form_row(form.year) }}
+
+                    </td>
+                    <td valign="top" class="required">
+                        {{ form_row(form.subject) }}
+
+                    </td>
+
+                    <td valign="top" class="required">
+                        {{ form_row(form.examType) }}
+                    </td>
+                    <td valign="top" class="required">
+                        {{ form_row(form.sitting) }}
+                    </td>
+                    <td valign="top" class="required">
+                        {{ form_row(form.grade) }}
+                    </td>
+                    {#<td  id="insertPaymentCell">
+                        <div class="ui teal button">
+                            <i class="add icon"></i>
+                            Add
+                        </div>
+                    </td>#}
+                 {#   <td  id="insertPaymentCell">
+
+                        <button style="margin-top:19px" type="button" id="insertPaymentRow" class="ui button green" title="click to add more grades" > <i class="add icon"></i>
+                            Click to add More
+                        </button>
+                    </td>#}
+
+
+
+
+
+                </tr>
+            </table>
+            <div class="ui divider"></div>
+        </div>
+
+
+
+
+        <center> {{ form_end(form) }}</center>
+        <p></p>
+       <center>  <div class="panel panel-default">
+            <div class="panel-heading"><span style="color:green">YOUR UPLOADED RESULTS</span></div>
+
+            <div class="panel-body">
+                <div class="row">
+
+                    <div class="col s12 m12 l12">
+                        <div class="card hoverable">
+                            <div class="col s12 m12 l12">
+                                <div class="card">
+                                    <div class="card-content">
+                                        <table class="ui column table" >
+                                            <thead>
+                                            <tr>
+                                                <th data-field="id">NO</th>
+                                                <th data-field="price">INDEXNO</th>
+                                                <th data-field="name">SUBJECT</th>
+                                                <th data-field="price">GRADE</th>
+
+                                                <th data-field="price">VALUE</th>
+                                                <th data-field="price">EXAM TYPE</th>
+                                                <th data-field="price">SITTING</th>
+                                                <th data-field="price">MONTH</th>
+                                                <th data-field="price">YEAR</th>
+                                                <th data-field="price">CENTER</th>
+                                                <th style="text-align: center">ACTION</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            {% for genus in data %}
+                                                <tr>
+                                                    <td>{{loop.index }}</td>
+                                                    <td>{{ genus.indexno }}</td>
+                                                    <td>{{ genus.subject.getName() }}</td>
+                                                    <td>{{ genus.grade }}</td>
+                                                    <td>{{ genus.gradeValue }}</td>
+                                                    <td>{{ genus.examType }}</td>
+                                                    <td>{{ genus.sitting }}</td>
+                                                    <td>{{ genus.month|capitalize }}</td>
+                                                    <td>{{ genus.year }}</td>
+                                                    <td>{{ genus.center }}</td>
+                                                    <td>
+                                                       {# <a href="{{ path('result_delete', {'id': genus.id}) }}" onclick="return('Are you sure you wanted to delete this result??')"class="ui button red">
+                                                           Delete result
+                                                        </a>#}
+                                                        <form action="{{ url('result_delete', {id: genus.id}) }}" method="post" onclick="return confirm('Are you sure you want to delete this result')" data-confirmation="true" id="delete-form">
+                                                            <input type="hidden" name="token" value="{{ csrf_token('delete') }}" />
+                                                            <button type="submit" class="ui button red">
+                                                                <i class="remove icon" aria-hidden="true"></i>
+                                                                Delete Result
+                                                            </button>
+                                                        </form>
+                                                    </td>
+                                                </tr>
+                                            {% endfor %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+           </div></center>
+
+        <p>
+        <center>
+
+
+
+            <a class="ui inverted green button" href="{{ path('step2') }}">Click to go back</a>
+
+            <a class="ui inverted blue button" href="{{ path('preview') }}">Click to preview form</a>
+
+
+        </center>
+        </p>
+    </div>
+</div>
+
+{% endblock %}
+{% block javascripts %}
+{{ parent() }}
+<script type="text/javascript">
+
+
+
+    $(document).ready(function(){
+        $("select").addClass('browser-default'),
+            function checkFormElements(){}
+
+
+
+        $("#insertPaymentRow").bind('click', function(){
+
+            var numOrgs = $(" table#paymentTable tr[payment_row]").length + 1;
+            var newOrg = $("table#paymentTable tr:first ").clone(true);
+            $(newOrg).children(' td#insertPaymentCell ').html('<button  type="button" id="removePaymentRow_' + numOrgs + '"  title="click to delete grade" class="ui button red" > <i class="remove icon"></i>\n' +
+                '                            Click to remove</button>');
+            var amountLine = $(newOrg).children('td')[2];
+            $(amountLine).children(':last-child').prop('value', '');
+            var amountInput = $(amountLine).children(':last-child');
+            $(amountInput).prop('id', 'amt_' + numOrgs);
+            $(newOrg).attr('id', 'paymentRow_' + numOrgs);
+            $(newOrg).insertAfter($("table#paymentTable tr:last"));
+            $('#removePaymentRow_' + numOrgs).bind("click", function(){
+// $(amountInput).trigger('keyup');
+                $('#paymentRow_' + numOrgs).remove();
+                var count = 0;
+            });
+// $('#amt_'+numOrgs).bind('focus',function(){
+//   console.log('hello from here');
+// });
+
+//});
+
+
+            $('#paymentTable .pay_type  :selected').parent().each(function(){
+                if ($(this).prop('selectedIndex') <= 0){
+                    //$('#new_payment_individual_form :submit').prop('disabled','disabled');
+                    //  $('#alertInfo').css('display','block').html("Please select a payment type!");
+                }
+            });
+//console.log($(this).prop('name')+"->"+$('#paymentTable .pay_type  :selected').parent().length);
+
+        });
+
+    });
+
+
+    jQuery(function($) {
+        $(document).on('click', '.btn-add[data-target]', function(event) {
+            var collectionHolder = $('#' + $(this).attr('data-target'));
+
+            if (!collectionHolder.attr('data-counter')) {
+                collectionHolder.attr('data-counter', collectionHolder.children().length);
+            }
+
+            var prototype = collectionHolder.attr('data-prototype');
+            var form = prototype.replace(/__name__/g, collectionHolder.attr('data-counter'));
+
+            collectionHolder.attr('data-counter', Number(collectionHolder.attr('data-counter')) + 1);
+            collectionHolder.append(form);
+
+            event && event.preventDefault();
+        });
+
+        $(document).on('click', '.btn-remove[data-related]', function(event) {
+            var name = $(this).attr('data-related');
+            $('*[data-content="'+name+'"]').remove();
+
+            event && event.preventDefault();
+        });
+    });
+</script>
+
+
+
+{% endblock %}
+
+
+
+
+
+
+

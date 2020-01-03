@@ -5,7 +5,9 @@
  
 
 {% block main %}
-    <div class="newsitem_text">
+
+
+    <div class="">
 
 
 
@@ -24,9 +26,13 @@
 
         <center><p><strong>For more information call 033 2094767 / 0243039730 / 0246091283 / 0505284060</strong></p></center>
         &nbsp;
+        <div class="form-actions" data-qa-continue="">
 
-        {#<center><a class="ui inverted orange button" href="{{ path('photoUpload') }}">Click to start application</a></center>#}
-   {##}
+            <a class="btn"  href="{{ path('photoUpload') }}">Click to start application</a>
+
+        </div>
+
+
     </div>
 
 {% endblock %}

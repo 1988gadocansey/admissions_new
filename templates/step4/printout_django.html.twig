@@ -1,0 +1,580 @@
+{#
+   This is the base template used as the application layout which contains the
+   common elements and decorates all the other templates.
+
+#}
+<!--
+Designed by Gad Ocansey <gadocansey@gmail.com> +233243348522
+-->
+<!DOCTYPE html>
+<html lang="{{ app.request.locale }}">
+<head>
+    <meta charset="UTF-8" />
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <title>{% block title %}Takoradi Technical University - Admissions{% endblock %}</title>
+    {% block stylesheets %}
+        <link rel="stylesheet" href="{{ asset('public/assets/css/style.css') }}">
+
+    {% endblock %}
+
+    <link rel="icon" type="image/x-icon" href="{{ asset('public/assets/img/logo2.png') }}" />
+
+    <style type="text/css">
+        /*img{
+            max-width:180px;
+        }*/
+        input[type=file]{
+            padding:10px;
+            background:#2d2d2d;}
+        .error{
+            color:red;
+        }
+        /*input{*/
+        /*text-transform: uppercase;*/
+        /*}*/
+
+
+
+    </style>
+    <style type="text/css">
+        html, body, #page3,  #page1, #page2 { float: none;  background: none}
+        body.pushable .pusher {
+            background-color: none;
+        }
+
+        fieldset {
+            background: none;
+        }
+        .uppercase {
+            font-weight: bold;
+            text-align: right;
+        }
+        @media print
+        {
+            table {float: none !important; }
+            div { float: none !important; }
+            #page1  { page-break-inside: avoid; page-break-before: always; }
+            #page2  { page-break-inside: avoid; page-break-before: always; }
+            #page3  { page-break-inside: avoid; page-break-before: always; }
+        }
+
+        @page {
+            size: A4;
+        }
+
+        table, figure {
+            page-break-inside: avoid;
+        }
+        fieldset legend {
+            page-break-before: always;
+        }
+        h1, h2, h3, h4, h5 {
+            page-break-after: avoid;
+        }
+        table{
+            background: none;
+        }
+    </style>
+    {% block css %}
+    {% endblock %}
+</head>
+
+<body id="{% block body_id %}{% endblock %}" class="pushabless">
+<div class="pusher">
+    <div id="menu" class="ui large sticky inverted stackable menu">
+
+
+
+
+
+
+
+        <div class="ui right stackable inverted menu">
+            {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                <a href="{{ path('security_logout') }}" class="item">Logout</a>
+            {% else %}
+                <a href="{{ path('security_login') }}" class="item">Login</a>
+
+            {% endif %}
+
+            {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                <p style="" class="item">Welcome {{ app.user.username }}</p>
+            {% endif %}
+        </div>
+
+
+
+    </div>
+    <div class="ui container">
+        <header>
+            <div class="ui basic segment">
+                <div class="ui three column stackable grid">
+                    <div class="column">
+                        <a href="#">
+                            <img style="width: 250px;margin-left: -24px" src="{{ asset('public/assets/images/logo.png') }}" alt="TTU logo"
+                                 class="ui small image"/>
+
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+
+
+            <div class="ui large stackable menu">
+
+                <a href="{{ path('dashboard') }}" class="item">Home</a>
+
+
+                <a onclick="javascript:printDiv('print')" class="ui right positive basic button"> Click to preview and
+                    print.</a>
+
+
+            </div>
+
+        </header>
+
+
+
+        <div style="margin-top: 4px;">
+            {% for msg in app.session.flashBag.get('success') %}
+                <div class="ui green message true">
+                    {{ msg }}
+                </div>
+            {% endfor %}
+            {% for msg in app.session.flashBag.get('error') %}
+                <div class="ui red message false">
+                    {{ msg }}
+                </div>
+            {% endfor %}
+        </div>
+        <p>
+            {% block banner %}
+
+            {% endblock %}
+        </p>
+        <div class="ui padded segment">
+            <div id="print">
+                <div id="page1">
+                    <img src='{{ asset('public/assets/images/header.jpg') }}' style="width:1086px;height: auto"
+                         class="ui fluid image"/>
+
+                    <br/>
+
+                    <center>APPLICATION NUMBER - {{ data.applicationNumber }} &nbsp;&nbsp;| APPLICATION TYPE -
+                        {{ data.formType }}, ENTRY MODE -  {{ data.entryMode|upper }}
+                    </center>
+
+
+                    <table class='ui red table'>
+                        <tr>
+
+                            <td>
+                                <table class="folder table">
+                                    <tr>
+                                        <td width="210" style="text-align: right" class="uppercase" align="right"><span>Title:</span></td>
+                                        <td width="408" class="capitalize">{{ data.title | upper }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td width="210" style="text-align: right" class="uppercase" align="right"><span>Surname:</span></td>
+                                        <td width="408" class="capitalize">{{ data.lastname | upper }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td width="210" style="text-align: right" class="uppercase" align="right"><span>First Name:</span></td>
+
+                                        <td width="408" class="capitalize">{{ data.firstname | upper}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="uppercase" style="text-align: right" style="" align="right"><span>Other Names:</span></td>
+                                        <td class="capitalize">{{ data.othernames }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="uppercase" style="text-align: right" align="right"><span>Gender:</span></td>
+                                        <td class="capitalize">{{ data.gender | upper}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="uppercase" style="text-align: right"align="right"><span>Date of birth</span>:</td>
+                                        <td class="capitalize">{{ data.dob| date('l, F j, Y') |upper}}</td>
+                                    </tr>
+
+
+                                    <tr>
+                                        <td class="uppercase" style="text-align: right" align="right"><span>Phone Number:</span></td>
+                                        <td class="capitalize">{{ data.phone }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="uppercase" style="text-align: right" align="right"><span>Hometown:</span></td>
+                                        <td class="capitalize">{{ data.hometown| upper }}</td>
+
+
+                                    </tr>
+
+                                    <tr>
+                                        <td class="uppercase" style="text-align: right" align="right"><span>Address:</span></td>
+                                        <td class="capitalize">{{ data.address | upper }}</td>
+
+
+                                    </tr>
+                                    <tr>
+                                        <td class="uppercase" style="text-align: right" align="right"><span>Hometown Region:</span></td>
+                                        <td class="capitalize">{{ data.region.name|upper }}</td>
+
+
+                                    </tr>
+                                    <tr>
+                                        <td class="uppercase" style="text-align: right" align="right"><span>Nationality:</span></td>
+                                        <td class="capitalize">{{ data.nationality.name | upper }}</td>
+
+
+                                    </tr>
+                                    <tr>
+                                        <td class="uppercase" style="text-align: right" align="right"><span>Marital Status</span></td>
+                                        <td class="capitalize">{{ data.maritalStatus | upper}}</td>
+
+
+                                    </tr>
+                                    <tr>
+                                        <td class="uppercase" style="text-align: right" align="right"><span >Physically Challenged?</span></td>
+                                        <td class="capitalize">{{ data.physicallyDisabled | upper }}</td>
+
+
+                                    </tr>
+                                    <tr>
+                                        <td class="uppercase" align="right"><span>Bonded to an organization?</span></td>
+                                        <td class="capitalize">{{ data.bond | upper}}</td>
+
+
+                                    </tr>
+
+
+
+
+                                </table>
+
+                            </td>
+
+                            <td valign="top">
+                                <div class='ui medium image'>
+
+                                    <img class="thumbnail img-preview medium ui image ui fluid image" style="width:240px;height:auto;margin-left: 85px  "
+
+                                         src="{{ asset('public/albums/thumbnails/'~ data.applicationNumber ~'.jpg') }}"
+                                         alt="your passport photo">
+
+                                </div>
+                            </td>
+                            <td>
+
+                            </td>
+
+                        </tr>
+                    </table>
+
+
+
+                    <p><h4>Guardian Information</h4></p>
+
+                    <table class="ui folder table">
+                        <tr>
+                            <td>
+                                <table>
+                                    <tr>
+                                        <td class="uppercase" style="text-align: right"><strong>GUARDIAN NAME:</strong></td>
+                                        <td class="capitalize">{{ data.guardianName | upper}}</td>
+
+                                    </tr>
+                                    <tr>
+                                        <td class="uppercase" style="text-align: right"><strong>GUARDIAN ADDRESS:</strong></td>
+                                        <td class="capitalize">{{ data.guardianAddress | upper}} </td>
+
+                                    </tr>
+
+                                </table>
+                            </td>
+                            <td>
+                                <table>
+                                    <tr>
+                                        <td class="uppercase" style="text-align: right" ><strong>GUARDIAN PHONE:</strong></td>
+                                        <td class="capitalize">{{ data.guardianPhone | upper}}</td>
+
+                                    </tr>
+                                    <tr>
+                                        <td class="uppercase" style="text-align: right" ><strong>GUARDIAN OCCUPATION:</strong></td>
+                                        <td class="capitalize">{{ data.guardianOccupation | upper}}</td>
+
+                                    </tr>
+
+                                </table>
+                            </td>
+                        </tr>
+
+
+                    </table>
+
+                </div>
+                <div id="page2">
+                    <p class="ui yellow table"><h4>Programme and Academic Information</h4></p>
+
+                    <table class="ui folder table">
+                        <tr>
+                            <td>
+                                <table>
+                                    <tr>
+                                        <td class="uppercase" style="text-align: right" ><strong>First Choice:</strong></td>
+                                        <td class="capitalize">{{ data.programmeID1.name  | upper}}</td>
+
+                                    </tr>
+                                    <tr>
+                                        <td class="uppercase" style="text-align: right"><strong>Second Choics:</strong></td>
+                                        <td class="capitalize">{{ data.programmeID2.name | upper }}</td>
+
+
+                                    </tr>
+                                    <tr>
+                                        <td class="uppercase" style="text-align: right"><strong>Third Choice:</strong></td>
+                                        <td class="capitalize">{{ data.programmeID3.name | upper  }}</td>
+
+                                    </tr>
+
+
+                                </table>
+                            </td>
+                            <td>
+                                <table>
+                                    
+                                    <tr>
+                                        <td class="uppercase" style="text-align: right"><strong>Programme Studied:</strong></td>
+                                        <td class="capitalize">{{ data.programmeStudied | upper}}</td>
+
+
+                                    </tr>
+                                    {% if  data.formType in ['BTECH', 'MTECH' ] %}
+                                        {% if data.award|length %}
+                                            <tr>
+                                                <td class="uppercase" style="text-align: right"><strong>Class Obtained:</strong></td>
+                                                <td class="capitalize">{{ data.award | upper}}</td>
+
+
+                                            </tr>
+                                        {% endif %}
+                                    {% endif %}
+
+                                </table>
+                            </td>
+                        </tr>
+
+
+                    </table>
+
+
+                    {% if   data.formType in ['HND', 'MATURE', 'DIPLOMA','CERTIFICATE'] %}
+
+                        <p class="ui yellow table"><h4>Examination Results</h4></p>
+
+                        <table class='ui yellow table'>
+                            <thead>
+                            <tr>
+                                <th data-field="id">NO</th>
+                                <th data-field="price">INDEXNO</th>
+                                <th data-field="name">SUBJECT</th>
+                                <th data-field="price">GRADE</th>
+
+                                <th data-field="price">VALUE</th>
+                                <th data-field="price">EXAM TYPE</th>
+                                <th data-field="price">SITTING</th>
+                                <th data-field="price">MONTH OF EXAM</th>
+                                <th data-field="price">CENTER</th>
+
+                            </tr>
+                            </thead>
+                            <tbody>
+
+                            {% for genus in result %}
+                                <tr>
+                                    <td>{{ loop.index }}</td>
+                                    <td>{{ genus.indexno }}</td>
+                                     
+
+
+                                <td>{{ genus.subject.getName() }}</td>
+
+
+                                     
+                                     
+                                    <td>{{ genus.grade }}</td>
+                                    <td>{{ genus.gradeValue }}</td>
+                                    <td>{{ genus.examType }}</td>
+                                    <td>{{ genus.sitting }}</td>
+                                    <td>{{ genus.month|upper }}</td>
+                                    <td>{{ genus.center|upper }}</td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+
+                        </table>
+
+
+                    {% endif %}
+                </div>
+                <div id="page3">
+                    <p  ><h4>CORROBORATIVE DECLARATION</h4></p>
+
+                    <p>(Please read the instructions carefully before you endorse this form)</p>
+                    <p></p>
+                    <p>1. This declaration should be signed by a person of high integrity and honour who must also endorse
+                        at least one of the candidate's passport size photographs on the reverse side and also satisfy
+                        him/herself that the examination grades indicated
+                        on the form by the applicant are true.
+                    <p>2. The application will not be valid if the declaration below is not signed</p>
+                    <p>3.If the declaration proves to be false, the application shall be rejected; if falsely detected after
+                        admission, the student shall be dismissed.</p>
+
+                    <p>
+                        I hereby declare that the photograph endorsed by me is the true likeness of the applicant  {{ data.title|upper }} {{ data.name |upper}} who is personally known to me. I have inspected his/her certificates against the
+                        results indicated on the form and I satisfied that they are true and name that appears on them is
+                        the same as that by which he/she is officially/personally known to me.
+
+                    </p>
+                    <table>
+
+
+                        <tr>
+                            <td>SIGNATURE  </td>
+                            <td> <span style="margin-left:32px;"> ..................................................................................... </span></td>
+
+                        </tr>
+                        <tr>
+                            <td>NAME  </td>
+                            <td> <span style="margin-left:32px;"> ..................................................................................... </span></td>
+
+                        </tr>
+                        <tr>
+                            <td>OCCUPATION  </td>
+                            <td> <span style="margin-left:32px;"> ..................................................................................... </span></td>
+
+                        </tr>
+                        <tr>
+                            <td>POSITION  </td>
+                            <td> <span style="margin-left:32px;"> ..................................................................................... </span></td>
+
+                        </tr>
+                        <tr>  <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td></tr>
+                        <tr>
+                            <td>ADDRESS & OFFICIAL STAMP  </td>
+                            <td> <span style="margin-left:32px;"> ..................................................................................... </span></td>
+
+                        </tr>
+
+
+
+
+
+
+                    </table>
+
+
+
+
+                    <p>
+                        <img src='{{ asset('public/assets/images/footer.jpg') }}' style="width:1086px;height: auto"
+                             class="ui fluid image"/>
+                    </p>
+                      </div>
+            </div>
+
+        </div>
+        {# <div class="links">
+             <center>
+
+                 <a class="ui inverted green button" href="{{ path('step1') }}">Click to go back</a>
+
+
+             </center>
+         </div>#}
+
+    </div>
+
+
+    </div>
+
+
+
+
+    {% block footer %}
+        <footer id="footer" class="ui inverted vertical footer segment">
+            <div class="ui container">
+                <div class="ui inverted divided equal height stackable grid">
+
+
+                    <div class="eight wide column">
+
+                        <p>&copy; {{ 'now'|date('Y') }} Takoradi Technical
+                            University | <a href="#" target="_blank" style="color: #1abb9c;"> Powered by TPConnect</a></p>
+                    </div>
+
+
+                </div>
+            </div>
+        </footer>
+    {% endblock %}
+
+</div>
+{% block javascripts %}
+    <script src="{{ asset('public/assets/js/app.js')}}"></script>
+    <script src="{{ asset('public/assets/js/form.js')}}"></script>
+    <script src="{{ asset('public/assets/js/validate-form.js')}}"></script>
+    <script src="{{ asset('public/assets/js/semantic.min.js')}}"></script>
+
+    <script>
+
+        $('.ui.dropdown').dropdown();
+        $('#applicant_step_one_dob_year').dropdown();
+        $('#applicant_step_one_dob_month').dropdown();
+        $('#applicant_step_one_dob_day').dropdown();
+
+
+        $('.save').on('click', function () {
+            $('.ui.basic.modal').modal('show');
+        })
+
+
+        $(".true").fadeOut(4000);
+        $(".false").fadeOut(4000);
+    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+    <script>
+
+        function printDiv(divID) {
+            //Get the HTML of div
+            var divElements = document.getElementById(divID).innerHTML;
+            //Get the HTML of whole page
+            var oldPage = document.body.innerHTML;
+
+            //Reset the page's HTML with div's HTML only
+            document.body.innerHTML =
+                "<html><head><title></title></head><body>" +
+                divElements + "</body>";
+
+            //Print Page
+            window.print();
+
+            //Restore orignal HTML
+            document.body.innerHTML = oldPage;
+
+
+        }
+
+    </script>
+    <script>
+        $(document).ready(function () {
+            // Wrap each tr and td's content within a div
+            // (todo: add logic so we only do this when printing)
+            $("table tbody th, table tbody td").wrapInner("<div></div>");
+        })
+    </script>
+{% endblock %}
+
+
+</body>
+</html>

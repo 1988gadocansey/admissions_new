@@ -1,0 +1,506 @@
+{% extends 'base.html.twig' %}
+{% block css %}
+    <style type="text/css">
+        html, body, #page3,  #page1, #page2 { float: none;  background: none}
+        body.pushable .pusher {
+            background-color: none;
+        }
+        #page1{
+            text-align: justify;
+        }
+
+        fieldset {
+            background: none;
+        }
+        .uppercase {
+            font-weight: bold;
+            text-align: justify;
+        }
+        @media print
+        {
+            table {float: none !important; }
+            div { float: none !important; }
+            #page1  { page-break-inside: avoid; page-break-before: always; }
+            #page2  { page-break-inside: avoid; page-break-before: always; }
+            #page3  { page-break-inside: avoid; page-break-before: always; }
+        }
+
+        @page {
+            size: A4;
+        }
+
+        table, figure {
+            page-break-inside: avoid;
+        }
+        fieldset legend {
+            page-break-before: always;
+        }
+        h1, h2, h3, h4, h5 {
+            page-break-after: avoid;
+        }
+        table{
+            background: none;
+        }
+    </style>
+{% endblock %}
+
+{% block body_id 'dashboard' %}
+
+{% block header %}
+    &nbsp;
+
+    <div class="ui two column stackable grid">
+
+        {% if(app.user.formCompleted==1) %}
+            <div class="right aligned column" style="margin-left: 590px">
+                <br/>
+                <a  onclick="javascript:printDiv('print')" class="ui right positive basic button print"> Click to preview and
+                    print.</a>
+                <br/>
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}
+
+
+
+
+{% block main %}
+
+    <div id="print">
+        <div id="page1">
+            <img src='{{ asset('public/assets/images/header.jpg') }}' style="width:1086px;height: auto"
+                 class="ui fluid image"/>
+
+            <br/>
+
+            <center>APPLICATION NUMBER - {{ app.user.formNo }} &nbsp;&nbsp;| APPLICATION TYPE -
+                {{ app.user.formType }}, ENTRY MODE -  {{ data.entryMode|upper }}
+            </center>
+
+
+            <table class='ui red table'>
+                <tr>
+
+                    <td>
+                        <table class="folder table">
+                            <tr>
+                                <td width="210" style="text-align: right" class="uppercase" align="right"><span>Title:</span></td>
+                                <td width="408" class="capitalize">{{ data.title | upper }}</td>
+                            </tr>
+                            <tr>
+                                <td width="210" style="text-align: right" class="uppercase" align="right"><span>Surname:</span></td>
+                                <td width="408" class="capitalize">{{ data.lastname | upper }}</td>
+                            </tr>
+                            <tr>
+                                <td width="210" style="text-align: right" class="uppercase" align="right"><span>First Name:</span></td>
+
+                                <td width="408" class="capitalize">{{ data.firstname | upper}}</td>
+                            </tr>
+                            <tr>
+                                <td class="uppercase" style="text-align: right" style="" align="right"><span>Other Names:</span></td>
+                                <td class="capitalize">{{ data.othernames|upper }}</td>
+                            </tr>
+                            <tr>
+                                <td class="uppercase" style="text-align: right" align="right"><span>Gender:</span></td>
+                                <td class="capitalize">{{ data.gender | upper}}</td>
+                            </tr>
+                            <tr>
+                                <td class="uppercase" style="text-align: right"align="right"><span>Date of birth</span>:</td>
+                                <td class="capitalize">{{ data.dob| date('l, F j, Y') |upper}}</td>
+                            </tr>
+
+
+                            <tr>
+                                <td class="uppercase" style="text-align: right" align="right"><span>Phone Number:</span></td>
+                                <td class="capitalize">{{ data.phone }}</td>
+                            </tr>
+                            <tr>
+                                <td class="uppercase" style="text-align: right" align="right"><span>Email:</span></td>
+                                <td class="capitalize">{{ data.email }}</td>
+                            </tr>
+                            <tr>
+                                <td class="uppercase" style="text-align: right" align="right"><span>Hometown:</span></td>
+                                <td class="capitalize">{{ data.hometown| upper }}</td>
+
+
+                            </tr>
+
+                            <tr>
+                                <td class="uppercase" style="text-align: right" align="right"><span>Address:</span></td>
+                                <td class="capitalize">{{ data.address | upper }}</td>
+
+
+                            </tr>
+                            <tr>
+                                <td class="uppercase" style="text-align: right" align="right"><span>Hometown Region:</span></td>
+                                <td class="capitalize">{{ data.region.name|upper }}</td>
+
+
+                            </tr>
+                            <tr>
+                                <td class="uppercase" style="text-align: right" align="right"><span>Nationality:</span></td>
+                                <td class="capitalize">{{ data.nationality.name | upper }}</td>
+
+
+                            </tr>
+                            <tr>
+                                <td class="uppercase" style="text-align: right" align="right"><span>Marital Status</span></td>
+                                <td class="capitalize">{{ data.maritalStatus | upper}}</td>
+
+
+                            </tr>
+                            <tr>
+                                <td class="uppercase" style="text-align: right" align="right"><span >Physically Challenged?</span></td>
+                                <td class="capitalize">{{ data.physicallyDisabled | upper }}</td>
+
+
+                            </tr>
+                            <tr>
+                                <td class="uppercase" align="right"><span>Bonded to an organization?</span></td>
+                                <td class="capitalize">{{ data.bond | upper}}</td>
+
+
+                            </tr>
+
+
+
+
+                        </table>
+
+                    </td>
+
+                    <td valign="top">
+                        <div class='ui medium image'>
+
+                            <img class="thumbnail img-preview medium ui image ui fluid image" style="width:240px;height:auto;margin-left: 85px  "
+
+                                 src="{{ asset('public/albums/thumbnails/'~ data.applicationNumber ~'.jpg') }}"
+                                 alt="your passport photo">
+
+                        </div>
+                    </td>
+                    <td>
+
+                    </td>
+
+                </tr>
+            </table>
+
+
+
+            <p><h4>Guardian Information</h4></p>
+
+            <table class="ui folder table">
+                <tr>
+                    <td>
+                        <table>
+                            <tr>
+                                <td class="uppercase" style="text-align: right"><strong>GUARDIAN NAME:</strong></td>
+                                <td class="capitalize">{{ data.guardianName | upper}}</td>
+
+                            </tr>
+                            <tr>
+                                <td class="uppercase" style="text-align: right"><strong>GUARDIAN ADDRESS:</strong></td>
+                                <td class="capitalize">{{ data.guardianAddress | upper}} </td>
+
+                            </tr>
+
+                        </table>
+                    </td>
+                    <td>
+                        <table>
+                            <tr>
+                                <td class="uppercase" style="text-align: right" ><strong>GUARDIAN PHONE:</strong></td>
+                                <td class="capitalize">{{ data.guardianPhone | upper}}</td>
+
+                            </tr>
+                            <tr>
+                                <td class="uppercase" style="text-align: right" ><strong>GUARDIAN OCCUPATION:</strong></td>
+                                <td class="capitalize">{{ data.guardianOccupation | upper}}</td>
+
+                            </tr>
+
+                        </table>
+                    </td>
+                </tr>
+
+
+            </table>
+
+        </div>
+        <div id="page2">
+            <p class="ui yellow table"><h4>Programme and Academic Information</h4></p>
+
+            <table class="ui folder table">
+                <tr>
+                    <td>
+                        <table>
+                            <tr>
+                                <td class="uppercase" style="text-align: right" ><strong>First Choice:</strong></td>
+                                <td class="capitalize">{{ data.programmeID1.name  | upper}}</td>
+
+                            </tr>
+                            <tr>
+                                <td class="uppercase" style="text-align: right"><strong>Second Choics:</strong></td>
+                                <td class="capitalize">{{ data.programmeID2.name | upper }}</td>
+
+
+                            </tr>
+                            <tr>
+                                <td class="uppercase" style="text-align: right"><strong>Third Choice:</strong></td>
+                                <td class="capitalize">{{ data.programmeID3.name | upper  }}</td>
+
+                            </tr>
+
+
+                        </table>
+                    </td>
+                    <td>
+                        <table>
+                            <tr>
+                                <td class="uppercase" style="text-align: right" ><strong>Former School:</strong></td>
+                                <td class="capitalize">{{ data.formerSchool.name | upper }}</td>
+
+                            </tr>
+                            <tr>
+                                <td class="uppercase" style="text-align: right"><strong>Programme Studied:</strong></td>
+                                <td class="capitalize">{{ data.programmeStudied | upper}}</td>
+
+
+                            </tr>
+                            {% if   app.user.formType in ['BTECH', 'MTECH' ] %}
+                                {% if data.award|length %}
+                                    <tr>
+                                        <td class="uppercase" style="text-align: right"><strong>Class Obtained:</strong></td>
+                                        <td class="capitalize">{{ data.award | upper}}</td>
+
+
+                                    </tr>
+                                {% endif %}
+                            {% endif %}
+
+                        </table>
+                    </td>
+                </tr>
+
+
+            </table>
+
+
+            {% if   app.user.formType in ['HND', 'MATURE', 'DIPLOMA','CERTIFICATE'] %}
+
+                <p class="ui yellow table"><h4>Examination Results</h4></p>
+
+                <table class='ui yellow table'>
+                    <thead>
+                    <tr>
+                        <th data-field="id">NO</th>
+                        <th data-field="price">INDEXNO</th>
+                        <th data-field="name">SUBJECT</th>
+                        <th data-field="price">GRADE</th>
+
+                        <th data-field="price">VALUE</th>
+                        <th data-field="price">EXAM TYPE</th>
+                        <th data-field="price">SITTING</th>
+                        <th data-field="price">MONTH OF EXAM</th>
+                        <th data-field="price">YEAR OF EXAM</th>
+                        <th data-field="price">CENTER</th>
+
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    {% for genus in result %}
+                        <tr>
+                            <td>{{ loop.index }}</td>
+                            <td>{{ genus.indexno }}</td>
+                            
+
+                                <td>{{ genus.subject.getName() }}</td>
+
+
+
+
+                            <td>{{ genus.grade }}</td>
+                            <td>{{ genus.gradeValue }}</td>
+                            <td>{{ genus.examType }}</td>
+                            <td>{{ genus.sitting }}</td>
+                            <td>{{ genus.month|upper }}</td>
+                            <td>{{ genus.year}}</td>
+                            <td>{{ genus.center|upper }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+
+                </table>
+
+
+            {% endif %}
+        </div>
+        <div id="page3">
+            <p  ><h4>CORROBORATIVE DECLARATION</h4></p>
+
+            <p>(Please read the instructions carefully before you endorse this form)</p>
+            <p></p>
+            <p>1. This declaration should be signed by a person of high integrity and honour who must also endorse
+                at least one of the candidate's passport size photographs on the reverse side and also satisfy
+                him/herself that the examination grades indicated
+                on the form by the applicant are true.
+            <p>2. The application will not be valid if the declaration below is not signed</p>
+            <p>3.If the declaration proves to be false, the application shall be rejected; if falsely detected after
+                admission, the student shall be dismissed.</p>
+
+            <p>
+                I hereby declare that the photograph endorsed by me is the true likeness of the applicant  {{ data.title|upper }} {{ data.name |upper}} who is personally known to me. I have inspected his/her certificates against the
+                results indicated on the form and I satisfied that they are true and name that appears on them is
+                the same as that by which he/she is officially/personally known to me.
+
+            </p>
+            <table>
+
+
+                <tr>
+                    <td>SIGNATURE  </td>
+                    <td> <span style="margin-left:32px;"> ..................................................................................... </span></td>
+
+                </tr>
+                <tr>
+                    <td>NAME  </td>
+                    <td> <span style="margin-left:32px;"> ..................................................................................... </span></td>
+
+                </tr>
+                <tr>
+                    <td>OCCUPATION  </td>
+                    <td> <span style="margin-left:32px;"> ..................................................................................... </span></td>
+
+                </tr>
+                <tr>
+                    <td>POSITION  </td>
+                    <td> <span style="margin-left:32px;"> ..................................................................................... </span></td>
+
+                </tr>
+                <tr>  <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td></tr>
+                <tr>
+                    <td>ADDRESS & OFFICIAL STAMP  </td>
+                    <td> <span style="margin-left:32px;"> ..................................................................................... </span></td>
+
+                </tr>
+
+
+
+
+
+
+            </table>
+
+
+
+
+            <p>
+                <img src='{{ asset('public/assets/images/footer.jpg') }}' style="width:1086px;height: auto"
+                     class="ui fluid image"/>
+            </p>
+            <center><img src="{{ qr_code_data_uri(data.applicationNumber, { writer: 'svg', size: 125 }) }}" /></center>
+        </div>
+    </div>
+
+
+    {# <div class="links">
+         <center>
+
+             <a class="ui inverted green button" href="{{ path('step1') }}">Click to go back</a>
+
+
+         </center>
+     </div>#}
+
+
+
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        $(document).ready(function () {
+            // Wrap each tr and td's content within a div
+            // (todo: add logic so we only do this when printing)
+            $("table tbody th, table tbody td").wrapInner("<div></div>");
+        })
+    </script>
+    <script language="javascript" type="text/javascript">
+        function printDiv(divID) {
+            //Get the HTML of div
+            var divElements = document.getElementById(divID).innerHTML;
+            //Get the HTML of whole page
+            var oldPage = document.body.innerHTML;
+
+            //Reset the page's HTML with div's HTML only
+            document.body.innerHTML =
+                "<html><head><title></title></head><body>" +
+                divElements + "</body>";
+
+            //Print Page
+            window.print();
+
+            //Restore orignal HTML
+            document.body.innerHTML = oldPage;
+
+
+        }
+    </script>
+
+    <script>
+
+
+        (function() {
+            var beforePrint = function() {
+
+            };
+            var afterPrint = function() {
+                // do ajax for insert queries
+                $.ajax({
+                    url: "{{ path('updatePrint') }}",
+                    success: function(data){
+                        $("#responseArea").text(data);
+                    }
+                });
+            };
+
+            if (window.matchMedia) {
+                var mediaQueryList = window.matchMedia('print');
+                mediaQueryList.addListener(function(mql) {
+                    if (mql.matches) {
+                        beforePrint();
+                    } else {
+                        afterPrint();
+                    }
+                });
+            }
+
+            window.onbeforeprint = beforePrint;
+            window.onafterprint = afterPrint;
+        }());
+
+
+
+
+
+
+
+
+
+
+    </script>
+
+
+
+
+{% endblock %}
+
+
+
+
+
+
