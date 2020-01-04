@@ -96,7 +96,7 @@ class ApplicantStepThree extends AbstractType
                 ))
 
 
-        ->add('Save and add new', SubmitType::class ,array('attr' => array( 'class'=>'ui large orange button ','v-form-ctrl'=>'')));
+        ->add('Save_addNew', SubmitType::class ,array('attr' => array( 'class'=>'ui large orange button ','v-form-ctrl'=>'')));
     }
 
     public function buildYearChoices() {

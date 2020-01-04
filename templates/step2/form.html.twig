@@ -1,34 +1,12 @@
 {% extends 'base.html.twig' %}
-{% form_theme form 'forms/semantic-ui-form-theme.html.twig' %}
+{% form_theme form 'forms/bootsrap4-theme.html.twig' %}
+{% block stylesheets %}
+    {{ parent() }}
 
-
-{% block body_id 'dashboard' %}
-
-{% block header %}
-    &nbsp;
-
-    <div class="ui two column stackable grid">
-        <div class="column">
-            <h1 class="ui header">
-
-                <img class="ui medium circular image" style="width: 50px"  src="{{ asset('public/albums/thumbnails/'~ app.user.formNo ~'.jpg') }}">
-
-                <div class="content" style='font-size:16px'>
-
-                    <small style='color:red'> fields marked in red asteriks(*) are required</small>
-
-
-                </div>
-            </h1>
-        </div>
-        {% if(app.user.formCompleted==1) %}
-            <div class="middle aligned column">
-                <a href="{{ path('preview') }}" class="ui right floated basic button">Are you done with filling the form? Click to
-                    preview and print.</a>
-            </div>
-        {% endif %}
-    </div>
 {% endblock %}
+{% block body_id 'form1' %}
+
+
 
 {% block main %}
 
@@ -40,47 +18,48 @@
             <center>1. ACADEMIC INFORMATION</center>
         </div>
         <hr>
-        <div class="ui form">
+
             {{ form_errors(form) }}
         {{ form_start(form ) }}
-        <div class="equal width fields ">
-            <div class="required field ">
+
+
+            <div class="form-control">
                 {{ form_row(form.programmeID1) }}
                  </div>
-            <div class="field required ">
+            <div class="form-control">
                 {{ form_row(form.programmeID2) }}
 
             </div>
-            <div class="field required ">
+            <div class="form-control ">
                 {{ form_row(form.programmeID3) }}
 
             </div>
 
-        </div>
-            <div class="equal width fields ">
-                <div class="required field ">
+
+
+                <div class="form-control">
                     {{ form_row(form.formerSchool) }}
                 </div>
-                <div class="field required ">
+                <div class="form-control">
                     {{ form_row(form.preferedHall) }}
 
                 </div>
 
-                <div class="field required ">
+                <div class="form-control">
                     {{ form_row(form.programmeStudied) }}
 
                 </div>
 
-                <div class="field required ">
+                <div class="form-control ">
                     {{ form_row(form.referrals) }}
 
                 </div>
-                <div class="field required ">
+                <div class="form-control">
                     {{ form_row(form.awaiting) }}
 
                 </div>
 
-            </div>
+    </div>
             
 
 
@@ -91,71 +70,50 @@
         <p>
            <center>
 
-            <a class="ui inverted green button" href="{{ path('step1') }}">Click to go back</a>
+            <a class="btn" href="{{ path('step1') }}">Click to go back</a>
 
                             {% if (app.user.formType=='MTECH' or app.user.formType=='BTECH' or app.user.formType=='FOREIGN') %}
-                                <a class="ui inverted blue button" href="{{ path('preview') }}">Click to Preview Form</a>
+                                <a class="btn" href="{{ path('preview') }}">Click to Preview Form</a>
 
                             {% elseif app.request.get('done')==2 or app.user.getFormNo !=0  %}
-                                 <a class="ui inverted blue button" href="{{ path('step3') }}">Click to go to step3</a>
+                                 <a class="btn" href="{{ path('step3') }}">Click to go to step3</a>
 
                             {%  endif%}
 
 
         </center>
-        </p>
+      
         </div>
-    </div>
+
 
 {% endblock %}
 {% block javascripts %}
 {{ parent() }}
-<script type="text/javascript">
+    <script>
+        $(document).ready(function () {
+            $(function () {
 
-    $('#save').click(function(e){
-        event.preventDefault();
-        var formData = new FormData($(this)[0]);
-
-        alert(formData);
-            $.ajax({
-                url: "{{ path('step1') }}",
-                data	: formData,
-                type: "POST",
-
-                contentType: false,
-                processData: false,
-                cache: false,
-                dataType: "JSON", // Change this according to your response from the server.
-                error: function (err) {
-                    console.error(err);
-                },
-                success: function (data) {
-                    console.log(data);
-                },
-                complete: function () {
-                    console.log("Request finished.");
-
-                }
-            }). done(function(data){
-
-                if (data.status == 'success'){
-                    $(".green").show();
-                    $(".green").text(data.status + " " + data.message);
-                    $(".green").fadeOut(4000);
-                    //window.location.href="{{url('photoUpload')}}";
-                }
-                else{
-                    $(".red").show();
-                    $(".red").text(data.status + " " + data.message);
-                    $(".red").fadeOut(4000);
-                }
+                $('.step1').find("select,input,textarea").each(function () {
+                    $(this).removeClass("form-control")
+                })
+            });
 
 
-            });;
-    });
+            $(function () {
 
+                $('.old').find("select,input,textarea").each(function () {
+                    $(this).removeClass("form-control")
+                })
+            });
 
-</script>
+            $(function () {
+
+                $('.last').find("select,input,textarea").each(function () {
+                    $(this).removeClass("form-control")
+                })
+            });
+        });
+    </script>
 
 
 

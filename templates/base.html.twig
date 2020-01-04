@@ -20,6 +20,9 @@
 
 
         <style>
+
+
+
             .primary {
                 color: #fff;
                 background-color: #3683dc;
@@ -28,35 +31,11 @@
                 background-color: #2398dc;
                 color: white;
             }
-            input{
+            input select textarea{
                 text-transform: uppercase;
             }
-            .select{
-                width: 100%;
-                max-width: 415px;
-                background: transparent;
-                -webkit-transition: border-color 225ms ease-in-out;
-                transition: border-color 225ms ease-in-out;
-                border: 1px solid #606469;
-                padding: .5rem;
-                border-radius: 0;
-                color: #333132;
-                border: 1px solid #c8d0d4;
-                min-height: 48px;
-                max-width: none;
-            }
 
-            .select-wrapper select, [type=email], [type=number], [type=select] {
-                width: 100%;
-                max-width: 415px;
-                background: transparent;
-                -webkit-transition: border-color 225ms ease-in-out;
-                transition: border-color 225ms ease-in-out;
-                border: 1px solid #606469;
-                padding: .5rem;
-                border-radius: 0;
-                color: #333132;
-            }
+
 
         </style>
     {% endblock %}
@@ -250,22 +229,9 @@
     });
 </script>
 <script src="https://cdn.jsdelivr.net/npm/select2@4.0.12/dist/js/select2.min.js"></script>
-<script>
-    $(document).ready(function() {
-        $('.select').select2();
-    });
 
+{% block javascripts %}
 
-
-</script>
-<script>
-    $(document).ready(function(){
-        $('.select').select2({ width: "resolve" });
-        width: 'resolve' // need to override the changed default
-
-    });
-
-</script>
-
+{% endblock %}
 </body>
 </html>

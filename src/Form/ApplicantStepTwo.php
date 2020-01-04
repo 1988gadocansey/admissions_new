@@ -302,7 +302,7 @@ class ApplicantStepTwo extends AbstractType
 
             ))
 
-            ->add('programmeStudied', TextType::class, array( 'required' => true, 'attr' => array('v-model' => 'guardianAddress', 'v-form-ctrl' => '', 'required' => '', 'id' => 'lastName', 'class' => 'required')))
+            ->add('programmeStudied', TextType::class, array( 'required' => true, 'attr' => array('v-model' => 'guardianAddress', 'v-form-ctrl' => '', 'required' => '', 'id' => 'lastName')))
 
 
             ->add('referrals', ChoiceType::class, [
@@ -348,7 +348,7 @@ class ApplicantStepTwo extends AbstractType
 
         }
 
-        $builder->add('Save and Continue', SubmitType::class ,array('attr' => array( 'class'=>'ui large orange button ','v-form-ctrl'=>'')));
+        $builder->add('Save', SubmitType::class ,array('attr' => array( 'class'=>'btn primary ','v-form-ctrl'=>'')));
 
 
 
@@ -362,7 +362,7 @@ class ApplicantStepTwo extends AbstractType
         $resolver->setDefaults(array(
             'data_class' => Applicant::class,
             //'attr' => array('class' => 'ui loadable form')
-            'attr' => array('class' => 'ui  form')
+            'attr' => array('class' => 'ui  validated')
         ));
         $resolver->setRequired('user');
         $resolver->setRequired('type');

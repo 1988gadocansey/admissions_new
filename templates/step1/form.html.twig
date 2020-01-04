@@ -1,36 +1,12 @@
 {% extends 'base.html.twig' %}
-{% form_theme form 'forms/semantic-ui-form-theme.html.twig' %}
-{% block css %}
+{% form_theme form 'forms/bootsrap4-theme.html.twig' %}
+{% block stylesheets %}
+    {{ parent() }}
 
 {% endblock %}
-{% block body_id 'dashboard' %}
-
-{% block header %}
-    &nbsp;
-
-    <div class="ui two column stackable grid">
-        <div class="column">
-            <h1 class="ui header">
-
-                <img class="ui medium circular image" style="width: 50px"  src="{{ asset('public/albums/thumbnails/'~ app.user.formNo ~'.jpg') }}">
-
-                <div class="content" style='font-size:16px'>
-
-                    <small style='color:red'> please fields marks with (*) are required</small>
+{% block body_id 'form1' %}
 
 
-                </div>
-            </h1>
-        </div>
-        {% if(app.user.formCompleted==1) %}
-            <div class="middle aligned column">
-                <a href="{{ path('preview') }}" class="ui right floated basic button">Click to
-                    preview your form.</a>
-
-            </div>
-        {% endif %}
-    </div>
-{% endblock %}
 
 {% block main %}
 
@@ -43,176 +19,184 @@
                 1. BIODATA COLLECTION</h4>
         </div>
         <hr>
-        <div class="ui form">
+
             {{ form_errors(form) }}
-        {{ form_start(form ) }}
+            {{ form_start(form ) }}
 
 
+            <div class="form-control">
 
-            <div class="equal width fields">
-            <div class="required field">
                 {{ form_row(form.firstName) }}
-                 </div>
-            <div class="field required ">
+
+            </div>
+
+            <div class="form-control">
                 {{ form_row(form.lastName) }}
 
             </div>
-            <div class="field ">
+            <div class="form-control">
                 {{ form_row(form.otherNames) }}
 
             </div>
 
-        </div>
-        <div class="equal width fields">
-            <div class="field required">
-                {{ form_row(form.title) }}
-              </div>
 
-            <div class="field required">
+            <div class="form-control">
+                {{ form_row(form.title) }}
+            </div>
+
+            <div class="form-control">
                 {{ form_row(form.gender) }}
 
             </div>
-            <div class="field required">
+            <div class="form-control">
                 {{ form_row(form.maritalStatus) }}
 
             </div>
 
-        </div>
-
-        <div class="equal width fields">
-            <div class="field required">
+            <div class="form-control">
                 {{ form_row(form.dob) }}
             </div>
-            <div class="field required">
+            <div class="form-control">
                 {{ form_row(form.phone) }}
             </div>
 
-
-        </div>
-        <div class="equal width fields">
-            <div class="field required">
+            <div class="form-control">
                 {{ form_row(form.entryQualificationOne) }}
             </div>
-            <div class="field required">
+            <div class="form-control">
                 {{ form_row(form.entryQualificationTwo) }}
             </div>
-            <div class="field required">
+            <div class="form-control">
                 {{ form_row(form.physicallyDisabled) }}
             </div>
 
+            <div class="form-control">
+                {{ form_row(form.religion) }}
+            </div>
 
+
+
+        <p>&nbsp;</p>
+        <h4 class="text-center">
+            2. LOCATION INFORMATION</h4>
+    </div>
+    <hr>
+<div class="old">
+
+        <div class="form-control">
+            {{ form_row(form.hometown) }}
         </div>
-            <div class="equal width fields">
+        <div class="form-control">
+            {{ form_row(form.address) }}
+        </div>
+        <div class="form-control">
+            {{ form_row(form.email) }}
+        </div>
 
-                <div class="field required">
-                    {{ form_row(form.religion) }}
-                </div>
 
-
+        <div class="form-control">
+            {{ form_row(form.bond) }}
+        </div>
+    </div>
+        {% if (app.user.formType=='FOREIGN') %}
+            <div class="form-control">
+                {{ form_row(form.nationality) }}
             </div>
-            <p>&nbsp;</p>
-            <h4 class="text-center">
-                2. LOCATION INFORMATION</h4>
-            </div>
-            <hr>
-
-            <div class="equal width fields">
-                <div class="field required">
-                    {{ form_row(form.hometown) }}
-                </div>
-                <div class="field required">
-                    {{ form_row(form.address) }}
-                </div>
-                <div class="field required">
-                    {{ form_row(form.email) }}
-                </div>
-
-
-            </div>
-
-            <div class="equal width fields">
-                <div class="field required">
-                    {{ form_row(form.bond) }}
-                </div>
-                {% if (app.user.formType=='FOREIGN') %}
-                <div class="field required  ">
-                    {{ form_row(form.nationality) }}
-                </div>
-                {% endif %}
-                <div class="field required">
-                    {{ form_row(form.region) }}
-                </div>
-
-
-            </div>
-
-            <p>&nbsp;</p>
-            <div class="ui ignored positive message">
-
-                <h4 class="text-center">
-                    3. GUARDIAN OR PARENT INFORMATION.</h4>
-            </div>
-
-            <hr>
-
-            <div class="equal width fields">
-                <div class="field required">
-                    {{ form_row(form.guardianName) }}
-                </div>
-                <div class="field required">
-                    {{ form_row(form.guardianAddress) }}
-                </div>
-                <div class="field required">
-                    {{ form_row(form.guardianPhone) }}
-                </div>
-
-
-            </div>
-
-            <div class="equal width fields">
-                <div class="field required">
-                    {{ form_row(form.guardianOccupation) }}
-                </div>
-                <div class="field required">
-                    {{ form_row(form.guardianRelationship) }}
-                </div>
-                <div class="required field">
-                    {{ form_row(form.financeSource) }}
-                </div>
-
-
-            </div>
-        <span>&nbsp;</span>
-            <center> {{ form_end(form) }}</center>
+        {% endif %}
+        <div class="form-control">
+            {{ form_row(form.region) }}
+        </div>
 
 
 
-            <p >
-           <center>
+        <h4 class="text-center">
+            3. GUARDIAN OR PARENT INFORMATION.</h4>
 
-            <a class="btn text-grey-darker" href="{{ path('photoUpload') }}">Click to go back</a>
-                {% if app.request.get('done')==1 or app.user.getFormNo !=0 %}
+
+    <hr>
+<div class="last">
+        <div class="form-control">
+            {{ form_row(form.guardianName) }}
+        </div>
+        <div class="form-control">
+            {{ form_row(form.guardianAddress) }}
+        </div>
+        <div class="form-control">
+            {{ form_row(form.guardianPhone) }}
+        </div>
+
+
+
+
+
+        <div class="form-control">
+            {{ form_row(form.guardianOccupation) }}
+        </div>
+        <div class="form-control">
+            {{ form_row(form.guardianRelationship) }}
+        </div>
+        <div class="required field">
+            {{ form_row(form.financeSource) }}
+        </div>
+
+</div>
+
+    <span>&nbsp;</span>
+    <center> {{ form_end(form) }}</center>
+
+
+
+    <p>
+    <center>
+
+        <a class="btn text-grey-darker" href="{{ path('photoUpload') }}">Click to go back</a>
+        {% if app.request.get('done')==1 or app.user.getFormNo !=0 %}
             <a class="btn btn primary" href="{{ path('step2') }}">Click to go to step2</a>
-                {% endif %}
+        {% endif %}
 
-        </center>
-        </p>
-        </div>
+    </center>
+    </p>
+    </div>
     </div>
 
 {% endblock %}
 {% block javascripts %}
-{{ parent() }}
-<script type="text/javascript">
+    {{ parent() }}
+    <script>
+        $(document).ready(function () {
+            $(function () {
 
-    $('#save').click(function(e){
-        event.preventDefault();
-        var formData = new FormData($(this)[0]);
+                $('.validated').find("select,input,textarea").each(function () {
+                    $(this).removeClass("form-control")
+                })
+            });
 
-        alert(formData);
+
+            $(function () {
+
+                $('.old').find("select,input,textarea").each(function () {
+                    $(this).removeClass("form-control")
+                })
+            });
+
+            $(function () {
+
+                $('.last').find("select,input,textarea").each(function () {
+                    $(this).removeClass("form-control")
+                })
+            });
+        });
+    </script>
+    <script type="text/javascript">
+
+        $('#save').click(function (e) {
+            event.preventDefault();
+            var formData = new FormData($(this)[0]);
+
+            alert(formData);
             $.ajax({
                 url: "{{ path('step1') }}",
-                data	: formData,
+                data: formData,
                 type: "POST",
 
                 contentType: false,
@@ -229,26 +213,27 @@
                     console.log("Request finished.");
 
                 }
-            }). done(function(data){
+            }).done(function (data) {
 
-                if (data.status == 'success'){
+                if (data.status == 'success') {
                     $(".green").show();
                     $(".green").text(data.status + " " + data.message);
                     $(".green").fadeOut(4000);
-                    //window.location.href="{{url('photoUpload')}}";
+                    //window.location.href="{{ url('photoUpload') }}";
                 }
-                else{
+                else {
                     $(".red").show();
                     $(".red").text(data.status + " " + data.message);
                     $(".red").fadeOut(4000);
                 }
 
 
-            });;
-    });
+            });
+            ;
+        });
 
 
-</script>
+    </script>
 
 
 

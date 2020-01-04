@@ -60,7 +60,7 @@ class ApplicantStepOne extends AbstractType
                 , 'attr' => array('v-model' => 'applicant_step_one[firstName]', 'v-form-ctrl' => '', 'required' => '', 'id' => 'applicant_step_one[firstName]')
 
                 ))
-                ->add('lastName', TextType::class, array('data' => @$this->existingApplicant->getLastName(), 'attr' => array('v-model' => 'lastName', 'v-form-ctrl' => '', 'required' => '', 'id' => 'lastName', 'class' => 'applicant_step_one[lastName]')))
+                ->add('lastName', TextType::class, array('data' => @$this->existingApplicant->getLastName(), 'attr' => array('v-model' => 'lastName', 'v-form-ctrl' => '', 'required' => '', 'id' => 'lastName')))
                
                 ->add('otherNames', TextType::class,
                     array('required' => false, 'data' => @$this->existingApplicant->getOthernames(),'attr' => array('id' => 'othernames', 'v-form-ctrl' => ''))
@@ -94,7 +94,7 @@ class ApplicantStepOne extends AbstractType
                     'required' => true,
 
                 ))
-                ->add('phone', TelType::class, array('required' => true, 'data' => @$this->existingApplicant->getPhone(),))
+                ->add('phone', TextType::class, array('required' => true, 'data' => @$this->existingApplicant->getPhone(),))
 
                 ->add('entryQualificationOne', ChoiceType::class, array('data' => @$this->existingApplicant->getentryQualificationOne(), 'placeholder' => 'Choose an answer',
                     'choices' => array('required' => true,'WASSSCE' => 'WASSSCE', 'SSSCE' => 'SSSCE', 'TEU/TECHNICAL CERTIFICATES' => 'TEU/TECHNICAL CERTIFICATES', 'NVTI' => 'NVTI', '1st Degree' => '1st Degree', '2nd Degree' => '2nd Degree', 'HND' => 'HND','NECO'=>'NECO'),
@@ -171,7 +171,7 @@ class ApplicantStepOne extends AbstractType
                 , 'attr' => array('v-model' => 'applicant_step_one[firstName]', 'v-form-ctrl' => '', 'required' => '', 'id' => 'applicant_step_one[firstName]')
 
                 ))
-                ->add('lastName', TextType::class, array(  'attr' => array('v-model' => 'lastName', 'v-form-ctrl' => '', 'required' => '', 'id' => 'lastName', 'class' => 'applicant_step_one[lastName]')))
+                ->add('lastName', TextType::class, array(  'attr' => array('v-model' => 'lastName', 'v-form-ctrl' => '', 'required' => '', 'id' => 'lastName')))
                 ->add('otherNames', TextType::class, array('required'=>false, 'attr' => array('id' => 'othernames', 'v-form-ctrl' => '')))
                 ->add('title', ChoiceType::class, array( 'placeholder' => 'Choose an answer',
                     'choices' => array('Mr' => 'Mr', 'Mrs' => 'Mrs', 'Miss' => 'Miss', 'Rev' => 'Rev', 'Dr' => 'Dr', 'PhD' => 'PhD'),
@@ -198,7 +198,7 @@ class ApplicantStepOne extends AbstractType
                     'required' => true,
 
                 ))
-                ->add('phone', TelType::class, array('required' => true,  ))
+                ->add('phone', TextType::class, array('required' => true,  ))
                 ->add('entryQualificationOne', ChoiceType::class, array(  'placeholder' => 'Choose an answer',
                     'choices' => array('WASSSCE' => 'WASSSCE', 'SSSCE' => 'SSSCE', 'TEU/TECHNICAL CERTIFICATES' => 'TEU/TECHNICAL CERTIFICATES', 'NVTI' => 'NVTI', '1st Degree' => '1st Degree', 'HND' => 'HND', 'DIPLOMA'=>'DIPLOMA','NECO'=>'NECO','Other' => 'Other'),
 
@@ -255,7 +255,7 @@ class ApplicantStepOne extends AbstractType
                 ->add('financeSource', TextType::class, array( 'required' => true, 'attr' => array('v-model' => 'financeSource', 'v-form-ctrl' => '', 'required' => '', 'id' => 'financeSource', 'class' => 'financeSource')))
                 ->add('guardianOccupation', TextType::class, array(  'required' => true, 'attr' => array('id' => 'guardianOccupation', 'v-form-ctrl' => '')))
                 ->add('guardianRelationship', TextType::class, array(  'attr' => array('id' => 'guardianRelationship', 'v-form-ctrl' => '')))
-                ->add('guardianPhone', TelType::class, array( 'required' => true))
+                ->add('guardianPhone', TextType::class, array( 'required' => true))
                 ->add('Save', SubmitType::class, array('attr' => array('class' => 'btn primary', 'v-form-ctrl' => '')));
 
             if ($options['type']=="FOREIGN") {
