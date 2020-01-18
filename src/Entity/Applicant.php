@@ -197,7 +197,7 @@ class Applicant implements  \Serializable
     /**
      * @param mixed $dob
      */
-    public function setDob( \DateTime $dob)
+    public function setDob(  $dob)
     {
         $this->dob = $dob;
     }
@@ -983,7 +983,7 @@ class Applicant implements  \Serializable
     /**
 
      * @Assert\NotBlank()
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="string")
      */
     private $dob;
 

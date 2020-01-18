@@ -30,21 +30,21 @@
                 float: none !important;
             }
 
-            #page1 {
-                page-break-inside: avoid;
-                page-break-before: always;
+            #page1{
+                page-break-after: always;
             }
 
-            #page2 {
-                page-break-inside: avoid;
-                page-break-before: always;
+            #page2{
+                page-break-after: always;
+            }
+            #page3{
+                page-break-after: always;
             }
 
-            #page3 {
-                page-break-inside: avoid;
-                page-break-before: always;
-            }
+
         }
+
+
 
         @page {
             size: A4;
@@ -84,7 +84,7 @@
     <div id="print">
 
 
-        <div id="page1">
+        <div id="page1" style="page-break-before: always;">
             <img src='{{ asset('public/img/header.jpg') }}' style="width:1086px;height: auto"
                  class="ui fluid image"/>
 
@@ -184,7 +184,7 @@
 
                             </tr>
                             <tr>
-                                <td class="uppercase" align="right"><span>Bonded to an organization?</span></td>
+                                <td class="uppercase" align="right"><span>Bonded?</span></td>
                                 <td class="capitalize">{{ data.bond | upper }}</td>
 
 

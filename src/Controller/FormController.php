@@ -166,8 +166,8 @@ class FormController extends AbstractController
                 $applicant->setPhysicallyDisabled(ucwords($form->get('physicallyDisabled')->getData()));
                 $applicant->setPhone($form->get('phone')->getData());
                 $applicant->setReligion($form->get('religion')->getData());
-                 $applicant->setRegion($form->get('region')->getData());
-                $applicant->setAge($helper->age($form->get('dob')->getData()->format('d-m-Y'), 'gh'));
+                $applicant->setRegion($form->get('region')->getData());
+                $applicant->setAge($helper->age($form->get('dob')->getData(), 'eu'));
                 $applicant->setHometown(ucwords($form->get('hometown')->getData()));
                 $applicant->setEmail(ucwords($form->get('email')->getData()));
                 $applicant->setBond(ucwords($form->get('bond')->getData()));
@@ -205,6 +205,7 @@ class FormController extends AbstractController
 
                 $em->persist($applicant);
             } else {
+
                 $applicant = $em->getRepository('App:Applicant')->findOneByApplicationNumber($formNo);
                 $applicant->setFirstName(ucwords($form->get('firstName')->getData()));
                 $applicant->setLastName(ucwords($form->get('lastName')->getData()));
@@ -224,7 +225,7 @@ class FormController extends AbstractController
                 $applicant->setReligion($form->get('religion')->getData());
                 $applicant->setRegion($form->get('region')->getData());
                 $applicant->setDenomination($form->get('religion')->getData());
-                $applicant->setAge($helper->age($form->get('dob')->getData()->format('d-m-Y'), 'gh'));
+                $applicant->setAge($helper->age($form->get('dob')->getData(), 'eu'));
                 $applicant->setHometown(ucwords($form->get('hometown')->getData()));
                 $applicant->setEmail(ucwords($form->get('email')->getData()));
                 $applicant->setBond(ucwords($form->get('bond')->getData()));

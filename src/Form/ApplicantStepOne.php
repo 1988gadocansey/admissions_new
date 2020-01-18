@@ -84,16 +84,10 @@ class ApplicantStepOne extends AbstractType
 
                     'attr' => array('v-model' => 'marital', 'v-select' => 'marital', 'required' => '', 'id' => 'marital', 'class' => 'ui fluid search dropdown')
                 ))
-                ->add('dob', DateType::class, array('data' => @$this->existingApplicant->getDob(), 'label' => 'Date of birth',
-                    'placeholder' => array(
-                        'year' => 'Year', 'month' => 'Month', 'day' => 'Day',
+
+                ->add('dob',  TextType::class, array('data' => @$this->existingApplicant->getDob(),  'label'=>'Date of Birth', 'attr' => array('v-model' => 'dob', 'v-form-ctrl' => '', 'required' => '', 'id' => 'dob','class'=>'dob')))
 
 
-                    ),
-                    'years' => range(1900, date("Y")),
-                    'required' => true,
-
-                ))
                 ->add('phone', TextType::class, array('required' => true, 'data' => @$this->existingApplicant->getPhone(),))
 
                 ->add('entryQualificationOne', ChoiceType::class, array('data' => @$this->existingApplicant->getentryQualificationOne(), 'placeholder' => 'Choose an answer',
@@ -141,6 +135,7 @@ class ApplicantStepOne extends AbstractType
                 ->add('guardianRelationship', TextType::class, array('data' => @$this->existingApplicant->getGuardianRelationship(), 'attr' => array('class' => 'form-control', 'v-form-ctrl' => '')))
                 ->add('guardianPhone', TextType::class, array('data' => @$this->existingApplicant->getGuardianPhone(),'attr' => array('id' => 'guardianPhone', 'v-form-ctrl' => '')))
                 ->add('Save', SubmitType::class, array('attr' => array('class' => 'btn primary ', 'v-form-ctrl' => '')));
+
             if ($options['type']=="FOREIGN") {
 
                 $builder->add('nationality', EntityType::class, [
@@ -188,16 +183,9 @@ class ApplicantStepOne extends AbstractType
 
                     'attr' => array('v-model' => 'marital', 'v-select' => 'marital', 'required' => '', 'id' => 'marital', 'class' => 'ui fluid search dropdown')
                 ))
-                ->add('dob', DateType::class, array(  'label' => 'Date of birth',
-                    'placeholder' => array(
-                        'year' => 'Year', 'month' => 'Month', 'day' => 'Day',
 
+                ->add('dob', TextType::class, array(  'attr' => array('v-model' => 'dob', 'v-form-ctrl' => '', 'required' => '', 'id' => 'dob','class'=>'dob'), 'label'=>'Date of Birth'))
 
-                    ),
-                    'years' => range(1900, date("Y")),
-                    'required' => true,
-
-                ))
                 ->add('phone', TextType::class, array('required' => true,  ))
                 ->add('entryQualificationOne', ChoiceType::class, array(  'placeholder' => 'Choose an answer',
                     'choices' => array('WASSSCE' => 'WASSSCE', 'SSSCE' => 'SSSCE', 'TEU/TECHNICAL CERTIFICATES' => 'TEU/TECHNICAL CERTIFICATES', 'NVTI' => 'NVTI', '1st Degree' => '1st Degree', 'HND' => 'HND', 'DIPLOMA'=>'DIPLOMA','NECO'=>'NECO','Other' => 'Other'),

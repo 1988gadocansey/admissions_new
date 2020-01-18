@@ -72,7 +72,10 @@ C/O https://placeholder.com/" alt="your passport photo">
                     {% endif %}
 
                 </p>
-                <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}"/>
+                {#<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}"/>#}
+
+                <input type="hidden" name="token" value="{{ csrf_token('upload') }}" />
+
             </form>
         </div>
     </main>

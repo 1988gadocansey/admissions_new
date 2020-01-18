@@ -111,7 +111,8 @@
 
         <h4 class="text-center">
             3. GUARDIAN OR PARENT INFORMATION.</h4>
-
+    </div>
+    <hr>
 
     <hr>
 <div class="last">
@@ -187,7 +188,27 @@
             });
         });
     </script>
+
+
+
+    <script src="https://rawgit.com/RobinHerbots/jquery.inputmask/2.x/dist/jquery.inputmask.bundle.js"></script>
+
+
     <script type="text/javascript">
+
+        $('.dob').inputmask("mm/dd/yyyy",
+            {
+                "placeholder": "mm/dd/yyyy",
+                onincomplete: function(){
+                    $(this).val('');
+                }
+            }
+        );
+
+
+
+
+
 
         $('#save').click(function (e) {
             event.preventDefault();
@@ -234,6 +255,7 @@
 
 
     </script>
+
 
 
 
