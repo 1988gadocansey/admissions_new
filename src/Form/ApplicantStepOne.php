@@ -91,13 +91,13 @@ class ApplicantStepOne extends AbstractType
                 ->add('phone', TextType::class, array('required' => true, 'data' => @$this->existingApplicant->getPhone(),))
 
                 ->add('entryQualificationOne', ChoiceType::class, array('data' => @$this->existingApplicant->getentryQualificationOne(), 'placeholder' => 'Choose an answer',
-                    'choices' => array('required' => true,'WASSSCE' => 'WASSSCE', 'SSSCE' => 'SSSCE', 'TEU/TECHNICAL CERTIFICATES' => 'TEU/TECHNICAL CERTIFICATES', 'NVTI' => 'NVTI', '1st Degree' => '1st Degree', '2nd Degree' => '2nd Degree', 'HND' => 'HND','NECO'=>'NECO'),
+                    'choices' => array('required' => true,'WASSSCE' => 'WASSSCE', 'SSSCE' => 'SSSCE', 'TEU/TECHNICAL CERTIFICATES' => 'TEU/TECHNICAL CERTIFICATES', 'NVTI' => 'NVTI', 'Barchelor' => 'Barchelor', '2nd Degree' => '2nd Degree', 'HND' => 'HND','NECO'=>'NECO'),
 
                     'attr' => array('v-model' => 'qualification1', 'v-select' => 'qualification1', 'required' => '', 'id' => 'qualification1', 'class' => 'ui fluid search dropdown')))
 
 
                 ->add('entryQualificationTwo', ChoiceType::class, array('data' => @$this->existingApplicant->getentryQualificationOne(), 'placeholder' => 'Choose an answer',
-                    'choices' => array( 'WASSSCE' => 'WASSSCE', 'SSSCE' => 'SSSCE', 'TEU/TECHNICAL CERTIFICATES' => 'TEU/TECHNICAL CERTIFICATES', 'NVTI' => 'NVTI', '1st Degree' => '1st Degree', '2nd Degree' => '2nd Degree', 'HND' => 'HND','NECO'=>'NECO','DIPLOMA'=>'DIPLOMA'),
+                    'choices' => array( 'WASSSCE' => 'WASSSCE', 'SSSCE' => 'SSSCE', 'TEU/TECHNICAL CERTIFICATES' => 'TEU/TECHNICAL CERTIFICATES', 'NVTI' => 'NVTI', 'Barchelor' => 'Barchelor', '2nd Degree' => '2nd Degree', 'HND' => 'HND','NECO'=>'NECO','DIPLOMA'=>'DIPLOMA'),
                     'required'=>"false",
 
                     'attr' => array('v-model' => 'qualification2', 'v-select' => 'qualification2', 'id' => 'qualification2', 'class' => 'ui fluid search dropdown')))
@@ -188,7 +188,7 @@ class ApplicantStepOne extends AbstractType
 
                 ->add('phone', TextType::class, array('required' => true,  ))
                 ->add('entryQualificationOne', ChoiceType::class, array(  'placeholder' => 'Choose an answer',
-                    'choices' => array('WASSSCE' => 'WASSSCE', 'SSSCE' => 'SSSCE', 'TEU/TECHNICAL CERTIFICATES' => 'TEU/TECHNICAL CERTIFICATES', 'NVTI' => 'NVTI', '1st Degree' => '1st Degree', 'HND' => 'HND', 'DIPLOMA'=>'DIPLOMA','NECO'=>'NECO','Other' => 'Other'),
+                    'choices' => array('WASSSCE' => 'WASSSCE', 'SSSCE' => 'SSSCE', 'TEU/TECHNICAL CERTIFICATES' => 'TEU/TECHNICAL CERTIFICATES', 'NVTI' => 'NVTI', 'Barchelor' => 'Barchelor', 'HND' => 'HND', 'DIPLOMA'=>'DIPLOMA','NECO'=>'NECO','Other' => 'Other'),
 
                     'attr' => array('v-model' => 'qualification1', 'v-select' => 'qualification1', 'required' => '', 'id' => 'qualification1', 'class' => 'ui fluid search dropdown')))
 
@@ -204,7 +204,7 @@ class ApplicantStepOne extends AbstractType
                         'WASSSCE' => 'WASSSCE',
                         'SSSCE' => 'SSSCE',
                         'TEU/TECHNICAL CERTIFICATES' => 'TEU/TECHNICAL CERTIFICATES',
-                        'NVTI' => 'NVTI', '1st Degree' => '1st Degree', 'HND' => 'HND','NECO'=>'NECO', 'Other' => 'Other'
+                        'NVTI' => 'NVTI', 'Barchelor' => 'Barchelor', 'HND' => 'HND','NECO'=>'NECO', 'Other' => 'Other'
 
                     ],
                     'attr'=>['v-model' => 'qualification2', 'v-select' => 'qualification1', 'id' => 'qualification2', 'class' => 'ui fluid search dropdown']

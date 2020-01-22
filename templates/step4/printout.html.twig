@@ -3,13 +3,11 @@
 {% block stylesheets %}
     {{ parent() }}
     <style type="text/css">
+
+
         html, body, #page3, #page1, #page2 {
             float: none;
             background: none
-        }
-
-        #page1 {
-            text-align: justify;
         }
 
         fieldset {
@@ -22,23 +20,30 @@
         }
 
         @media print {
+
+            body {
+                height: auto;
+            }
             table {
                 float: none !important;
             }
-
+            * { overflow: visible !important; }
             div {
                 float: none !important;
             }
+            #page1  { page-break-inside: avoid; page-break-after: always; }
+            #page2  { page-break-inside: avoid; page-break-after: always;; }
+            #page3  { page-break-inside: avoid; page-break-before: always; }
+            .clear { clear: both; } /* clear here */
+            table { page-break-inside:auto; border-collapse: collapse }
+            tr    { page-break-inside:avoid; page-break-after:auto }
+            thead { display:table-header-group }
+            tfoot { display:table-footer-group }
 
-            #page1{
-                page-break-after: always;
-            }
-
-            #page2{
-                page-break-after: always;
-            }
-            #page3{
-                page-break-after: always;
+            main::after {
+                content: "Copyright site.com";
+                display: block;
+                text-align: center;
             }
 
 
@@ -256,6 +261,8 @@
             </table>
 
         </div>
+
+        <p style="page-break-before: always"></p>
         <div id="page2">
              <h3 class="text-BaseGreen text-center">Programme and Academic Information</h3>
 

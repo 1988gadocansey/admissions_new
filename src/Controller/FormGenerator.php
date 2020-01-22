@@ -21,7 +21,7 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use  App\Entity\User as User;
 use Symfony\Component\HttpFoundation\Request;
-class MessageController extends AbstractController
+class FormGenerator extends AbstractController
 {
 
     private $em;
@@ -42,7 +42,7 @@ class MessageController extends AbstractController
          ini_set('max_execution_time', 50000);
         
         $conn = $this->em->getConnection();
-        for ($a=0;$a<3000;$a++) {
+        for ($a=0;$a<4;$a++) {
             $pin = $this->getPin();
             $serial = $this->getSerial();
 
@@ -68,7 +68,7 @@ class MessageController extends AbstractController
         }
 
          return new Response(
-        '<html><body>Voucher generatte</body></html>'
+        '<html><body>Voucher generated</body></html>'
     );
 
 

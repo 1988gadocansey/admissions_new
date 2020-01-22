@@ -211,7 +211,7 @@ class UploadController extends AbstractController
             }
 
             $photo = $applicant;
-            return $this->redirectToRoute("photoUpload");
+            return $this->redirectToRoute("photoUpload", array('status' => $status));
         }
     }
 }

@@ -5,32 +5,54 @@
 
 
 {% block main %}
-    <h4 class="text-BaseBlue" style="text-align: center">Upload your Passport Photo here (Max 300KB Type JPG JPEG,
+    <h4 class="text-BaseBlue" style="text-align: center">Upload your Passport Photo here (Max 250KB Type JPG JPEG,
         dimension 180px,180px , only portrait)</h4>
     <hr/>
 
-    {% if status is defined and  (status=='File was empty' or status=='photo size is less than or equal 300kb' or status=='Upload only jpeg photo') %}
+    {% if status is defined and  (status=='File was empty' or  app.request.get('status')=='photo size is greater than 250kb' or status=='Upload only jpeg photo') %}
 
-
+<center>
         <div class="form-messages form-errors" data-qa-form-error="">
             <ul class="list-reset input-caption text-BaseRed">
                 Error uploading photo check file size and picture format given
             </ul>
 
-        </div>
+        </div></center>
     {% endif %}
-    {% if status is defined and status=='Photo uploaded successfully' %}
-
+    {% if   app.request.get('status') == "Photo uploaded successfully"%}
+        <center>
         <div class="form-messages form-errors" data-qa-form-error="">
             <ul class="list-reset input-caption text-BaseGreen">
                 Photo uploaded successfully
             </ul>
-        </div>
+        </div></center>
+    {% endif %}
+    {% if    app.request.get('status') == "Upload only jpeg photo" %}
+<center>
+    <div class="form-messages form-errors" data-qa-form-error="">
+        <ul class="list-reset input-caption text-BaseRed">
+            Error uploading photo. Upload only JPEG photo
+        </ul>
+
+    </div></center>
+    {% endif %}
+
+    {% if    app.request.get('status') == "The size of the photo must not exceed 250kb" %}
+        <center>
+            <div class="form-messages form-errors" data-qa-form-error="">
+                <ul class="list-reset input-caption text-BaseRed">
+                    Error uploading photo. Picture size exceeds 250kb
+                </ul>
+
+            </div></center>
     {% endif %}
 
 
 
+
+
     <main class="mx-auto max-w-sm mt-10">
+
         <div class="ui middle col-md-4 col-md-offset-4" style="margin-left:90px">
             <form action="{{ path('process_upload') }}" method="post" enctype="multipart/form-data"
                   class="ui loadable form  zxcvbn" id="uploaderd">

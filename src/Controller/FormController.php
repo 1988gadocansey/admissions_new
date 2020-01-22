@@ -331,7 +331,7 @@ class FormController extends AbstractController
 
             $em->flush();
 
-            $this->addFlash('success', 'Data saved successfully - Step 2 completed!');
+            $this->addFlash('success', 'Data saved successfully!');
             #return $this->redirectToRoute('step2');
             return  $this->redirectToRoute('step2', array('done' => 2));
 
@@ -417,7 +417,7 @@ class FormController extends AbstractController
             $em->flush();
 
 
-            $this->addFlash('success', " Data saved - Step 3 completed");
+            $this->addFlash('success', " Data saved successfully");
             return $this->redirectToRoute('step3');
 
         }
@@ -444,7 +444,7 @@ class FormController extends AbstractController
         $applicant = $em->getRepository('App:Applicant')->findOneByApplicationNumber($formNo);
         $result = $em->getRepository('App:ExamResult')->findByForm($formNo);
         // dump($applicant);die();
-        return $this->render('step4/printout.html.twig', array(
+        return $this->render('step4/print_semantic_ui.html.twig', array(
 
             'data' => $applicant,
             'result' => $result,

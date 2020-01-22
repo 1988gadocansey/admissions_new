@@ -27,8 +27,26 @@
         <center><p><strong>For more information call 033 2094767 / 0243039730 / 0246091283 / 0505284060</strong></p></center>
         &nbsp;
         <div class="form-actions" data-qa-continue="">
+            <center>
+       <table>
+           <tr>
+               <td>   <a class="btn"  href="{{ path('photoUpload') }}">Click to start application</a></td>
+               <td>&nbsp;</td>
+               <td>
+                   {% if(app.user.formCompleted==1) %}
 
-            <a class="btn"  href="{{ path('photoUpload') }}">Click to start application</a>
+
+                       <a  href="{{ path('preview') }}" class="btn primary" > Click to preview form.</a>
+
+
+                   {% endif %}
+
+               </td>
+           </tr>
+       </table>
+
+            </center>
+
 
         </div>
 
