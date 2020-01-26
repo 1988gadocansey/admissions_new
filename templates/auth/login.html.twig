@@ -70,9 +70,10 @@
                 </div>
 
                 <div class="form-control">
-                    <label for="password">Pin</label>
-                    <div class="input-wrapper" data-qa-password>
-                        <input id="password" id="password" name="_password" required type="password" >
+                    <label class="help" for="password" data-qa-password-heading>Pin</label>
+                    <div class="input-wrapper pass-wrapper" data-qa-password>
+                        <input autocomplete="off" class="new_password" id="password" name="_password" required type="password" value="">
+                        <button type="button" toggle="#password" class="toggle-password eye" title="Show Password"></button>
 
                     </div>
                 </div>
