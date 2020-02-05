@@ -184,7 +184,7 @@ class ApplicantStepOne extends AbstractType
                     'attr' => array('v-model' => 'marital', 'v-select' => 'marital', 'required' => '', 'id' => 'marital', 'class' => 'ui fluid search dropdown')
                 ))
 
-                ->add('dob', TextType::class, array(  'attr' => array('v-model' => 'dob', 'v-form-ctrl' => '', 'required' => '', 'id' => 'dob','class'=>'dob'), 'label'=>'Date of Birth'))
+                ->add('dob', TextType::class, array(  'attr' => array('v-model' => 'dob', 'placeholder'=>'02/02/1990', 'v-form-ctrl' => '', 'required' => '', 'id' => 'dob','class'=>'dob'), 'label'=>'Date of Birth'))
 
                 ->add('phone', TextType::class, array('required' => true,  ))
                 ->add('entryQualificationOne', ChoiceType::class, array(  'placeholder' => 'Choose an answer',
