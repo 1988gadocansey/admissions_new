@@ -42,7 +42,7 @@ class FormGenerator extends AbstractController
          ini_set('max_execution_time', 50000);
         
         $conn = $this->em->getConnection();
-        for ($a=0;$a<2;$a++) {
+        for ($a=0;$a<1000;$a++) {
             $pin = $this->getPin();
             $serial = $this->getSerial();
 
@@ -51,8 +51,8 @@ class FormGenerator extends AbstractController
             $encoded = $encoder->encodePassword($user, $pin);
 
             $user->setPassword($encoded);
-            $user->setFormType("ACCESS");
-            $user->setSoldBy("ZENITH");
+            $user->setFormType("BTECH");
+            $user->setSoldBy("POST");
             $user->setSold("0");
             $user->setYear(date("Y"));
             $user->setStarted(0);

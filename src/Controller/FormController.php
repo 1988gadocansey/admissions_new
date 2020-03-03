@@ -470,7 +470,7 @@ class FormController extends AbstractController
         $phone = $applicant->getPhone();
         $email= $applicant->getEmail();
         $grades = $em->getRepository('App:ExamResult')->findByApplicant($formNo);
-        $message = "Hi $name your application has been received by our school. Your Application number is $formNo.Congrats";
+        $message = "Hi  your application has been received. Vist status.ttuportal.com with $formNo to check your admission";
 
       //  dump($applicant->getFormCompleted());die();
 
