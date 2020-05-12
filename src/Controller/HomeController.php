@@ -33,6 +33,23 @@ class HomeController extends AbstractController
     {
 
 
+        $em = $this->getDoctrine()->getManager();
+        $user = $this->getUser();
+        $applicant = $user->getFormNo();
+        $applicantID = $user->getId();
+        $photo = $applicant;
+
+        $checkIfAdmitted= $em->getRepository('App:Applicant')->findOneByApplicationNumber($applicant);
+        if($checkIfAdmitted) {
+            if ($checkIfAdmitted->getAdmited() == 1) {
+                @$userData = $em->getRepository('App\Entity\User')->findOneByFormNo($applicant);
+
+                @$userData->setFinalized(1);
+                return $this->redirectToRoute('letter');
+            }
+        }
+
+
 
         return $this->render('dashboard/dashboard.html.twig');
 

@@ -37,7 +37,6 @@ class FormController extends AbstractController
 
     /**
      * @Security("is_granted('ROLE_USER')")
-     * @Route("/dashboard", name="dashboard")
      */
 
 
