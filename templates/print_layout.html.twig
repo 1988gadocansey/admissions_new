@@ -1,0 +1,268 @@
+{#
+   This is the base template used as the application layout which contains the
+   common elements and decorates all the other templates.
+
+#}
+<!--
+Designed by Gad Ocansey <gadocansey@gmail.com> +233243348522
+-->
+<!DOCTYPE html>
+<html lang="{{ app.request.locale }}">
+<head>
+    <meta charset="UTF-8" />
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <title>{% block title %}Takoradi Technical University - Admissions{% endblock %}</title>
+    {% block stylesheets %}
+        <link rel="stylesheet" href="{{ asset('public/assets/css/style.css') }}">
+
+    {% endblock %}
+
+    <link rel="icon" type="image/x-icon" href="{{ asset('public/assets/img/logo2.png') }}" />
+
+     <style type="text/css">
+         .required label:after {
+             color: #e32;
+             content: ' *';
+             display:inline;
+         }
+
+         label.required{
+              margin: -.2em 0 0 .2em;
+              content: '*';
+              color: #DB2828;
+
+          }
+        input[type=file]{
+            padding:10px;
+            background:#2d2d2d;}
+        .error{
+            color:red;
+        }
+         input{
+             text-transform: uppercase;
+         }
+
+
+
+    </style>
+    {% block css %}
+    {% endblock %}
+</head>
+
+<body id="{% block body_id %}{% endblock %}" class="pushabless">
+<div class="pusher">
+    <div id="menu" class="ui large sticky inverted stackable menu">
+
+        <div class="ui right stackable inverted menu">
+            {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                <a href="{{ path('security_logout') }}" class="item">Logout</a>
+            {% else %}
+                <a href="{{ path('security_login') }}" class="item">Login</a>
+
+            {% endif %}
+
+            {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                <p style="" class="item">Welcome {{ app.user.username }}</p>
+            {% endif %}
+        </div>
+
+    </div>
+<div class="ui container">
+    <header>
+        <div class="ui basic segment">
+            <div class="ui three column stackable grid">
+                <div class="column">
+                    <a href="#">
+                        <img style="width: 250px;margin-left: -24px" src="{{ asset('public/assets/images/logo.png') }}" alt="TTU logo"
+                             class="ui small image"/>
+
+                    </a>
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="ui large stackable menu">
+
+            <a href="{{ path('dashboard') }}" class="item">Home</a>
+
+            {% if(app.user.formCompleted==1) %}
+
+            {% if(app.user.finalized==0) %}
+                    <a class="ui inverted green button" href="{{ path('step1') }}">Edit Form</a>
+                    &nbsp;  <a class="ui inverted orange button" href="{{ path('complete') }}" onclick="return confirm('This will finalized your form and submit to the admissions office. A form once submitted cannot be edited.')">Finalized Form</a>
+
+            {% endif %}
+
+                 <a class="ui inverted blue button" href="{{ path('preview') }}">Preview Form</a>
+
+            {% endif %}
+            <p class="item">Last Login {{ app.user.lastLogin|date('F j, Y g:i a ')  }}</p>
+
+        </div>
+
+    </header>
+
+    {% block header %}
+
+    <div class="ui hidden divider"></div>
+
+
+    {% endblock %}
+    <div style="margin-top: 4px;">
+        {% for msg in app.session.flashBag.get('success') %}
+            <div class="ui green message true">
+                {{ msg }}
+            </div>
+        {% endfor %}
+        {% for msg in app.session.flashBag.get('error') %}
+            <div class="ui red message false">
+                {{ msg }}
+            </div>
+        {% endfor %}
+    </div>
+     <p>
+        {% block banner %}
+
+        {% endblock %}
+    </p>
+    <div class="ui padded segment">
+        {% block main %}
+
+        {% endblock %}
+     </div>
+
+
+</div>
+
+
+
+
+{% block footer %}
+<footer id="footer" class="ui inverted vertical footer segment">
+    <div class="ui container">
+        <div class="ui inverted divided equal height stackable grid">
+
+
+            <div class="eight wide column">
+
+                <p>&copy; {{ 'now'|date('Y') }} Takoradi Technical
+                        University | <a href="#" target="_blank" style="color: #1abb9c;"> Powered by TPConnect</a></p>
+            </div>
+
+
+        </div>
+    </div>
+</footer>
+{% endblock %}
+
+</div>
+{% block javascripts %}
+    <script src="{{ asset('public/assets/js/app.js')}}"></script>
+    <script src="{{ asset('public/assets/js/form.js')}}"></script>
+    <script src="{{ asset('public/assets/js/validate-form.js')}}"></script>
+    <script src="{{ asset('public/assets/js/semantic.min.js')}}"></script>
+
+    <script>
+
+        $('.ui.dropdown').dropdown();
+        $('#applicant_step_one_dob_year').dropdown();
+        $('#applicant_step_one_dob_month').dropdown();
+        $('#applicant_step_one_dob_day').dropdown();
+
+
+        $('.save').on('click', function () {
+            $('.ui.basic.modal').modal('show');
+        })
+
+
+        $(".true").fadeOut(4000);
+        $(".false").fadeOut(4000);
+    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    {#<script src="{{   asset('assets/js/vue.min.js') }}"> </script>
+    <script src="{{   asset('assets/js/vue-form.min.js')}}"> </script>
+
+    <script>
+        $(document).ready(function(){
+            $('select').select2({ width: "resolve" });
+
+
+        });
+
+
+    </script>
+    <script>
+
+       /* $(document).ready(function () {
+            var brand = document.getElementById('logo-id');
+            brand.className = 'attachment_upload';
+            brand.onchange = function () {
+                document.getElementById('fakeUploadLogo').value = this.value.substring(12);
+            };
+
+            // Source: http://stackoverflow.com/a/4459419/6396981
+            function readURL(input) {
+                if (input.files && input.files[0]) {
+                    var reader = new FileReader();
+
+                    reader.onload = function (e) {
+                        $('.img-preview').attr('src', e.target.result);
+                    };
+                    reader.readAsDataURL(input.files[0]);
+                }
+            }
+
+            $("#logo-id").change(function () {
+                readURL(this);
+            });
+        });*/
+
+
+        //code for ensuring vuejs can work with select2 select boxes
+        Vue.directive('select', {
+            twoWay: true,
+            priority: 1000,
+            params: [ 'options'],
+            bind: function () {
+                var self = this
+                $(this.el)
+                    .select2({
+                        data: this.params.options,
+                        width: "resolve"
+                    })
+                    .on('change', function () {
+                        self.vm.$set(this.name,this.value)
+                        Vue.set(self.vm.$data,this.name,this.value)
+                    })
+            },
+            update: function (newValue,oldValue) {
+                $(this.el).val(newValue).trigger('change')
+            },
+            unbind: function () {
+                $(this.el).off().select2('destroy')
+            }
+        })
+
+
+        var vm = new Vue({
+            el: "body",
+            ready : function() {
+            },
+            data : {
+
+
+                options: [    ]
+
+            },
+
+        })#}
+
+
+
+{% endblock %}
+
+
+</body>
+</html>

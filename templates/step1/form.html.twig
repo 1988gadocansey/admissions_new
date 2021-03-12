@@ -1,0 +1,269 @@
+{% extends 'base.html.twig' %}
+{% form_theme form 'forms/bootsrap4-theme.html.twig' %}
+{% block stylesheets %}
+    {{ parent() }}
+
+{% endblock %}
+{% block body_id 'form1' %}
+
+
+
+{% block main %}
+
+    <div class="step1">
+
+
+        <div class="ui ignored positive message">
+
+            <h4 class="text-center">
+                1. BIODATA COLLECTION</h4>
+        </div>
+        <hr>
+
+            {{ form_errors(form) }}
+            {{ form_start(form ) }}
+
+
+            <div class="form-control">
+
+                {{ form_row(form.firstName) }}
+
+            </div>
+
+            <div class="form-control">
+                {{ form_row(form.lastName) }}
+
+            </div>
+            <div class="form-control">
+                {{ form_row(form.otherNames) }}
+
+            </div>
+
+
+            <div class="form-control">
+                {{ form_row(form.title) }}
+            </div>
+
+            <div class="form-control">
+                {{ form_row(form.gender) }}
+
+            </div>
+            <div class="form-control">
+                {{ form_row(form.maritalStatus) }}
+
+            </div>
+
+            <div class="form-control">
+                {{ form_row(form.dob) }}
+            </div>
+            <div class="form-control">
+                {{ form_row(form.phone) }}
+            </div>
+
+            <div class="form-control">
+                {{ form_row(form.entryQualificationOne) }}
+            </div>
+            <div class="form-control">
+                {{ form_row(form.entryQualificationTwo) }}
+            </div>
+            <div class="form-control">
+                {{ form_row(form.physicallyDisabled) }}
+            </div>
+
+            <div class="form-control">
+                {{ form_row(form.religion) }}
+            </div>
+
+
+
+        <p>&nbsp;</p>
+        <h4 class="text-center">
+            2. LOCATION INFORMATION</h4>
+    </div>
+    <hr>
+<div class="old">
+
+        <div class="form-control">
+            {{ form_row(form.hometown) }}
+        </div>
+        <div class="form-control">
+            {{ form_row(form.address) }}
+        </div>
+        <div class="form-control">
+            {{ form_row(form.email) }}
+        </div>
+
+
+        <div class="form-control">
+            {{ form_row(form.bond) }}
+        </div>
+    </div>
+        {% if (app.user.formType=='FOREIGN') %}
+            <div class="form-control">
+                {{ form_row(form.nationality) }}
+            </div>
+        {% endif %}
+        <div class="form-control">
+            {{ form_row(form.region) }}
+        </div>
+
+
+
+        <h4 class="text-center">
+            3. GUARDIAN OR PARENT INFORMATION.</h4>
+    </div>
+    <hr>
+
+    <hr>
+<div class="last">
+        <div class="form-control">
+            {{ form_row(form.guardianName) }}
+        </div>
+        <div class="form-control">
+            {{ form_row(form.guardianAddress) }}
+        </div>
+        <div class="form-control">
+            {{ form_row(form.guardianPhone) }}
+        </div>
+
+
+
+
+
+        <div class="form-control">
+            {{ form_row(form.guardianOccupation) }}
+        </div>
+        <div class="form-control">
+            {{ form_row(form.guardianRelationship) }}
+        </div>
+        <div class="required field">
+            {{ form_row(form.financeSource) }}
+        </div>
+
+</div>
+
+    <span>&nbsp;</span>
+    <center> {{ form_end(form) }}</center>
+
+
+
+    <p>
+    <center>
+
+        <a class="btn text-grey-darker" href="{{ path('photoUpload') }}">Click to go back</a>
+        {% if app.request.get('done')==1 or app.user.getFormNo !=0 %}
+            <a class="btn btn primary" href="{{ path('step2') }}">Click to go to step2</a>
+        {% endif %}
+
+    </center>
+    </p>
+    </div>
+    </div>
+
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        $(document).ready(function () {
+            $(function () {
+
+                $('.validated').find("select,input,textarea").each(function () {
+                    $(this).removeClass("form-control")
+                })
+            });
+
+
+            $(function () {
+
+                $('.old').find("select,input,textarea").each(function () {
+                    $(this).removeClass("form-control")
+                })
+            });
+
+            $(function () {
+
+                $('.last').find("select,input,textarea").each(function () {
+                    $(this).removeClass("form-control")
+                })
+            });
+        });
+    </script>
+
+
+
+    <script src="https://rawgit.com/RobinHerbots/jquery.inputmask/2.x/dist/jquery.inputmask.bundle.js"></script>
+
+
+    <script type="text/javascript">
+
+        $('.dob').inputmask("dd/mm/yyyy",
+            {
+                "placeholder": "dd/mm/yyyy",
+                onincomplete: function(){
+                    $(this).val('');
+                }
+            }
+        );
+
+
+
+
+
+
+        $('#save').click(function (e) {
+            event.preventDefault();
+            var formData = new FormData($(this)[0]);
+
+            alert(formData);
+            $.ajax({
+                url: "{{ path('step1') }}",
+                data: formData,
+                type: "POST",
+
+                contentType: false,
+                processData: false,
+                cache: false,
+                dataType: "JSON", // Change this according to your response from the server.
+                error: function (err) {
+                    console.error(err);
+                },
+                success: function (data) {
+                    console.log(data);
+                },
+                complete: function () {
+                    console.log("Request finished.");
+
+                }
+            }).done(function (data) {
+
+                if (data.status == 'success') {
+                    $(".green").show();
+                    $(".green").text(data.status + " " + data.message);
+                    $(".green").fadeOut(4000);
+                    //window.location.href="{{ url('photoUpload') }}";
+                }
+                else {
+                    $(".red").show();
+                    $(".red").text(data.status + " " + data.message);
+                    $(".red").fadeOut(4000);
+                }
+
+
+            });
+            ;
+        });
+
+
+    </script>
+
+
+
+
+{% endblock %}
+
+
+
+
+
+
+
