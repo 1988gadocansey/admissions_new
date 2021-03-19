@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "Dashboard";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -10,8 +9,8 @@
         <div class="md-card">
             <div class="md-card-content">
                 <div class="uk-float-right uk-margin-top uk-margin-small-right"><span class="peity_visitors peity_data">5,3,9,6,5,9,7</span></div>
-                <span class="uk-text-muted uk-text-small">Form Type</span>
-                <h4 class="uk-margin-remove"><span class="countUpMew"> @User.Identity.Name</span></h4>
+                <span class="uk-text-muted uk-text-small">Visitors (last 7d)</span>
+                <h2 class="uk-margin-remove"><span class="countUpMe">0<noscript>12456</noscript></span></h2>
             </div>
         </div>
     </div>
@@ -68,17 +67,18 @@
                 &nbsp;
                 <div class="form-actions" data-qa-continue="">
                     <center>
-                        <table align="center">
-
+                        <table>
                             <tr>
+                                <td>   <a class="btn" href="{{ path('photoUpload') }}">Click to start application</a></td>
+                                <td>&nbsp;</td>
                                 <td>
-                                    <input type="submit" value="Start Application" id='save' v-show="applicationForm.$valid" class="md-btn   md-btn-success uk-margin-small-top">
 
-                                    @*@if (@User.Identity.get() == 1) {*@
 
-                                    <a class="md-btn   md-btn-primary uk-margin-small-top" asp-area="" asp-controller="Upload" asp-action="Index">Upload Picture</a>
 
-                                    @*}*@
+                                    <a href="{{ path('preview') }}" class="btn primary"> Click to preview form.</a>
+
+
+
 
                                 </td>
                             </tr>
