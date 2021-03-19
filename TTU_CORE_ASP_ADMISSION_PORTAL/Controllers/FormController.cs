@@ -15,5 +15,6 @@ namespace TTU_CORE_ASP_ADMISSION_PORTAL.Controllers
         {
             return View();
         }
+
     }
 }

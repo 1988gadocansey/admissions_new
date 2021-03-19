@@ -12,6 +12,7 @@ using TTU_CORE_ASP_ADMISSION_PORTAL.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using TTU_CORE_ASP_ADMISSION_PORTAL.Services;
 
 namespace TTU_CORE_ASP_ADMISSION_PORTAL
 {
@@ -20,6 +21,7 @@ namespace TTU_CORE_ASP_ADMISSION_PORTAL
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+
         }
 
         public IConfiguration Configuration { get; }
@@ -27,23 +29,75 @@ namespace TTU_CORE_ASP_ADMISSION_PORTAL
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            /** services.AddDbContext<ApplicationDbContext>(options =>
-                 options.UseSqlite(
-                     Configuration.GetConnectionString("DefaultConnection")));
-             services.AddDatabaseDeveloperPageExceptionFilter();
+            /**services.AddDbContext<ApplicationDbContext>(options =>
+                options.UseSqlite(
+                    Configuration.GetConnectionString("DefaultConnection")));
+            services.AddDatabaseDeveloperPageExceptionFilter();**/
 
-             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-                 .AddEntityFrameworkStores<ApplicationDbContext>();
-             services.AddControllersWithViews();**/
 
-            // add postgress db services to overide sqlite
             services.AddDbContext<ApplicationDbContext>(options =>
-            options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
-            services.AddIdentity<User, IdentityRole<long>>()
-                            .AddEntityFrameworkStores<ApplicationDbContext, long>()
-                            .AddDefaultTokenProviders();
+            options.UseNpgsql(
+            Configuration.GetConnectionString("DefaultConnection")));
 
 
+            _ = services.AddDefaultIdentity<Models.ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
+               
+                .AddEntityFrameworkStores<ApplicationDbContext>()
+                .AddDefaultUI()
+
+                .AddDefaultTokenProviders();
+            ;
+
+            services.AddControllersWithViews();
+
+
+            //configure identity options
+            services.Configure<IdentityOptions>(options =>
+            {
+                // Password settings.
+                options.Password.RequireDigit = true;
+                options.Password.RequireLowercase = true;
+                options.Password.RequireNonAlphanumeric = true;
+                options.Password.RequireUppercase = true;
+                options.Password.RequiredLength = 6;
+                options.Password.RequiredUniqueChars = 1;
+
+                // Lockout settings.
+                options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
+                options.Lockout.MaxFailedAccessAttempts = 5;
+                options.Lockout.AllowedForNewUsers = true;
+
+                // User settings.
+                options.User.AllowedUserNameCharacters =
+                "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+";
+                options.User.RequireUniqueEmail = false;
+            });
+
+
+
+            services.ConfigureApplicationCookie(options =>
+            {
+                // Cookie settings
+                options.Cookie.HttpOnly = true;
+                options.ExpireTimeSpan = TimeSpan.FromMinutes(5);
+
+                options.LoginPath = $"/Identity/Account/Login";
+                
+                options.LogoutPath = $"/Identity/Account/Logout";
+                options.AccessDeniedPath = $"/Identity/Account/AccessDenied";
+            });
+            services.Configure<DataProtectionTokenProviderOptions>(o =>
+            o.TokenLifespan = TimeSpan.FromHours(3));
+           
+
+            services.AddControllersWithViews();
+            services.AddControllers();
+            services.AddRazorPages();
+            services.AddHealthChecks();
+            
+            services.AddAuthentication();
+            services.AddAuthorization();
+            services.AddHealthChecks();
 
         }
 
@@ -75,6 +129,20 @@ namespace TTU_CORE_ASP_ADMISSION_PORTAL
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
+                
+                endpoints.MapHealthChecks("/health");
+
+
+            });
+
+            app.Use(async (context, next) =>
+            {
+                await next();
+                if (context.Response.StatusCode == 404)
+                {
+                    context.Request.Path = "/Home";
+                    await next();
+                }
             });
         }
     }

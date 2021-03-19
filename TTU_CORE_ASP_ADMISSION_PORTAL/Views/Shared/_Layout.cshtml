@@ -1,49 +1,277 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+<!doctype html>
+<!--[if lte IE 9]> <html class="lte-ie9" lang="en"> <![endif]-->
+<!--[if gt IE 9]><!-->
 <html lang="en">
+<!--<![endif]-->
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - TTU_CORE_ASP_ADMISSION_PORTAL</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Remove Tap Highlight on Windows Phone IE -->
+    <meta name="msapplication-tap-highlight" content="no" />
+
+    <link rel="icon" type="image/png" href="~/favicon.ico" sizes="16x16">
+    <link rel="icon" type="image/png" href="assets/img/favicon-32x32.png" sizes="32x32">
+
+    <title>@ViewData["Title"] - TTU Admissions</title>
+
+    <!-- uikit -->
+    <link rel="stylesheet" href="~/assets/plugins/uikit/css/uikit.almost-flat.min.css" media="all">
+
+
+    <link rel="stylesheet" href="~/assets/css/main.min.css" media="all">
+    <!-- <link rel="stylesheet" href="~/assets/css/combined.min.css" media="all"> -->
+
+    <link rel="stylesheet" href="~/assets/plugins/sweet-alert/sweet-alert.min.css" media="all">
+    <!-- font awesome -->
+    <link rel="stylesheet" href="~/assets/css/select2.min.css" media="all">
+    <link rel="stylesheet" href="~/assets/css/dropify.css" media="all">
+    <link rel="stylesheet" href="~/datatables/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="~/datatables/css/dataTables.uikit.min.css">
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    @await RenderSectionAsync("Style", required: false)
+
 </head>
-<body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">TTU_CORE_ASP_ADMISSION_PORTAL</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+<body class=" sidebar_main_open sidebar_main_swipe">
+    <!-- main header -->
+    <header id="header_main">
+        <div class="header_main_content">
+            <nav class="uk-navbar">
+
+                <!-- main sidebar switch -->
+                <a href="index.html#" id="sidebar_main_toggle" class="sSwitch sSwitch_left">
+                    <span class="sSwitchIcon"></span>
+                </a>
+
+                <!-- secondary sidebar switch -->
+                <a href="index.html#" id="sidebar_secondary_toggle" class="sSwitch sSwitch_right sidebar_secondary_check">
+                    <span class="sSwitchIcon"></span>
+                </a>
+
+              
+                <div class="uk-navbar-flip">
+                    
+                    <ul class="uk-navbar-nav user_actions">
+                        
+                        <li data-uk-dropdown="{mode:'click',pos:'bottom-right'}">
+                            
+                        <li  class="user_action_icon"><a>Hello @User.Identity.Name!</a></li>
+                         
+                        <li data-uk-dropdown="{mode:'click',pos:'bottom-right'}">
+                            <a href="index.html#" class="user_action_image"><img class="md-user-image" src="assets/img/avatars/avatar_11_tn.png" alt="" /></a>
+                            <div class="uk-dropdown uk-dropdown-small">
+                                <ul class="uk-nav js-uk-prevent">
+                                    @*<li><a href="page_user_profile.html">My profile</a></li>
+                                    <li><a href="page_settings.html">Settings</a></li>*@
+
+
+                                    <li>  <a class="nav-link text-dark" asp-area="Identity" asp-controller="Account" asp-action="Logout">Sign out</a></li>
+
+                                </ul>
+                            </div>
                         </li>
                     </ul>
-                    <partial name="_LoginPartial" />
                 </div>
+            </nav>
+        </div>
+        <div class="header_main_search_form">
+            <i class="md-icon header_main_search_close material-icons">&#xE5CD;</i>
+            <form class="uk-form">
+                <input type="text" class="header_main_search_input" />
+                <button class="header_main_search_btn uk-button-link"><i class="md-icon material-icons">&#xE8B6;</i></button>
+            </form>
+        </div>
+    </header><!-- main header end -->
+    <!-- main sidebar -->
+    <aside id="sidebar_main">
+
+        <div class="sidebar_main_header">
+            <div class="sidebar_logo">
+               
+
             </div>
-        </nav>
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3">
+            
+        </div>
+
+        <div class="menu_section">
+
+            <partial name="_MenuBar" />
+
+        </div>
+    </aside><!-- main sidebar end -->
+
+    <div id="page_content">
+        <div id="page_content_inner">
+
             @RenderBody()
-        </main>
+
+        </div>
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2021 - TTU_CORE_ASP_ADMISSION_PORTAL - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
-    </footer>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
+
+
+    <!-- google web fonts -->
+    <script>WebFontConfig = {
+            google: {
+                families: [
+                    'Source+Code+Pro:400,700:latin',
+                    'Roboto:400,300,500,700,400italic:latin'
+                ]
+            }
+        };
+        (function () {
+            var wf = document.createElement('script');
+            wf.src = ('https:' == document.location.protocol ? 'https' : 'http') +
+                '://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
+            wf.type = 'text/javascript';
+            wf.async = 'true';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(wf, s);
+        })();</script>
+
+    <script src="~/assets/js/common.min.js"></script>
+    <script src="~/assets/js/dropify.min.js"></script>
+    <script src="~/assets/js/file_input.min.js"></script>
+    <!-- uikit functions -->
+    <script src="~/assets/js/uikit_custom.min.js"></script>
+
+    <!-- altair common functions/helpers -->
+    <script src="~/assets/js/altair_admin_common.min.js"></script>
+
+    <script src="~/assets/js/vue.min.js"></script>
+    <script src="~/assets/js/vue-form.min.js"></script>
+    <script src="~/assets/js/jquery-ui.min.js"></script>
+    <script src="~/assets/tableexport/tableExport.js"></script>
+    <script src="~/assets/tableexport/jquery.base64.js"></script>
+
+    <script src="~/assets/tableexport/html2canvas.js"></script>
+
+    <script src="~/assets/tableexport/jspdf/libs/sprintf.js"></script>
+
+    <script src="~/assets/tableexport/jspdf/jspdf.js"></script>
+    <script src="~/assets/tableexport/jspdf/libs/base64.js"></script>
+    <script src="~/datatables/js/jquery.dataTables.min.js"></script>
+
+    <script src="~/datatables/js/dataTables.uikit.min.js"></script>
+    <script src="~/datatables/js/plugins_datatables.min.js"></script>
+    <script src="~/datatables/js/datatables_uikit.min.js"></script>
+
+
     @await RenderSectionAsync("Scripts", required: false)
+    <script>$(function () {
+            // enable hires images
+            altair_helpers.retina_images();
+            // fastClick (touch devices)
+            if (Modernizr.touch) {
+                FastClick.attach(document.body);
+            }
+        });</script>
+
+    <script>$(function () {
+            var $switcher = $('#style_switcher'),
+                $switcher_toggle = $('#style_switcher_toggle'),
+                $theme_switcher = $('#theme_switcher'),
+                $mini_sidebar_toggle = $('#style_sidebar_mini'),
+                $boxed_layout_toggle = $('#style_layout_boxed'),
+                $body = $('body');
+
+
+            $switcher_toggle.click(function (e) {
+                e.preventDefault();
+                $switcher.toggleClass('switcher_active');
+            });
+
+            $theme_switcher.children('li').click(function (e) {
+                e.preventDefault();
+                var $this = $(this),
+                    this_theme = $this.attr('data-app-theme');
+
+                $theme_switcher.children('li').removeClass('active_theme');
+                $(this).addClass('active_theme');
+                $body
+                    .removeClass('app_theme_a app_theme_b app_theme_c app_theme_d app_theme_e app_theme_f app_theme_g')
+                    .addClass(this_theme);
+
+                if (this_theme == '') {
+                    localStorage.removeItem('altair_theme');
+                } else {
+                    localStorage.setItem("altair_theme", this_theme);
+                }
+
+            });
+
+            // hide style switcher
+            $document.on('click keyup', function (e) {
+                if ($switcher.hasClass('switcher_active')) {
+                    if (
+                        (!$(e.target).closest($switcher).length)
+                        || (e.keyCode == 27)
+                    ) {
+                        $switcher.removeClass('switcher_active');
+                    }
+                }
+            });
+
+            // get theme from local storage
+            if (localStorage.getItem("altair_theme") !== null) {
+                $theme_switcher.children('li[data-app-theme=' + localStorage.getItem("altair_theme") + ']').click();
+            }
+
+
+            // toggle mini sidebar
+
+            // change input's state to checked if mini sidebar is active
+            if ((localStorage.getItem("altair_sidebar_mini") !== null && localStorage.getItem("altair_sidebar_mini") == '1') || $body.hasClass('sidebar_mini')) {
+                $mini_sidebar_toggle.iCheck('check');
+            }
+
+            $mini_sidebar_toggle
+                .on('ifChecked', function (event) {
+                    $switcher.removeClass('switcher_active');
+                    localStorage.setItem("altair_sidebar_mini", '1');
+                    location.reload(true);
+                })
+                .on('ifUnchecked', function (event) {
+                    $switcher.removeClass('switcher_active');
+                    localStorage.removeItem('altair_sidebar_mini');
+                    location.reload(true);
+                });
+
+
+            // toggle boxed layout
+
+            // change input's state to checked if mini sidebar is active
+            if ((localStorage.getItem("altair_layout") !== null && localStorage.getItem("altair_layout") == 'boxed') || $body.hasClass('boxed_layout')) {
+                $boxed_layout_toggle.iCheck('check');
+                $body.addClass('boxed_layout');
+                $(window).resize();
+            }
+
+            // toggle mini sidebar
+            $boxed_layout_toggle
+                .on('ifChecked', function (event) {
+                    $switcher.removeClass('switcher_active');
+                    localStorage.setItem("altair_layout", 'boxed');
+                    location.reload(true);
+                })
+                .on('ifUnchecked', function (event) {
+                    $switcher.removeClass('switcher_active');
+                    localStorage.removeItem('altair_layout');
+                    location.reload(true);
+                });
+
+
+        });</script>
+
+
+
+
+
+
 </body>
 </html>

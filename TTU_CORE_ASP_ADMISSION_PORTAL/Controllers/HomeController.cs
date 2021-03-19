@@ -6,22 +6,34 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using TTU_CORE_ASP_ADMISSION_PORTAL.Models;
-
+using TTU_CORE_ASP_ADMISSION_PORTAL.Services;
 namespace TTU_CORE_ASP_ADMISSION_PORTAL.Controllers
 {
+    [Microsoft.AspNetCore.Authorization.Authorize]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly SMSService sms;
+
 
         public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
+            
         }
 
+        
         public IActionResult Index()
         {
             return View();
         }
+
+
+        
+        public IActionResult Dashboard() => View(
+            // SMSService sms = new SMSService()
+
+            );
 
         public IActionResult Privacy()
         {
