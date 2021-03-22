@@ -163,6 +163,15 @@
 
 
     @await RenderSectionAsync("Scripts", required: false)
+    <script>
+       
+        $(document).ready(function () {
+
+            $(".uk-alert-success").fadeOut(2000);
+            $(".uk-alert-danger").fadeOut(2000);
+
+        });
+    </script>
     <script>$(function () {
             // enable hires images
             altair_helpers.retina_images();

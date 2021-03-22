@@ -9,9 +9,28 @@
 
     <link rel="stylesheet" href="~/assets/css/jquery-ui.css" media="all">
 }
-<div align="center">
 
-    <form id="form" method="POST" enctype="multipart/form-data" accept-charset="utf-8" name="applicationForm" v-form>
+@if (TempData["message"] != null)
+{
+
+    @if (TempData["type"].ToString() == "success")
+    {
+<div style="text-align: center" class="uk-alert uk-alert-success" data-uk-alert=""> @TempData["message"]  </div>
+
+    }
+    else
+    {
+
+<div style="text-align: center" class="uk-alert uk-alert-danger" data-uk-alert=""> @TempData["message"]  </div>
+
+    }
+}
+
+@*<partial name="_StatusMessages" />*@
+
+<div align="center">
+   <p> @User.ToString()</p>
+    <form id="form" method="POST" enctype="multipart/form-data" asp-controller="Upload" asp-action="Upload" accept-charset="utf-8" name="applicationForm" v-form>
         @Html.AntiForgeryToken()
 
         <div class="uk-width-small-1-2">
@@ -21,15 +40,30 @@
                     <h3 class="heading_a uk-margin-small-bottom">
                         Upload Picture here. Only (.JPG .JPEG) are allowed.
                     </h3>
-                    <input type="file" id="input-file-e" required="" name="file" v-model="file" v-form-ctrl="" class="dropify" data-max-file-size="200000K" />
+
+                    @if (TempData["message"] != null)
+                    {
+
+                        <img class="thumbnail img-preview medium ui image" style=" width:270px;height:auto"
+                             src="{{'http://photos.ttuportal.com/public/albums/thumbnails/'~photo ~'.jpg' }}"
+                             alt="your passport photo">
+
+                    }
+
+
+
+                    <input type="file" accept="image/jpeg image/jpg" id="input-file-e" required="" name="file" v-model="file" v-form-ctrl="" class="dropify" data-max-file-size="200000K" />
                 </div>
             </div>
+
+
             <div class="uk-grid">
                 <div class="uk-width-1-1">
                     <input type="submit" v-show="applicationForm.$valid" class="md-btn md-btn-primary" value="upload" />
                 </div>
 
             </div>
+
 
         </div>
 
@@ -52,11 +86,8 @@
 
 
 
-});
-    </script>
-    <script>
-
-        async function AJAXSubmit(oFormElement) {
+        });</script>
+    <script>async function AJAXSubmit(oFormElement) {
             var resultElement = oFormElement.elements.namedItem("result");
             const formData = new FormData(oFormElement);
 
@@ -75,9 +106,7 @@
             } catch (error) {
                 console.error('Error:', error);
             }
-        }
-
-    </script>
+        }</script>
     <script src="~/assets/js/select2.full.min.js"></script>
     <script>$(document).ready(function () {
             $('select').select2({ width: "resolve" });

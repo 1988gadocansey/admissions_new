@@ -1,17 +1,16 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.EntityFrameworkCore;
 using TTU_CORE_ASP_ADMISSION_PORTAL.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using SixLabors.ImageSharp.Web.DependencyInjection;
+using Microsoft.IO;
+using TTU_CORE_ASP_ADMISSION_PORTAL.Extensions;
 using TTU_CORE_ASP_ADMISSION_PORTAL.Services;
 
 namespace TTU_CORE_ASP_ADMISSION_PORTAL
@@ -73,7 +72,7 @@ namespace TTU_CORE_ASP_ADMISSION_PORTAL
                 options.User.RequireUniqueEmail = false;
             });
 
-
+        
 
             services.ConfigureApplicationCookie(options =>
             {
@@ -99,6 +98,26 @@ namespace TTU_CORE_ASP_ADMISSION_PORTAL
             services.AddAuthorization();
             services.AddHealthChecks();
 
+            services.AddImageSharp(
+            options =>
+            {
+                // You only need to set the options you want to change here
+                // All properties have been listed for demonstration purposes
+                // only.
+                
+                options.MemoryStreamManager = new RecyclableMemoryStreamManager();
+                options.BrowserMaxAge = TimeSpan.FromDays(7);
+                options.CacheMaxAge = TimeSpan.FromDays(365);
+                options.CachedNameLength = 8;
+                options.OnParseCommandsAsync = _ => Task.CompletedTask;
+                options.OnBeforeSaveAsync = _ => Task.CompletedTask;
+                options.OnProcessedAsync = _ => Task.CompletedTask;
+                options.OnPrepareResponseAsync = _ => Task.CompletedTask;
+            });
+
+            //services.AddImageResizer();
+            //services.AddSingleton<IMageService>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -122,7 +141,7 @@ namespace TTU_CORE_ASP_ADMISSION_PORTAL
 
             app.UseAuthentication();
             app.UseAuthorization();
-
+            app.UseImageSharp();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
@@ -134,6 +153,7 @@ namespace TTU_CORE_ASP_ADMISSION_PORTAL
 
 
             });
+            //app.UseImageResizer();
 
             app.Use(async (context, next) =>
             {
