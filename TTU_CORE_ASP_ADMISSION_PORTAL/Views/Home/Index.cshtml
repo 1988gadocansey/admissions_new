@@ -1,9 +1,12 @@
 ﻿
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
 @{
     ViewBag.Title = "Dashboard";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
+@{ var user = await UserManager.GetUserAsync(User); }
 
 <div class="uk-grid uk-grid-width-large-1-4 uk-grid-width-medium-1-2 uk-grid-medium uk-sortable sortable-handler hierarchical_show" data-uk-sortable data-uk-grid-margin>
     <div>
@@ -11,7 +14,14 @@
             <div class="md-card-content">
                 <div class="uk-float-right uk-margin-top uk-margin-small-right"><span class="peity_visitors peity_data">5,3,9,6,5,9,7</span></div>
                 <span class="uk-text-muted uk-text-small">Form Type</span>
-                <h4 class="uk-margin-remove"><span class="countUpMew"> @User.Identity.Name</span></h4>
+                <h4 class="uk-margin-remove">
+                    <span class="countUpMew">
+                       
+                        
+                         @(user.Type )
+
+                    </span>
+                </h4>
             </div>
         </div>
     </div>
@@ -19,8 +29,8 @@
         <div class="md-card">
             <div class="md-card-content">
                 <div class="uk-float-right uk-margin-top uk-margin-small-right"><span class="peity_sale peity_data">5,3,9,6,5,9,7,3,5,2</span></div>
-                <span class="uk-text-muted uk-text-small">Sale</span>
-                <h2 class="uk-margin-remove">$<span class="countUpMe">0<noscript>142384</noscript></span></h2>
+                <span class="uk-text-muted uk-text-small">Purchased From</span>
+                <h4 class="uk-margin-remove"><span class="countUpMe">  @(user.SoldBy )</span></h4>
             </div>
         </div>
     </div>
@@ -28,8 +38,26 @@
         <div class="md-card">
             <div class="md-card-content">
                 <div class="uk-float-right uk-margin-top uk-margin-small-right"><span class="peity_orders peity_data">64/100</span></div>
-                <span class="uk-text-muted uk-text-small">Orders Completed</span>
-                <h2 class="uk-margin-remove"><span class="countUpMe">0<noscript>64</noscript></span>%</h2>
+                <span class="uk-text-muted uk-text-small">Picture Upload</span>
+
+
+
+
+                @if ((user.PictureUploaded) == 1)
+                {
+
+                    <h4 class="uk-margin-remove"><span class="countUpMe">Yes</span></h4>
+
+                }
+                else
+                {
+                    <h4 class="uk-margin-remove"><span class="countUpMe">No</span></h4>
+                }
+
+
+
+                 
+
             </div>
         </div>
     </div>
@@ -37,8 +65,27 @@
         <div class="md-card">
             <div class="md-card-content">
                 <div class="uk-float-right uk-margin-top uk-margin-small-right"><span class="peity_live peity_data">5,3,9,6,5,9,7,3,5,2,5,3,9,6,5,9,7,3,5,2</span></div>
-                <span class="uk-text-muted uk-text-small">Visitors (live)</span>
-                <h2 class="uk-margin-remove" id="peity_live_text">46</h2>
+                <span class="uk-text-muted uk-text-small">Form Completed</span>
+
+
+                @if ((user.FormCompleted) == 1)
+                {
+
+                    <h4 class="uk-margin-remove" id="peity_live_text">
+                       Yes.
+                    </h4>
+
+                }
+                else
+                {
+                    <h4 class="uk-margin-remove" id="peity_live_text">
+                       No.
+                    </h4>
+                }
+
+
+
+
             </div>
         </div>
     </div>
@@ -53,7 +100,7 @@
 
                 <p><center><strong>INSTRUCTIONS IN FILLING THE FORM </strong></center></p>
                 <hr>
-                <p>All Ghanaian applicants for the  @DateTime.Now.Year/@DateTime.Now.AddYears(+1).Year Academic year admission are required to use Takoradi Technical University online admission portal.<br/> The procedure for the online application process is as follows:</p>
+                <p>All Ghanaian applicants for the  @DateTime.Now.Year/@DateTime.Now.AddYears(+1).Year Academic year admission are required to use Takoradi Technical University online admission portal.<br /> The procedure for the online application process is as follows:</p>
 
                 <p><strong>I</strong>. In completing the online form, applicants will be required to upload their passport size photograph (not more than 500KB) with a white background.</p>
                 <p><strong>II. </strong>Applicants are advised to check thoroughly all details entered before they finally submit their online applications. A form, once submitted, can be viewed, but cannot be edited.</p>

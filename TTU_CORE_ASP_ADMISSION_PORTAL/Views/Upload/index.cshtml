@@ -1,4 +1,8 @@
-﻿@{
+﻿
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+@{
     ViewBag.Title = "Upload Profile Picture";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -15,13 +19,13 @@
 
     @if (TempData["type"].ToString() == "success")
     {
-<div style="text-align: center" class="uk-alert uk-alert-success" data-uk-alert=""> @TempData["message"]  </div>
+        <div style="text-align: center" class="uk-alert uk-alert-success" data-uk-alert=""> @TempData["message"]  </div>
 
     }
     else
     {
 
-<div style="text-align: center" class="uk-alert uk-alert-danger" data-uk-alert=""> @TempData["message"]  </div>
+        <div style="text-align: center" class="uk-alert uk-alert-danger" data-uk-alert=""> @TempData["message"]  </div>
 
     }
 }
@@ -29,7 +33,8 @@
 @*<partial name="_StatusMessages" />*@
 
 <div align="center">
-   <p> @User.ToString()</p>
+    @{ var user = await UserManager.GetUserAsync(User); }
+    <p> @(user.Type )!</p>
     <form id="form" method="POST" enctype="multipart/form-data" asp-controller="Upload" asp-action="Upload" accept-charset="utf-8" name="applicationForm" v-form>
         @Html.AntiForgeryToken()
 
@@ -41,14 +46,6 @@
                         Upload Picture here. Only (.JPG .JPEG) are allowed.
                     </h3>
 
-                    @if (TempData["message"] != null)
-                    {
-
-                        <img class="thumbnail img-preview medium ui image" style=" width:270px;height:auto"
-                             src="{{'http://photos.ttuportal.com/public/albums/thumbnails/'~photo ~'.jpg' }}"
-                             alt="your passport photo">
-
-                    }
 
 
 

@@ -24,12 +24,12 @@ namespace TTU_CORE_ASP_ADMISSION_PORTAL.Data.Migrations
                     b.Property<int>("ApplicantID")
                         .HasColumnType("integer");
 
-                    b.Property<int>("programmesID")
+                    b.Property<int>("programmesId")
                         .HasColumnType("integer");
 
-                    b.HasKey("ApplicantID", "programmesID");
+                    b.HasKey("ApplicantID", "programmesId");
 
-                    b.HasIndex("programmesID");
+                    b.HasIndex("programmesId");
 
                     b.ToTable("ApplicantModelProgrammeModel");
                 });
@@ -570,7 +570,7 @@ namespace TTU_CORE_ASP_ADMISSION_PORTAL.Data.Migrations
 
             modelBuilder.Entity("TTU_CORE_ASP_ADMISSION_PORTAL.Models.ProgrammeModel", b =>
                 {
-                    b.Property<int>("ID")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
@@ -599,7 +599,7 @@ namespace TTU_CORE_ASP_ADMISSION_PORTAL.Data.Migrations
                     b.Property<string>("Type")
                         .HasColumnType("text");
 
-                    b.HasKey("ID");
+                    b.HasKey("Id");
 
                     b.ToTable("ProgrammeModel");
                 });
@@ -665,7 +665,7 @@ namespace TTU_CORE_ASP_ADMISSION_PORTAL.Data.Migrations
 
                     b.HasOne("TTU_CORE_ASP_ADMISSION_PORTAL.Models.ProgrammeModel", null)
                         .WithMany()
-                        .HasForeignKey("programmesID")
+                        .HasForeignKey("programmesId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

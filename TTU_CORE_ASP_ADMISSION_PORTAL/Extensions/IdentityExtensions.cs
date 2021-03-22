@@ -22,12 +22,19 @@ namespace TTU_CORE_ASP_ADMISSION_PORTAL.Extensions
     {
         public static class IdentityExtensions
         {
-            public static int PictureUploaded(this IIdentity identity)
+            public static string FormNo(this IIdentity identity)
             {
-                var claim = ((ClaimsIdentity)identity).FindFirst("PictureUploaded");
+                var claim = ((ClaimsIdentity)identity).FindFirst(ClaimTypes.GivenName);
                 // Test for null to avoid issues during local testing
-                return int.Parse
-                        (claim.ToString());
+                return (claim != null) ? claim.Value : string.Empty;
+            }
+
+
+            public static string Type(this IIdentity identity)
+            {
+                var claim = ((ClaimsIdentity)identity).FindFirst(ClaimTypes.Surname);
+                // Test for null to avoid issues during local testing
+                return (claim != null) ? claim.Value : string.Empty;
             }
         }
     }
