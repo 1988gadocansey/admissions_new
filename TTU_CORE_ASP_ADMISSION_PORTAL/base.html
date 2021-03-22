@@ -1,0 +1,1626 @@
+{% load static %}
+{% load humanize %}
+
+{% load account_tags %}
+
+<!doctype html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Remove Tap Highlight on Windows Phone IE -->
+    <meta name="msapplication-tap-highlight" content="no"/>
+    <meta description="Student portal for takoradi tech uni" author="Gad Ocansey +233243348522"/>
+    <meta name="csrfmiddlewaretoken" content="{{ csrf_token }}"/>
+    <link rel="icon" type="image/png" href="{% static 'assets/img/favicon-16x16.png ' %}" sizes="16x16">
+    <link rel="icon" type="image/png" href="{% static 'assets/img/favicon-32x32.png ' %}" sizes="32x32">
+
+    <title>Applicant Placement and Management System |  {% block title %} {% endblock %}</title>
+
+
+    <!-- uikit -->
+    <link rel="stylesheet" href="{% static 'bower_components/uikit/css/uikit.almost-flat.min.css' %}" media="all">
+
+
+    <link rel="stylesheet" href="{% static 'assets/css/main.min.css' %}" media="all">
+
+    <link rel="stylesheet" href="{% static 'assets/css/themes/themes_combined.min.css' %}" media="all">
+
+
+    <link rel="stylesheet" href="{% static 'assets/css/select2.min.css' %}" media="all">
+    <link rel="stylesheet" href="{% static 'assets/css/dropify.css' %}" media="all">
+    <link rel="stylesheet" href="{% static 'datatables/css/jquery.dataTables.min.css' %}">
+    <link rel="stylesheet" href="{% static 'datatables/css/dataTables.uikit.min.css' %}">
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <!-- style switcher -->
+    <link rel="stylesheet" href="{% static 'assets/css/style_switcher.min.css' %}" media="all">
+
+
+    {% block style %}{% endblock %}
+</head>
+<body class="top_menu">
+<!-- main header -->
+<header id="header_main">
+    <div class="header_main_content">
+        <nav class="uk-navbar">
+            <div class="main_logo_top">
+                <a href="/dashboard"><img src="{% static 'logins/images/logo.png' %}" alt="" style="width: 100px"/></a>
+
+            </div>
+
+            <!-- secondary sidebar switch -->
+            <a href="#" id="sidebar_secondary_toggle" class="sSwitch sSwitch_right sidebar_secondary_check">
+                <span class="sSwitchIcon"></span>
+            </a>
+
+            <div class="uk-navbar-flip">
+                <ul class="uk-navbar-nav user_actions">
+                    <li><a href="#" id="full_screen_toggle" class="user_action_icon uk-visible-large"><i
+                            class="material-icons md-24 md-light">&#xE5D0;</i></a></li>
+                    <li data-uk-dropdown="{mode:'click',pos:'bottom-right'}">
+                        <a href="#" class="user_action_icon"><i class="material-icons md-24 md-light">&#xE7F4;</i><span
+                                class="uk-badge">16</span></a>
+                        <div class="uk-dropdown uk-dropdown-xlarge">
+                            <div class="md-card-content">
+                                <ul class="uk-tab uk-tab-grid"
+                                    data-uk-tab="{connect:'#header_alerts',animation:'slide-horizontal'}">
+                                    <li class="uk-width-1-2 uk-active"><a href="#" class="js-uk-prevent uk-text-small">Messages
+                                        (12)</a></li>
+                                    <li class="uk-width-1-2"><a href="#" class="js-uk-prevent uk-text-small">Alerts
+                                        (4)</a></li>
+                                </ul>
+                                <ul id="header_alerts" class="uk-switcher uk-margin">
+                                    <li>
+                                        <ul class="md-list md-list-addon">
+                                            <li>
+                                                <div class="md-list-addon-element">
+                                                    <span class="md-user-letters md-bg-cyan">ao</span>
+                                                </div>
+                                                <div class="md-list-content">
+                                                    <span class="md-list-heading"><a href="#">Consequatur ut repudiandae.</a></span>
+                                                    <span class="uk-text-small uk-text-muted">Et sunt qui quod aut laborum et nisi.</span>
+                                                </div>
+                                            </li>
+
+                                        </ul>
+                                        <div class="uk-text-center uk-margin-top uk-margin-small-bottom">
+                                            <a href="page_mailbox.html"
+                                               class="md-btn md-btn-flat md-btn-flat-primary js-uk-prevent">Show All</a>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <ul class="md-list md-list-addon">
+                                            <li>
+                                                <div class="md-list-addon-element">
+                                                    <i class="md-list-addon-icon material-icons uk-text-warning">&#xE8B2;</i>
+                                                </div>
+                                                <div class="md-list-content">
+                                                    <span class="md-list-heading">Repudiandae accusantium.</span>
+                                                    <span class="uk-text-small uk-text-muted uk-text-truncate">Et fugit ipsum quia non ducimus quo.</span>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="md-list-addon-element">
+                                                    <i class="md-list-addon-icon material-icons uk-text-success">&#xE88F;</i>
+                                                </div>
+                                                <div class="md-list-content">
+                                                    <span class="md-list-heading">Eos earum qui.</span>
+                                                    <span class="uk-text-small uk-text-muted uk-text-truncate">Accusamus nisi vitae dolorem et vel repudiandae ratione tenetur.</span>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="md-list-addon-element">
+                                                    <i class="md-list-addon-icon material-icons uk-text-danger">&#xE001;</i>
+                                                </div>
+                                                <div class="md-list-content">
+                                                    <span class="md-list-heading">Rerum accusantium.</span>
+                                                    <span class="uk-text-small uk-text-muted uk-text-truncate">Ut voluptatem eos sapiente hic qui molestiae.</span>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="md-list-addon-element">
+                                                    <i class="md-list-addon-icon material-icons uk-text-primary">&#xE8FD;</i>
+                                                </div>
+                                                <div class="md-list-content">
+                                                    <span class="md-list-heading">Id molestias.</span>
+                                                    <span class="uk-text-small uk-text-muted uk-text-truncate">Excepturi delectus rem doloribus quia fugiat.</span>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+                    <li data-uk-dropdown="{mode:'click',pos:'bottom-right'}">
+
+                        <a href="#" class="user_action_image">
+                            <span class="" style="color:white">Hi {{ request.user|capfirst }}</span>
+
+
+                            <div class="uk-dropdown uk-dropdown-small">
+                                <ul class="uk-nav js-uk-prevent">
+
+
+                                    <li>
+                                        <a href="{% url 'logout' %}"
+                                        >
+                                            Logout
+                                        </a>
+
+
+                                    </li>
+
+                                </ul>
+                            </div>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+    <div class="header_main_search_form">
+        <i class="md-icon header_main_search_close material-icons">&#xE5CD;</i>
+
+    </div>
+</header><!-- main header end -->
+<div id="top_bar">
+    <div class="md-top-bar">
+
+        {% if request.user.is_authenticated %}
+            <ul id="menu_top" class="uk-clearfix">
+               {% if not request.user.username == "751986"%}
+                <li class="uk-hidden-small"><a href="{% url 'dashboard' %}"><i class="material-icons">&#xE88A;</i><span>HOME</span></a>
+                </li>
+
+
+
+                <li data-uk-dropdown class="uk-hidden-small">
+
+                    <a href="#"><i
+                            class="sidebar-menu-icon material-icons md-18">people</i><span>APPLICANTS MANAGEMENT</span></a>
+
+                    <div class="uk-dropdown uk-dropdown-scrollable">
+                        <ul class="uk-nav uk-nav-dropdown">
+                            <li>
+                                <a class="dropdown-item ks-active" href="{% url 'applicants_index' %}">Applicants</a>
+
+
+                            </li>
+
+                        </ul>
+                    </div>
+                </li>
+                {% endif %}
+
+                {% comment %} <li data-uk-dropdown class="uk-hidden-small">
+
+                    <a href="#"><i class="sidebar-menu-icon material-icons md-18">people</i><span>INTERNATIONAL </span></a>
+
+                    <div class="uk-dropdown uk-dropdown-scrollable">
+                        <ul class="uk-nav uk-nav-dropdown">
+                             <li>
+                                 <a class="dropdown-item ks-active" href="{% url 'international_index' %}"> international applicants</a>
+
+
+                             </li>
+                             <li>
+
+                          <a class="dropdown-item ks-active" href="{% url 'international_admitted' %}">Admitted international</a>
+
+
+
+                             </li>
+                        </ul>
+                    </div>
+                </li>{% endcomment %}
+
+{#             {% if request.user.username != "yiddrisu" or   request.user.username != "Finance" or  request.user.username != "754997"% }#}
+
+            {% if user.groups.all.0.name  ==  "admin" %}
+                 <li data-uk-dropdown class="uk-hidden-small">
+
+                    <a href="#"><i class="sidebar-menu-icon material-icons md-18">&#xE85D;</i><span>REPORTS</span></a>
+
+                    <div class="uk-dropdown uk-dropdown-scrollable">
+                        <ul class="uk-nav uk-nav-dropdown">
+                            <li>
+                                <a class="dropdown-item ks-active" href="{% url 'show_export_form' %}">WAEC
+                                    Verification</a>
+
+
+                            <li>
+                             <li>
+                                <a class="dropdown-item ks-active" href="{% url 'download_admission_excel' %}">
+                                   Admissions Report</a>
+
+
+                            <li>
+
+
+                        </ul>
+                    </div>
+                </li>
+                 {% endif %}
+
+            {% if user.groups.all.0.name  ==  "admin" %}
+                <li data-uk-dropdown class="uk-hidden-small">
+
+                    <a href="#"><i
+                            class="sidebar-menu-icon material-icons md-18">bar_chart</i><span>STATISTICS</span></a>
+
+                    <div class="uk-dropdown uk-dropdown-scrollable">
+                        <ul class="uk-nav uk-nav-dropdown">
+                            <li>
+                                <a class="dropdown-item ks-active" href="{% url 'statistics' %}">View admissions
+                                    statistics</a>
+
+                            <li>
+
+
+                        </ul>
+                    </div>
+                </li>
+                {% endif %}
+
+               {% if request.user.username == "751986" or request.user.username == "751772"  or request.user.username == "yiddrisu" or request.user.username == "finance"%}
+                <li data-uk-dropdown class="uk-hidden-small">
+
+                    <a href="#">
+                         {% if request.user.username == "751772" %}
+{#                        <i class="sidebar-menu-icon material-icons md-18">bar_chart</i><span>OUTREACH SECTION</span></a>#}
+                        OUTREACH SECTION
+                        {% else %}
+
+                             <i class="sidebar-menu-icon material-icons md-18">bar_chart</i><span>VOUCHER SALES</span></a>
+                       {% endif %}
+                    <div class="uk-dropdown uk-dropdown-scrollable">
+                        <ul class="uk-nav uk-nav-dropdown">
+                            <li>
+                                {% if request.user.username == "751772" %}
+                                 <a class="dropdown-item ks-active" href="{% url 'outreach' %}">Generate Outreach form</a>
+                               {% comment %} <a class="dropdown-item ks-active" href="{% url 'postOffice' %}">Generate Others </a>
+                                {% endcomment %}
+
+                                     {% elif request.user.username == "finance" or  request.user.username == "yiddrisu" %}
+
+                                         <a class="dropdown-item ks-active" href="{% url 'sales' %}">View Sales </a>
+
+                                     {% else %}
+
+                                    <a class="dropdown-item ks-active" href="{% url 'sell' %}">Sell Voucher </a>
+                                <a class="dropdown-item ks-active" href="{% url 'sales' %}">View Sales </a>
+
+                                <a class="dropdown-item ks-active" href="{% url 'recover_voucher' %}">Recover lost
+                                    Voucher</a>
+
+                                    {% endif %}
+
+
+                            <li>
+
+
+                        </ul>
+                    </div>
+                </li>
+
+
+               {% endif %}
+             {% if user.groups.all.0.name  ==  "admin" %}
+                <li data-uk-dropdown class="uk-hidden-small">
+
+                    <a href="#"><i class="sidebar-menu-icon material-icons md-18">sms</i><span>SMS</span></a>
+
+                    <div class="uk-dropdown uk-dropdown-scrollable">
+                        <ul class="uk-nav uk-nav-dropdown">
+                            <li>
+                                <a class="dropdown-item ks-active" href="{% url 'send_admission_alert' %}">Send SMS
+                                    Notification</a>
+
+                            <li>
+                            <li>
+                                <a class="dropdown-item" href="{% url 'messages' %}">View Messages</a>
+
+                            <li>
+
+
+                        </ul>
+                    </div>
+                </li>
+                  {% endif %}
+            {% if request.user.username != "finance" %}
+               {% if user.groups.all.0.name  ==  "admin" %}
+
+                <li data-uk-dropdown class="uk-hidden-small">
+
+                    <a href="#"><i class="sidebar-menu-icon material-icons md-18">help_outline</i><span>HELP DESK</span></a>
+
+                    <div class="uk-dropdown uk-dropdown-scrollable">
+                        <ul class="uk-nav uk-nav-dropdown">
+
+                            <li>
+                                <a class="dropdown-item ks-active" href="{% url 'programmes' %}">Programmes</a>
+
+
+                            <li>
+
+
+                            <li>
+                                <a class="dropdown-item ks-active" href="{% url 'block_unblock' %}">Block and Ublock
+                                    Applicant</a>
+
+
+                            <li>
+
+
+
+                        </ul>
+                    </div>
+                </li>
+                   {% endif %}
+                <li data-uk-dropdown class="uk-hidden-small">
+
+                    <a href="#"><i class="sidebar-menu-icon material-icons md-18">settings</i><span>SETTINGS</span></a>
+
+                    <div class="uk-dropdown uk-dropdown-scrollable">
+                        <ul class="uk-nav uk-nav-dropdown">
+                            <li>
+
+                                <a class="dropdown-item ks-active" href="{% url 'settings' %}">Configurations</a>
+
+                            <li>
+
+
+                        </ul>
+                    </div>
+                </li>
+
+
+                   {% endif %}
+              {% if request.user.username != "finance" %}
+              <li data-uk-dropdown class="uk-hidden-small">
+
+                    <a href="#"><i class="sidebar-menu-icon material-icons md-18">help_outline</i><span>HELP DESK</span></a>
+
+                    <div class="uk-dropdown uk-dropdown-scrollable">
+                        <ul class="uk-nav uk-nav-dropdown">
+
+                            <li>
+                                <a class="dropdown-item ks-active" href="{% url 'programmes' %}">Programmes</a>
+
+
+                            <li>
+
+
+                            <li>
+                                <a class="dropdown-item ks-active" href="{% url 'block_unblock' %}">Block and Ublock
+                                    Applicant</a>
+
+
+                            <li>
+
+
+
+                        </ul>
+                    </div>
+                </li>
+                  {% endif %}
+
+                <li data-uk-dropdown class="uk-hidden-small">
+                    <a href="#"><i class="sidebar-menu-icon material-icons md-18">lock</i><span>ACCOUNT</span></a>
+                    <div class="uk-dropdown uk-dropdown-scrollable">
+                        <ul class="uk-nav uk-nav-dropdown">
+                            <li><a href='#'>My Profile</a></li>
+                            <li>
+
+                                <a href="{% url 'logout' %}"
+                                >
+                                    Logout
+                                </a>
+
+
+                            </li>
+
+                        </ul>
+                    </div>
+                </li>
+                <li data-uk-dropdown="justify:'#top_bar'" class="uk-visible-small">
+                    <a href="#"><i class="material-icons">&#xE5D2;</i><span>Menu</span></a>
+                    <div class="uk-dropdown uk-dropdown-width-2">
+                        <div class="uk-grid uk-dropdown-grid" data-uk-grid-margin>
+                            <div class="uk-width-1-2">
+                                <ul class="uk-nav uk-nav-dropdown ">
+                                    <li><a href="{% url 'dashboard' %}">Home</a></li>
+
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        {% endif %}
+    </div>
+</div>
+
+<div id="page_content">
+    <div id="page_content_inner">
+
+
+        {% block contents %}
+
+        {% endblock %}
+
+
+    </div>
+</div><!-- common functions -->
+<br/>
+<div class="footer uk-text-small">
+    <center>
+        <small style="font-size: 11px">&copy2017-{% now 'Y' %} | Takoradi Technical University - Powered by
+            TPconnect<br/>Help lines 0243348522/0246091283
+        </small>
+    </center>
+</div>
+</body>
+
+
+<script src="{% static 'assets/js/common.min.js' %}"></script>
+
+<!-- uikit functions -->
+<script src="{% static 'assets/js/uikit_custom.min.js' %}"></script>
+
+<!-- altair common functions/helpers -->
+<script src="{% static 'assets/js/altair_admin_common.min.js' %}"></script>
+<script src="{% static 'assets/js/uikit/uikit.min.js' %}"></script>
+
+
+<script src="{% static 'assets/js/vue.min.js' %}"></script>
+<script src="{% static 'assets/js/vue-form.min.js' %}"></script>
+
+
+<script src="{% static 'assets/js/jquery-ui.min.js' %}"></script>
+<script src="{% static 'plugins/tableexport/tableExport.js' %}"></script>
+<script src="{% static 'plugins/tableexport/jquery.base64.js' %}"></script>
+
+<script src="{% static 'plugins/tableexport/html2canvas.js' %}"></script>
+
+<script src="{% static 'plugins/tableexport/jspdf/libs/sprintf.js' %}"></script>
+
+<script src="{% static 'plugins/tableexport/jspdf/jspdf.js' %}"></script>
+<script src="{% static 'plugins/tableexport/jspdf/libs/base64.js' %}"></script>
+
+
+
+
+<script src="{% static 'datatables/js/jquery.dataTables.min.js' %}"></script>
+
+
+<script src="{% static 'datatables/js/dataTables.uikit.min.js' %}"></script>
+<script src="{% static 'datatables/js/plugins_datatables.min.js' %}"></script>
+<script src="{% static 'datatables/js/datatables_uikit.min.js' %}"></script>
+
+
+{#<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>#}
+ <script src="{% static 'assets/js/select2.full.min.js' %}"></script>
+
+<script>
+
+    $(document).ready(function () {
+        $('.select').select2({width: "resolve"});
+    });
+
+
+</script>
+
+<script type="text/javascript">
+    function getCookie(c_name) {
+        if (document.cookie.length > 0) {
+            c_start = document.cookie.indexOf(c_name + "=");
+            if (c_start != -1) {
+                c_start = c_start + c_name.length + 1;
+                c_end = document.cookie.indexOf(";", c_start);
+                if (c_end == -1) c_end = document.cookie.length;
+                return unescape(document.cookie.substring(c_start, c_end));
+            }
+        }
+        return "";
+    }
+
+    $(function () {
+        $.ajaxSetup({
+            headers: {"X-CSRFToken": getCookie("csrftoken")}
+        });
+    });
+
+
+</script>
+<script type="text/javascript">
+    $(document).ready(function () {
+
+
+        $.ajax({
+            type: "GET",
+            url: "{% url 'live' %}",
+            success: function (data) {
+
+                {% comment %} modal = UIkit.modal.blockUI("<div class='uk-text-center'>Wait fetching data...<br/><img class='uk-margin-top' src='{% static 'assets/img/spinners/spinner.gif'%}' alt=''>");
+
+
+                 //modal.show();
+                 modalTimeout = setTimeout(function () {
+                     if (modal.isActive()) {
+
+                         modal.hide();
+                     }
+                 }, 2000);{% endcomment %}
+
+
+                var trHTML = '';
+                $.each(data, function (i, item) {
+
+
+                    trHTML += '<tr><td>' + item.name.toUpperCase() + '</td><td>' + item.applicants + '</td><td>' + item.admittedApplicants + '</td></tr>';
+
+
+                });
+                $('.gad').append(trHTML);
+
+
+//modal.hide();
+
+            },
+
+
+            error: function (error) {
+
+                jsonValue = jQuery.parseJSON(error.responseText);
+                alert("error" + error.responseText);
+            }
+        });
+    });
+</script>
+
+<script>
+
+{#     $(document).ready(function () {#}
+{##}
+{##}
+{#        $.ajax({#}
+{#            type: "GET",#}
+{#            url: "{% url 'saleStatistics' %}",#}
+{#            success: function (data) {#}
+{##}
+{#                 modal = UIkit.modal.blockUI("<div class='uk-text-center'>Wait fetching data...<br/><img class='uk-margin-top' src='{% static 'assets/img/spinners/spinner.gif'%}' alt=''>");#}
+{##}
+{##}
+{#                 //modal.show();#}
+{#                 modalTimeout = setTimeout(function () {#}
+{#                     if (modal.isActive()) {#}
+{##}
+{#                         modal.hide();#}
+{#                     }#}
+{#                 }, 2000);#}
+{##}
+{##}
+{#                var trHTML = '';#}
+{#                $.each(data, function (i, item) {#}
+{##}
+{##}
+{#                    trHTML += '<tr><td>' + item.sold_by.toUpperCase() + '</td><td>' + item.sold__count + '</td><td>#</td></tr>';#}
+{##}
+{##}
+{#                });#}
+{#                $('.sales').append(trHTML);#}
+{##}
+{##}
+{#//modal.hide();#}
+{##}
+{#            },#}
+{##}
+{##}
+{#            error: function (error) {#}
+{##}
+{#                jsonValue = jQuery.parseJSON(error.responseText);#}
+{#                alert("error" + error.responseText);#}
+{#            }#}
+{#        });#}
+{#    });#}
+
+</script>
+
+
+
+
+
+
+
+
+<script>
+
+    $(document).ready(function () {
+
+        $(".parent").on('change', function (e) {
+
+            $("#group").submit();
+        });
+    });
+    $(document).ready(function () {
+        $('.admit').on('click', function (e) {
+
+
+            var applicant = $(this).closest('tr').find('.app').val();
+            var program = $(this).closest('tr').find('.programs').val();
+            var hall = $(this).closest('tr').find('.halls').val();
+            var admit = $(this).closest('tr').find('.admit').val();
+            var level = $(this).closest('tr').find('.level').val();
+            var type = $(this).closest('tr').find('.type').val();
+            var applicant_id = $(this).closest('tr').find('.applicant').val();
+            var name = $(this).closest('tr').find('.names').val().toUpperCase();
+            var resident = $(this).closest('tr').find('.resident').val();
+            //alert(resident);
+            if (program == "" || type == "" || hall == "" || resident == "" || level == "") {
+                alert("please select program,admission type,hall, level of admission and residential status ");
+            }
+            else {
+                UIkit.modal.confirm("Are you sure you want to admit this applicant?? "
+                    , function () {
+                        modal = UIkit.modal.blockUI("<div class='uk-text-center'>Admitting Applicant " + name.toUpperCase() + " <br/><img class='uk-thumbnail uk-margin-top' src='{% static 'assets/img/spinners/spinner.gif'%}' /></div>");
+                        //setTimeout(function(){ modal.hide() }, 500) })()
+                        $.ajax({
+
+                            type: "GET",
+                            url: "{% url 'admit' %}",
+                            data: {
+                                applicant: applicant,
+                                program: program,
+                                hall: hall,
+                                admit: admit,
+                                level: level,
+                                type: type,
+                                resident: resident
+                            }, //your form data to post goes
+                            dataType: "json",
+                        }).done(function (data) {
+                            //  var objData = jQuery.parseJSON(data);
+
+                            modal.hide();
+                            //
+                            //                                     UIkit.modal.alert("Action completed successfully");
+
+                            //alert(data.status + data.data);
+                            if (data.status == 'success') {
+                                UIkit.modal.alert(name + " Admitted successfully ");
+
+                                 location.reload(true);
+                                {% comment %}  $(".uk-alert-success").show();
+
+                            $(".uk-alert-success").text(data.status + " " + data.message);
+                            $(".uk-alert-success").fadeOut(4000);
+                    }{% endcomment %}
+                            } else {
+                                {% comment %} $(".uk-alert-danger").show();
+                                         $(".uk-alert-danger").text(data.status + " " + data.message);
+                                         $(".uk-alert-danger").fadeOut(4000);{% endcomment %}
+                                UIkit.modal.alert(" Error admitting " + name + "check if the selected programme has fees and courses assigned.");
+                            }
+
+
+                        });
+                    }
+                );
+            }
+        });
+
+
+        // reversing admissions
+
+        $('.reverse').on('click', function (e) {
+
+
+            var applicant = $(this).closest('tr').find('.app').val();
+            var reverse = $(this).closest('tr').find('.reverse').val();
+            var name = $(this).closest('tr').find('.names').val().toUpperCase();
+
+
+            UIkit.modal.confirm("Are you sure you want to cancel " + name + " admission?"
+                , function () {
+                    modal = UIkit.modal.blockUI("<div class='uk-text-center'>Ok reversing the admission of " + name.toUpperCase() + " <br/><img class='uk-thumbnail uk-margin-top' src='{% static 'assets/img/spinners/spinner.gif'%}' /></div>");
+                    //setTimeout(function(){ modal.hide() }, 500) })()
+                    $.ajax({
+
+                        type: "GET",
+                        url: "{% url 'revoke_admission' %}",
+                        data: {
+                            applicant: applicant,
+
+                        }, //your form data to post goes
+                        dataType: "json",
+                    }).done(function (data) {
+                        //  var objData = jQuery.parseJSON(data);
+
+                        modal.hide();
+                        //
+                        //                                     UIkit.modal.alert("Action completed successfully");
+
+                        //alert(data.status + data.data);
+                        if (data.status == 'success') {
+                            UIkit.modal.alert(name + " Admission reversed successfully ");
+
+
+                            {% comment %}  $(".uk-alert-success").show();
+
+                        $(".uk-alert-success").text(data.status + " " + data.message);
+                        $(".uk-alert-success").fadeOut(4000);
+                }{% endcomment %}
+                        } else {
+                            {% comment %} $(".uk-alert-danger").show();
+                                     $(".uk-alert-danger").text(data.status + " " + data.message);
+                                     $(".uk-alert-danger").fadeOut(4000);{% endcomment %}
+                            UIkit.modal.alert(" Error reversing " + name + " admission.Try again later");
+                        }
+
+
+                    });
+                }
+            );
+
+        });
+
+
+    });
+    // sending custom sms
+
+    $('.sms').on('click', function (e) {
+
+
+        var message = $('.message').val();
+        var phone = $('.phone').val();
+
+
+        UIkit.modal.confirm("Are you sure you want to send this sms?"
+            , function () {
+                modal = UIkit.modal.blockUI("<div class='uk-text-center'>Ok send sms to  " + phone.split(",") + " <br/><img class='uk-thumbnail uk-margin-top' src='{% static 'assets/img/spinners/spinner.gif'%}' /></div>");
+                //setTimeout(function(){ modal.hide() }, 500) })()
+                $.ajax({
+
+                    type: "POST",
+                    url: "{% url 'fireCustomSMS' %}",
+                    data: {
+                        message: message,
+                        phone: phone
+
+                    }, //your form data to post goes
+                    dataType: "json",
+                }).done(function (data) {
+                    //  var objData = jQuery.parseJSON(data);
+
+                    modal.hide();
+                    //
+                    //                                     UIkit.modal.alert("Action completed successfully");
+
+                    //alert(data.status + data.data);
+                    if (data.status == 'success') {
+                        UIkit.modal.alert(data.message);
+
+
+                        {% comment %}  $(".uk-alert-success").show();
+
+                    $(".uk-alert-success").text(data.status + " " + data.message);
+                    $(".uk-alert-success").fadeOut(4000);
+            }{% endcomment %}
+                    } else {
+                        {% comment %} $(".uk-alert-danger").show();
+                                 $(".uk-alert-danger").text(data.status + " " + data.message);
+                                 $(".uk-alert-danger").fadeOut(4000);{% endcomment %}
+                        UIkit.modal.alert(" Error sending sms to " + phone.split(",") + "Try again later");
+                    }
+
+
+                });
+            }
+        );
+
+    });
+
+
+</script>
+
+
+<script>
+
+
+    $(document).ready(function () {
+        $('.createForm').on('click', function (e) {
+
+            e.preventDefault();
+
+            var name = $('.name').val();
+            var deadline = $('.deadline').val();
+            var medicals_starts = $('.medicals_start').val();
+            var medicals_ends = $('.medicals_end').val();
+            var orient_ends = $('.orient_ends').val();
+            var orient_starts = $('.orient_starts').val();
+            var reporting = $('.reporting').val();
+            var year = $('.year').val();
+
+
+            //alert(resident);
+            if (year == "" || name == "" || deadline == "" ||  medicals_starts == "" || medicals_ends == "") {
+                alert("please fill all fields");
+            }
+            else {
+                UIkit.modal.confirm("Sure you want to save? "
+                    , function () {
+                        modal = UIkit.modal.blockUI("<div class='uk-text-center'>Ok saving configuration with name " + name.toUpperCase() + " <br/><img class='uk-thumbnail uk-margin-top' src='{% static 'assets/img/spinners/spinner.gif'%}' /></div>");
+                        //setTimeout(function(){ modal.hide() }, 500) })()
+                        $.ajax({
+
+                            type: "POST",
+                            url: "{% url 'create_settings' %}",
+                            data: {
+                                year: year,
+                                name: name,
+                                deadline: deadline,
+                                medicals_starts: medicals_starts,
+                                medicals_ends: medicals_ends,
+                                orient_starts: orient_starts,
+                                orient_ends: orient_ends,
+                                reporting: reporting
+
+
+                            }, //your form data to post goes
+                            dataType: "json",
+
+                        }).done(function (data) {
+                            //  var objData = jQuery.parseJSON(data);
+
+                            modal.hide();
+                            location.reload(true);
+                            //
+                            //                                     UIkit.modal.alert("Action completed successfully");
+
+                            //alert(data.status + data.data);
+                            if (data.status == 'success') {
+                                UIkit.modal.alert(data.message.toString());
+
+
+                                {% comment %}  $(".uk-alert-success").show();
+
+                            $(".uk-alert-success").text(data.status + " " + data.message);
+                            $(".uk-alert-success").fadeOut(4000);
+                    }{% endcomment %}
+                            } else {
+                                {% comment %} $(".uk-alert-danger").show();
+                                         $(".uk-alert-danger").text(data.status + " " + data.message);
+                                         $(".uk-alert-danger").fadeOut(4000);{% endcomment %}
+                                UIkit.modal.alert(data.message.toString());
+                            }
+
+
+                        });
+                    }
+                );
+            }
+        });
+
+
+    });
+
+
+$(document).ready(function () {
+        $('.recover').on('click', function (e) {
+
+
+            var phone = $('.phone').val();
+
+
+            UIkit.modal.confirm("Are you sure of this action? "
+                , function () {
+                    modal = UIkit.modal.blockUI("<div class='uk-text-center'>Ok recoving lost voucher.  <br/><img class='uk-thumbnail uk-margin-top' src='{% static 'assets/img/spinners/spinner.gif'%}' /></div>");
+                    //setTimeout(function(){ modal.hide() }, 500) })()
+                    $.ajax({
+
+                        type: "POST",
+                        url: "{% url 'recover_voucher' %}",
+                        data: {
+                            phone: phone
+
+
+                        }, //your form data to post goes
+                        dataType: "json",
+
+                    }).done(function (data) {
+                        //  var objData = jQuery.parseJSON(data);
+
+                        modal.hide();
+                        location.reload(true);
+                        //
+                        //                                     UIkit.modal.alert("Action completed successfully");
+
+                        //alert(data.status + data.data);
+                        if (data.status == 'success') {
+                            UIkit.modal.alert(data.message.toString());
+
+
+                              $(".uk-alert-success").show();
+
+                        $(".uk-alert-success").text(data.status + " " + data.message);
+                        $(".uk-alert-success").fadeOut(4000);
+                }
+                        } else {
+                             $(".uk-alert-danger").show();
+                                     $(".uk-alert-danger").text(data.status + " " + data.message);
+                                     $(".uk-alert-danger").fadeOut(4000);
+                            UIkit.modal.alert(data.message.toString());
+                        }
+
+
+                    });
+                }
+            );
+
+        });
+
+
+    });
+
+
+
+
+     $(document).ready(function () {
+        $('.edit_button').on('click', function (e) {
+            //alert();
+            e.preventDefault();
+
+            var name = $('.nameedit').val();
+            var deadline = $('.deadlineedit').val();
+            var medicals_starts = $('.medicalseditstarts').val();
+            var medicals_ends = $('.medicalseditsend').val();
+            var orient_ends = $('.orient_endsedit').val();
+            var orient_starts = $('.orient_startsedit').val();
+            var reporting = $('.reportingedit').val();
+            var year = $('.yearedit').val();
+
+
+            //alert(resident);
+            if (year == "" || name == "" || deadline == "" || medicals_ends == "" || medicals_starts == "") {
+                alert("please fill all fields");
+            }
+            else {
+                UIkit.modal.confirm("Sure you want to update this settings? "
+                    , function () {
+                        modal = UIkit.modal.blockUI("<div class='uk-text-center'>Ok updating configuration with name " + name.toUpperCase() + " <br/><img class='uk-thumbnail uk-margin-top' src='{% static 'assets/img/spinners/spinner.gif'%}' /></div>");
+                        //setTimeout(function(){ modal.hide() }, 500) })()
+                        $.ajax({
+
+                            type: "POST",
+                            url: "{% url 'create_settings' %}",
+                            data: {
+                                year: year,
+                                name: name,
+                                deadline: deadline,
+                                medicals_starts: medicals_starts,
+                                medicals_ends: medicals_ends,
+                                orient_starts: orient_starts,
+                                orient_ends: orient_ends,
+                                reporting: reporting
+
+
+                            }, //your form data to post goes
+                            dataType: "json",
+
+                        }).done(function (data) {
+                            //  var objData = jQuery.parseJSON(data);
+
+                            modal.hide();
+                            location.reload(true);
+                            //
+                            //                                     UIkit.modal.alert("Action completed successfully");
+
+                            //alert(data.status + data.data);
+                            if (data.status == 'success') {
+                                UIkit.modal.alert(data.message.toString());
+
+
+                                {% comment %}  $(".uk-alert-success").show();
+
+                            $(".uk-alert-success").text(data.status + " " + data.message);
+                            $(".uk-alert-success").fadeOut(4000);
+                    }{% endcomment %}
+                            } else {
+                                {% comment %} $(".uk-alert-danger").show();
+                                         $(".uk-alert-danger").text(data.status + " " + data.message);
+                                         $(".uk-alert-danger").fadeOut(4000);{% endcomment %}
+                                UIkit.modal.alert(data.message.toString());
+                            }
+
+
+                        });
+                    }
+                );
+            }
+        });
+
+
+    });
+
+
+
+
+
+
+
+
+
+
+
+    $(document).ready(function () {
+        $('.deletes').on('click', function (e) {
+
+
+            var id = $('.id').val();
+
+
+            UIkit.modal.confirm("Are you sure you want to delete this setting? "
+                , function () {
+                    modal = UIkit.modal.blockUI("<div class='uk-text-center'>Ok deleting setting  <br/><img class='uk-thumbnail uk-margin-top' src='{% static 'assets/img/spinners/spinner.gif'%}' /></div>");
+                    //setTimeout(function(){ modal.hide() }, 500) })()
+                    $.ajax({
+
+                        type: "GET",
+                        url: "{% url 'setting-delete' %}",
+                        data: {
+                            id: id
+
+
+                        }, //your form data to post goes
+                        dataType: "json",
+
+                    }).done(function (data) {
+                        //  var objData = jQuery.parseJSON(data);
+
+                        modal.hide();
+                        location.reload(true);
+                        //
+                        //                                     UIkit.modal.alert("Action completed successfully");
+
+                        //alert(data.status + data.data);
+                        if (data.status == 'success') {
+                            UIkit.modal.alert(data.message.toString());
+
+
+                            {% comment %}  $(".uk-alert-success").show();
+
+                        $(".uk-alert-success").text(data.status + " " + data.message);
+                        $(".uk-alert-success").fadeOut(4000);
+                }{% endcomment %}
+                        } else {
+                            {% comment %} $(".uk-alert-danger").show();
+                                     $(".uk-alert-danger").text(data.status + " " + data.message);
+                                     $(".uk-alert-danger").fadeOut(4000);{% endcomment %}
+                            UIkit.modal.alert(data.message.toString());
+                        }
+
+
+                    });
+                }
+            );
+
+        });
+
+
+    });
+
+
+    $(document).ready(function () {
+        $('.delete_sales').on('click', function (e) {
+
+
+            var id = $('.ids').val();
+
+            //alert(id);
+            UIkit.modal.confirm("Are you sure you want to delete this sale? "
+                , function () {
+                    modal = UIkit.modal.blockUI("<div class='uk-text-center'>Ok deleting sales  <br/><img class='uk-thumbnail uk-margin-top' src='{% static 'assets/img/spinners/spinner.gif'%}' /></div>");
+                    //setTimeout(function(){ modal.hide() }, 500) })()
+                    $.ajax({
+
+                        type: "GET",
+                        url: "{% url 'delete_sales' %}",
+                        data: {
+                            id: id
+
+
+                        }, //your form data to post goes
+                        dataType: "json",
+
+                    }).done(function (data) {
+                        //  var objData = jQuery.parseJSON(data);
+                        console.log(data)
+                        modal.hide();
+                        location.reload(true);
+                        //
+                        //                                     UIkit.modal.alert("Action completed successfully");
+
+                        //alert(data.status + data.data);
+                        if (data.status == 'success') {
+                            UIkit.modal.alert(data.message.toString());
+
+
+                            {% comment %}  $(".uk-alert-success").show();
+
+                        $(".uk-alert-success").text(data.status + " " + data.message);
+                        $(".uk-alert-success").fadeOut(4000);
+                }{% endcomment %}
+                        } else {
+                            {% comment %} $(".uk-alert-danger").show();
+                                     $(".uk-alert-danger").text(data.status + " " + data.message);
+                                     $(".uk-alert-danger").fadeOut(4000);{% endcomment %}
+                            UIkit.modal.alert(data.message.toString());
+                        }
+
+
+                    });
+                }
+            );
+
+        });
+
+
+    });
+
+    // applicant form settings
+
+
+    $(document).ready(function () {
+        $('.actions_command').on('click', function (e) {
+
+
+            var name = $('.applicant_name').val();
+            var applicant = $('.applicant').val();
+            var action = $('.action').val();
+
+
+            UIkit.modal.confirm("Are you sure you want to perform this action? "
+                , function () {
+                    modal = UIkit.modal.blockUI("<div class='uk-text-center'>Ok updating" + name + " admission forms  <br/><img class='uk-thumbnail uk-margin-top' src='{% static 'assets/img/spinners/spinner.gif'%}' /></div>");
+                    //setTimeout(function(){ modal.hide() }, 500) })()
+                    $.ajax({
+
+                        type: "POST",
+                        url: "{% url 'modify_applicant_form' %}",
+                        data: {
+                            name: name,
+                            applicant: applicant,
+                            action: action
+
+
+                        }, //your form data to post goes
+                        dataType: "json",
+
+                    }).done(function (data) {
+                        //  var objData = jQuery.parseJSON(data);
+
+                        modal.hide();
+
+                        //location.reload(true);
+                        //
+                        //                                     UIkit.modal.alert("Action completed successfully");
+
+                        //alert(data.status + data.data);
+                        if (data.status == 'success') {
+                            UIkit.modal.alert(data.message.toString());
+
+
+                            {% comment %}  $(".uk-alert-success").show();
+
+                        $(".uk-alert-success").text(data.status + " " + data.message);
+                        $(".uk-alert-success").fadeOut(4000);
+                }{% endcomment %}
+                        } else {
+                            {% comment %} $(".uk-alert-danger").show();
+                                     $(".uk-alert-danger").text(data.status + " " + data.message);
+                                     $(".uk-alert-danger").fadeOut(4000);{% endcomment %}
+                            UIkit.modal.alert(data.message.toString());
+                        }
+
+
+                    });
+                }
+            );
+
+        });
+
+
+    });
+
+
+    $(document).ready(function () {
+        var brand = document.getElementById('logo-id');
+        brand.className = 'attachment_upload';
+        brand.onchange = function () {
+            document.getElementById('fakeUploadLogo').value = this.value.substring(12);
+        };
+
+        // Source: http://stackoverflow.com/a/4459419/6396981
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('.img-preview').attr('src', e.target.result);
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        $("#logo-id").change(function () {
+            readURL(this);
+        });
+    });
+
+
+
+    $('.edit').on('click', function () {
+        //var myModal = $('#edit');
+        var myModal = UIkit.modal("#edit");
+
+        // now get the values from the table
+        var name = $(this).closest('tr').find('.name').html();
+        var medicals_start = $(this).closest('tr').find('.medicals_start').html();
+        var medicals_end = $(this).closest('tr').find('.medicals_end').html();
+        var year = $(this).closest('tr').find('.year').html();
+        var orient_starts = $(this).closest('tr').find('.orient_starts').html();
+        var orient_ends = $(this).closest('tr').find('.orient_ends').html();
+        var reporting = $(this).closest('tr').find('.reporting').html();
+        var deadline = $(this).closest('tr').find('.deadline').html();
+
+
+        // and set them in the modal:
+        $('.nameedit').val(name);
+        $('.medicalseditstarts').val(medicals_start);
+        $('.medicalseditend').val(medicals_end);
+        $('.yearedit').val(year);
+        $('.orient_endsedit').val(orient_ends);
+        $('.orient_startsedit').val(orient_starts);
+        $('.reportingedit').val(reporting);
+        $('.deadlineedit').val(deadline);
+
+
+        // and finally show the modal
+        myModal.show();
+
+
+    });
+
+
+
+</script>
+
+<script type="text/javascript">
+    //Javascript
+    $(function () {
+        $("#q").autocomplete({
+            source: {% url 'applicant_live_search' %},
+            minLength: 3,
+            select: function (event, ui) {
+                $('#q').val(ui.item.value);
+
+            }
+        });
+    });
+</script>
+
+
+<script>
+
+
+    //code for ensuring vuejs can work with select2 select boxes
+    Vue.directive('select', {
+        twoWay: true,
+        priority: 1000,
+        params: ['options'],
+        bind: function () {
+            var self = this
+            $(this.el)
+                .select2({
+                    data: this.params.options,
+                    width: "resolve"
+                })
+                .on('change', function () {
+                    self.vm.$set(this.name, this.value)
+                    Vue.set(self.vm.$data, this.name, this.value)
+                })
+        },
+        update: function (newValue, oldValue) {
+            $(this.el).val(newValue).trigger('change')
+        },
+        unbind: function () {
+            $(this.el).off().select2('destroy')
+        }
+    })
+
+
+    var vm = new Vue({
+        el: "body",
+        ready: function () {
+        },
+        data: {},
+        methods: {}
+    })
+
+</script>
+
+
+<script>
+    $(function () {
+        if (isHighDensity()) {
+            $.getScript("{% static 'assets/js/custom/dense.min.js' %}", function (data) {
+                // enable hires images
+                altair_helpers.retina_images();
+            });
+        }
+        if (Modernizr.touch) {
+            // fastClick (touch devices)
+            FastClick.attach(document.body);
+        }
+    });
+    $window.load(function () {
+        // ie fixes
+        altair_helpers.ie_fix();
+    });
+</script>
+
+<div id="style_switcher">
+    <div id="style_switcher_toggle"><i class="material-icons">&#xE8B8;</i></div>
+    <div class="uk-margin-medium-bottom">
+        <h4 class="heading_c uk-margin-bottom">Colors</h4>
+        <ul class="switcher_app_themes" id="theme_switcher">
+
+            <li class="app_style_default active_theme" data-app-theme="">
+                <span class="app_color_main"></span>
+                <span class="app_color_accent"></span>
+            </li>
+            <li class="switcher_theme_a" data-app-theme="app_theme_a">
+                <span class="app_color_main"></span>
+                <span class="app_color_accent"></span>
+            </li>
+            <li class="switcher_theme_b" data-app-theme="app_theme_b">
+                <span class="app_color_main"></span>
+                <span class="app_color_accent"></span>
+            </li>
+            <li class="switcher_theme_c" data-app-theme="app_theme_c">
+                <span class="app_color_main"></span>
+                <span class="app_color_accent"></span>
+            </li>
+            <li class="switcher_theme_d" data-app-theme="app_theme_d">
+                <span class="app_color_main"></span>
+                <span class="app_color_accent"></span>
+            </li>
+            <li class="switcher_theme_e" data-app-theme="app_theme_e">
+                <span class="app_color_main"></span>
+                <span class="app_color_accent"></span>
+            </li>
+            <li class="switcher_theme_f" data-app-theme="app_theme_f">
+                <span class="app_color_main"></span>
+                <span class="app_color_accent"></span>
+            </li>
+            <li class="switcher_theme_g" data-app-theme="app_theme_g">
+                <span class="app_color_main"></span>
+                <span class="app_color_accent"></span>
+            </li>
+            <li class="switcher_theme_h" data-app-theme="app_theme_h">
+                <span class="app_color_main"></span>
+                <span class="app_color_accent"></span>
+            </li>
+            <li class="switcher_theme_i" data-app-theme="app_theme_i">
+                <span class="app_color_main"></span>
+                <span class="app_color_accent"></span>
+            </li>
+            <li class="switcher_theme_dark" data-app-theme="app_theme_dark">
+                <span class="app_color_main"></span>
+                <span class="app_color_accent"></span>
+            </li>
+
+
+        </ul>
+    </div>
+    <div class="uk-visible-large uk-margin-medium-bottom">
+        <h4 class="heading_c">Sidebar</h4>
+        <p>
+            <input type="checkbox" name="style_sidebar_mini" id="style_sidebar_mini" data-md-icheck/>
+            <label for="style_sidebar_mini" class="inline-label">Mini Sidebar</label>
+        </p>
+    </div>
+    <div class="uk-visible-large uk-margin-medium-bottom">
+        <h4 class="heading_c">Layout</h4>
+        <p>
+            <input type="checkbox" name="style_layout_boxed" id="style_layout_boxed" data-md-icheck/>
+            <label for="style_layout_boxed" class="inline-label">Boxed layout</label>
+        </p>
+    </div>
+    <div class="uk-visible-large">
+        <h4 class="heading_c">Main menu accordion</h4>
+        <p>
+            <input type="checkbox" name="accordion_mode_main_menu" id="accordion_mode_main_menu" data-md-icheck/>
+            <label for="accordion_mode_main_menu" class="inline-label">Accordion mode</label>
+        </p>
+    </div>
+</div>
+
+
+<script>
+    $(function () {
+        var $switcher = $('#style_switcher'),
+            $switcher_toggle = $('#style_switcher_toggle'),
+            $theme_switcher = $('#theme_switcher'),
+            $mini_sidebar_toggle = $('#style_sidebar_mini'),
+            $boxed_layout_toggle = $('#style_layout_boxed'),
+            $accordion_mode_toggle = $('#accordion_mode_main_menu'),
+            $body = $('body');
+
+
+        $switcher_toggle.click(function (e) {
+            e.preventDefault();
+            $switcher.toggleClass('switcher_active');
+        });
+
+        $theme_switcher.children('li').click(function (e) {
+            e.preventDefault();
+            var $this = $(this),
+                this_theme = $this.attr('data-app-theme');
+
+            $theme_switcher.children('li').removeClass('active_theme');
+            $(this).addClass('active_theme');
+            $body
+                .removeClass('app_theme_a app_theme_b app_theme_c app_theme_d app_theme_e app_theme_f app_theme_g app_theme_h app_theme_i')
+                .addClass(this_theme);
+
+            if (this_theme == '') {
+                localStorage.removeItem('altair_theme');
+            } else {
+                localStorage.setItem("altair_theme", this_theme);
+            }
+
+        });
+
+        // hide style switcher
+        $document.on('click keyup', function (e) {
+            if ($switcher.hasClass('switcher_active')) {
+                if (
+                    ( !$(e.target).closest($switcher).length )
+                    || ( e.keyCode == 27 )
+                ) {
+                    $switcher.removeClass('switcher_active');
+                }
+            }
+        });
+
+        // get theme from local storage
+        if (localStorage.getItem("altair_theme") !== null) {
+            $theme_switcher.children('li[data-app-theme=' + localStorage.getItem("altair_theme") + ']').click();
+        }
+
+
+        // toggle mini sidebar
+
+        // change input's state to checked if mini sidebar is active
+        if ((localStorage.getItem("altair_sidebar_mini") !== null && localStorage.getItem("altair_sidebar_mini") == '1') || $body.hasClass('sidebar_mini')) {
+            $mini_sidebar_toggle.iCheck('check');
+        }
+
+        $mini_sidebar_toggle
+            .on('ifChecked', function (event) {
+                $switcher.removeClass('switcher_active');
+                localStorage.setItem("altair_sidebar_mini", '1');
+                location.reload(true);
+            })
+            .on('ifUnchecked', function (event) {
+                $switcher.removeClass('switcher_active');
+                localStorage.removeItem('altair_sidebar_mini');
+                location.reload(true);
+            });
+
+
+        // toggle boxed layout
+
+        if ((localStorage.getItem("altair_layout") !== null && localStorage.getItem("altair_layout") == 'boxed') || $body.hasClass('boxed_layout')) {
+            $boxed_layout_toggle.iCheck('check');
+            $body.addClass('boxed_layout');
+            $(window).resize();
+        }
+
+        $boxed_layout_toggle
+            .on('ifChecked', function (event) {
+                $switcher.removeClass('switcher_active');
+                localStorage.setItem("altair_layout", 'boxed');
+                location.reload(true);
+            })
+            .on('ifUnchecked', function (event) {
+                $switcher.removeClass('switcher_active');
+                localStorage.removeItem('altair_layout');
+                location.reload(true);
+            });
+
+        // main menu accordion mode
+        if ($sidebar_main.hasClass('accordion_mode')) {
+            $accordion_mode_toggle.iCheck('check');
+        }
+
+        $accordion_mode_toggle
+            .on('ifChecked', function () {
+                $sidebar_main.addClass('accordion_mode');
+            })
+            .on('ifUnchecked', function () {
+                $sidebar_main.removeClass('accordion_mode');
+            });
+
+
+    });
+</script>
+
+
+
+
+
+<script language="javascript" type="text/javascript">
+    function printDiv(divID) {
+        //Get the HTML of div
+        var divElements = document.getElementById(divID).innerHTML;
+        //Get the HTML of whole page
+        var oldPage = document.body.innerHTML;
+        //Reset the page's HTML with div's HTML only
+        document.body.innerHTML =
+            "<html><head><title></title></head><body>" +
+            divElements + "</body>";
+        //Print Page
+        window.print();
+        //Restore orignal HTML
+        document.body.innerHTML = oldPage;
+    }
+</script>
+<script>
+    function recalculateSum() {
+        var num1 = parseFloat(document.getElementById("pay").value);
+        var num2 = parseFloat(document.getElementById("bill").value);
+        document.getElementById("amount_left").value = (num2 - num1);
+    }
+
+    function MM_openBrWindow(theURL, winName, features) { //v2.0
+        window.open(theURL, winName, features);
+    }
+
+    function recalculateTranAmt() {
+        var copies = document.getElementById("copies").value;
+        var price = parseFloat(document.getElementById("price").value);
+        document.getElementById("amount").value = (copies * price);
+    }
+</script>
+
+<script src="{% static 'plugins/tablesorter/dist/js/jquery.tablesorter.min.js' %}"></script>
+
+<script src="{% static 'plugins/tablesorter/dist/js/jquery.tablesorter.widgets.min.js' %}"></script>
+
+<script src="{% static 'plugins/tablesorter/dist/js/widgets/widget-alignChar.min.js' %}"></script>
+
+<script src="{% static 'plugins/tablesorter/dist/js/widgets/widget-columnSelector.min.js' %}"></script>
+
+<script src="{% static 'plugins/tablesorter/dist/js/widgets/widget-print.min.js' %}"></script>
+<!--  tablesorter functions -->
+<script src="{% static 'assets/js/pages/plugins_tablesorter.min.js' %}"></script>
+
+<script src="{% static 'plugins/tablesorter/addons/pager/jquery.tablesorter.pager.js' %}"></script>
+
+
+
+
+
+
+{% block js %}
+{% endblock %}
+
+
+
+</body>
+</html>
