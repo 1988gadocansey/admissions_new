@@ -18,7 +18,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace TTU_CORE_ASP_ADMISSION_PORTAL.Models
 {
-    public class ResultUploadModel
+    public class ResultUploadModel:BaseEntity
     {
         [Key]
         public int Id { set; get; }
@@ -37,7 +37,7 @@ namespace TTU_CORE_ASP_ADMISSION_PORTAL.Models
         public string OldSubject { set; get; }
         public string InstitutionName { set; get; }
 
-        public virtual ICollection<ApplicantModel> Applicants { get; set; }
+       
         public ResultUploadModel()
         {
         }

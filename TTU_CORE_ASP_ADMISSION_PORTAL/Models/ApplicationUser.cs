@@ -38,6 +38,7 @@ namespace TTU_CORE_ASP_ADMISSION_PORTAL.Models
         public int Finalized { set; get; }
         public string Year { get; set; }
         public string Pin { get; set; }
+        public DateTime LastLogin { set; get; }
         //public byte[] ProfilePicture { get; set; }
 
 

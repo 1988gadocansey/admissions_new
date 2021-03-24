@@ -10,8 +10,8 @@ using TTU_CORE_ASP_ADMISSION_PORTAL.Data;
 namespace TTU_CORE_ASP_ADMISSION_PORTAL.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210322170715_FormNo")]
-    partial class FormNo
+    [Migration("20210323131000_AddModel2")]
+    partial class AddModel2
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -26,12 +26,12 @@ namespace TTU_CORE_ASP_ADMISSION_PORTAL.Data.Migrations
                     b.Property<int>("ApplicantID")
                         .HasColumnType("integer");
 
-                    b.Property<int>("programmesId")
+                    b.Property<int>("ProgrammesId")
                         .HasColumnType("integer");
 
-                    b.HasKey("ApplicantID", "programmesId");
+                    b.HasKey("ApplicantID", "ProgrammesId");
 
-                    b.HasIndex("programmesId");
+                    b.HasIndex("ProgrammesId");
 
                     b.ToTable("ApplicantModelProgrammeModel");
                 });
@@ -168,6 +168,41 @@ namespace TTU_CORE_ASP_ADMISSION_PORTAL.Data.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
+                });
+
+            modelBuilder.Entity("TTU_CORE_ASP_ADMISSION_PORTAL.Models.AcademicExperieceModel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<int?>("ApplicantModelID")
+                        .HasColumnType("integer");
+
+                    b.Property<DateTime>("From")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<string>("Grade")
+                        .HasColumnType("text");
+
+                    b.Property<string>("InstitutionAddress")
+                        .HasColumnType("text");
+
+                    b.Property<string>("InstitutionName")
+                        .HasColumnType("text");
+
+                    b.Property<string>("ProgrammeStudied")
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("To")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ApplicantModelID");
+
+                    b.ToTable("AcademicExperieceModel");
                 });
 
             modelBuilder.Entity("TTU_CORE_ASP_ADMISSION_PORTAL.Models.ApplicantModel", b =>
@@ -537,6 +572,24 @@ namespace TTU_CORE_ASP_ADMISSION_PORTAL.Data.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
+            modelBuilder.Entity("TTU_CORE_ASP_ADMISSION_PORTAL.Models.BankModel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("Account")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("BankModel");
+                });
+
             modelBuilder.Entity("TTU_CORE_ASP_ADMISSION_PORTAL.Models.CountryModel", b =>
                 {
                     b.Property<int>("ID")
@@ -550,6 +603,42 @@ namespace TTU_CORE_ASP_ADMISSION_PORTAL.Data.Migrations
                     b.HasKey("ID");
 
                     b.ToTable("CountryModel");
+                });
+
+            modelBuilder.Entity("TTU_CORE_ASP_ADMISSION_PORTAL.Models.DenominationModel", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("Name")
+                        .HasColumnType("text");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("DenominationModel");
+                });
+
+            modelBuilder.Entity("TTU_CORE_ASP_ADMISSION_PORTAL.Models.DepartmentModel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("Code")
+                        .HasColumnType("text");
+
+                    b.Property<int>("Faculty")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("DepartmentModel");
                 });
 
             modelBuilder.Entity("TTU_CORE_ASP_ADMISSION_PORTAL.Models.DistrictModel", b =>
@@ -568,6 +657,128 @@ namespace TTU_CORE_ASP_ADMISSION_PORTAL.Data.Migrations
                     b.HasKey("ID");
 
                     b.ToTable("DistrictModel");
+                });
+
+            modelBuilder.Entity("TTU_CORE_ASP_ADMISSION_PORTAL.Models.DocumentUploadModel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<int>("Applicant")
+                        .HasColumnType("integer");
+
+                    b.Property<int?>("ApplicantModelID")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Type")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ApplicantModelID");
+
+                    b.ToTable("DocumentUploadModel");
+                });
+
+            modelBuilder.Entity("TTU_CORE_ASP_ADMISSION_PORTAL.Models.ExamModel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("CutOffPoint")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ExamModel");
+                });
+
+            modelBuilder.Entity("TTU_CORE_ASP_ADMISSION_PORTAL.Models.FacultyModel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("Code")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("FacultyModel");
+                });
+
+            modelBuilder.Entity("TTU_CORE_ASP_ADMISSION_PORTAL.Models.FormNoModel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<int>("No")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Year")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("FormNoModel");
+                });
+
+            modelBuilder.Entity("TTU_CORE_ASP_ADMISSION_PORTAL.Models.GradeModel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("Comment")
+                        .HasColumnType("text");
+
+                    b.Property<int>("Exam")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Value")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("GradeModel");
+                });
+
+            modelBuilder.Entity("TTU_CORE_ASP_ADMISSION_PORTAL.Models.HallModel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<int>("BankAcc")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("HallModel");
                 });
 
             modelBuilder.Entity("TTU_CORE_ASP_ADMISSION_PORTAL.Models.ProgrammeModel", b =>
@@ -636,6 +847,132 @@ namespace TTU_CORE_ASP_ADMISSION_PORTAL.Data.Migrations
                     b.ToTable("ReligionModel");
                 });
 
+            modelBuilder.Entity("TTU_CORE_ASP_ADMISSION_PORTAL.Models.RequirementModel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<int?>("ApplicantModelID")
+                        .HasColumnType("integer");
+
+                    b.Property<bool>("Aprroved")
+                        .HasColumnType("boolean");
+
+                    b.Property<int>("Department")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("RuleOne")
+                        .HasColumnType("text");
+
+                    b.Property<string>("RuleThree")
+                        .HasColumnType("text");
+
+                    b.Property<string>("RuleTwo")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Year")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ApplicantModelID");
+
+                    b.ToTable("RequirementModel");
+                });
+
+            modelBuilder.Entity("TTU_CORE_ASP_ADMISSION_PORTAL.Models.ResultUploadModel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<int>("Applicant")
+                        .HasColumnType("integer");
+
+                    b.Property<int?>("ApplicantModelID")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Center")
+                        .HasColumnType("text");
+
+                    b.Property<int>("ExamType")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Form")
+                        .HasColumnType("text");
+
+                    b.Property<int>("Grade")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("GradeOld")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("GradeValueOld")
+                        .HasColumnType("text");
+
+                    b.Property<string>("IndexNo")
+                        .HasColumnType("text");
+
+                    b.Property<string>("InstitutionName")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Month")
+                        .HasColumnType("text");
+
+                    b.Property<string>("OldSubject")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Sitting")
+                        .HasColumnType("text");
+
+                    b.Property<int>("Subject")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Year")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ApplicantModelID");
+
+                    b.ToTable("ResultUploadModel");
+                });
+
+            modelBuilder.Entity("TTU_CORE_ASP_ADMISSION_PORTAL.Models.SMSModel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<int?>("ApplicantModelID")
+                        .HasColumnType("integer");
+
+                    b.Property<DateTime>("DateSent")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<string>("Message")
+                        .HasColumnType("text");
+
+                    b.Property<int>("Recipient")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("SentBy")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Status")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ApplicantModelID");
+
+                    b.ToTable("SMSModel");
+                });
+
             modelBuilder.Entity("TTU_CORE_ASP_ADMISSION_PORTAL.Models.SchoolModel", b =>
                 {
                     b.Property<int>("Id")
@@ -657,6 +994,62 @@ namespace TTU_CORE_ASP_ADMISSION_PORTAL.Data.Migrations
                     b.ToTable("SchoolModel");
                 });
 
+            modelBuilder.Entity("TTU_CORE_ASP_ADMISSION_PORTAL.Models.SubjectModel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("Code")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Type")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("SubjectModel");
+                });
+
+            modelBuilder.Entity("TTU_CORE_ASP_ADMISSION_PORTAL.Models.WorkingExperienceModel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<int?>("ApplicantModelID")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("CompanyAddress")
+                        .HasColumnType("text");
+
+                    b.Property<string>("CompanyFrom")
+                        .HasColumnType("text");
+
+                    b.Property<string>("CompanyName")
+                        .HasColumnType("text");
+
+                    b.Property<string>("CompanyPhone")
+                        .HasColumnType("text");
+
+                    b.Property<string>("CompanyPosition")
+                        .HasColumnType("text");
+
+                    b.Property<string>("CompanyTo")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ApplicantModelID");
+
+                    b.ToTable("WorkingExperienceModel");
+                });
+
             modelBuilder.Entity("ApplicantModelProgrammeModel", b =>
                 {
                     b.HasOne("TTU_CORE_ASP_ADMISSION_PORTAL.Models.ApplicantModel", null)
@@ -667,7 +1060,7 @@ namespace TTU_CORE_ASP_ADMISSION_PORTAL.Data.Migrations
 
                     b.HasOne("TTU_CORE_ASP_ADMISSION_PORTAL.Models.ProgrammeModel", null)
                         .WithMany()
-                        .HasForeignKey("programmesId")
+                        .HasForeignKey("ProgrammesId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -723,6 +1116,13 @@ namespace TTU_CORE_ASP_ADMISSION_PORTAL.Data.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("TTU_CORE_ASP_ADMISSION_PORTAL.Models.AcademicExperieceModel", b =>
+                {
+                    b.HasOne("TTU_CORE_ASP_ADMISSION_PORTAL.Models.ApplicantModel", null)
+                        .WithMany("AcademicExperience")
+                        .HasForeignKey("ApplicantModelID");
+                });
+
             modelBuilder.Entity("TTU_CORE_ASP_ADMISSION_PORTAL.Models.ApplicantModel", b =>
                 {
                     b.HasOne("TTU_CORE_ASP_ADMISSION_PORTAL.Models.ApplicationUser", "ApplicationUser")
@@ -730,7 +1130,7 @@ namespace TTU_CORE_ASP_ADMISSION_PORTAL.Data.Migrations
                         .HasForeignKey("ApplicationUserId1");
 
                     b.HasOne("TTU_CORE_ASP_ADMISSION_PORTAL.Models.DistrictModel", "District")
-                        .WithMany("Applicants")
+                        .WithMany()
                         .HasForeignKey("DistrictId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -772,9 +1172,54 @@ namespace TTU_CORE_ASP_ADMISSION_PORTAL.Data.Migrations
                     b.Navigation("School");
                 });
 
-            modelBuilder.Entity("TTU_CORE_ASP_ADMISSION_PORTAL.Models.DistrictModel", b =>
+            modelBuilder.Entity("TTU_CORE_ASP_ADMISSION_PORTAL.Models.DocumentUploadModel", b =>
                 {
-                    b.Navigation("Applicants");
+                    b.HasOne("TTU_CORE_ASP_ADMISSION_PORTAL.Models.ApplicantModel", null)
+                        .WithMany("DocumentUpload")
+                        .HasForeignKey("ApplicantModelID");
+                });
+
+            modelBuilder.Entity("TTU_CORE_ASP_ADMISSION_PORTAL.Models.RequirementModel", b =>
+                {
+                    b.HasOne("TTU_CORE_ASP_ADMISSION_PORTAL.Models.ApplicantModel", null)
+                        .WithMany("Requirement")
+                        .HasForeignKey("ApplicantModelID");
+                });
+
+            modelBuilder.Entity("TTU_CORE_ASP_ADMISSION_PORTAL.Models.ResultUploadModel", b =>
+                {
+                    b.HasOne("TTU_CORE_ASP_ADMISSION_PORTAL.Models.ApplicantModel", null)
+                        .WithMany("ResultUploads")
+                        .HasForeignKey("ApplicantModelID");
+                });
+
+            modelBuilder.Entity("TTU_CORE_ASP_ADMISSION_PORTAL.Models.SMSModel", b =>
+                {
+                    b.HasOne("TTU_CORE_ASP_ADMISSION_PORTAL.Models.ApplicantModel", null)
+                        .WithMany("Sms")
+                        .HasForeignKey("ApplicantModelID");
+                });
+
+            modelBuilder.Entity("TTU_CORE_ASP_ADMISSION_PORTAL.Models.WorkingExperienceModel", b =>
+                {
+                    b.HasOne("TTU_CORE_ASP_ADMISSION_PORTAL.Models.ApplicantModel", null)
+                        .WithMany("WorkingExperience")
+                        .HasForeignKey("ApplicantModelID");
+                });
+
+            modelBuilder.Entity("TTU_CORE_ASP_ADMISSION_PORTAL.Models.ApplicantModel", b =>
+                {
+                    b.Navigation("AcademicExperience");
+
+                    b.Navigation("DocumentUpload");
+
+                    b.Navigation("Requirement");
+
+                    b.Navigation("ResultUploads");
+
+                    b.Navigation("Sms");
+
+                    b.Navigation("WorkingExperience");
                 });
 #pragma warning restore 612, 618
         }

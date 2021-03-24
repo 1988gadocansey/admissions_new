@@ -17,7 +17,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 namespace TTU_CORE_ASP_ADMISSION_PORTAL.Models
 {
-    public class ApplicantModel
+    public class ApplicantModel:BaseEntity
     {
         [Key]
         public int ID { set; get; }
@@ -134,7 +134,19 @@ namespace TTU_CORE_ASP_ADMISSION_PORTAL.Models
         //public virtual ProgrammeModel SecondChoice { get; set; }
         //public virtual ProgrammeModel ThirdChoice { get; set; }
 
-        public virtual ICollection<ProgrammeModel> programmes { get; set; }
+        public virtual ICollection<ProgrammeModel> Programmes { get; set; }
+
+         public virtual ICollection<ResultUploadModel> ResultUploads { get; set; }
+
+        public virtual ICollection<WorkingExperienceModel> WorkingExperience { get; set; }
+
+        public virtual ICollection<AcademicExperieceModel> AcademicExperience { get; set; }
+
+        public virtual ICollection<RequirementModel> Requirement { get; set; }
+
+        public virtual ICollection<DocumentUploadModel> DocumentUpload { get; set; }
+
+        public virtual ICollection<SMSModel> Sms { get; set; }
 
         public bool FeePaying { get; set; }
         public bool ReportedInSchool { get; set; }

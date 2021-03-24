@@ -13,10 +13,14 @@
 //    See the License for the specific language governing permissions and
 //    limitations under the License.
 using System;
+using System.ComponentModel.DataAnnotations;
+
 namespace TTU_CORE_ASP_ADMISSION_PORTAL.Models
 {
     public class DenominationModel
     {
+        [Key]
+        public int ID { set; get; }
         public string Name { set; get; }
         public DenominationModel()
         {

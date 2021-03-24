@@ -13,6 +13,7 @@
 //    See the License for the specific language governing permissions and
 //    limitations under the License.
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace TTU_CORE_ASP_ADMISSION_PORTAL.Models
@@ -27,6 +28,7 @@ namespace TTU_CORE_ASP_ADMISSION_PORTAL.Models
         public string RuleOne { get; set; }
         public string RuleTwo { get; set; }
         public string RuleThree { set; get; }
+        
         public RequirementModel()
         {
         }

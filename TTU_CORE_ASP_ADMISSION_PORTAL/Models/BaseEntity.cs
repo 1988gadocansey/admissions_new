@@ -13,26 +13,11 @@
 //    See the License for the specific language governing permissions and
 //    limitations under the License.
 using System;
-using System.ComponentModel.DataAnnotations;
-using System.Collections.Generic;
 namespace TTU_CORE_ASP_ADMISSION_PORTAL.Models
 {
-    public class WorkingExperienceModel: BaseEntity
+    public class BaseEntity
     {
-        [Key]
-        public int Id { set; get; }
-       
-        public string CompanyName { set; get; }
-        public string CompanyPhone { set; get; }
-        public string CompanyAddress { set; get; }
-        public string CompanyPosition { set; get; }
-        public string CompanyFrom { set; get; }
-        public string CompanyTo { set; get; }
-
-       
-
-        public WorkingExperienceModel()
-        {
-        }
+        public DateTime CreatedOn { get; set; }
+        public DateTime UpdatedOn { get; set; }
     }
 }

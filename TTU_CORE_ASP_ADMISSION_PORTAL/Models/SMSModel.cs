@@ -13,6 +13,7 @@
 //    See the License for the specific language governing permissions and
 //    limitations under the License.
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace TTU_CORE_ASP_ADMISSION_PORTAL.Models
@@ -24,8 +25,9 @@ namespace TTU_CORE_ASP_ADMISSION_PORTAL.Models
         public string Message { set; get; }
         public int SentBy { get; set; }
         public int Recipient { get; set; }
-        public DateTime dateSent { get; set; }
+        public DateTime DateSent { get; set; }
         public string Status { get; set; }
+         
         public SMSModel()
         {
         }

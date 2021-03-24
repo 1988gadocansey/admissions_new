@@ -13,12 +13,13 @@
         <div class="md-card">
             <div class="md-card-content">
                 <div class="uk-float-right uk-margin-top uk-margin-small-right"><span class="peity_visitors peity_data">5,3,9,6,5,9,7</span></div>
-                <span class="uk-text-muted uk-text-small">Form Type</span>
+                <span class="uk-text-muted uk-text-small">Form Details</span>
                 <h4 class="uk-margin-remove">
                     <span class="countUpMew">
-                       
-                        
-                         @(user.Type )
+
+                        App No:  @(user.FormNo ) - Form Type: @(user.Type )
+
+
 
                     </span>
                 </h4>
@@ -56,7 +57,7 @@
 
 
 
-                 
+
 
             </div>
         </div>
@@ -72,14 +73,14 @@
                 {
 
                     <h4 class="uk-margin-remove" id="peity_live_text">
-                       Yes.
+                        Yes.
                     </h4>
 
                 }
                 else
                 {
                     <h4 class="uk-margin-remove" id="peity_live_text">
-                       No.
+                        No.
                     </h4>
                 }
 

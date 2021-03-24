@@ -24,7 +24,7 @@ namespace TTU_CORE_ASP_ADMISSION_PORTAL.Models
         public int ID { set; get; }
         public string Name { get; set; }
         public int Region { get; set; }
-        public virtual ICollection<ApplicantModel> Applicants { get; set; }
+      
         public DistrictModel()
         {
         }

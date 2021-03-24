@@ -13,21 +13,24 @@
 //    See the License for the specific language governing permissions and
 //    limitations under the License.
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace TTU_CORE_ASP_ADMISSION_PORTAL.Models
 {
-    public class AcademicExperieceModel
+    public class AcademicExperieceModel: BaseEntity
     {
         [Key]
         public int Id { set; get; }
-        public int Applicant { set; get; }
+       
         public string InstitutionName { set; get; }
         public string InstitutionAddress { set; get; }
         public string ProgrammeStudied{ set; get; }
         public DateTime From { set; get; }
         public DateTime To { set; get; }
         public string Grade { set; get; }
+
+        
         public AcademicExperieceModel()
         {
         }
