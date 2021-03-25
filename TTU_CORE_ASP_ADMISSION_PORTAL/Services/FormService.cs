@@ -90,5 +90,10 @@
 
 
             }
+
+            public  string GetAdmissionYear()
+            {
+                 return DateTime.Now.Year + "/" + DateTime.Now.AddYears(+1).Year;
+            }
         }
         }

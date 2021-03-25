@@ -17,7 +17,7 @@
                 <h4 class="uk-margin-remove">
                     <span class="countUpMew">
 
-                        App No:  @(user.FormNo ) - Form Type: @(user.Type )
+                        App No:  @(user.FormNo ) - Type: @(user.Type )
 
 
 
@@ -120,13 +120,25 @@
 
                             <tr>
                                 <td>
-                                    <input type="submit" value="Start Application" id='save' v-show="applicationForm.$valid" class="md-btn   md-btn-success uk-margin-small-top">
+                                    @if ((user.PictureUploaded) == 1)
+                                    {
 
-                                    @*@if (@User.Identity.get() == 1) {*@
+                                        <a class="md-btn   md-btn-primary uk-margin-small-top" asp-area="" asp-controller="Form" asp-action="Create">Start Application</a>
 
-                                    <a class="md-btn   md-btn-primary uk-margin-small-top" asp-area="" asp-controller="Upload" asp-action="Index">Upload Picture</a>
 
-                                    @*}*@
+                                    }
+                                    else
+                                    {
+
+                                        <a class="md-btn   md-btn-primary uk-margin-small-top" asp-area="" asp-controller="Upload" asp-action="Index">Upload Picture</a>
+
+                                    }
+                                    @if ((user.Finalized) == 1)
+                                    {
+
+                                        <a class="md-btn   md-btn-primary uk-margin-small-top" asp-area="" asp-controller="Form" asp-action="PreviewForm">Preview Form</a>
+
+                                    }
 
                                 </td>
                             </tr>

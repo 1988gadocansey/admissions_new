@@ -48,7 +48,14 @@ namespace TTU_CORE_ASP_ADMISSION_PORTAL.Controllers
 
 
             ViewData["formno"] = "";
-                 
+
+
+            // lets check if the applicant has been admitted. if yes redirect him to pdf letter
+            // else show in homepage
+            //if (admitted)
+            //{
+
+            //}
 
 
             if (applicationNo == null)

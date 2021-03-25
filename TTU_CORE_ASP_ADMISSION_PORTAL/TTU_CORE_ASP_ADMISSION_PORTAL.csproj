@@ -51,6 +51,11 @@
     <Folder Include="Views\Upload\" />
     <Folder Include="Extensions\" />
     <Folder Include="wwwroot\pictures\" />
+    <Folder Include="Views\Form\Regular\" />
+    <Folder Include="Views\Form\TOPUP\" />
+    <Folder Include="Views\Form\Degree\" />
+    <Folder Include="Views\Form\Postgraduate\" />
+    <Folder Include="Views\Form\Mature\" />
   </ItemGroup>
   <ItemGroup>
     <Content Remove="wwwroot\plugins\css\bootstrap.min.css" />

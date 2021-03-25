@@ -1,6 +1,7 @@
 ﻿@using Microsoft.AspNetCore.Identity
 @inject SignInManager<ApplicationUser> SignInManager
 @inject UserManager<ApplicationUser> UserManager
+@{ var user = await UserManager.GetUserAsync(User); }
 <!doctype html>
 <!--[if lte IE 9]> <html class="lte-ie9" lang="en"> <![endif]-->
 <!--[if gt IE 9]><!-->
@@ -53,38 +54,51 @@
                     <span class="sSwitchIcon"></span>
                 </a>
 
-              
+
                 <div class="uk-navbar-flip">
-                    
+
                     <ul class="uk-navbar-nav user_actions">
-                        
+
                         <li data-uk-dropdown="{mode:'click',pos:'bottom-right'}">
-                            
-                        <li  class="user_action_icon"><a>Hello @User.Identity.Name!</a></li>
-                         
+
+                        <li class="user_action_icon"><a>Hello @User.Identity.Name!</a></li>
+
                         <li data-uk-dropdown="{mode:'click',pos:'bottom-right'}">
-                            <a href="index.html#" class="user_action_image"><img class="md-user-image" src="assets/img/avatars/avatar_11_tn.png" alt="" /></a>
+                            <a href="#" class="user_action_image">
+
+                             
+
+
+                                <img src="~/pictures/@(user.FormNo ).jpg"
+                                     onerror="this.onerror = function my()
+    { return this.src = '~/pictures/@(user.FormNo ).jpeg'; };
+    this.src = '~/pictures/@(user.FormNo ).JPG';"
+                                     class="md-user-image"
+                                     asp-append-version="true" />
+
+                            </a>
+
                             <div class="uk-dropdown uk-dropdown-small">
                                 <ul class="uk-nav js-uk-prevent">
                                     @*<li><a href="page_user_profile.html">My profile</a></li>
-        <li><a href="page_settings.html">Settings</a></li>*@
+                                        <li><a href="page_settings.html">Settings</a></li>*@
 
 
                                     @*<li>  <a class="nav-link text-dark" asp-area="Identity" asp-controller="Account" asp-action="Logout">Sign out</a></li>*@
                                     <li>
-                                        
 
-                                    <a class="nav-link text-dark"  asp-area="Identity" asp-page="/Account/Logout"  asp-route-returnUrl="@Url.Page("/", new { area = "" })"
-                                       onclick="event.preventDefault();
+
+                                        <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/", new { area = "" })"
+                                           onclick="event.preventDefault();
                                                  document.getElementById('logout-form').submit();">
-                                        Logout
-                                    </a>
+                                            Logout
+                                        </a>
 
-                                    <form id="logout-form"   asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/", new { area = "" })" method="POST" style="display: none;">
-                                        
-                                    </form>
+                                        <form id="logout-form" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/", new { area = "" })" method="POST" style="display: none;">
+                                            @Html.AntiForgeryToken()
+                                        </form>
 
-                                        </li>
+                                    </li>
 
                                 </ul>
                             </div>
@@ -106,10 +120,10 @@
 
         <div class="sidebar_main_header">
             <div class="sidebar_logo">
-               
+
 
             </div>
-            
+
         </div>
 
         <div class="menu_section">
@@ -178,15 +192,12 @@
 
 
     @await RenderSectionAsync("Scripts", required: false)
-    <script>
-       
-        $(document).ready(function () {
+    <script>$(document).ready(function () {
 
             $(".uk-alert-success").fadeOut(2500);
             $(".uk-alert-danger").fadeOut(2500);
 
-        });
-    </script>
+        });</script>
     <script>$(function () {
             // enable hires images
             altair_helpers.retina_images();
