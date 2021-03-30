@@ -137,8 +137,14 @@ namespace TTU_CORE_ASP_ADMISSION_PORTAL.Services
                     img.RotateFlip(rot);
             }
 
-        }
-
+            public static void checkBackground()
+            {
+             // accept only white background
+            }
 
 
     }
+
+
+
+}

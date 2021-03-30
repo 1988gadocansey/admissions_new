@@ -69,7 +69,7 @@
                             {
 
                                 using var image = Image.Load(file.OpenReadStream());
-                                image.Mutate(x => x.Resize(256, 256));
+                                image.Mutate(x => x.Resize(413, 531));
 
                                 // image.Save(file.FileName);
                                 //image.Save(filePath);
