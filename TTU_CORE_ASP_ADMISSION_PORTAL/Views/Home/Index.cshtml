@@ -1,5 +1,6 @@
 ﻿
 @using Microsoft.AspNetCore.Identity
+@using Humanizer
 @inject SignInManager<ApplicationUser> SignInManager
 @inject UserManager<ApplicationUser> UserManager
 @{
@@ -9,6 +10,17 @@
 @{ var user = await UserManager.GetUserAsync(User); }
 
 <div class="uk-grid uk-grid-width-large-1-4 uk-grid-width-medium-1-2 uk-grid-medium uk-sortable sortable-handler hierarchical_show" data-uk-sortable data-uk-grid-margin>
+
+    <div>
+        <div class="md-card">
+            <div class="md-card-content">
+                <div class="uk-float-right uk-margin-top uk-margin-small-right"><span class="peity_sale peity_data">5,3,9,6,5,9,7,3,5,2</span></div>
+                <span class="uk-text-muted uk-text-small">Last Login</span>
+                <h4 class="uk-margin-remove"><span class="countUpMe" style="text-transform:capitalize">  @(user.LastLogin.Humanize())</span></h4>
+            </div>
+        </div>
+    </div>
+
     <div>
         <div class="md-card">
             <div class="md-card-content">
@@ -17,7 +29,7 @@
                 <h4 class="uk-margin-remove">
                     <span class="countUpMew">
 
-                        App No:  @(user.FormNo ) - Type: @(user.Type )
+                        App No:  @(user.FormNo ) -  @(user.Type )
 
 
 
@@ -26,15 +38,7 @@
             </div>
         </div>
     </div>
-    <div>
-        <div class="md-card">
-            <div class="md-card-content">
-                <div class="uk-float-right uk-margin-top uk-margin-small-right"><span class="peity_sale peity_data">5,3,9,6,5,9,7,3,5,2</span></div>
-                <span class="uk-text-muted uk-text-small">Purchased From</span>
-                <h4 class="uk-margin-remove"><span class="countUpMe">  @(user.SoldBy )</span></h4>
-            </div>
-        </div>
-    </div>
+
     <div>
         <div class="md-card">
             <div class="md-card-content">

@@ -4,8 +4,11 @@ using System.Globalization;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using TTU_CORE_ASP_ADMISSION_PORTAL.Data;
 using TTU_CORE_ASP_ADMISSION_PORTAL.Models;
@@ -23,14 +26,15 @@ namespace TTU_CORE_ASP_ADMISSION_PORTAL.Controllers
 
         private readonly ApplicationDbContext _dbContext;
 
-
+        private readonly IHttpContextAccessor _httpContextAccessor;
         private UserManager<ApplicationUser> _userManager;
 
-        public FormController(ILogger<FormController> logger, UserManager<ApplicationUser> userManager, ApplicationDbContext dbContext)
+        public FormController(ILogger<FormController> logger, UserManager<ApplicationUser> userManager, ApplicationDbContext dbContext, IHttpContextAccessor httpContextAccessor)
         {
             _logger = logger;
             _userManager = userManager;
             _dbContext = dbContext;
+            _httpContextAccessor = httpContextAccessor;
         }
         [HttpGet]
         public async Task<IActionResult> CreateAsync()
@@ -56,9 +60,20 @@ namespace TTU_CORE_ASP_ADMISSION_PORTAL.Controllers
             }
 
 
-            
+            ViewData["regions"] = _formService.GetRegions();
 
+            ViewData["country"] = _formService.GetCountry();
+            ViewData["religions"] = _formService.GetReligions();
 
+            ViewData["choice"] = _formService.GetProgrammes();
+
+            ViewData["programme"] = _formService.GetSHSProgrammes();
+
+            ViewData["denominations"] = _formService.GetDenominations();
+
+            ViewData["districts"] = _formService.GetDistrict();
+
+            ViewData["school"] = _formService.GetSchools();
             return View();
         }
 
@@ -67,19 +82,24 @@ namespace TTU_CORE_ASP_ADMISSION_PORTAL.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> SaveAysnc()
         {
+    //        Character character = await _context.Characters
+    //.FirstOrDefaultAsync(c => c.Id == newWeapon.CharacterId &&
+    //c.User.Id == int.Parse(_httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier)));
+
             FormService _formService = new FormService(_dbContext);
 
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier); // will give the user's userId
 
-            var a = _userManager.GetUserId(User);
-            
-
-            Console.Write("id is " + a);
+             
             ApplicationUser applicationUser = await _userManager.GetUserAsync(User);
 
             var ApplicantForm = applicationUser?.FormNo;
 
-            
+            ApplicationUser user = await _dbContext.Users.FirstOrDefaultAsync(n => n.Id == userId);
+
+            RegionModel region = await _dbContext.RegionModel.FirstOrDefaultAsync(r=>r.Id== Convert.ToInt32(HttpContext.Request.Form["region"]));
+
+             
 
             string dob = HttpContext.Request.Form["dob"];
 
@@ -93,10 +113,7 @@ namespace TTU_CORE_ASP_ADMISSION_PORTAL.Controllers
             DateTime dateOfBirth = new DateTime(Convert.ToInt32(dobArray[0]), Convert.ToInt32(dobArray[1]), Convert.ToInt32(dobArray[2]), 7, 0, 0);
 
 
-            //Console.Write("USER ID " + int.Parse(userId, System.Globalization.NumberStyles.HexNumber));
-
-           // var date1 = new DateTime(2008, 3, 1, 7, 0, 0);
-
+            
             await _dbContext.ApplicantModel.AddAsync(
                 new ApplicantModel
                 {
@@ -104,8 +121,9 @@ namespace TTU_CORE_ASP_ADMISSION_PORTAL.Controllers
                     LastName = HttpContext.Request.Form["surname"],
                     DateOfBirth = dateOfBirth,
 
+                    ApplicationUser= user,
 
-          
+
                     PreviousName = HttpContext.Request.Form["previousName"],
                     MiddleName = HttpContext.Request.Form["othernames"],
                     Gender = HttpContext.Request.Form["gender"],
@@ -147,8 +165,8 @@ namespace TTU_CORE_ASP_ADMISSION_PORTAL.Controllers
                     Awaiting = Convert.ToBoolean(HttpContext.Request.Form["awaiting"]),
                     PreferedHall = HttpContext.Request.Form["hall"],
                     Status = "Applicant",
+                    SourceOfFinance= HttpContext.Request.Form["finance"],
 
-                    
 
                     SponsorShip = Convert.ToBoolean(HttpContext.Request.Form["sponsorship"]),
                     SponsorShipCompany = HttpContext.Request.Form["sponsorshipName"],
@@ -162,7 +180,7 @@ namespace TTU_CORE_ASP_ADMISSION_PORTAL.Controllers
 
                     NationalityId = 1,
 
-                    RegionId = 1,
+                    Region = region,
 
                     SchoolId = 1,
                     Grade = 10,
@@ -175,7 +193,7 @@ namespace TTU_CORE_ASP_ADMISSION_PORTAL.Controllers
                     YearOfAdmission = _formService.GetAdmissionYear(),
                     Admitted = false,
                     LetterPrinted = false,
-                    FeePaying = false,
+                    FeePaying = Convert.ToBoolean(HttpContext.Request.Form["FeePaying"]),
                     ReportedInSchool = false,
                     FeesPaid =Convert.ToDecimal( 0.0),
                     Reported = false,
@@ -192,6 +210,12 @@ namespace TTU_CORE_ASP_ADMISSION_PORTAL.Controllers
             {
                 TempData["message"] = "Data saved successfully!!";
                 TempData["type"] = "success";
+
+                var applicant = await _dbContext.Users.FindAsync(userId);
+                
+                user.Started = 1;
+                await _dbContext.SaveChangesAsync();
+                
             }
             else
             {

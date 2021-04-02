@@ -39,6 +39,8 @@
     <PackageReference Include="SixLabors.ImageSharp.Web" Version="1.0.2" />
     <PackageReference Include="System.Drawing.Common" Version="5.0.2" />
     <PackageReference Include="Twilio" Version="5.56.0" />
+    <PackageReference Include="Humanizer" Version="2.8.26" />
+    <PackageReference Include="Humanizer.Core" Version="2.8.26" />
   </ItemGroup>
 
   <ItemGroup>

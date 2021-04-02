@@ -12,6 +12,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 using TTU_CORE_ASP_ADMISSION_PORTAL.Models;
+using System.Security.Claims;
+using TTU_CORE_ASP_ADMISSION_PORTAL.Data;
 
 namespace TTU_CORE_ASP_ADMISSION_PORTAL.Areas.Identity.Pages.Account
 {
@@ -21,14 +23,15 @@ namespace TTU_CORE_ASP_ADMISSION_PORTAL.Areas.Identity.Pages.Account
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly ILogger<LoginModel> _logger;
-
+        private readonly ApplicationDbContext _dbContext;
         public LoginModel(SignInManager<ApplicationUser> signInManager, 
             ILogger<LoginModel> logger,
-            UserManager<ApplicationUser> userManager)
+            UserManager<ApplicationUser> userManager, ApplicationDbContext dbContext)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
+            _dbContext = dbContext;
         }
 
         [BindProperty]
@@ -96,7 +99,43 @@ namespace TTU_CORE_ASP_ADMISSION_PORTAL.Areas.Identity.Pages.Account
                 var result = await _signInManager.PasswordSignInAsync(Input.UserName, Input.Password, Input.RememberMe, lockoutOnFailure: true);
                 if (result.Succeeded)
                 {
-                    _logger.LogInformation("User logged in.");
+
+
+
+                    //ApplicationDbContext db = new ApplicationDbContext();
+                    //UserProfileInfo logged = db.UserProfileInfo.SingleOrDefault();
+                    //Session["lastLoggedTime"] = logged.Logged;
+                    //logged.Logged = DateTime.Now;
+                    //db.Entry(logged).State = EntityState.Modified;
+                    //db.SaveChanges();
+
+                    //var userId = User.FindFirstValue(ClaimTypes.NameIdentifier); // will give the user's userId
+                    //var auth = _dbContext.Users.Where(n => n.Id == userId).First();
+                    //auth.LastLogin = DateTimeOffset.UtcNow;
+                    //_ = _dbContext.SaveChanges();
+
+                    //var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+                    //ApplicationUser applicationUser = _dbContext.Users.SingleOrDefault();
+                    //Session["lastLoggedTime"] = applicationUser.LastLogin;
+                    //applicationUser.LastLogin= DateTimeOffset.UtcNow;
+                    //await _dbContext.SaveChangesAsync();
+
+
+                    var user = await _dbContext.Users.FindAsync(Input.Password);
+                    if (user != null)
+                    {
+                        user.LastLogin = DateTimeOffset.UtcNow;
+                        await _dbContext.SaveChangesAsync();
+                    }
+                    else{
+                        _logger.LogInformation("Error retrieving user context.");
+                    }
+
+
+
+
+                        _logger.LogInformation("User logged in.");
                     return LocalRedirect(returnUrl);
                 }
                 if (result.RequiresTwoFactor)

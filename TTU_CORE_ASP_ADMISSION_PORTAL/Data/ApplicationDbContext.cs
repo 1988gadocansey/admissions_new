@@ -49,6 +49,12 @@ namespace TTU_CORE_ASP_ADMISSION_PORTAL.Data
 
         public DbSet<TTU_CORE_ASP_ADMISSION_PORTAL.Models.SubjectModel> SubjectModel { get; set; }
 
+        public DbSet<TTU_CORE_ASP_ADMISSION_PORTAL.Models.SHSProgrammes> SHSProgrammes { get; set; }
+
+        public DbSet<TTU_CORE_ASP_ADMISSION_PORTAL.Models.CountryModel> CountryModel { get; set; }
+
+        public DbSet<TTU_CORE_ASP_ADMISSION_PORTAL.Models.ProgrammeModel> ProgrammeModel { get; set; }
+
 
         public DbSet<TTU_CORE_ASP_ADMISSION_PORTAL.Models.WorkingExperienceModel> WorkingExperienceModel { get; set; }
 

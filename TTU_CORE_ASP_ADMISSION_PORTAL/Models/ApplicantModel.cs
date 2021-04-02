@@ -29,7 +29,7 @@ namespace TTU_CORE_ASP_ADMISSION_PORTAL.Models
         [StringLength(50, ErrorMessage = "First name cannot be longer than 50 characters.")]
         public string FirstName { set; get; }
 
-        public string Name { set; get; }
+         
 
         public string MiddleName { set; get; }
 
@@ -45,7 +45,7 @@ namespace TTU_CORE_ASP_ADMISSION_PORTAL.Models
 
         [Required]
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+       
         public DateTime DateOfBirth { get; set; }
 
         [Required]
@@ -83,14 +83,13 @@ namespace TTU_CORE_ASP_ADMISSION_PORTAL.Models
         public virtual CountryModel Nationality { get; set; }
 
         
-        public bool   ResidentialStatus { get; set; }
+        public bool?   ResidentialStatus { get; set; }
         public string GuardianName { get; set; }
-        public string GuardianAddress { get; set; }
-        public string GuardianEmail { get; set; }
+        
         public string GuardianPhone { get; set; }
         public string GuardianOccupation { get; set; }
         public string GuardianRelationship { get; set; }
-        public bool Disability{ get; set; }
+        public bool? Disability{ get; set; }
         public string DisabilityType { get; set; }
         public string SourceOfFinance { get; set; }
         
@@ -109,14 +108,14 @@ namespace TTU_CORE_ASP_ADMISSION_PORTAL.Models
         public virtual SchoolModel School { get; set; }
 
         public int LastYearInSchool { get; set; }
-        public bool Awaiting { get; set; }
+        public bool? Awaiting { get; set; }
         public int Grade { get; set; }
         public string YearOfAdmission { get; set; }
         public string PreferedHall { get; set; }
         public string Results { get; set; }
         public string ExternalHostel { get; set; }
-        public bool Elligible { get; set; }
-        public bool Admitted { get; set; }
+        public bool? Elligible { get; set; }
+        public bool? Admitted { get; set; }
         public int AdmittedBy { get; set; }
 
         public DateTime DateAdmitted { get; set; }
@@ -125,8 +124,8 @@ namespace TTU_CORE_ASP_ADMISSION_PORTAL.Models
         public string HallAdmitted { get; set; }
         public string RoomNo { get; set; }
         public string Status { get; set; }
-        public bool SMSSent { get; set; }
-        public bool LetterPrinted { get; set; }
+        public bool? SMSSent { get; set; }
+        public bool? LetterPrinted { get; set; }
         public int FirstChoiceId { get; set; }
         public int SecondChoiceId { get; set; }
         public int ThirdChoiceId { get; set; }
@@ -148,14 +147,14 @@ namespace TTU_CORE_ASP_ADMISSION_PORTAL.Models
 
         public virtual ICollection<SMSModel> Sms { get; set; }
 
-        public bool FeePaying { get; set; }
-        public bool ReportedInSchool { get; set; }
+        public bool? FeePaying { get; set; }
+        public bool? ReportedInSchool { get; set; }
         public decimal FeesPaid { get; set; }
         public bool Reported { get; set; }
-        public string WorkPlace { get; set; }
-        public string WorkPlaceContact { get; set; }
-        public string YearsOfExperience { get; set; }
-        public bool SponsorShip { get; set; }
+        //public string WorkPlace { get; set; }
+        //public string WorkPlaceContact { get; set; }
+        //public string YearsOfExperience { get; set; }
+        public bool? SponsorShip { get; set; }
         public string SponsorShipCompany { get; set; }
         public string SponsorShipLocation { get; set; }
         public string SponsorShipCompanyContact { get; set; }

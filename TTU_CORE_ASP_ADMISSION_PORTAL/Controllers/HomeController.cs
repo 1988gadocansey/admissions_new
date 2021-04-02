@@ -38,9 +38,29 @@ namespace TTU_CORE_ASP_ADMISSION_PORTAL.Controllers
         //[ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> IndexAsync ()
         {
+            _logger.LogInformation("User visted dashboard.");
             FormService _formService = new FormService(_dbContext);
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier); // will give the user's userId
             var userName = User.FindFirstValue(ClaimTypes.Name); // will give the user's userName
+
+
+            // update user last login
+
+
+            
+            //var auth = _dbContext.Users.Where(n => n.Id == userId).First();
+            //auth.LastLogin = DateTimeOffset.UtcNow;
+            // await _dbContext.SaveChangesAsync();
+
+
+
+
+
+
+
+
+
+
 
             ApplicationUser applicationUser = await _userManager.GetUserAsync(User);
 

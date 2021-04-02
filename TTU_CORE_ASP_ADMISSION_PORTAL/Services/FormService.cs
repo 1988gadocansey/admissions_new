@@ -73,25 +73,66 @@
 
 
             }
-            public async Task<IEnumerable<SelectListItem>> GetRegions()
+            //public async Task<IEnumerable<SelectListItem>> GetRegions()
+            //{
+
+
+            //        IEnumerable<SelectListItem> regions = await _dbContext.RegionModel.AsNoTracking()
+            //            .OrderBy(n => n.Name)
+            //            .Where(n => n.Id >0)
+            //            .Select(n =>
+            //                new SelectListItem
+            //                {
+            //                    Value = n.Id.ToString(),
+            //                    Text = n.Name
+            //                }).ToListAsync();
+            //        return new SelectList(regions, "Value", "Text");
+
+
+            //}
+            public object GetRegions()
             {
-
-
-                    IEnumerable<SelectListItem> regions = await _dbContext.RegionModel.AsNoTracking()
-                        .OrderBy(n => n.Name)
-                        .Where(n => n.Id >0)
-                        .Select(n =>
-                            new SelectListItem
-                            {
-                                Value = n.Id.ToString(),
-                                Text = n.Name
-                            }).ToListAsync();
-                    return new SelectList(regions, "Value", "Text");
-
-
+               return new SelectList(_dbContext.RegionModel, "Id", "Name");
+            }
+            public object GetReligions()
+            {
+                return new SelectList(_dbContext.ReligionModel, "Id", "Name");
             }
 
-            public  string GetAdmissionYear()
+            public object GetProgrammes()
+            {
+                return new SelectList(_dbContext.ProgrammeModel, "Id", "Name");
+            }
+
+        public object GetDistrict()
+            {
+                return new SelectList(_dbContext.DistrictModel, "Id", "Name");
+            }
+
+            public object GetSchools()
+            {
+                return new SelectList(_dbContext.SchoolModel, "Id", "Name");
+            }
+
+            public object GetDenominations()
+            {
+                return new SelectList(_dbContext.DenominationModel, "Id", "Name");
+            }
+
+            public object GetSHSProgrammes()
+            {
+                return new SelectList(_dbContext.SHSProgrammes, "Id", "Name");
+            }
+
+            public object GetCountry()
+            {
+                return new SelectList(_dbContext.CountryModel, "Id", "Name");
+            }
+
+
+
+
+        public string GetAdmissionYear()
             {
                  return DateTime.Now.Year + "/" + DateTime.Now.AddYears(+1).Year;
             }

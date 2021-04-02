@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using TTU_CORE_ASP_ADMISSION_PORTAL.Data;
@@ -9,9 +10,10 @@ using TTU_CORE_ASP_ADMISSION_PORTAL.Data;
 namespace TTU_CORE_ASP_ADMISSION_PORTAL.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210401201926_newApplicantm1112")]
+    partial class newApplicantm1112
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -346,6 +348,9 @@ namespace TTU_CORE_ASP_ADMISSION_PORTAL.Data.Migrations
                     b.Property<string>("MiddleName")
                         .HasColumnType("text");
 
+                    b.Property<string>("Name")
+                        .HasColumnType("text");
+
                     b.Property<string>("NationalIDNo")
                         .HasColumnType("text");
 
@@ -438,7 +443,16 @@ namespace TTU_CORE_ASP_ADMISSION_PORTAL.Data.Migrations
                     b.Property<DateTime>("UpdatedOn")
                         .HasColumnType("timestamp without time zone");
 
+                    b.Property<string>("WorkPlace")
+                        .HasColumnType("text");
+
+                    b.Property<string>("WorkPlaceContact")
+                        .HasColumnType("text");
+
                     b.Property<string>("YearOfAdmission")
+                        .HasColumnType("text");
+
+                    b.Property<string>("YearsOfExperience")
                         .HasColumnType("text");
 
                     b.HasKey("ID");
@@ -940,21 +954,6 @@ namespace TTU_CORE_ASP_ADMISSION_PORTAL.Data.Migrations
                     b.HasIndex("ApplicantModelID");
 
                     b.ToTable("ResultUploadModel");
-                });
-
-            modelBuilder.Entity("TTU_CORE_ASP_ADMISSION_PORTAL.Models.SHSProgrammes", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
-
-                    b.Property<string>("Name")
-                        .HasColumnType("text");
-
-                    b.HasKey("ID");
-
-                    b.ToTable("SHSProgrammes");
                 });
 
             modelBuilder.Entity("TTU_CORE_ASP_ADMISSION_PORTAL.Models.SMSModel", b =>
