@@ -106,7 +106,7 @@
 
         public object GetDistrict()
             {
-                return new SelectList(_dbContext.DistrictModel, "Id", "Name");
+                return new SelectList(_dbContext.DistrictModel, "ID", "Name");
             }
 
             public object GetSchools()
@@ -116,18 +116,23 @@
 
             public object GetDenominations()
             {
-                return new SelectList(_dbContext.DenominationModel, "Id", "Name");
+                return new SelectList(_dbContext.DenominationModel, "ID", "Name");
             }
 
             public object GetSHSProgrammes()
             {
-                return new SelectList(_dbContext.SHSProgrammes, "Id", "Name");
+                return new SelectList(_dbContext.SHSProgrammes, "ID", "Name");
             }
 
             public object GetCountry()
             {
-                return new SelectList(_dbContext.CountryModel, "Id", "Name");
+                return new SelectList(_dbContext.CountryModel, "ID", "Name");
             }
+
+        public object GetHalls()
+        {
+            return new SelectList(_dbContext.HallModel, "Id", "Name");
+        }
 
 
 

@@ -65,15 +65,16 @@ namespace TTU_CORE_ASP_ADMISSION_PORTAL.Controllers
             ViewData["country"] = _formService.GetCountry();
             ViewData["religions"] = _formService.GetReligions();
 
-            ViewData["choice"] = _formService.GetProgrammes();
+            ViewData["choices"] = _formService.GetProgrammes();
 
-            ViewData["programme"] = _formService.GetSHSProgrammes();
+            ViewData["programme"] =_formService.GetSHSProgrammes();
 
             ViewData["denominations"] = _formService.GetDenominations();
 
             ViewData["districts"] = _formService.GetDistrict();
 
             ViewData["school"] = _formService.GetSchools();
+            ViewData["hall"] = _formService.GetHalls();
             return View();
         }
 
