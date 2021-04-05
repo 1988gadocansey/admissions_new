@@ -151,5 +151,10 @@
 
                 return (a - b) / 10000;
             }
+
+        public bool QualifiesMature(int age)
+            {
+            return (age>=25);
+            }
     }
         }

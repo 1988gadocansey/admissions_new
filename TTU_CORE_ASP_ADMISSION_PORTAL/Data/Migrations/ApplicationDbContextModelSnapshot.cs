@@ -237,10 +237,7 @@ namespace TTU_CORE_ASP_ADMISSION_PORTAL.Data.Migrations
                     b.Property<int>("ApplicationNumber")
                         .HasColumnType("integer");
 
-                    b.Property<int>("ApplicationUserId")
-                        .HasColumnType("integer");
-
-                    b.Property<string>("ApplicationUserId1")
+                    b.Property<string>("ApplicationUserId")
                         .HasColumnType("text");
 
                     b.Property<bool?>("Awaiting")
@@ -324,6 +321,9 @@ namespace TTU_CORE_ASP_ADMISSION_PORTAL.Data.Migrations
 
                     b.Property<string>("HallAdmitted")
                         .HasColumnType("text");
+
+                    b.Property<int?>("HallId")
+                        .HasColumnType("integer");
 
                     b.Property<string>("Hometown")
                         .HasColumnType("text");
@@ -443,9 +443,11 @@ namespace TTU_CORE_ASP_ADMISSION_PORTAL.Data.Migrations
 
                     b.HasKey("ID");
 
-                    b.HasIndex("ApplicationUserId1");
+                    b.HasIndex("ApplicationUserId");
 
                     b.HasIndex("DistrictId");
+
+                    b.HasIndex("HallId");
 
                     b.HasIndex("NationalityId");
 
@@ -1149,13 +1151,17 @@ namespace TTU_CORE_ASP_ADMISSION_PORTAL.Data.Migrations
                 {
                     b.HasOne("TTU_CORE_ASP_ADMISSION_PORTAL.Models.ApplicationUser", "ApplicationUser")
                         .WithMany()
-                        .HasForeignKey("ApplicationUserId1");
+                        .HasForeignKey("ApplicationUserId");
 
                     b.HasOne("TTU_CORE_ASP_ADMISSION_PORTAL.Models.DistrictModel", "District")
                         .WithMany()
                         .HasForeignKey("DistrictId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("TTU_CORE_ASP_ADMISSION_PORTAL.Models.HallModel", "Hall")
+                        .WithMany()
+                        .HasForeignKey("HallId");
 
                     b.HasOne("TTU_CORE_ASP_ADMISSION_PORTAL.Models.CountryModel", "Nationality")
                         .WithMany()
@@ -1184,6 +1190,8 @@ namespace TTU_CORE_ASP_ADMISSION_PORTAL.Data.Migrations
                     b.Navigation("ApplicationUser");
 
                     b.Navigation("District");
+
+                    b.Navigation("Hall");
 
                     b.Navigation("Nationality");
 

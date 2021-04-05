@@ -75,6 +75,7 @@
                                 //image.Save(filePath);
                                 try
                                 {
+                            //IMageService.ExifRotate(image);
                                     //image.Save(serverUrl);
                                     image.Save(filePath);
                              

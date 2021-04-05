@@ -9,7 +9,7 @@
     <link rel="icon" type="image/png" href="public/assets/img/favicon-16x16.png" sizes="16x16">
     <link rel="icon" type="image/png" href="public/assets/img/favicon-32x32.png" sizes="32x32">
 
-    <title>Admissions | Print Preview</title>
+    <title>@ViewData["Title"] - TTU Admissions</title>
 
     <!-- uikit -->
     <link rel="stylesheet" href="~/assets/plugins/uikit/css/uikit.almost-flat.min.css" media="all">
@@ -21,7 +21,7 @@
     <link rel="stylesheet" href="~/assets/plugins/sweet-alert/sweet-alert.min.css" media="all">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-
+    @await RenderSectionAsync("Style", required: false)
 
 </head>
 <body class=" ">
@@ -80,5 +80,7 @@
         //Restore orignal HTML
         document.body.innerHTML = oldPage;
     }</script>
+
+@await RenderSectionAsync("Scripts", required: false)
 
 </html>

@@ -69,7 +69,9 @@ namespace TTU_CORE_ASP_ADMISSION_PORTAL.Models
 
         public int DistrictId { get; set; }
         public virtual DistrictModel District { get; set; }
-        
+
+        public virtual HallModel Hall { get; set; }
+
 
 
         public string NationalIDType { get; set; }
@@ -158,9 +160,9 @@ namespace TTU_CORE_ASP_ADMISSION_PORTAL.Models
         public string SponsorShipCompany { get; set; }
         public string SponsorShipLocation { get; set; }
         public string SponsorShipCompanyContact { get; set; }
-        
 
-        public int ApplicationUserId { get; set; }
+        //public string ama { get; set; }
+        public string ApplicationUserId { get; set; }
         public virtual ApplicationUser ApplicationUser { get; set; }
 
 
