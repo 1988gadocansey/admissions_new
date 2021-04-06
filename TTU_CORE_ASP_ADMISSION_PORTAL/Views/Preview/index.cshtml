@@ -1,0 +1,529 @@
+﻿<!--
+Designed by Gad Ocansey <gadocansey@gmail.com> +233243348522
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <title>Takoradi Technical University - Admissions</title>
+    <link rel="stylesheet" href="/public/assets/css/style.css">
+
+
+    <link rel="icon" type="image/x-icon" href="/public/assets/img/logo2.png" />
+
+    <style type="text/css">
+        .required label:after {
+            color: #e32;
+            content: ' *';
+            display: inline;
+        }
+
+        label.required {
+            margin: -.2em 0 0 .2em;
+            content: '*';
+            color: #DB2828;
+        }
+
+        input[type=file] {
+            padding: 10px;
+            background: #2d2d2d;
+        }
+
+        .error {
+            color: red;
+        }
+
+        input {
+            text-transform: uppercase;
+        }
+    </style>
+    <style type="text/css">
+        html, body, #page3,  #page1, #page2 { float: none;  background: none}
+        body.pushable .pusher {
+            background-color: none;
+        }
+        #page3{
+        text-align: justify;
+        }
+
+        fieldset {
+            background: none;
+        }
+        .uppercase {
+            font-weight: bold;
+
+
+
+        }
+         
+
+        table, figure {
+            page-break-inside: avoid;
+        }
+        fieldset legend {
+            page-break-before: always;
+        }
+        h1, h2, h3, h4, h5 {
+            page-break-after: avoid;
+        }
+        table{
+            background: none;
+        }
+    </style>
+</head>
+
+<body id="dashboard" class="pushabless">
+    <div class="pusher">
+         
+        <div class="ui container">
+             
+
+            <div class="ui two column stackable grid">
+
+                <div class="right aligned column" style="margin-left: 590px">
+                    <br />
+                    <a onclick="javascript:printDiv('print')" class="ui right positive basic button print">
+                        Click to preview and
+                        print.
+                    </a>
+                    <br />
+                </div>
+            </div>
+            <div style="margin-top: 4px;">
+            </div>
+            <p>
+
+            </p>
+            <div class="ui padded segment">
+
+                <div id="print">
+                    <div id="page1">
+                        <img src='/public/assets/images/header.jpg' style="width:1086px;height: auto"
+                             class="ui fluid image" />
+
+                        <br />
+
+                        <center>
+                            APPLICATION NUMBER - 202018930 &nbsp;&nbsp;| APPLICATION TYPE -
+                            ACCELERATED_BTECH, ENTRY MODE -
+                        </center>
+
+
+                        <table class='ui red table'>
+                            <tr>
+
+                                <td>
+                                    <table class="folder table">
+                                        <tr>
+                                            <td width="210" style="" class="uppercase" align="right"><span>Title:</span></td>
+                                            <td width="408" class="capitalize">@(ViewBag.applicant.Title)</td>
+                                        </tr>
+                                        <tr>
+                                            <td width="210" style="" class="uppercase" align="right"><span>Surname:</span></td>
+                                            <td width="408" class="capitalize">@(ViewBag.applicant.LastName)</td>
+                                        </tr>
+                                        <tr>
+                                            <td width="210" style="" class="uppercase" align="right"><span>First Name:</span></td>
+
+                                            <td width="408" class="capitalize">@(ViewBag.applicant.FirstName)</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="uppercase" style="" style="" align="right"><span>Other Names:</span></td>
+                                            <td class="capitalize">@(ViewBag.applicant.MiddleName)</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="uppercase" style="" align="right"><span style="">Gender:</span></td>
+                                            <td class="capitalize">@(ViewBag.applicant.Gender)</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="uppercase" style="" align="right"><span>Date of birth</span>:</td>
+                                            <td class="capitalize">@(ViewBag.applicant.DateOfBirth)</td>
+                                        </tr>
+
+
+                                        <tr>
+                                            <td class="uppercase" style="" align="right"><span>Phone Number:</span></td>
+                                            <td class="capitalize">@(ViewBag.applicant.Phone)</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="uppercase" style="" align="right"><span>Email:</span></td>
+                                            <td class="capitalize">@(ViewBag.applicant.Email)</td>
+                                        </tr>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                    </table>
+
+                                </td>
+
+                                <td valign="top">
+                                    <div class='ui medium image'>
+
+                                        <img class="thumbnail img-preview medium ui image ui fluid image" style="width:240px;height:auto;margin-left: 85px  "
+                                             src="http://photos.ttuportal.com/public/albums/thumbnails/202018930.jpg"
+                                             alt="your passport photo">
+
+                                    </div>
+                                </td>
+                                <td>
+                                </td>
+
+                            </tr>
+                        </table>
+
+                        <table class="ui folders table">
+                            <tr>
+                                <td>
+                                    <table>
+                                        <tr>
+                                            <td class="uppercase" style=""><strong>Hometown:</strong></td>
+                                            <td class="capitalize">@(ViewBag.applicant.Hometown)</td>
+
+                                        </tr>
+                                        <tr>
+                                            <td class="uppercase" style=""><strong>Address:</strong></td>
+                                            <td class="capitalize">@(ViewBag.applicant.Address) </td>
+
+                                        </tr>
+
+                                    </table>
+                                </td>
+                                <td>
+                                    <table>
+                                        <tr>
+                                            <td class="uppercase" style=""><strong>Hometown Region:</strong></td>
+                                            <td class="capitalize">@(ViewBag.applicant.Region)</td>
+
+                                        </tr>
+                                        <tr>
+                                            <td class="uppercase" style=""><strong>Nationality:</strong></td>
+                                            <td class="capitalize">@(ViewBag.applicant.NationalityId)</td>
+
+                                        </tr>
+
+                                    </table>
+                                </td>
+                            </tr>
+
+
+                            <tr>
+                                <td>
+                                    <table>
+                                        <tr>
+                                            <td class="uppercase" style=""><strong>Marital Status:</strong></td>
+                                            <td class="capitalize">@(ViewBag.applicant.MaritalStatus)</td>
+
+
+                                            <td class="uppercase" style=""><strong>Physically Challenged:</strong></td>
+                                            <td class="capitalize">@(ViewBag.applicant.Disability) </td>
+
+                                        </tr>
+
+                                    </table>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <table>
+                                        <tr>
+                                            <td class="uppercase" style=""><strong>Guardian Name:</strong></td>
+                                            <td class="capitalize">@(ViewBag.applicant.GuardianName)</td>
+
+                                        </tr>
+                                        <tr>
+                                            <td class="uppercase" style=""><strong>Guardian Relationship:</strong></td>
+                                            <td class="capitalize">@(ViewBag.applicant.GuardianRelationship) </td>
+
+                                        </tr>
+
+                                    </table>
+                                </td>
+                                <td>
+                                    <table>
+                                        <tr>
+                                            <td class="uppercase" style=""><strong>Guardian Phone:</strong></td>
+                                            <td class="capitalize"> @(ViewBag.applicant.GuardianPhone) </td>
+
+                                        </tr>
+                                        <tr>
+                                            <td class="uppercase" style=""><strong>Guardian Occupation:</strong></td>
+                                            <td class="capitalize">@(ViewBag.applicant.GuardianOccupation)</td>
+
+                                        </tr>
+
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    </div>
+                    <div id="page2">
+                        <p class="ui yellow table"><h4 style="text-transform: uppercase">Programme and Academic Information</h4></p>
+
+                        <table class="ui folder table">
+                            <tr>
+                                <td>
+                                    <table>
+                                        <tr>
+                                            <td class="uppercase" style=""><strong><div style="width: 125px">First Choice:</div></strong></td>
+                                            <td class="capitalize">BACHELOR OF TECHNOLOGY IN PROCUREMENT MANAGEMENT</td>
+
+                                        </tr>
+                                        <tr>
+                                            <td class="uppercase" style=""><strong>Second Choics:</strong></td>
+                                            <td class="capitalize">BACHELOR OF TECHNOLOGY IN PROCUREMENT MANAGEMENT</td>
+
+
+                                        </tr>
+                                        <tr>
+                                            <td class="uppercase" style=""><strong>Third Choice:</strong></td>
+                                            <td class="capitalize">BACHELOR OF TECHNOLOGY IN PROCUREMENT MANAGEMENT</td>
+
+                                        </tr>
+
+
+                                    </table>
+                                </td>
+                                <td>
+                                    <table>
+                                        <tr>
+                                            <td class="uppercase" style=""><strong>Former School:</strong></td>
+                                            <td class="capitalize">@(ViewBag.applicant.School)</td>
+
+                                        </tr>
+                                        <tr>
+                                            <td class="uppercase" style=""><strong>Programme Studied:</strong></td>
+                                            <td class="capitalize">@(ViewBag.applicant.ProgrammeStudied)</td>
+
+
+                                        </tr>
+
+                                    </table>
+                                </td>
+                            </tr>
+
+
+                        </table>
+
+
+                    </div>
+                    <div id="page3">
+                        <p><h4>CORROBORATIVE DECLARATION</h4></p>
+
+                        <p>(Please read the instructions carefully before you endorse this form)</p>
+                        <p></p>
+                        <p>
+                            1. This declaration should be signed by a person of high integrity and honour who must also endorse
+                            at least one of the candidate's passport size photographs on the reverse side and also satisfy
+                            him/herself that the examination grades indicated
+                            on the form by the applicant are true.
+                        <p>2. The application will not be valid if the declaration below is not signed</p>
+                        <p>
+                            3.If the declaration proves to be false, the application shall be rejected; if falsely detected after
+                            admission, the student shall be dismissed.
+                        </p>
+
+                        <p>
+                            I hereby declare that the photograph endorsed by me is the true likeness of the applicant  MISS FYNN AUGUSTINA AGGREY who is personally known to me. I have inspected his/her certificates against the
+                            results indicated on the form and I satisfied that they are true and name that appears on them is
+                            the same as that by which he/she is officially/personally known to me.
+
+                        </p>
+                        <table>
+
+
+                            <tr>
+                                <td>SIGNATURE  </td>
+                                <td> <span style="margin-left:32px;"> ..................................................................................... </span></td>
+
+                            </tr>
+                            <tr>
+                                <td>NAME  </td>
+                                <td> <span style="margin-left:32px;"> ..................................................................................... </span></td>
+
+                            </tr>
+                            <tr>
+                                <td>OCCUPATION  </td>
+                                <td> <span style="margin-left:32px;"> ..................................................................................... </span></td>
+
+                            </tr>
+                            <tr>
+                                <td>POSITION  </td>
+                                <td> <span style="margin-left:32px;"> ..................................................................................... </span></td>
+
+                            </tr>
+                            <tr>  <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td></tr>
+                            <tr>
+                                <td>ADDRESS & OFFICIAL STAMP  </td>
+                                <td> <span style="margin-left:32px;"> ..................................................................................... </span></td>
+
+                            </tr>
+
+
+
+
+
+
+                        </table>
+
+
+
+
+                        <p>
+                            <img src='/public/assets/images/footer.jpg' style="width:1086px;height: auto"
+                                 class="ui fluid image" />
+                        </p>
+                        <center><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIj8+CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgdmVyc2lvbj0iMS4xIiB3aWR0aD0iMTQ1cHgiIGhlaWdodD0iMTQ1cHgiIHZpZXdCb3g9IjAgMCAxNDUgMTQ1Ij48ZGVmcz48cmVjdCBpZD0iYmxvY2siIHdpZHRoPSI1IiBoZWlnaHQ9IjUiIGZpbGw9IiMwMDAwMDAiIGZpbGwtb3BhY2l0eT0iMSIvPjwvZGVmcz48cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMTQ1IiBoZWlnaHQ9IjE0NSIgZmlsbD0iI2ZmZmZmZiIgZmlsbC1vcGFjaXR5PSIxIi8+PHVzZSB4PSIyMCIgeT0iMjAiIHhsaW5rOmhyZWY9IiNibG9jayIvPjx1c2UgeD0iMjUiIHk9IjIwIiB4bGluazpocmVmPSIjYmxvY2siLz48dXNlIHg9IjMwIiB5PSIyMCIgeGxpbms6aHJlZj0iI2Jsb2NrIi8+PHVzZSB4PSIzNSIgeT0iMjAiIHhsaW5rOmhyZWY9IiNibG9jayIvPjx1c2UgeD0iNDAiIHk9IjIwIiB4bGluazpocmVmPSIjYmxvY2siLz48dXNlIHg9IjQ1IiB5PSIyMCIgeGxpbms6aHJlZj0iI2Jsb2NrIi8+PHVzZSB4PSI1MCIgeT0iMjAiIHhsaW5rOmhyZWY9IiNibG9jayIvPjx1c2UgeD0iNjAiIHk9IjIwIiB4bGluazpocmVmPSIjYmxvY2siLz48dXNlIHg9IjY1IiB5PSIyMCIgeGxpbms6aHJlZj0iI2Jsb2NrIi8+PHVzZSB4PSI3MCIgeT0iMjAiIHhsaW5rOmhyZWY9IiNibG9jayIvPjx1c2UgeD0iNzUiIHk9IjIwIiB4bGluazpocmVmPSIjYmxvY2siLz48dXNlIHg9IjgwIiB5PSIyMCIgeGxpbms6aHJlZj0iI2Jsb2NrIi8+PHVzZSB4PSI5MCIgeT0iMjAiIHhsaW5rOmhyZWY9IiNibG9jayIvPjx1c2UgeD0iOTUiIHk9IjIwIiB4bGluazpocmVmPSIjYmxvY2siLz48dXNlIHg9IjEwMCIgeT0iMjAiIHhsaW5rOmhyZWY9IiNibG9jayIvPjx1c2UgeD0iMTA1IiB5PSIyMCIgeGxpbms6aHJlZj0iI2Jsb2NrIi8+PHVzZSB4PSIxMTAiIHk9IjIwIiB4bGluazpocmVmPSIjYmxvY2siLz48dXNlIHg9IjExNSIgeT0iMjAiIHhsaW5rOmhyZWY9IiNibG9jayIvPjx1c2UgeD0iMTIwIiB5PSIyMCIgeGxpbms6aHJlZj0iI2Jsb2NrIi8+PHVzZSB4PSIyMCIgeT0iMjUiIHhsaW5rOmhyZWY9IiNibG9jayIvPjx1c2UgeD0iNTAiIHk9IjI1IiB4bGluazpocmVmPSIjYmxvY2siLz48dXNlIHg9IjYwIiB5PSIyNSIgeGxpbms6aHJlZj0iI2Jsb2NrIi8+PHVzZSB4PSI2NSIgeT0iMjUiIHhsaW5rOmhyZWY9IiNibG9jayIvPjx1c2UgeD0iNzUiIHk9IjI1IiB4bGluazpocmVmPSIjYmxvY2siLz48dXNlIHg9IjgwIiB5PSIyNSIgeGxpbms6aHJlZj0iI2Jsb2NrIi8+PHVzZSB4PSI5MCIgeT0iMjUiIHhsaW5rOmhyZWY9IiNibG9jayIvPjx1c2UgeD0iMTIwIiB5PSIyNSIgeGxpbms6aHJlZj0iI2Jsb2NrIi8+PHVzZSB4PSIyMCIgeT0iMzAiIHhsaW5rOmhyZWY9IiNibG9jayIvPjx1c2UgeD0iMzAiIHk9IjMwIiB4bGluazpocmVmPSIjYmxvY2siLz48dXNlIHg9IjM1IiB5PSIzMCIgeGxpbms6aHJlZj0iI2Jsb2NrIi8+PHVzZSB4PSI0MCIgeT0iMzAiIHhsaW5rOmhyZWY9IiNibG9jayIvPjx1c2UgeD0iNTAiIHk9IjMwIiB4bGluazpocmVmPSIjYmxvY2siLz48dXNlIHg9IjY1IiB5PSIzMCIgeGxpbms6aHJlZj0iI2Jsb2NrIi8+PHVzZSB4PSI3MCIgeT0iMzAiIHhsaW5rOmhyZWY9IiNibG9jayIvPjx1c2UgeD0iNzUiIHk9IjMwIiB4bGluazpocmVmPSIjYmxvY2siLz48dXNlIHg9IjkwIiB5PSIzMCIgeGxpbms6aHJlZj0iI2Jsb2NrIi8+PHVzZSB4PSIxMDAiIHk9IjMwIiB4bGluazpocmVmPSIjYmxvY2siLz48dXNlIHg9IjEwNSIgeT0iMzAiIHhsaW5rOmhyZWY9IiNibG9jayIvPjx1c2UgeD0iMTEwIiB5PSIzMCIgeGxpbms6aHJlZj0iI2Jsb2NrIi8+PHVzZSB4PSIxMjAiIHk9IjMwIiB4bGluazpocmVmPSIjYmxvY2siLz48dXNlIHg9IjIwIiB5PSIzNSIgeGxpbms6aHJlZj0iI2Jsb2NrIi8+PHVzZSB4PSIzMCIgeT0iMzUiIHhsaW5rOmhyZWY9IiNibG9jayIvPjx1c2UgeD0iMzUiIHk9IjM1IiB4bGluazpocmVmPSIjYmxvY2siLz48dXNlIHg9IjQwIiB5PSIzNSIgeGxpbms6aHJlZj0iI2Jsb2NrIi8+PHVzZSB4PSI1MCIgeT0iMzUiIHhsaW5rOmhyZWY9IiNibG9jayIvPjx1c2UgeD0iNjUiIHk9IjM1IiB4bGluazpocmVmPSIjYmxvY2siLz48dXNlIHg9Ijc1IiB5PSIzNSIgeGxpbms6aHJlZj0iI2Jsb2NrIi8+PHVzZSB4PSI4MCIgeT0iMzUiIHhsaW5rOmhyZWY9IiNibG9jayIvPjx1c2UgeD0iOTAiIHk9IjM1IiB4bGluazpocmVmPSIjYmxvY2siLz48dXNlIHg9IjEwMCIgeT0iMzUiIHhsaW5rOmhyZWY9IiNibG9jayIvPjx1c2UgeD0iMTA1IiB5PSIzNSIgeGxpbms6aHJlZj0iI2Jsb2NrIi8+PHVzZSB4PSIxMTAiIHk9IjM1IiB4bGluazpocmVmPSIjYmxvY2siLz48dXNlIHg9IjEyMCIgeT0iMzUiIHhsaW5rOmhyZWY9IiNibG9jayIvPjx1c2UgeD0iMjAiIHk9IjQwIiB4bGluazpocmVmPSIjYmxvY2siLz48dXNlIHg9IjMwIiB5PSI0MCIgeGxpbms6aHJlZj0iI2Jsb2NrIi8+PHVzZSB4PSIzNSIgeT0iNDAiIHhsaW5rOmhyZWY9IiNibG9jayIvPjx1c2UgeD0iNDAiIHk9IjQwIiB4bGluazpocmVmPSIjYmxvY2siLz48dXNlIHg9IjUwIiB5PSI0MCIgeGxpbms6aHJlZj0iI2Jsb2NrIi8+PHVzZSB4PSI2MCIgeT0iNDAiIHhsaW5rOmhyZWY9IiNibG9jayIvPjx1c2UgeD0iODAiIHk9IjQwIiB4bGluazpocmVmPSIjYmxvY2siLz48dXNlIHg9IjkwIiB5PSI0MCIgeGxpbms6aHJlZj0iI2Jsb2NrIi8+PHVzZSB4PSIxMDAiIHk9IjQwIiB4bGluazpocmVmPSIjYmxvY2siLz48dXNlIHg9IjEwNSIgeT0iNDAiIHhsaW5rOmhyZWY9IiNibG9jayIvPjx1c2UgeD0iMTEwIiB5PSI0MCIgeGxpbms6aHJlZj0iI2Jsb2NrIi8+PHVzZSB4PSIxMjAiIHk9IjQwIiB4bGluazpocmVmPSIjYmxvY2siLz48dXNlIHg9IjIwIiB5PSI0NSIgeGxpbms6aHJlZj0iI2Jsb2NrIi8+PHVzZSB4PSI1MCIgeT0iNDUiIHhsaW5rOmhyZWY9IiNibG9jayIvPjx1c2UgeD0iNjAiIHk9IjQ1IiB4bGluazpocmVmPSIjYmxvY2siLz48dXNlIHg9IjcwIiB5PSI0NSIgeGxpbms6aHJlZj0iI2Jsb2NrIi8+PHVzZSB4PSI5MCIgeT0iNDUiIHhsaW5rOmhyZWY9IiNibG9jayIvPjx1c2UgeD0iMTIwIiB5PSI0NSIgeGxpbms6aHJlZj0iI2Jsb2NrIi8+PHVzZSB4PSIyMCIgeT0iNTAiIHhsaW5rOmhyZWY9IiNibG9jayIvPjx1c2UgeD0iMjUiIHk9IjUwIiB4bGluazpocmVmPSIjYmxvY2siLz48dXNlIHg9IjMwIiB5PSI1MCIgeGxpbms6aHJlZj0iI2Jsb2NrIi8+PHVzZSB4PSIzNSIgeT0iNTAiIHhsaW5rOmhyZWY9IiNibG9jayIvPjx1c2UgeD0iNDAiIHk9IjUwIiB4bGluazpocmVmPSIjYmxvY2siLz48dXNlIHg9IjQ1IiB5PSI1MCIgeGxpbms6aHJlZj0iI2Jsb2NrIi8+PHVzZSB4PSI1MCIgeT0iNTAiIHhsaW5rOmhyZWY9IiNibG9jayIvPjx1c2UgeD0iNjAiIHk9IjUwIiB4bGluazpocmVmPSIjYmxvY2siLz48dXNlIHg9IjcwIiB5PSI1MCIgeGxpbms6aHJlZj0iI2Jsb2NrIi8+PHVzZSB4PSI4MCIgeT0iNTAiIHhsaW5rOmhyZWY9IiNibG9jayIvPjx1c2UgeD0iOTAiIHk9IjUwIiB4bGluazpocmVmPSIjYmxvY2siLz48dXNlIHg9Ijk1IiB5PSI1MCIgeGxpbms6aHJlZj0iI2Jsb2NrIi8+PHVzZSB4PSIxMDAiIHk9IjUwIiB4bGluazpocmVmPSIjYmxvY2siLz48dXNlIHg9IjEwNSIgeT0iNTAiIHhsaW5rOmhyZWY9IiNibG9jayIvPjx1c2UgeD0iMTEwIiB5PSI1MCIgeGxpbms6aHJlZj0iI2Jsb2NrIi8+PHVzZSB4PSIxMTUiIHk9IjUwIiB4bGluazpocmVmPSIjYmxvY2siLz48dXNlIHg9IjEyMCIgeT0iNTAiIHhsaW5rOmhyZWY9IiNibG9jayIvPjx1c2UgeD0iNjAiIHk9IjU1IiB4bGluazpocmVmPSIjYmxvY2siLz48dXNlIHg9IjY1IiB5PSI1NSIgeGxpbms6aHJlZj0iI2Jsb2NrIi8+PHVzZSB4PSI3MCIgeT0iNTUiIHhsaW5rOmhyZWY9IiNibG9jayIvPjx1c2UgeD0iNzUiIHk9IjU1IiB4bGluazpocmVmPSIjYmxvY2siLz48dXNlIHg9IjIwIiB5PSI2MCIgeGxpbms6aHJlZj0iI2Jsb2NrIi8+PHVzZSB4PSIyNSIgeT0iNjAiIHhsaW5rOmhyZWY9IiNibG9jayIvPjx1c2UgeD0iMzAiIHk9IjYwIiB4bGluazpocmVmPSIjYmxvY2siLz48dXNlIHg9IjQ1IiB5PSI2MCIgeGxpbms6aHJlZj0iI2Jsb2NrIi8+PHVzZSB4PSI1MCIgeT0iNjAiIHhsaW5rOmhyZWY9IiNibG9jayIvPjx1c2UgeD0iNjAiIHk9IjYwIiB4bGluazpocmVmPSIjYmxvY2siLz48dXNlIHg9IjY1IiB5PSI2MCIgeGxpbms6aHJlZj0iI2Jsb2NrIi8+PHVzZSB4PSI3MCIgeT0iNjAiIHhsaW5rOmhyZWY9IiNibG9jayIvPjx1c2UgeD0iNzUiIHk9IjYwIiB4bGluazpocmVmPSIjYmxvY2siLz48dXNlIHg9IjgwIiB5PSI2MCIgeGxpbms6aHJlZj0iI2Jsb2NrIi8+PHVzZSB4PSI4NSIgeT0iNjAiIHhsaW5rOmhyZWY9IiNibG9jayIvPjx1c2UgeD0iOTAiIHk9IjYwIiB4bGluazpocmVmPSIjYmxvY2siLz48dXNlIHg9Ijk1IiB5PSI2MCIgeGxpbms6aHJlZj0iI2Jsb2NrIi8+PHVzZSB4PSIxMDAiIHk9IjYwIiB4bGluazpocmVmPSIjYmxvY2siLz48dXNlIHg9IjExNSIgeT0iNjAiIHhsaW5rOmhyZWY9IiNibG9jayIvPjx1c2UgeD0iMTIwIiB5PSI2MCIgeGxpbms6aHJlZj0iI2Jsb2NrIi8+PHVzZSB4PSIzMCIgeT0iNjUiIHhsaW5rOmhyZWY9IiNibG9jayIvPjx1c2UgeD0iMzUiIHk9IjY1IiB4bGluazpocmVmPSIjYmxvY2siLz48dXNlIHg9IjQwIiB5PSI2NSIgeGxpbms6aHJlZj0iI2Jsb2NrIi8+PHVzZSB4PSI2MCIgeT0iNjUiIHhsaW5rOmhyZWY9IiNibG9jayIvPjx1c2UgeD0iNjUiIHk9IjY1IiB4bGluazpocmVmPSIjYmxvY2siLz48dXNlIHg9IjcwIiB5PSI2NSIgeGxpbms6aHJlZj0iI2Jsb2NrIi8+PHVzZSB4PSIxMjAiIHk9IjY1IiB4bGluazpocmVmPSIjYmxvY2siLz48dXNlIHg9IjM1IiB5PSI3MCIgeGxpbms6aHJlZj0iI2Jsb2NrIi8+PHVzZSB4PSI0MCIgeT0iNzAiIHhsaW5rOmhyZWY9IiNibG9jayIvPjx1c2UgeD0iNDUiIHk9IjcwIiB4bGluazpocmVmPSIjYmxvY2siLz48dXNlIHg9IjUwIiB5PSI3MCIgeGxpbms6aHJlZj0iI2Jsb2NrIi8+PHVzZSB4PSI1NSIgeT0iNzAiIHhsaW5rOmhyZWY9IiNibG9jayIvPjx1c2UgeD0iNjUiIHk9IjcwIiB4bGluazpocmVmPSIjYmxvY2siLz48dXNlIHg9IjkwIiB5PSI3MCIgeGxpbms6aHJlZj0iI2Jsb2NrIi8+PHVzZSB4PSIxMDUiIHk9IjcwIiB4bGluazpocmVmPSIjYmxvY2siLz48dXNlIHg9IjExMCIgeT0iNzAiIHhsaW5rOmhyZWY9IiNibG9jayIvPjx1c2UgeD0iMTE1IiB5PSI3MCIgeGxpbms6aHJlZj0iI2Jsb2NrIi8+PHVzZSB4PSIyNSIgeT0iNzUiIHhsaW5rOmhyZWY9IiNibG9jayIvPjx1c2UgeD0iMzAiIHk9Ijc1IiB4bGluazpocmVmPSIjYmxvY2siLz48dXNlIHg9IjU1IiB5PSI3NSIgeGxpbms6aHJlZj0iI2Jsb2NrIi8+PHVzZSB4PSI4MCIgeT0iNzUiIHhsaW5rOmhyZWY9IiNibG9jayIvPjx1c2UgeD0iMTAwIiB5PSI3NSIgeGxpbms6aHJlZj0iI2Jsb2NrIi8+PHVzZSB4PSIxMDUiIHk9Ijc1IiB4bGluazpocmVmPSIjYmxvY2siLz48dXNlIHg9IjMwIiB5PSI4MCIgeGxpbms6aHJlZj0iI2Jsb2NrIi8+PHVzZSB4PSI0NSIgeT0iODAiIHhsaW5rOmhyZWY9IiNibG9jayIvPjx1c2UgeD0iNTAiIHk9IjgwIiB4bGluazpocmVmPSIjYmxvY2siLz48dXNlIHg9IjU1IiB5PSI4MCIgeGxpbms6aHJlZj0iI2Jsb2NrIi8+PHVzZSB4PSI2NSIgeT0iODAiIHhsaW5rOmhyZWY9IiNibG9jayIvPjx1c2UgeD0iNzAiIHk9IjgwIiB4bGluazpocmVmPSIjYmxvY2siLz48dXNlIHg9IjkwIiB5PSI4MCIgeGxpbms6aHJlZj0iI2Jsb2NrIi8+PHVzZSB4PSIxMDUiIHk9IjgwIiB4bGluazpocmVmPSIjYmxvY2siLz48dXNlIHg9IjExMCIgeT0iODAiIHhsaW5rOmhyZWY9IiNibG9jayIvPjx1c2UgeD0iNjAiIHk9Ijg1IiB4bGluazpocmVmPSIjYmxvY2siLz48dXNlIHg9IjY1IiB5PSI4NSIgeGxpbms6aHJlZj0iI2Jsb2NrIi8+PHVzZSB4PSI3MCIgeT0iODUiIHhsaW5rOmhyZWY9IiNibG9jayIvPjx1c2UgeD0iNzUiIHk9Ijg1IiB4bGluazpocmVmPSIjYmxvY2siLz48dXNlIHg9Ijg1IiB5PSI4NSIgeGxpbms6aHJlZj0iI2Jsb2NrIi8+PHVzZSB4PSI5MCIgeT0iODUiIHhsaW5rOmhyZWY9IiNibG9jayIvPjx1c2UgeD0iOTUiIHk9Ijg1IiB4bGluazpocmVmPSIjYmxvY2siLz48dXNlIHg9IjExMCIgeT0iODUiIHhsaW5rOmhyZWY9IiNibG9jayIvPjx1c2UgeD0iMjAiIHk9IjkwIiB4bGluazpocmVmPSIjYmxvY2siLz48dXNlIHg9IjI1IiB5PSI5MCIgeGxpbms6aHJlZj0iI2Jsb2NrIi8+PHVzZSB4PSIzMCIgeT0iOTAiIHhsaW5rOmhyZWY9IiNibG9jayIvPjx1c2UgeD0iMzUiIHk9IjkwIiB4bGluazpocmVmPSIjYmxvY2siLz48dXNlIHg9IjQwIiB5PSI5MCIgeGxpbms6aHJlZj0iI2Jsb2NrIi8+PHVzZSB4PSI0NSIgeT0iOTAiIHhsaW5rOmhyZWY9IiNibG9jayIvPjx1c2UgeD0iNTAiIHk9IjkwIiB4bGluazpocmVmPSIjYmxvY2siLz48dXNlIHg9Ijc1IiB5PSI5MCIgeGxpbms6aHJlZj0iI2Jsb2NrIi8+PHVzZSB4PSI4MCIgeT0iOTAiIHhsaW5rOmhyZWY9IiNibG9jayIvPjx1c2UgeD0iODUiIHk9IjkwIiB4bGluazpocmVmPSIjYmxvY2siLz48dXNlIHg9Ijk1IiB5PSI5MCIgeGxpbms6aHJlZj0iI2Jsb2NrIi8+PHVzZSB4PSIxMDAiIHk9IjkwIiB4bGluazpocmVmPSIjYmxvY2siLz48dXNlIHg9IjEyMCIgeT0iOTAiIHhsaW5rOmhyZWY9IiNibG9jayIvPjx1c2UgeD0iMjAiIHk9Ijk1IiB4bGluazpocmVmPSIjYmxvY2siLz48dXNlIHg9IjUwIiB5PSI5NSIgeGxpbms6aHJlZj0iI2Jsb2NrIi8+PHVzZSB4PSI2MCIgeT0iOTUiIHhsaW5rOmhyZWY9IiNibG9jayIvPjx1c2UgeD0iNzUiIHk9Ijk1IiB4bGluazpocmVmPSIjYmxvY2siLz48dXNlIHg9Ijg1IiB5PSI5NSIgeGxpbms6aHJlZj0iI2Jsb2NrIi8+PHVzZSB4PSI5MCIgeT0iOTUiIHhsaW5rOmhyZWY9IiNibG9jayIvPjx1c2UgeD0iOTUiIHk9Ijk1IiB4bGluazpocmVmPSIjYmxvY2siLz48dXNlIHg9IjExMCIgeT0iOTUiIHhsaW5rOmhyZWY9IiNibG9jayIvPjx1c2UgeD0iMTIwIiB5PSI5NSIgeGxpbms6aHJlZj0iI2Jsb2NrIi8+PHVzZSB4PSIyMCIgeT0iMTAwIiB4bGluazpocmVmPSIjYmxvY2siLz48dXNlIHg9IjMwIiB5PSIxMDAiIHhsaW5rOmhyZWY9IiNibG9jayIvPjx1c2UgeD0iMzUiIHk9IjEwMCIgeGxpbms6aHJlZj0iI2Jsb2NrIi8+PHVzZSB4PSI0MCIgeT0iMTAwIiB4bGluazpocmVmPSIjYmxvY2siLz48dXNlIHg9IjUwIiB5PSIxMDAiIHhsaW5rOmhyZWY9IiNibG9jayIvPjx1c2UgeD0iNzAiIHk9IjEwMCIgeGxpbms6aHJlZj0iI2Jsb2NrIi8+PHVzZSB4PSI3NSIgeT0iMTAwIiB4bGluazpocmVmPSIjYmxvY2siLz48dXNlIHg9IjgwIiB5PSIxMDAiIHhsaW5rOmhyZWY9IiNibG9jayIvPjx1c2UgeD0iODUiIHk9IjEwMCIgeGxpbms6aHJlZj0iI2Jsb2NrIi8+PHVzZSB4PSI5MCIgeT0iMTAwIiB4bGluazpocmVmPSIjYmxvY2siLz48dXNlIHg9Ijk1IiB5PSIxMDAiIHhsaW5rOmhyZWY9IiNibG9jayIvPjx1c2UgeD0iMTAwIiB5PSIxMDAiIHhsaW5rOmhyZWY9IiNibG9jayIvPjx1c2UgeD0iMTA1IiB5PSIxMDAiIHhsaW5rOmhyZWY9IiNibG9jayIvPjx1c2UgeD0iMTE1IiB5PSIxMDAiIHhsaW5rOmhyZWY9IiNibG9jayIvPjx1c2UgeD0iMTIwIiB5PSIxMDAiIHhsaW5rOmhyZWY9IiNibG9jayIvPjx1c2UgeD0iMjAiIHk9IjEwNSIgeGxpbms6aHJlZj0iI2Jsb2NrIi8+PHVzZSB4PSIzMCIgeT0iMTA1IiB4bGluazpocmVmPSIjYmxvY2siLz48dXNlIHg9IjM1IiB5PSIxMDUiIHhsaW5rOmhyZWY9IiNibG9jayIvPjx1c2UgeD0iNDAiIHk9IjEwNSIgeGxpbms6aHJlZj0iI2Jsb2NrIi8+PHVzZSB4PSI1MCIgeT0iMTA1IiB4bGluazpocmVmPSIjYmxvY2siLz48dXNlIHg9IjY1IiB5PSIxMDUiIHhsaW5rOmhyZWY9IiNibG9jayIvPjx1c2UgeD0iNzAiIHk9IjEwNSIgeGxpbms6aHJlZj0iI2Jsb2NrIi8+PHVzZSB4PSIyMCIgeT0iMTEwIiB4bGluazpocmVmPSIjYmxvY2siLz48dXNlIHg9IjMwIiB5PSIxMTAiIHhsaW5rOmhyZWY9IiNibG9jayIvPjx1c2UgeD0iMzUiIHk9IjExMCIgeGxpbms6aHJlZj0iI2Jsb2NrIi8+PHVzZSB4PSI0MCIgeT0iMTEwIiB4bGluazpocmVmPSIjYmxvY2siLz48dXNlIHg9IjUwIiB5PSIxMTAiIHhsaW5rOmhyZWY9IiNibG9jayIvPjx1c2UgeD0iNjAiIHk9IjExMCIgeGxpbms6aHJlZj0iI2Jsb2NrIi8+PHVzZSB4PSI2NSIgeT0iMTEwIiB4bGluazpocmVmPSIjYmxvY2siLz48dXNlIHg9IjkwIiB5PSIxMTAiIHhsaW5rOmhyZWY9IiNibG9jayIvPjx1c2UgeD0iMTA1IiB5PSIxMTAiIHhsaW5rOmhyZWY9IiNibG9jayIvPjx1c2UgeD0iMTE1IiB5PSIxMTAiIHhsaW5rOmhyZWY9IiNibG9jayIvPjx1c2UgeD0iMTIwIiB5PSIxMTAiIHhsaW5rOmhyZWY9IiNibG9jayIvPjx1c2UgeD0iMjAiIHk9IjExNSIgeGxpbms6aHJlZj0iI2Jsb2NrIi8+PHVzZSB4PSI1MCIgeT0iMTE1IiB4bGluazpocmVmPSIjYmxvY2siLz48dXNlIHg9IjYwIiB5PSIxMTUiIHhsaW5rOmhyZWY9IiNibG9jayIvPjx1c2UgeD0iNzAiIHk9IjExNSIgeGxpbms6aHJlZj0iI2Jsb2NrIi8+PHVzZSB4PSI4MCIgeT0iMTE1IiB4bGluazpocmVmPSIjYmxvY2siLz48dXNlIHg9IjEwMCIgeT0iMTE1IiB4bGluazpocmVmPSIjYmxvY2siLz48dXNlIHg9IjExNSIgeT0iMTE1IiB4bGluazpocmVmPSIjYmxvY2siLz48dXNlIHg9IjIwIiB5PSIxMjAiIHhsaW5rOmhyZWY9IiNibG9jayIvPjx1c2UgeD0iMjUiIHk9IjEyMCIgeGxpbms6aHJlZj0iI2Jsb2NrIi8+PHVzZSB4PSIzMCIgeT0iMTIwIiB4bGluazpocmVmPSIjYmxvY2siLz48dXNlIHg9IjM1IiB5PSIxMjAiIHhsaW5rOmhyZWY9IiNibG9jayIvPjx1c2UgeD0iNDAiIHk9IjEyMCIgeGxpbms6aHJlZj0iI2Jsb2NrIi8+PHVzZSB4PSI0NSIgeT0iMTIwIiB4bGluazpocmVmPSIjYmxvY2siLz48dXNlIHg9IjUwIiB5PSIxMjAiIHhsaW5rOmhyZWY9IiNibG9jayIvPjx1c2UgeD0iNjAiIHk9IjEyMCIgeGxpbms6aHJlZj0iI2Jsb2NrIi8+PHVzZSB4PSI2NSIgeT0iMTIwIiB4bGluazpocmVmPSIjYmxvY2siLz48dXNlIHg9IjkwIiB5PSIxMjAiIHhsaW5rOmhyZWY9IiNibG9jayIvPjx1c2UgeD0iMTA1IiB5PSIxMjAiIHhsaW5rOmhyZWY9IiNibG9jayIvPjx1c2UgeD0iMTEwIiB5PSIxMjAiIHhsaW5rOmhyZWY9IiNibG9jayIvPjx1c2UgeD0iMTE1IiB5PSIxMjAiIHhsaW5rOmhyZWY9IiNibG9jayIvPjx1c2UgeD0iMTIwIiB5PSIxMjAiIHhsaW5rOmhyZWY9IiNibG9jayIvPjwvc3ZnPgo=" /></center>
+                    </div>
+                </div>
+
+
+
+
+
+
+            </div>
+
+
+        </div>
+
+
+
+
+        <footer id="footer" class="ui inverted vertical footer segment">
+            <div class="ui container">
+                <div class="ui inverted divided equal height stackable grid">
+
+
+                    <div class="eight wide column">
+
+                        <p>
+                            &copy; 2021 Takoradi Technical
+                            University | <a href="#" target="_blank" style="color: #1abb9c;"> Powered by TPConnect</a>
+                        </p>
+                    </div>
+
+
+                </div>
+            </div>
+        </footer>
+
+    </div>
+    <script src="/public/assets/js/app.js"></script>
+    <script src="/public/assets/js/form.js"></script>
+    <script src="/public/assets/js/validate-form.js"></script>
+    <script src="/public/assets/js/semantic.min.js"></script>
+
+    <script>$('.ui.dropdown').dropdown();
+        $('#applicant_step_one_dob_year').dropdown();
+        $('#applicant_step_one_dob_month').dropdown();
+        $('#applicant_step_one_dob_day').dropdown();
+
+
+        $('.save').on('click', function () {
+            $('.ui.basic.modal').modal('show');
+        })
+
+
+        $(".true").fadeOut(4000);
+        $(".false").fadeOut(4000);</script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+
+
+
+    <script>$(document).ready(function () {
+            // Wrap each tr and td's content within a div
+            // (todo: add logic so we only do this when printing)
+            $("table tbody th, table tbody td").wrapInner("<div></div>");
+        })</script>
+    <script language="javascript" type="text/javascript">function printDiv(divID) {
+            //Get the HTML of div
+            var divElements = document.getElementById(divID).innerHTML;
+            //Get the HTML of whole page
+            var oldPage = document.body.innerHTML;
+
+            //Reset the page's HTML with div's HTML only
+            document.body.innerHTML =
+                "<html><head><title></title></head><body>" +
+                divElements + "</body>";
+
+            //Print Page
+            window.print();
+
+            //Restore orignal HTML
+            document.body.innerHTML = oldPage;
+
+
+        }</script>
+
+    <script>(function() {
+            var beforePrint = function() {
+
+            };
+            var afterPrint = function() {
+                // do ajax for insert queries
+                $.ajax({
+                    url: "/form/print/update",
+                    success: function(data){
+                        $("#responseArea").text(data);
+                    }
+                });
+            };
+
+            if (window.matchMedia) {
+                var mediaQueryList = window.matchMedia('print');
+                mediaQueryList.addListener(function(mql) {
+                    if (mql.matches) {
+                        beforePrint();
+                    } else {
+                        afterPrint();
+                    }
+                });
+            }
+
+            window.onbeforeprint = beforePrint;
+            window.onafterprint = afterPrint;
+        }());</script>
+
+
+
+
+
+
+</body>
+</html>
