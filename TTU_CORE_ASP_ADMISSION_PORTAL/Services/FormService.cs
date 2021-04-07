@@ -121,7 +121,7 @@
 
             public object GetSHSProgrammes()
             {
-                return new SelectList(_dbContext.SHSProgrammes, "ID", "Name");
+                return new SelectList(_dbContext.SHSProgrammes, "Name", "Name");
             }
 
             public object GetCountry()

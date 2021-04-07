@@ -59,7 +59,7 @@
                     {
                         return RedirectToAction("Index", "Preview");
                  
-            }
+                    }
 
 
                     ViewData["regions"] = _formService.GetRegions();
@@ -253,6 +253,12 @@
                             var applicant = await _dbContext.Users.FindAsync(userId);
 
                             user.Started = 1;
+                               if( HttpContext.Request.Form["thirdChoice"] != "")
+                                {
+                                   user.FormCompleted = 1;
+                                }
+
+
                             await _dbContext.SaveChangesAsync();
 
                         }
@@ -303,7 +309,7 @@
                                 applicantModel.GuardianPhone = HttpContext.Request.Form["guardianPhone"];
                                 applicantModel.GuardianOccupation = HttpContext.Request.Form["guardianOccupation"];
 
-                                applicantModel.Disability = Convert.ToBoolean(HttpContext.Request.Form["disability"]);
+                                applicantModel.Disability = Convert.ToBoolean((HttpContext.Request.Form["disability"]));
 
                                 applicantModel.DisabilityType = HttpContext.Request.Form["disabilityType"];
 

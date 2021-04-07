@@ -58,6 +58,8 @@
     <Folder Include="Views\Form\Degree\" />
     <Folder Include="Views\Form\Postgraduate\" />
     <Folder Include="Views\Form\Mature\" />
+    <Folder Include="Views\404\" />
+    <Folder Include="Views\500\" />
   </ItemGroup>
   <ItemGroup>
     <Content Remove="wwwroot\plugins\css\bootstrap.min.css" />

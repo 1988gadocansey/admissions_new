@@ -64,9 +64,22 @@ using Microsoft.Extensions.Logging;
                 var ApplicantPin = applicationUser?.Pin;
                 var ApplicantFormType = applicationUser?.Type;
 
+
+            //var applicant = await _dbContext.ApplicantModel.FirstOrDefaultAsync(a => a.ApplicationUserId == ApplicantId);
+            var applicant = await _dbContext.ApplicantModel.Include(r=>r.Region).Include(n =>n.Nationality)
+                .Include(p =>p.Programmes)
+                 .Include(h => h.Hall)
+                 .Include(rel => rel.Religion)
+                  .Include(s => s.School)
+                  .Include(d => d.District)
+
+
+                .FirstOrDefaultAsync(a => a.ApplicationUserId == ApplicantId);
+
+            //Console.WriteLine(applicant.Region.Name);
+            ViewData["applicant"] = applicant;
+
             
-                var applicant = await _dbContext.ApplicantModel.FirstOrDefaultAsync(app => app.ApplicationNumber == Convert.ToInt32(ApplicantForm));
-                 ViewData["applicant"] = applicant;
 
             return View();
 
