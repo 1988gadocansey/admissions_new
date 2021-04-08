@@ -156,5 +156,47 @@
             {
             return (age>=25);
             }
+
+        // count the number of failed courses
+        public int checkFailed(int[] GradeValues)
+        {
+            int fail = 0;
+             
+            foreach (int values in GradeValues)
+            {
+
+                if (values > 7)
+                {
+
+                     fail++;
+                }
+
+
+            }
+            return fail;
+
+        }
+
+        // count the number of passed courses
+
+        public int checkPassed(int[] GradeValues)
+        {
+            int passed = 0;
+
+            foreach (int values in GradeValues)
+            {
+
+                if (values <= 7)
+                {
+
+                    passed++;
+                }
+
+
+            }
+            return passed;
+
+        }
+
     }
         }
