@@ -128,6 +128,30 @@
             {
                 return new SelectList(_dbContext.CountryModel, "ID", "Name");
             }
+        public object GetGrades()
+        {
+            return new SelectList(_dbContext.GradeModel, "Id", "Name");
+        }
+        public object GetExamTypes()
+        {
+            return new SelectList(_dbContext.ExamModel, "Id", "Name");
+        }
+
+        public object GetSubjects()
+        {
+            return new SelectList(_dbContext.SubjectModel, "Id", "Name");
+        }
+        public object GetYears()
+        {
+            int[] year= { };
+
+            for (int a=1970; a<= DateTime.Now.Year; a++)
+            {
+                Array.Fill(year, a);
+            }
+           // Console.WriteLine(year.Min());
+            return year;
+        }
 
         public object GetHalls()
         {

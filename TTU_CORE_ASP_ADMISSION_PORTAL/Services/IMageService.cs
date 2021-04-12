@@ -142,6 +142,45 @@ namespace TTU_CORE_ASP_ADMISSION_PORTAL.Services
              // accept only white background
             }
 
+        public static bool IsBackgroundWhite(Bitmap theImageBitmap)
+        {
+            Bitmap bmp = new Bitmap(theImageBitmap);
+            int weight = 0;
+
+            for (int x = 0; x < bmp.Width; x++)
+            {
+                weight += GetWeight(bmp.GetPixel(x, 0));
+                weight += GetWeight(bmp.GetPixel(x, bmp.Height - 1));
+            }
+
+            for (int y = 0; y < bmp.Height; y++)
+            {
+                weight += GetWeight(bmp.GetPixel(0, y));
+                weight += GetWeight(bmp.GetPixel(bmp.Width - 1, y));
+            }
+
+            if (weight > 255)
+                return true;
+            return false;
+        }
+
+        private static int GetWeight(Color c)
+        {
+            if (c.R >= 200 && c.B >= 200 && c.G >= 200)
+            {
+                int n1 = 255 - c.R;
+                int n2 = 255 - c.G;
+                int n3 = 255 - c.B;
+
+                return (int)((n1 + n2 + n3) / 3);
+            }
+            else
+            {
+                return 0;
+            }
+
+        }
+
 
     }
 

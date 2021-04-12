@@ -20,7 +20,7 @@ namespace TTU_CORE_ASP_ADMISSION_PORTAL.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly SMSService sms;
-        
+
         private readonly ApplicationDbContext _dbContext;
 
 
@@ -29,14 +29,14 @@ namespace TTU_CORE_ASP_ADMISSION_PORTAL.Controllers
         {
             _logger = logger;
             _userManager = userManager;
-            _dbContext= dbContext;
+            _dbContext = dbContext;
 
 
         }
         //[Consumes(MediaTypeNames.Application.Json)]
         //[ProducesResponseType(StatusCodes.Status201Created)]
         //[ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> IndexAsync ()
+        public async Task<IActionResult> IndexAsync()
         {
             _logger.LogInformation("User visted dashboard.");
             FormService _formService = new FormService(_dbContext);
@@ -47,7 +47,7 @@ namespace TTU_CORE_ASP_ADMISSION_PORTAL.Controllers
             // update user last login
 
 
-            
+
             //var auth = _dbContext.Users.Where(n => n.Id == userId).First();
             //auth.LastLogin = DateTimeOffset.UtcNow;
             // await _dbContext.SaveChangesAsync();
@@ -87,15 +87,15 @@ namespace TTU_CORE_ASP_ADMISSION_PORTAL.Controllers
                 var user = await _userManager.GetUserAsync(User);
 
 
-                user.FormNo = Year+application;
+                user.FormNo = Year + application;
 
                 // Apply the changes if any to the db
                 // UserManager.Update(user);
-               if(_dbContext.SaveChanges()==1)
+                if (_dbContext.SaveChanges() == 1)
                 {
                     // if we are able to allocate form number to an applicant
                     // then lets update the form number generator + 1
-                  await  _formService.UpdateFormNoAsync();
+                    await _formService.UpdateFormNoAsync();
                 }
             }
 
@@ -106,7 +106,7 @@ namespace TTU_CORE_ASP_ADMISSION_PORTAL.Controllers
         }
 
 
-        
+
         public IActionResult Dashboard() => View(
             // SMSService sms = new SMSService()
 
@@ -122,5 +122,6 @@ namespace TTU_CORE_ASP_ADMISSION_PORTAL.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
     }
 }

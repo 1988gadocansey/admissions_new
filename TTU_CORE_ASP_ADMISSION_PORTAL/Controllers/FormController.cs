@@ -83,6 +83,7 @@
                     {
                         var applicantModel = await _dbContext.ApplicantModel.FirstOrDefaultAsync(a=>a.ApplicationUserId== ApplicantId);
                         ViewData["applicant"] = applicantModel;
+                        return View("update");
                     }
                     return View();
                 }

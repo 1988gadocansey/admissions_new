@@ -121,18 +121,18 @@ namespace TTU_CORE_ASP_ADMISSION_PORTAL.Areas.Identity.Pages.Account
                     //applicationUser.LastLogin= DateTimeOffset.UtcNow;
                     //await _dbContext.SaveChangesAsync();
 
-
-                    var user = await _dbContext.Users.FindAsync(Input.Password);
-                    if (user != null)
-                    {
-                        user.LastLogin = DateTimeOffset.UtcNow;
-                        await _dbContext.SaveChangesAsync();
-                    }
-                    else{
-                        _logger.LogInformation("Error retrieving user context.");
-                    }
-
-
+                   
+                    
+                        var user = await _dbContext.Users.FindAsync(Input.Password);
+                        if (user != null)
+                        {
+                            user.LastLogin = DateTimeOffset.UtcNow;
+                            await _dbContext.SaveChangesAsync();
+                        }
+                        else {
+                            _logger.LogInformation("Error retrieving user context.");
+                        }
+ 
 
 
                         _logger.LogInformation("User logged in.");

@@ -36,8 +36,8 @@ namespace TTU_CORE_ASP_ADMISSION_PORTAL.Models
         public string Year { set; get; }
         public string OldSubject { set; get; }
         public string InstitutionName { set; get; }
+        public int ApplicantModelID { set; get; }
 
-       
         public ResultUploadModel()
         {
         }

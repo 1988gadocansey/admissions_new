@@ -1,0 +1,1066 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using Humanizer
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+@{ var user = await UserManager.GetUserAsync(User); }
+
+@{
+    ViewBag.Title = "Form";
+
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section Style{
+    <style>
+      @*  input {
+            text-transform: uppercase;
+        }
+        select {
+            text-transform: uppercase;
+        }*@
+    </style>
+
+
+}
+@if ((user.Started) == 1)
+{
+    var date = ViewBag.applicant.DateOfBirth.ToString("yyy-MM-dd");
+
+}
+else
+{
+    var date = "";
+}
+@if (TempData["message"] != null)
+{
+
+    @if (TempData["type"].ToString() == "success")
+    {
+        <div style="text-align: center" class="uk-alert uk-alert-success" data-uk-alert=""> @TempData["message"]  </div>
+
+    }
+    else
+    {
+
+        <div style="text-align: center" class="uk-alert uk-alert-danger" data-uk-alert=""> @TempData["message"]  </div>
+
+    }
+}
+<h6 class="heading_b uk-margin-bottom">Fill all the required fields</h6>
+<div class="uk-width-xLarge-1-10">
+    <div class="md-card">
+        <div class="md-card-content" style="">
+
+
+
+
+            <form novalidate id="wizard_advanced_form" class="uk-form-stacked" method="POST" asp-controller="Form" asp-action="SaveAysnc" accept-charset="utf-8" name="updateForm" v-form>
+                @Html.AntiForgeryToken()
+
+                <div data-uk-observe="" id="wizard_advanced" role="application" class="wizard clearfix">
+                    <div class="steps clearfix">
+                        <ul role="tablist">
+                            <li role="tab" class="fill_form_header first current" aria-disabled="false" aria-selected="true" v-bind:class="{ 'error' : !in_payment_section}">
+                                <a aria-controls="wizard_advanced-p-0" href="#wizard_advanced-h-0" id="wizard_advanced-t-0">
+                                    <span class="current-info audible">current step: </span><span class="number">1</span> <span class="title">Biodata</span>
+                                </a>
+                            </li>
+                            <li role="tab" class="payment_header disabled" aria-disabled="true" v-bind:class="{ 'error' : in_payment_section}">
+                                <a aria-controls="wizard_advanced-p-1" href="#wizard_advanced-h-1" id="wizard_advanced-t-1">
+                                    <span class="number">2</span> <span class="title">Academic Information</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class=" clearfix " style="box-sizing: border-box;display: block;padding:15px!important;position: relative;">
+
+
+                        <section id="fill_form_section" role="tabpanel" aria-labelledby="fill form section" class="body step-0 current" data-step="0" aria-hidden="false" v-bind:class="{'uk-hidden': in_payment_section} ">
+
+                            <div data-uk-grid-margin="" class="uk-grid uk-grid-width-medium-1-4 uk-grid-width-large-1-4">
+
+
+                                <div class="parsley-row">
+                                    <div class="uk-input-group">
+
+                                        <div class="md-input-wrapper md-input-filled"><label for="wizard_referer">First Name :</label><input type="text" id="fname" name="fname" class="md-input" required="required" v-model="fname" v-form-ctrl><span class="md-input-bar"></span></div>
+                                        <p class=" uk-text-danger uk-text-small  " v-if="updateForm.fname.$error.required">Please enter your first name</p>
+                                    </div>
+                                </div>
+
+                                <div class="parsley-row">
+                                    <div class="uk-input-group">
+
+                                        <div class="md-input-wrapper md-input-filled"><label for="wizard_referer">Last Name :</label><input type="text" id="surname" name="surname" class="md-input" required="required" v-model="surname" v-form-ctrl><span class="md-input-bar"></span></div>
+                                        <p class=" uk-text-danger uk-text-small  " v-if="updateForm.surname.$error.required">Please enter your surname</p>
+                                    </div>
+                                </div>
+
+                                <div class="parsley-row">
+                                    <div class="uk-input-group">
+
+                                        <div class="md-input-wrapper md-input-filled"><label for="wizard_skype">Other Names :</label><input type="text" id="oname" name="othernames" v-form-ctrl class="md-input" v-model="othernames" /><span class="md-input-bar"></span></div>
+
+                                    </div>
+                                </div>
+                                <div class="parsley-row">
+                                    <div class="uk-input-group">
+
+                                        <div class="md-input-wrapper md-input-filled"><label for="wizard_skype">Previous Name :</label><input type="text" id="previousName" name="previousName" v-form-ctrl class="md-input" v-model="previousName" /><span class="md-input-bar"></span></div>
+
+                                    </div>
+                                </div>
+                                <div class="parsley-row">
+                                    <div class="uk-input-group">
+
+                                        <label for="">Title :</label>
+                                        <div class="md-input-wrapper md-input-filled">
+                                            <select name="title" class="md-input" required="required" v-model="title" v-form-ctrl="" v-select="title">
+                                                <option value="">Select</option>
+                                                <option value="Mr">Mr</option>
+                                                <option value="Ms">Ms</option>
+                                                <option value="Mrs">Mrs</option>
+                                                <option value="Miss">Miss</option>
+                                                <option value="Dr">Dr</option>
+                                                <option value="Rev">Rev</option>
+
+
+                                            </select>
+
+                                            <span class="md-input-bar"></span>
+                                        </div>
+
+                                        <p class="uk-text-danger uk-text-small" v-if="updateForm.title.$error.required">Title is required</p>
+                                    </div>
+                                </div>
+
+
+                                <div class="parsley-row">
+                                    <div class="uk-input-group">
+
+                                        <label for="">Gender :</label>
+                                        <div class="md-input-wrapper md-input-filled">
+                                            <select name="gender" class="md-input" id="gender" required="required" v-model="gender" v-form-ctrl="" v-select="gender">
+                                                <option value="">Select</option>
+                                                <option value="Male">Male</option>
+                                                <option value="Female">Female</option>
+
+
+
+                                            </select>
+                                            <span class="md-input-bar"></span>
+                                        </div>
+                                        <p class="uk-text-danger uk-text-small" v-if="updateForm.gender.$error.required">Gender is required</p>
+                                    </div>
+                                </div>
+
+
+                                <div class="parsley-row">
+                                    <div class="uk-input-group">
+
+                                        <label for="">Marital Status :</label>
+                                        <div class="md-input-wrapper md-input-filled">
+                                            <select name="maritalStatus" class="md-input" required="required" v-model="maritalStatus" v-form-ctrl="" v-select="maritalStatus">
+                                                <option value="">Select</option>
+                                                <option value="Single">Single</option>
+                                                <option value="Married">Married</option>
+
+
+                                            </select>
+
+                                            <span class="md-input-bar"></span>
+                                        </div>
+
+                                        <p class="uk-text-danger uk-text-small" v-if="updateForm.maritalStatus.$error.required">Marital Status is required</p>
+                                    </div>
+                                </div>
+
+                                @if ((user.Started) == 1)
+                                {
+                                    var date = ViewBag.applicant.DateOfBirth.ToString("yyy-MM-dd");
+                                    <div class="parsley-row">
+                                        <div class="uk-input-group">
+
+                                            <div class="md-input-wrapper md-input-filled"><label for="wizard_twitter">Date of Birth :</label><input type="text" name="dob" class="md-input" data-uk-datepicker="{format:'YYYY-MM-DD'}" value="@date" required="required" v-model="dob" v-form-ctrl><span class="md-input-bar"></span></div>
+                                            <p class="uk-text-danger uk-text-small " v-if="updateForm.dob.$error.required">Date of birth is required</p>
+                                        </div>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="parsley-row">
+                                        <div class="uk-input-group">
+
+                                            <div class="md-input-wrapper md-input-filled"><label for="wizard_twitter">Date of Birth :</label><input type="text" name="dob" class="md-input" data-uk-datepicker="{format:'YYYY-MM-DD'}" required="required" v-model="dob" v-form-ctrl><span class="md-input-bar"></span></div>
+                                            <p class="uk-text-danger uk-text-small " v-if="updateForm.dob.$error.required">Date of birth is required</p>
+                                        </div>
+                                    </div>
+                                }
+
+
+                            </div>
+
+                            <div data-uk-grid-margin="" class="uk-grid uk-grid-width-medium-1-4 uk-grid-width-large-1-4">
+
+
+
+                                <div class="parsley-row">
+                                    <div class="uk-input-group">
+
+                                        <div class="md-input-wrapper md-input-filled"><label for="wizard_skype">Post GPRS :</label><input type="text" id="postGPRS" name="postGPRS" v-form-ctrl class="md-input" v-model="postGPRS" /><span class="md-input-bar"></span></div>
+
+                                    </div>
+                                </div>
+
+
+                                <div class="parsley-row">
+                                    <div class="uk-input-group">
+
+                                        <div class="md-input-wrapper md-input-filled"><label for="wizard_skype">Hometown :</label><input type="text" id="hometown" name="hometown" required="" v-form-ctrl class="md-input" v-model="hometown" /><span class="md-input-bar"></span></div>
+                                        <p class="uk-text-danger uk-text-small " v-if="updateForm.hometown.$error.required">Hometown is required</p>
+
+                                    </div>
+                                </div>
+                                <div class="parsley-row">
+                                    <div class="uk-input-group">
+
+                                        <div class="md-input-wrapper md-input-filled">
+                                            <label for="wizard_referer">
+                                                Contact Address
+                                                :
+                                            </label><input type="text" id="address" name="address" class="md-input" required="required" v-model="address" v-form-ctrl><span class="md-input-bar"></span>
+                                        </div>
+                                        <p class=" uk-text-danger uk-text-small  " v-if="updateForm.address.$error.required">Contact Address is required</p>
+                                    </div>
+                                </div>
+
+
+
+                                <div class="parsley-row">
+                                    <div class="uk-input-group">
+
+                                        <label for="">Referal :</label>
+                                        <div class="md-input-wrapper md-input-filled">
+                                            <select name="Referal" class="md-input" required="required" v-model="Referal" v-form-ctrl="" v-select="Referal">
+                                                <option value="">Select</option>
+                                                <option value="Social Media">Social Media</option>
+                                                <option value="Print Media">Print Media</option>
+                                                <option value="TTU Outreach team">TTU Outreach team</option>
+                                                <option value="Friends">Friends</option>
+
+
+                                            </select>
+
+                                            <span class="md-input-bar"></span>
+                                        </div>
+
+                                        <p class="uk-text-danger uk-text-small" v-if="updateForm.Referal.$error.required">Referral  is required</p>
+                                    </div>
+                                </div>
+
+
+
+
+                            </div>
+
+                            <div data-uk-grid-margin="" class="uk-grid uk-grid-width-medium-1-4 uk-grid-width-large-1-4">
+                                <div class="parsley-row">
+                                    <div class="uk-input-group">
+
+                                        <div class="md-input-wrapper md-input-filled"><label for="wizard_referer">Phone N<u>o</u> :</label><input type="text" id="phone" name="phone" class="md-input" data-parsley-type="digits" minlength="10" required="required" maxlength="10" pattern='^[0-9]{10}$' v-model="phone" v-form-ctrl><span class="md-input-bar"></span></div>
+                                        <p class=" uk-text-danger uk-text-small  " v-if="updateForm.phone.$invalid">Please enter a valid phone number of 10 digits</p>
+                                    </div>
+                                </div>
+
+
+
+
+
+                                <div class="parsley-row">
+                                    <div class="uk-input-group">
+
+                                        <div class="md-input-wrapper md-input-filled"><label for="wizard_referer">Altenative Phone N<u>o</u> :</label><input type="text" id="altPhone" name="altPhone" class="md-input" data-parsley-type="digits" minlength="10" maxlength="10" pattern='^[0-9]{10}$' v-model="altPhone" v-form-ctrl><span class="md-input-bar"></span></div>
+                                        <p class=" uk-text-danger uk-text-small  " v-if="updateForm.altPhone.$invalid">Please enter a valid phone number of 10 digits</p>
+                                    </div>
+                                </div>
+
+
+                                <div class="parsley-row">
+                                    <div class="uk-input-group">
+
+                                        <div class="md-input-wrapper md-input-filled"><label for="wizard_email">Email :</label><input type="email" id="email" name="email" class="md-input" v-model="email" v-form-ctrl><span class="md-input-bar"></span></div>
+                                        <p class="uk-text-danger uk-text-small " v-if="updateForm.email.$invalid">Please enter a valid email address</p>
+
+                                    </div>
+                                </div>
+
+
+
+                                <div class="parsley-row">
+                                    <div class="uk-input-group">
+
+                                        <div class="md-input-wrapper md-input-filled"><label for="wizard_referer">Emergency Contact N<u>o</u> :</label><input type="text" id="emergency" name="emergency" class="md-input" data-parsley-type="digits" minlength="10" required="required" maxlength="10" pattern='^[0-9]{10}$' v-model="emergency" v-form-ctrl><span class="md-input-bar"></span></div>
+                                        <p class=" uk-text-danger uk-text-small  " v-if="updateForm.emergency.$invalid">Please enter a valid phone number of 10 digits</p>
+                                    </div>
+                                </div>
+
+
+
+
+
+                            </div>
+
+
+                            <div data-uk-grid-margin="" class="uk-grid uk-grid-width-medium-1-4 uk-grid-width-large-1-4">
+
+
+
+
+
+
+                                <div class="parsley-row">
+                                    <div class="uk-input-group">
+
+                                        <label for="">Apply as awaiting result? :</label>
+                                        <div class="md-input-wrapper md-input-filled">
+                                            <select name="awaiting" class="md-input" required="required" v-model="awaiting" v-form-ctrl="" v-select="awaiting">
+
+                                                <option value="">Select</option>
+                                                <option value="True">Yes</option>
+                                                <option value="False">No</option>
+
+
+                                            </select>
+
+                                            <span class="md-input-bar"></span>
+                                        </div>
+
+                                        <p class="uk-text-danger uk-text-small" v-if="updateForm.awaiting.$error.required">Respnse   is required</p>
+                                    </div>
+                                </div>
+
+
+                                <div class="parsley-row">
+                                    <div class="uk-input-group">
+
+                                        <label for="">Nationality :</label>
+                                        <div class="md-input-wrapper md-input-filled">
+                                            <select name="nationality" class="md-input" asp-items="@ViewBag.country" required="required" v-model="nationality" v-form-ctrl="" v-select="nationality">
+                                            </select>
+
+                                            <span class="md-input-bar"></span>
+                                        </div>
+
+                                        <p class="uk-text-danger uk-text-small" v-if="updateForm.nationality.$error.required">nationality  is required</p>
+                                    </div>
+                                </div>
+
+                                <div class="parsley-row">
+                                    <div class="uk-input-group" v-if="nationality=='58'">
+
+                                        <label for="">Hometown Region :</label>
+                                        <div class="md-input-wrapper md-input-filled">
+                                            <select name="region" class="md-input" asp-items="@ViewBag.regions" required="required" v-model="region" v-form-ctrl="" v-select="region">
+                                            </select>
+
+                                            <span class="md-input-bar"></span>
+                                        </div>
+
+                                        <p class="uk-text-danger uk-text-small" v-if="updateForm.region.$error.required">Region  is required</p>
+                                    </div>
+                                </div>
+
+                                <div class="parsley-row" v-if="nationality=='58'">
+                                    <div class="uk-input-group">
+
+                                        <label for="">District :</label>
+                                        <div class="md-input-wrapper md-input-filled">
+                                            <select name="district" class="md-input" asp-items="@ViewBag.districts" required="required" v-model="district" v-form-ctrl="" v-select="district">
+                                            </select>
+
+                                            <span class="md-input-bar"></span>
+                                        </div>
+
+                                        <p class="uk-text-danger uk-text-small" v-if="updateForm.district.$error.required">district  is required</p>
+                                    </div>
+                                </div>
+
+
+
+
+
+
+
+                            </div>
+
+
+
+
+                            <div data-uk-grid-margin="" class="uk-grid uk-grid-width-medium-1-4 uk-grid-width-large-1-4">
+
+
+
+
+
+                                <div class="parsley-row">
+                                    <div class="uk-input-group">
+
+                                        <label for="">Religion :</label>
+                                        <div class="md-input-wrapper md-input-filled">
+                                            <select name="religion" class="md-input" asp-items="@ViewBag.religions" required="required" v-model="religion" v-form-ctrl="" v-select="religion">
+                                            </select>
+
+                                            <span class="md-input-bar"></span>
+                                        </div>
+
+                                        <p class="uk-text-danger uk-text-small" v-if="updateForm.religion.$error.required">religion  is required</p>
+                                    </div>
+                                </div>
+
+                                <div class="parsley-row" v-if="religion=='8'">
+                                    <div class="uk-input-group">
+
+                                        <label for="">Denomination :</label>
+                                        <div class="md-input-wrapper md-input-filled">
+                                            <select name="denomination" class="md-input" asp-items="@ViewBag.denominations" required="required" v-model="denomination" v-form-ctrl="" v-select="denomination">
+                                            </select>
+
+                                            <span class="md-input-bar"></span>
+                                        </div>
+
+                                        <p class="uk-text-danger uk-text-small" v-if="updateForm.denomination.$error.required">denomination  is required</p>
+                                    </div>
+                                </div>
+
+
+                                <div class="parsley-row">
+                                    <div class="uk-input-group">
+
+                                        <label for="">Residential Status :</label>
+                                        <div class="md-input-wrapper md-input-filled">
+                                            <select name="resident" class="md-input" required="required" v-model="resident" v-form-ctrl="" v-select="resident">
+                                                <option value="">Select</option>
+                                                <option value="True">Yes</option>
+                                                <option value="False">No</option>
+
+
+                                            </select>
+
+                                            <span class="md-input-bar"></span>
+                                        </div>
+
+                                        <p class="uk-text-danger uk-text-small" v-if="updateForm.resident.$error.required">Residential Status is required</p>
+                                    </div>
+                                </div>
+
+                                <div class="parsley-row" v-if="resident=='True'">
+                                    <div class="uk-input-group">
+
+                                        <label for="">Hall of Residence :</label>
+                                        <div class="md-input-wrapper md-input-filled">
+                                            <select name="hall" class="md-input" asp-items="@ViewBag.hall" required="required" v-model="hall" v-form-ctrl="" v-select="hall">
+                                            </select>
+
+                                            <span class="md-input-bar"></span>
+                                        </div>
+
+                                        <p class="uk-text-danger uk-text-small" v-if="updateForm.hall.$error.required">Hall  is required</p>
+                                    </div>
+                                </div>
+
+
+
+
+
+                            </div>
+
+                            <div data-uk-grid-margin="" class="uk-grid uk-grid-width-medium-1-4 uk-grid-width-large-1-4">
+
+
+                                <div class="parsley-row">
+                                    <div class="uk-input-group">
+
+                                        <div class="md-input-wrapper md-input-filled"><label for="wizard_referer">Guardian Name :</label><input type="text" id="guardianName" name="guardianName" class="md-input" required="required" v-model="guardianName" v-form-ctrl><span class="md-input-bar"></span></div>
+                                        <p class=" uk-text-danger uk-text-small  " v-if="updateForm.guardianName.$error.required">Please provide your guadian name</p>
+                                    </div>
+                                </div>
+
+                                <div class="parsley-row">
+                                    <div class="uk-input-group">
+
+                                        <div class="md-input-wrapper md-input-filled"><label for="wizard_referer">Guardian Phone N<u>o</u> :</label><input type="text" id="guardianPhone" name="guardianPhone" class="md-input" data-parsley-type="digits" minlength="10" required="required" maxlength="10" pattern='^[0-9]{10}$' v-model="guardianPhone" v-form-ctrl><span class="md-input-bar"></span></div>
+                                        <p class=" uk-text-danger uk-text-small  " v-if="updateForm.guardianPhone.$invalid">Please enter a valid phone number of 10 digits</p>
+                                    </div>
+                                </div>
+
+                                <div class="parsley-row">
+                                    <div class="uk-input-group">
+
+                                        <div class="md-input-wrapper md-input-filled"><label for="wizard_referer">Guardian Occupation :</label><input type="text" id="guardianOccupation" name="guardianOccupation" class="md-input" required="required" v-model="guardianOccupation" v-form-ctrl><span class="md-input-bar"></span></div>
+                                        <p class=" uk-text-danger uk-text-small  " v-if="updateForm.guardianOccupation.$error.required">Please provide your guadian occupation</p>
+                                    </div>
+                                </div>
+                                <div class="parsley-row">
+                                    <div class="uk-input-group">
+
+                                        <div class="md-input-wrapper md-input-filled"><label for="wizard_skype">Guardian Relationship :</label><input type="text" id="guardianRelationship" name="guardianRelationship" v-form-ctrl class="md-input" v-model="guardianRelationship" /><span class="md-input-bar"></span></div>
+
+                                    </div>
+                                </div>
+
+
+
+
+
+                            </div>
+                            <div data-uk-grid-margin="" class="uk-grid uk-grid-width-medium-1-4 uk-grid-width-large-1-4">
+
+
+
+
+
+                                <div class="parsley-row">
+                                    <div class="uk-input-group">
+
+                                        <label for="">Are under Sponsorship? :</label>
+                                        <div class="md-input-wrapper md-input-filled">
+                                            <select name="sponsorship" class="md-input" required="required" v-model="sponsorship" v-form-ctrl="" v-select="sponsorship">
+                                                <option value="">Select</option>
+                                                <option value="True">Yes</option>
+                                                <option value="False">No</option>
+
+
+                                            </select>
+
+                                            <span class="md-input-bar"></span>
+                                        </div>
+
+                                        <p class="uk-text-danger uk-text-small" v-if="updateForm.sponsorship.$error.required">Sponsorship Status is required</p>
+                                    </div>
+                                </div>
+
+
+
+                                <div class="parsley-row" v-if="sponsorship=='True'">
+
+
+
+                                    <div class="uk-input-group">
+
+                                        <div class="md-input-wrapper md-input-filled"><label for="wizard_referer">Sponsorship Company :</label><input type="text" id="sponsorshipName" name="sponsorshipName" class="md-input" required="required" v-model="sponsorshipName" v-form-ctrl><span class="md-input-bar"></span></div>
+                                        <p class=" uk-text-danger uk-text-small  " v-if="updateForm.sponsorshipName.$error.required">Please provide Sponsorship Name</p>
+                                    </div>
+
+
+
+
+
+                                </div>
+
+
+                                <div class="parsley-row" v-if="sponsorship=='True'">
+
+
+
+                                    <div class="uk-input-group" v-if="sponsorship=='True'">
+
+                                        <div class="md-input-wrapper md-input-filled"><label for="wizard_referer">Sponsorship Location :</label><input type="text" id="SponsorShipLocation" name="SponsorShipLocation" class="md-input" required="required" v-model="SponsorShipLocation" v-form-ctrl><span class="md-input-bar"></span></div>
+                                        <p class=" uk-text-danger uk-text-small  " v-if="updateForm.SponsorShipLocation.$error.required">Please provide Sponsorship Location address</p>
+                                    </div>
+
+
+
+                                </div>
+
+
+                                <div class="parsley-row" v-if="sponsorship=='True'">
+                                    <div class="uk-input-group">
+
+                                        <div class="md-input-wrapper md-input-filled"><label for="wizard_referer">Sponsorship Phone N<u>o</u> :</label><input type="text" id="SponsorShipCompanyContact" name="SponsorShipCompanyContact" class="md-input" data-parsley-type="digits" minlength="10" required="required" maxlength="10" pattern='^[0-9]{10}$' v-model="SponsorShipCompanyContact" v-form-ctrl><span class="md-input-bar"></span></div>
+                                        <p class=" uk-text-danger uk-text-small  " v-if="updateForm.SponsorShipCompanyContact.$invalid">Please enter a valid phone number of 10 digits</p>
+                                    </div>
+                                </div>
+
+
+
+
+
+                            </div>
+
+
+
+
+                            <div data-uk-grid-margin="" class="uk-grid uk-grid-width-medium-1-4 uk-grid-width-large-1-4">
+
+
+
+                                <div class="parsley-row">
+                                    <div class="uk-input-group">
+
+                                        <label for="">Are you physically challenged? :</label>
+                                        <div class="md-input-wrapper md-input-filled">
+                                            <select name="disability" class="md-input" required="required" v-model="disability" v-form-ctrl="" v-select="disability">
+                                                <option value="">Select</option>
+                                                <option value="True">Yes</option>
+                                                <option value="False">No</option>
+
+
+                                            </select>
+
+                                            <span class="md-input-bar"></span>
+                                        </div>
+
+                                        <p class="uk-text-danger uk-text-small" v-if="updateForm.disability.$error.required">Disability Status is required</p>
+                                    </div>
+                                </div>
+
+                                <div class="parsley-row" v-if="disability=='True'">
+                                    <div class="uk-input-group">
+
+                                        <label for="">Type of Disability :</label>
+                                        <div class="md-input-wrapper md-input-filled">
+                                            <select name="disabilityType" class="md-input" required="required" v-model="disabilityType" v-form-ctrl="" v-select="disabilityType">
+                                                <option value="">Select</option>
+                                                <option value="Deaf and Dumb">Deaf and Dumb</option>
+                                                <option value="Blind">Blind</option>
+                                                <option value="Other">Other</option>
+
+
+
+                                            </select>
+
+                                            <span class="md-input-bar"></span>
+                                        </div>
+
+                                        <p class="uk-text-danger uk-text-small" v-if="updateForm.disabilityType.$error.required">Disability type  is required</p>
+                                    </div>
+                                </div>
+
+                                <div class="parsley-row">
+                                    <div class="uk-input-group">
+
+                                        <label for="">National ID :</label>
+                                        <div class="md-input-wrapper md-input-filled">
+                                            <select name="NationalityId" class="md-input" required="required" v-model="NationalityId" v-form-ctrl="" v-select="NationalityId">
+                                                <option value="">Select</option>
+                                                <option value="Voters ID">Voters ID</option>
+                                                <option value="Driver's License">Driver's License</option>
+                                                <option value="Ghana Card">Ghana Card</option>
+                                                <option value="Passport">Passport</option>
+
+
+                                            </select>
+
+                                            <span class="md-input-bar"></span>
+                                        </div>
+
+                                        <p class="uk-text-danger uk-text-small" v-if="updateForm.NationalityId.$error.required">NationalityId is required</p>
+                                    </div>
+                                </div>
+
+                                <div class="parsley-row">
+
+
+
+                                    <div class="uk-input-group">
+
+                                        <div class="md-input-wrapper md-input-filled"><label for="wizard_referer">Nationality ID No. :</label><input type="text" id="NationalityName" name="NationalityName" class="md-input" required="required" v-model="NationalityName" v-form-ctrl><span class="md-input-bar"></span></div>
+                                        <p class=" uk-text-danger uk-text-small  " v-if="updateForm.NationalityName.$error.required">Please provide Nationality Name</p>
+                                    </div>
+
+
+
+                                </div>
+
+                            </div>
+
+
+
+
+
+
+
+                        </section>
+
+
+                        <section id="payment_section" role="tabpanel" aria-labelledby="payment section" class="body step-1 " v-bind:class="{'uk-hidden': !in_payment_section} " data-step="1" aria-hidden="true">
+                            <h2 class="heading_a"></h2>
+
+                            <div data-uk-grid-margin="" class="uk-grid uk-grid-width-medium-1-4 uk-grid-width-large-1-4">
+
+
+
+
+                                <div class="parsley-row">
+                                    <div class="uk-input-group">
+
+                                        <label for="">Former School Attended :</label>
+                                        <div class="md-input-wrapper md-input-filled">
+                                            <select name="school" class="md-input" asp-items="@ViewBag.school" v-model="school" v-form-ctrl="" v-select="school">
+                                            </select>
+
+                                            <span class="md-input-bar"></span>
+                                        </div>
+
+
+                                    </div>
+                                </div>
+
+                                <div class="parsley-row">
+                                    <div class="uk-input-group">
+
+                                        <label for="">First Choice :</label>
+                                        <div class="md-input-wrapper md-input-filled">
+                                            <select name="firstChoice" class="md-input" asp-items="@ViewBag.choices" v-model="firstChoice" v-form-ctrl="" v-select="firstChoice">
+                                            </select>
+
+                                            <span class="md-input-bar"></span>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="parsley-row">
+                                    <div class="uk-input-group">
+
+                                        <label for="">Second Choice :</label>
+                                        <div class="md-input-wrapper md-input-filled">
+                                            <select name="secondChoice" class="md-input" asp-items="@ViewBag.choices" v-model="secondChoice" v-form-ctrl="" v-select="secondChoice">
+                                            </select>
+
+                                            <span class="md-input-bar"></span>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="parsley-row">
+                                    <div class="uk-input-group">
+
+                                        <label for="">Third Choice :</label>
+                                        <div class="md-input-wrapper md-input-filled">
+                                            <select name="thirdChoice" class="md-input" asp-items="@ViewBag.choices" v-model="thirdChoice" v-form-ctrl="" v-select="thirdChoice">
+                                            </select>
+
+                                            <span class="md-input-bar"></span>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div data-uk-grid-margin="" class="uk-grid uk-grid-width-medium-1-4 uk-grid-width-large-1-4">
+
+                                <div class="parsley-row">
+                                    <div class="uk-input-group">
+
+                                        <label for="">Programme Studied :</label>
+                                        <div class="md-input-wrapper md-input-filled">
+                                            <select name="programme" class="md-input" asp-items="@ViewBag.programme" v-model="programme" v-form-ctrl="" v-select="programme">
+                                            </select>
+
+                                            <span class="md-input-bar"></span>
+                                        </div>
+
+                                        <p class="uk-text-danger uk-text-small" v-if="updateForm.programme.$error.required">programme  is required</p>
+                                    </div>
+                                </div>
+
+                                <div class="parsley-row">
+                                    <div class="uk-input-group">
+
+                                        <label for="">Apply as Fee Paying? :</label>
+                                        <div class="md-input-wrapper md-input-filled">
+                                            <select name="FeePaying" class="md-input" v-model="FeePaying" v-form-ctrl="" v-select="FeePaying">
+                                                <option value="">Select</option>
+                                                <option value="True">Yes</option>
+                                                <option value="False">No</option>
+
+
+                                            </select>
+
+                                            <span class="md-input-bar"></span>
+                                        </div>
+
+
+                                    </div>
+                                </div>
+
+
+                                <div class="parsley-row">
+                                    <div class="uk-input-group">
+
+                                        <div class="md-input-wrapper md-input-filled"><label for="wizard_skype">Last Year in school :</label><input type="number" id="year" name="year" v-form-ctrl class="md-input" v-model="year" /><span class="md-input-bar"></span></div>
+
+                                    </div>
+                                </div>
+
+                                <div class="parsley-row">
+                                    <div class="uk-input-group">
+
+
+                                        <div class="md-input-wrapper md-input-filled"><label for="wizard_referer">Source of Finance :</label><input type="text" id="finance" name="finance" class="md-input" v-model="finance" v-form-ctrl><span class="md-input-bar"></span></div>
+
+
+                                    </div>
+                                </div>
+
+
+                            </div>
+
+
+
+                            <div data-uk-grid-margin="" class="uk-grid uk-grid-width-medium-1-4 uk-grid-width-large-1-4">
+
+
+
+                                <div class="parsley-row">
+                                    <div class="uk-input-group">
+
+                                        <label for="">Entry Mode :</label>
+                                        <div class="md-input-wrapper md-input-filled">
+                                            <select name="mode" class="md-input" v-model="mode" v-form-ctrl="" v-select="mode">
+                                                <option value="">Select</option>
+                                                <option value="Regular">Regular</option>
+                                                <option value="Distance">Distance</option>
+
+
+                                            </select>
+
+                                            <span class="md-input-bar"></span>
+                                        </div>
+
+
+                                    </div>
+                                </div>
+
+
+
+                                <div class="parsley-row">
+                                    <div class="uk-input-group">
+
+                                        <label for="">First Qualification :</label>
+                                        <div class="md-input-wrapper md-input-filled">
+                                            <select name="FirstQualification" class="md-input" v-model="FirstQualification" v-form-ctrl="" v-select="FirstQualification">
+                                                <option value="">Select</option>
+                                                <option value="WASSSCE">Mr</option>
+                                                <option value="SSCE">Ms</option>
+                                                <option value="DIPLOMA">Mrs</option>
+                                                <option value="TEU/TECHNICAL CERTIFICATES">TEU/TECHNICAL CERTIFICATES</option>
+                                                <option value="NVTI">NVTI</option>
+                                                <option value="NECO">NECO</option>
+                                                <option value="TEC">TEC</option>
+
+
+                                            </select>
+
+                                            <span class="md-input-bar"></span>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+
+
+                                <div class="parsley-row">
+                                    <div class="uk-input-group">
+
+                                        <label for="">Second Qualification :</label>
+                                        <div class="md-input-wrapper md-input-filled">
+                                            <select name="SecondQualification" class="md-input" v-model="SecondQualification" v-form-ctrl="" v-select="SecondQualification">
+                                                <option value="">Select</option>
+                                                <option value="HND">HND</option>
+                                                <option value="BACHELOR">BACHELOR</option>
+                                                <option value="MASTERS">MASTERS</option>
+                                                <option value="PhD">PhD</option>
+                                                <option value="Others">Others</option>
+
+
+
+                                            </select>
+
+                                            <span class="md-input-bar"></span>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+
+
+                            </div>
+
+
+                        </section>
+
+                    </div>
+                    <div class="actions clearfix ">
+                        <ul aria-label="Pagination" role="menu">
+                            <li class="button_previous " aria-disabled="true" v-on:click="go_to_fill_form_section()" v-show="in_payment_section==true">
+                                <a role="menuitem" href="#previous">
+                                    <i class="material-icons"></i> Previous
+                                </a>
+                            </li>
+                            <li class="button_next button" v-on:click="go_to_payment_section()" aria-hidden="false" aria-disabled="false" v-show="updateForm.$valid && in_payment_section==false">
+                                <a role="menuitem" href="#next">
+                                    Next
+                                    <i class="material-icons">
+                                        
+                                    </i>
+                                </a>
+                            </li>
+                            <li class="button_finish " aria-hidden="true" v-show="updateForm.$valid && in_payment_section==true">
+                                <input class="md-btn md-btn-primary uk-margin-small-top" type="submit" name="submit_order" value="Submit" v-on:click="submit_form" />
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </form>
+
+            <div class="uk-modal" id="confirm_modal">
+                <div class="uk-modal-dialog" v-el:confirm_modal>
+                    <div class="uk-modal-header uk-text-large uk-text-success uk-text-center">Confirm Data</div>
+                    Are you certain of all the info
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+
+</div>
+
+
+@section Scripts{
+
+    @*<script>$(document).ready(function () {
+            $("#form").on("submit", function (event) {
+                event.preventDefault();
+                UIkit.modal.alert('Saving data...');
+                $(event.target).unbind("submit").submit();
+
+
+            });
+
+
+
+
+        });</script>*@
+    <script src="~/assets/js/select2.full.min.js"></script>
+    <script>$(document).ready(function () {
+            $('select').select2({ width: "resolve" });
+
+
+        });</script>
+
+
+
+    <script>//code for ensuring vuejs can work with select2 select boxes
+        Vue.directive('select', {
+            twoWay: true,
+            priority: 1000,
+            params: ['options'],
+            bind: function () {
+                var self = this
+                $(this.el)
+                    .select2({
+                        data: this.params.options,
+                        width: "resolve"
+                    })
+                    .on('change', function () {
+                        self.vm.$set(this.name, this.value)
+                        Vue.set(self.vm.$data, this.name, this.value)
+                    })
+            },
+            update: function (newValue, oldValue) {
+                $(this.el).val(newValue).trigger('change')
+            },
+            unbind: function () {
+                $(this.el).off().select2('destroy')
+            }
+        })
+        var vm = new Vue({
+            el: "body",
+            ready: function () {
+            },
+            data: {
+
+                fname: "@(ViewBag.applicant.FirstName)",
+                surname: "@(ViewBag.applicant.LastName)",
+                 gender: "@(ViewBag.applicant.Gender)",
+                title: "@(ViewBag.applicant.Title)",
+                maritalStatus: "@(ViewBag.applicant.MaritalStatus)",
+                Referal: "@(ViewBag.applicant.Referrals)",
+                phone: "@(ViewBag.applicant.Phone)",
+                altPhone: "@(ViewBag.applicant.AltPhone)",
+                awaiting: "@(ViewBag.applicant.Awaiting)",
+                nationality: "@(ViewBag.applicant.Nationality.ID)",
+                region: "@(ViewBag.applicant.Region.Id)",
+                district: "@(ViewBag.applicant.District.ID)",
+                religion: "@(ViewBag.applicant.Religion.Id)",
+                denomination: "@(ViewBag.applicant.Denomination)",
+                resident: "@(ViewBag.applicant.ResidentialStatus)",
+                hall: "@(ViewBag.applicant.Hall.Id)",
+                sponsorship: "@(ViewBag.applicant.SponsorShip)",
+                disability: "@(ViewBag.applicant.Disability)",
+                disabilityType: "@(ViewBag.applicant.DisabilityType)",
+                NationalityName: "@(ViewBag.applicant.NationalIDNo)",
+
+                NationalityId: "@(ViewBag.applicant.NationalIDType)",
+
+                FirstQualification: "@(ViewBag.applicant.FirstQualification)",
+                SecondQualification: "@(ViewBag.applicant.SecondQualification)",
+
+                mode: "@(ViewBag.applicant.EntryMode)",
+                FeePaying: "@(ViewBag.applicant.FeePaying)",
+                email: "@(ViewBag.applicant.Email)",
+
+                emergency: "@(ViewBag.applicant.EmergencyContact)",
+
+                phone: "@(ViewBag.applicant.Phone)",
+                altPhone: "@(ViewBag.applicant.AltPhone)",
+                      hometown: "@(ViewBag.applicant.Hometown)",
+                        address: "@(ViewBag.applicant.Address)",
+                programme: "@(ViewBag.applicant.ProgrammeStudied)",
+
+                thirdChoice: "@(ViewBag.applicant.ThirdChoiceId)",
+
+                secondChoice: "@(ViewBag.applicant.SecondChoiceId)",
+
+                firstChoice: "@(ViewBag.applicant.FirstChoiceId)",
+
+                school: "@(ViewBag.applicant.FormerSchool)",
+                year: "@(ViewBag.applicant.LastYearInSchool)",
+
+                SponsorShipCompanyContact: "@(ViewBag.applicant.SponsorShipCompanyContact)",
+                sponsorshipName: "@(ViewBag.applicant.SponsorShipCompany)",
+
+                SponsorShipLocation: "@(ViewBag.applicant.SponsorShipLocation)",
+
+                guardianName: "@(ViewBag.applicant.GuardianName)",
+                guardianOccupation: "@(ViewBag.applicant.GuardianOccupation)",
+                guardianRelationship: "@(ViewBag.applicant.GuardianRelationship)",
+                guardianPhone: "@(ViewBag.applicant.GuardianPhone)",
+
+      finance: "@(ViewBag.applicant.SourceOfFinance)",
+                options: [
+                ],
+                in_payment_section: false,
+            },
+            methods: {
+                go_to_payment_section: function (event) {
+                    UIkit.modal.confirm(vm.$els.confirm_modal.innerHTML, function () {
+
+                        vm.$data.in_payment_section = true
+                    })
+                },
+                submit_form: function () {
+                    return (function (modal) { modal = UIkit.modal.blockUI("<div class='uk-text-center'>Saving Data...<br/><img class='uk-thumbnail uk-margin-top' src='https://localhost:5001/assets/img/spinners/spinner_success.gif' /></div>"); setTimeout(function () { modal.hide() }, 50000) })();
+                },
+
+                go_to_fill_form_section: function (event) {
+                    vm.$data.in_payment_section = false
+                }
+            }
+        })</script>
+
+}

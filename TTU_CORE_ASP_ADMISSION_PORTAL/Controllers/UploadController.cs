@@ -75,8 +75,11 @@
                                 //image.Save(filePath);
                                 try
                                 {
-                            //IMageService.ExifRotate(image);
+                                  //IMageService.ExifRotate(image);
                                     //image.Save(serverUrl);
+                                    /**
+                                     * Call the image background service from the ttuportal.com/api/image/check to help test
+                                     **/
                                     image.Save(filePath);
                              
 
