@@ -13,9 +13,11 @@
 //    See the License for the specific language governing permissions and
 //    limitations under the License.
 using System;
+using Microsoft.AspNetCore.Mvc;
+
 namespace TTU_CORE_ASP_ADMISSION_PORTAL.Controllers
 {
-    public class WorKExpController
+    public class WorKExpController : Controller
     {
         public WorKExpController()
         {

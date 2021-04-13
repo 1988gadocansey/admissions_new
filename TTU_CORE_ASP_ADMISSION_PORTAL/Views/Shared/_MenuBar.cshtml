@@ -48,13 +48,32 @@
             </a>
         </li>
     }
-    <li title="Mailbox">
-        <a href="#">
-            <span class="menu_icon"><i class="material-icons">account_balance</i></span>
-            <span class="menu_title">Book Accommodation</span>
-        </a>
-    </li>
 
+    @if ((user.Type) == "MTECH" || user.Type == "MTECH")
+    {
+
+        <li title="Forms">
+
+            <a asp-area="" asp-controller="WorkExperience" asp-action="Index">
+
+
+                <span class="menu_icon"><i class="material-icons">note-plus</i></span>
+                <span class="menu_title">Upload Work Experience</span>
+            </a>
+        </li>
+
+    }
+
+
+
+    @*@if ((user.PictureUploaded) == 1)
+            <li title="Mailbox">
+                <a href="#">
+                    <span class="menu_icon"><i class="material-icons">account_balance</i></span>
+                    <span class="menu_title">Book Accommodation</span>
+                </a>
+            </li>
+        }*@
 
 
     <li title="Click to Logout">

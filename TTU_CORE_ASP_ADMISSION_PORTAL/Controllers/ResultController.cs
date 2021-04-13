@@ -132,7 +132,13 @@ using System.Security.Claims;
                 string[] center = HttpContext.Request.Form["items[center]"];
 
                 string[] type = HttpContext.Request.Form["items[type]"];
+            //int[] Core;
+            //int[] CoreAlt;
+           // int[] Electives;
 
+            var Core = new int[2];
+            var CoreAlt = new int[2];
+            var Electives= new int[10];
 
             if (year.Length>= 0 && month.Length >= 0 && grade.Length >= 0 && subject.Length >= 0 && sitting.Length >= 0 && indexno.Length >= 0 && center.Length >= 0 && type.Length >= 0)
             {
@@ -169,15 +175,38 @@ using System.Security.Claims;
                                           Grade = grades
                                       });
 
-
+                           
                             await _dbContext.SaveChangesAsync();
+
+                            if (subjects.Type=="Core")
+                            {
+                                Array.Fill(Core, Convert.ToInt32(grades.Value));
+
+                            }
+                            if (subjects.Type == "CoreAlt")
+                            {
+                                Array.Fill(CoreAlt, Convert.ToInt32(grades.Value));
+
+                            }
+
+                            if (subjects.Type == "Elective")
+                            {
+                                Array.Fill(Electives, Convert.ToInt32(grades.Value));
+
+                            }
+
+
+
+
 
                         }
 
-
+                        var grades_ = _formService.GetTotalAggregate(Core,CoreAlt,Electives);
 
                         TempData["message"] = "Result(s) uploaded successfully!!";
                         TempData["type"] = "success";
+
+                        TempData["grade"] = grades_;
 
                     }
                     else

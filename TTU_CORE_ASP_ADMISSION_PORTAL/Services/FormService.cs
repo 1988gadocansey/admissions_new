@@ -21,8 +21,8 @@
     using Microsoft.EntityFrameworkCore;
         using TTU_CORE_ASP_ADMISSION_PORTAL.Data;
     using TTU_CORE_ASP_ADMISSION_PORTAL.Models;
-
-    namespace TTU_CORE_ASP_ADMISSION_PORTAL.Services
+using Microsoft.AspNetCore.Identity;
+namespace TTU_CORE_ASP_ADMISSION_PORTAL.Services
         {
             public  class FormService
             {
@@ -219,6 +219,61 @@
 
             }
             return passed;
+
+        }
+        public string GradesIssues(int[] Cores, int[] CoreAlt, int[] Electives)
+        {
+            string error;
+            if (Cores.Count() + CoreAlt.Count() + Electives.Count() != 6)
+            {
+                error = "Results not completed.";
+            }
+            else if( Cores.Count()<2)
+            {
+                error = "Minimum of two(2) core subjects not met.";
+            }
+            else if (Electives.Count() <3)
+            {
+                error = "Minimum of three(3) elective subjects not met.";
+            }
+            else if (CoreAlt.Count() < 1)
+            {
+                error = "Social or Science required.";
+            }
+            else
+            {
+                error = "Ok";
+            }
+
+            return error;
+
+
+
+        }
+        public int GetTotalAggregate(int[] Cores, int[] CoreAlt, int[] Electives)
+        {
+            if (GradesIssues(Cores, CoreAlt, Electives)=="Ok")
+            {
+                Array.Sort(CoreAlt);
+
+                Array.Sort(Cores);
+
+                Array.Sort(Electives);
+
+                int[] SliceElect = (int[])Electives.Take(3);
+
+                int[] SliceCoreAlt = (int[])CoreAlt.Take(1);
+
+
+                int grade = Cores.Sum() + SliceElect.Sum() + SliceCoreAlt.Sum();
+
+                return grade;
+
+            }
+            else
+            {
+                return 0;
+            }
 
         }
         private bool ApplicantModelExists(int id)
