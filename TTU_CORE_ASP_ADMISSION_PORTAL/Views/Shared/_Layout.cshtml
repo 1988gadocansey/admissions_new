@@ -25,13 +25,12 @@
 
     <link rel="stylesheet" href="~/assets/css/main.min.css" media="all">
     <!-- <link rel="stylesheet" href="~/assets/css/combined.min.css" media="all"> -->
-
-    <link rel="stylesheet" href="~/assets/plugins/sweet-alert/sweet-alert.min.css" media="all">
+    <!-- themes -->
+    <link rel="stylesheet" href="~/assets/css/themes_combined.min.css" media="all">
     <!-- font awesome -->
     <link rel="stylesheet" href="~/assets/css/select2.min.css" media="all">
     <link rel="stylesheet" href="~/assets/css/dropify.css" media="all">
-    <link rel="stylesheet" href="~/datatables/css/jquery.dataTables.min.css">
-    <link rel="stylesheet" href="~/datatables/css/dataTables.uikit.min.css">
+
 
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
@@ -39,13 +38,12 @@
     <style>
         .md-user-image {
             width: 34px;
-            height:45px;
+            height: 45px;
             border-radius: 50%;
-             
         }
     </style>
 </head>
-<body class=" sidebar_main_open sidebar_main_swipe">
+<body class="disable_transitions sidebar_main_open sidebar_main_swipe">
     <!-- main header -->
     <header id="header_main">
         <div class="header_main_content">
@@ -70,256 +68,187 @@
 
                             @if (User.Identity.IsAuthenticated)
                             {
-                                <li class="user_action_icon"><a>Hello @User.Identity.Name!</a></li>
-                              }
+                            <li class="user_action_icon"><a>Hello @User.Identity.Name!</a></li>
+                        }
 
-                        <li data-uk-dropdown="{mode:'click',pos:'bottom-right'}">
-                            <a href="#" class="user_action_image">
+                            <li data-uk-dropdown="{mode:'click',pos:'bottom-right'}">
+                                <a href="#" class="user_action_image">
 
 
 
-                                @if (User.Identity.IsAuthenticated)
-                                {
-                                    <img src="~/pictures/@(user.FormNo ).jpg"
-                                         onerror="this.onerror = function my()
+                                    @if (User.Identity.IsAuthenticated)
+                                    {
+                                        <img src="~/pictures/@(user.FormNo ).jpg"
+                                             onerror="this.onerror = function my()
     { return this.src = '~/pictures/@(user.FormNo ).jpeg'; };
     this.src = '~/pictures/@(user.FormNo ).JPG';"
-                                         class="md-user-image"
-                                         asp-append-version="true" />
-                                }
+                                             class="md-user-image"
+                                             asp-append-version="true" />
+                                    }
                                 </a>
 
-                            <div class="uk-dropdown uk-dropdown-small">
-                                <ul class="uk-nav js-uk-prevent">
-                                    @*<li><a href="page_user_profile.html">My profile</a></li>
-        <li><a href="page_settings.html">Settings</a></li>*@
+                                <div class="uk-dropdown uk-dropdown-small">
+                                    <ul class="uk-nav js-uk-prevent">
+                                        @*<li><a href="page_user_profile.html">My profile</a></li>
+                                        <li><a href="page_settings.html">Settings</a></li>*@
 
 
-                                    @*<li>  <a class="nav-link text-dark" asp-area="Identity" asp-controller="Account" asp-action="Logout">Sign out</a></li>*@
+                                        @*<li>  <a class="nav-link text-dark" asp-area="Identity" asp-controller="Account" asp-action="Logout">Sign out</a></li>*@
 
-                                    <li><a asp-area="" asp-controller="Upload" asp-action="Index">Profile Picture</a></li>
-                                    <li>
+                                        <li><a asp-area="" asp-controller="Upload" asp-action="Index">Profile Picture</a></li>
+                                        <li>
 
 
-                                        <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/", new { area = "" })"
-                                           onclick="event.preventDefault();
+                                            <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/", new { area = "" })"
+                                               onclick="event.preventDefault();
                                                  document.getElementById('logout-form').submit();">
-                                            Logout
-                                        </a>
+                                                Logout
+                                            </a>
 
-                                        <form id="logout-form" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/", new { area = "" })" method="POST" style="display: none;">
-                                            @Html.AntiForgeryToken()
-                                        </form>
+                                            <form id="logout-form" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/", new { area = "" })" method="POST" style="display: none;">
+                                                @Html.AntiForgeryToken()
+                                            </form>
 
-                                    </li>
+                                        </li>
 
-                                </ul>
-                            </div>
-                        </li>
-                    </ul>
+                                    </ul>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+            <div class="header_main_search_form">
+                <i class="md-icon header_main_search_close material-icons">&#xE5CD;</i>
+                <form class="uk-form">
+                    <input type="text" class="header_main_search_input" />
+                    <button class="header_main_search_btn uk-button-link"><i class="md-icon material-icons">&#xE8B6;</i></button>
+                </form>
+            </div>
+        </header><!-- main header end -->
+        <!-- main sidebar -->
+        <aside id="sidebar_main">
+
+            <div class="sidebar_main_header">
+                <div class="sidebar_logo">
+
+
                 </div>
-            </nav>
-        </div>
-        <div class="header_main_search_form">
-            <i class="md-icon header_main_search_close material-icons">&#xE5CD;</i>
-            <form class="uk-form">
-                <input type="text" class="header_main_search_input" />
-                <button class="header_main_search_btn uk-button-link"><i class="md-icon material-icons">&#xE8B6;</i></button>
-            </form>
-        </div>
-    </header><!-- main header end -->
-    <!-- main sidebar -->
-    <aside id="sidebar_main">
-
-        <div class="sidebar_main_header">
-            <div class="sidebar_logo">
-
 
             </div>
 
+            <div class="menu_section">
+
+                <partial name="_MenuBar" />
+
+            </div>
+        </aside><!-- main sidebar end -->
+
+        <div id="page_content">
+            <div id="page_content_inner">
+
+                @RenderBody()
+
+            </div>
         </div>
 
-        <div class="menu_section">
-
-            <partial name="_MenuBar" />
-
-        </div>
-    </aside><!-- main sidebar end -->
-
-    <div id="page_content">
-        <div id="page_content_inner">
-
-            @RenderBody()
-
-        </div>
-    </div>
 
 
-
-    <!-- google web fonts -->
-    <script>WebFontConfig = {
-            google: {
-                families: [
-                    'Source+Code+Pro:400,700:latin',
-                    'Roboto:400,300,500,700,400italic:latin'
-                ]
-            }
-        };
-        (function () {
-            var wf = document.createElement('script');
-            wf.src = ('https:' == document.location.protocol ? 'https' : 'http') +
-                '://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
-            wf.type = 'text/javascript';
-            wf.async = 'true';
-            var s = document.getElementsByTagName('script')[0];
-            s.parentNode.insertBefore(wf, s);
-        })();</script>
-
-    <script src="~/assets/js/common.min.js"></script>
-    <script src="~/assets/js/dropify.min.js"></script>
-    <script src="~/assets/js/file_input.min.js"></script>
-    <!-- uikit functions -->
-    <script src="~/assets/js/uikit_custom.min.js"></script>
-
-    <!-- altair common functions/helpers -->
-    <script src="~/assets/js/altair_admin_common.min.js"></script>
-
-    <script src="~/assets/js/vue.min.js"></script>
-    <script src="~/assets/js/vue-form.min.js"></script>
-    <script src="~/assets/js/jquery-ui.min.js"></script>
-
-    <script src="~/assets/tableexport/tableExport.js"></script>
-    <script src="~/assets/tableexport/jquery.base64.js"></script>
-
-    <script src="~/assets/tableexport/html2canvas.js"></script>
-
-    <script src="~/assets/tableexport/jspdf/libs/sprintf.js"></script>
-
-    <script src="~/assets/tableexport/jspdf/jspdf.js"></script>
-    <script src="~/assets/tableexport/jspdf/libs/base64.js"></script>
-    <script src="~/datatables/js/jquery.dataTables.min.js"></script>
-
-    <script src="~/datatables/js/dataTables.uikit.min.js"></script>
-    <script src="~/datatables/js/plugins_datatables.min.js"></script>
-    <script src="~/datatables/js/datatables_uikit.min.js"></script>
-
-
-    @await RenderSectionAsync("Scripts", required: false)
-    <script>$(document).ready(function () {
-
-            $(".uk-alert-success").fadeOut(2500);
-            $(".uk-alert-danger").fadeOut(2500);
-
-        });</script>
-    <script>$(function () {
-            // enable hires images
-            altair_helpers.retina_images();
-            // fastClick (touch devices)
-            if (Modernizr.touch) {
-                FastClick.attach(document.body);
-            }
-        });</script>
-
-    <script>$(function () {
-            var $switcher = $('#style_switcher'),
-                $switcher_toggle = $('#style_switcher_toggle'),
-                $theme_switcher = $('#theme_switcher'),
-                $mini_sidebar_toggle = $('#style_sidebar_mini'),
-                $boxed_layout_toggle = $('#style_layout_boxed'),
-                $body = $('body');
-
-
-            $switcher_toggle.click(function (e) {
-                e.preventDefault();
-                $switcher.toggleClass('switcher_active');
-            });
-
-            $theme_switcher.children('li').click(function (e) {
-                e.preventDefault();
-                var $this = $(this),
-                    this_theme = $this.attr('data-app-theme');
-
-                $theme_switcher.children('li').removeClass('active_theme');
-                $(this).addClass('active_theme');
-                $body
-                    .removeClass('app_theme_a app_theme_b app_theme_c app_theme_d app_theme_e app_theme_f app_theme_g')
-                    .addClass(this_theme);
-
-                if (this_theme == '') {
-                    localStorage.removeItem('altair_theme');
-                } else {
-                    localStorage.setItem("altair_theme", this_theme);
+        <!-- google web fonts -->
+        <script>WebFontConfig = {
+                google: {
+                    families: [
+                        'Source+Code+Pro:400,700:latin',
+                        'Roboto:400,300,500,700,400italic:latin'
+                    ]
                 }
+            };
+            (function () {
+                var wf = document.createElement('script');
+                wf.src = ('https:' == document.location.protocol ? 'https' : 'http') +
+                    '://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
+                wf.type = 'text/javascript';
+                wf.async = 'true';
+                var s = document.getElementsByTagName('script')[0];
+                s.parentNode.insertBefore(wf, s);
+            })();</script>
 
-            });
+        <script src="~/assets/js/common.min.js"></script>
 
-            // hide style switcher
-            $document.on('click keyup', function (e) {
-                if ($switcher.hasClass('switcher_active')) {
-                    if (
-                        (!$(e.target).closest($switcher).length)
-                        || (e.keyCode == 27)
-                    ) {
-                        $switcher.removeClass('switcher_active');
-                    }
-                }
-            });
+        <!-- uikit functions -->
+        <script src="~/assets/js/uikit_custom.min.js"></script>
 
-            // get theme from local storage
-            if (localStorage.getItem("altair_theme") !== null) {
-                $theme_switcher.children('li[data-app-theme=' + localStorage.getItem("altair_theme") + ']').click();
-            }
+        <!-- altair common functions/helpers -->
+        <script src="~/assets/js/altair_admin_common.min.js"></script>
+
+        <script src="~/assets/js/chartist.min.js"></script>
+
+        <script src="~/assets/js/jquery.peity.min.js"></script>
+        <script src="~/assets/js/countUp.min.js"></script>
+
+        <script src="~/assets/js/dashboard.min.js"></script>
+
+        <script src="~/assets/js/dropify.min.js"></script>
+        <script src="~/assets/js/file_input.min.js"></script>
+
+        <script src="~/assets/js/vue.min.js"></script>
+        <script src="~/assets/js/vue-form.min.js"></script>
+        <script src="~/assets/js/jquery-ui.min.js"></script>
 
 
-            // toggle mini sidebar
 
-            // change input's state to checked if mini sidebar is active
-            if ((localStorage.getItem("altair_sidebar_mini") !== null && localStorage.getItem("altair_sidebar_mini") == '1') || $body.hasClass('sidebar_mini')) {
-                $mini_sidebar_toggle.iCheck('check');
-            }
 
-            $mini_sidebar_toggle
-                .on('ifChecked', function (event) {
-                    $switcher.removeClass('switcher_active');
-                    localStorage.setItem("altair_sidebar_mini", '1');
-                    location.reload(true);
-                })
-                .on('ifUnchecked', function (event) {
-                    $switcher.removeClass('switcher_active');
-                    localStorage.removeItem('altair_sidebar_mini');
-                    location.reload(true);
+
+
+        @await RenderSectionAsync("Scripts", required: false)
+        <script>$(document).ready(function () {
+
+                $(".uk-alert-success").fadeOut(2500);
+                $(".uk-alert-danger").fadeOut(2500);
+
+            });</script>
+
+        
+
+
+
+
+        <script>$(document).ready(function () {
+                // console.log($('select[name="status"]'));
+                $('select[name="status"]').on('change', function (e) {
+                    var newval = $(this).val();
+                    var status_id = $(this).attr("status_id");
+                    var name = $(this).attr("name");
+                    var phone = $(this).attr("phone");
+                    UIkit.modal.confirm('Update status of order?', function () {
+                        $.post("updatestatus/" + status_id, { "newval": newval }, function (data, status) {
+                            if (data == "success") {
+
+                                UIkit.notify({
+                                    message: 'Status Updated!',
+                                    status: 'success',
+                                    timeout: 8000,
+                                    pos: 'top-center'
+                                });
+
+                            }
+                            else {
+                                UIkit.notify('My message');
+                                UIkit.notify({
+                                    message: 'Error updating status of order!',
+                                    status: 'danger',
+                                    timeout: 10000,
+                                    pos: 'top-center'
+                                });
+
+                            }
+                        });
+                    });
                 });
-
-
-            // toggle boxed layout
-
-            // change input's state to checked if mini sidebar is active
-            if ((localStorage.getItem("altair_layout") !== null && localStorage.getItem("altair_layout") == 'boxed') || $body.hasClass('boxed_layout')) {
-                $boxed_layout_toggle.iCheck('check');
-                $body.addClass('boxed_layout');
-                $(window).resize();
-            }
-
-            // toggle mini sidebar
-            $boxed_layout_toggle
-                .on('ifChecked', function (event) {
-                    $switcher.removeClass('switcher_active');
-                    localStorage.setItem("altair_layout", 'boxed');
-                    location.reload(true);
-                })
-                .on('ifUnchecked', function (event) {
-                    $switcher.removeClass('switcher_active');
-                    localStorage.removeItem('altair_layout');
-                    location.reload(true);
-                });
-
-
-        });</script>
+            });</script>
 
 
 
 
-
-
-</body>
+    </body>
 </html>

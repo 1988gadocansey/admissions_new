@@ -13,7 +13,8 @@
     //    See the License for the specific language governing permissions and
     //    limitations under the License.
     using System;
-    using System.Security.Claims;
+using System.Linq;
+using System.Security.Claims;
     using System.Threading.Tasks;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Identity;
@@ -71,6 +72,7 @@ using Microsoft.Extensions.Logging;
                  .Include(h => h.Hall)
                  .Include(rel => rel.Religion)
                   .Include(s => s.School)
+                   .Include(r => r.ResultUploads)
                   .Include(d => d.District)
 
 
@@ -79,7 +81,12 @@ using Microsoft.Extensions.Logging;
             //Console.WriteLine(applicant.Region.Name);
             ViewData["applicant"] = applicant;
 
-            
+            var results =  _dbContext.ResultUploadModel.Include(g => g.Grade)
+               .Include(s => s.Subject).Where(r => r.ApplicantModelID == applicant.ID).OrderBy(s => s.Year);
+
+
+
+            ViewData["results"] = results;
 
             return View();
 

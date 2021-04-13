@@ -10,15 +10,15 @@ using TTU_CORE_ASP_ADMISSION_PORTAL.Data;
 namespace TTU_CORE_ASP_ADMISSION_PORTAL.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210403190555_gadh")]
-    partial class gadh
+    [Migration("20210413000148_resultsEdit")]
+    partial class resultsEdit
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("Relational:MaxIdentifierLength", 63)
-                .HasAnnotation("ProductVersion", "5.0.4")
+                .HasAnnotation("ProductVersion", "5.0.5")
                 .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
             modelBuilder.Entity("ApplicantModelProgrammeModel", b =>
@@ -891,7 +891,7 @@ namespace TTU_CORE_ASP_ADMISSION_PORTAL.Data.Migrations
                     b.Property<int>("Applicant")
                         .HasColumnType("integer");
 
-                    b.Property<int?>("ApplicantModelID")
+                    b.Property<int>("ApplicantModelID")
                         .HasColumnType("integer");
 
                     b.Property<string>("Center")
@@ -900,13 +900,13 @@ namespace TTU_CORE_ASP_ADMISSION_PORTAL.Data.Migrations
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("timestamp without time zone");
 
-                    b.Property<int>("ExamType")
-                        .HasColumnType("integer");
+                    b.Property<string>("ExamType")
+                        .HasColumnType("text");
 
                     b.Property<string>("Form")
                         .HasColumnType("text");
 
-                    b.Property<int>("Grade")
+                    b.Property<int?>("GradeId")
                         .HasColumnType("integer");
 
                     b.Property<int>("GradeOld")
@@ -930,7 +930,7 @@ namespace TTU_CORE_ASP_ADMISSION_PORTAL.Data.Migrations
                     b.Property<string>("Sitting")
                         .HasColumnType("text");
 
-                    b.Property<int>("Subject")
+                    b.Property<int?>("SubjectId")
                         .HasColumnType("integer");
 
                     b.Property<DateTime>("UpdatedOn")
@@ -942,6 +942,10 @@ namespace TTU_CORE_ASP_ADMISSION_PORTAL.Data.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("ApplicantModelID");
+
+                    b.HasIndex("GradeId");
+
+                    b.HasIndex("SubjectId");
 
                     b.ToTable("ResultUploadModel");
                 });
@@ -1222,7 +1226,21 @@ namespace TTU_CORE_ASP_ADMISSION_PORTAL.Data.Migrations
                 {
                     b.HasOne("TTU_CORE_ASP_ADMISSION_PORTAL.Models.ApplicantModel", null)
                         .WithMany("ResultUploads")
-                        .HasForeignKey("ApplicantModelID");
+                        .HasForeignKey("ApplicantModelID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("TTU_CORE_ASP_ADMISSION_PORTAL.Models.GradeModel", "Grade")
+                        .WithMany()
+                        .HasForeignKey("GradeId");
+
+                    b.HasOne("TTU_CORE_ASP_ADMISSION_PORTAL.Models.SubjectModel", "Subject")
+                        .WithMany()
+                        .HasForeignKey("SubjectId");
+
+                    b.Navigation("Grade");
+
+                    b.Navigation("Subject");
                 });
 
             modelBuilder.Entity("TTU_CORE_ASP_ADMISSION_PORTAL.Models.SMSModel", b =>

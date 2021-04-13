@@ -1,7 +1,11 @@
 ﻿    <!--
     Designed by Gad Ocansey <gadocansey@gmail.com> +233243348522
     -->
-    @{ Layout = null; }
+    @{ Layout = null;
+
+        string[] forms = { "HND", "MATURE", "DIPLOMA", "CERTIFICATE","DEGREE" };
+
+        }
     <!DOCTYPE html>
     <html lang="en">
     <head>
@@ -17,6 +21,14 @@
 
      
         <style type="text/css">
+
+
+
+
+
+
+
+
             html, body, #page3, #page1, #page2 {
                 float: none;
                 background: none
@@ -61,6 +73,9 @@
             table {
                 background: none;
             }
+
+
+
         </style>
     </head>
 
@@ -69,7 +84,7 @@
          
             <div class="ui container">
              
-
+                
                 <div class="ui two column stackable grid">
 
                     <div class="right aligned column" style="margin-left: 590px">
@@ -154,7 +169,7 @@
 
                                             </tr>
 
-                         
+
 
 
 
@@ -173,9 +188,9 @@
 
                                         </div>
                                     </td>
-                                    
+
                                 </tr>
-                            
+
                                 <tr>
                                     <td>
                                         <table>
@@ -219,7 +234,7 @@
                                                 <td class="uppercase" style=""><strong>Phone No:</strong></td>
                                                 <td class="capitalize" style="text-transform:capitalize">@(ViewBag.applicant.Phone) </td>
 
-                                                </tr>
+                                            </tr>
                                             <tr>
                                                 <td class="uppercase" style=""><strong>Alt Phone:</strong></td>
                                                 <td class="capitalize" style="text-transform:capitalize">@(ViewBag.applicant.AltPhone) </td>
@@ -237,52 +252,52 @@
                                                 <td class="capitalize" style="text-transform:capitalize">@(ViewBag.applicant.EmergencyContact) </td>
                                             </tr>
                                             <tr>
-                                           
+
                                                 <td class="uppercase" style=""><strong>Nationality:</strong></td>
                                                 <td class="capitalize" style="text-transform:capitalize">@(ViewBag.applicant.Nationality.Name)</td>
 
                                             </tr>
-</tr>
-
-                                        </table>
-                                    </td>
-
-
-
-                                 </tr>
-
-                                <tr>
-                                    <td>
-                                        <table>
-                                            <tr>
-                                                <td class="uppercase" style=""><strong>Guardian Name:</strong></td>
-                                                <td class="capitalize"  style="text-transform:capitalize">@(ViewBag.applicant.GuardianName)</td>
-
-                                            </tr>
-                                            <tr>
-                                                <td class="uppercase" style=""><strong>Guardian Relationship:</strong></td>
-                                                <td class="capitalize"  style="text-transform:capitalize">@(ViewBag.applicant.GuardianRelationship)</td>
-
-                                            </tr>
-
-                                        </table>
-                                    </td>
-                                    <td>
-                                        <table>
-                                            <tr>
-                                                <td class="uppercase" style=""><strong>Guardian Phone:</strong></td>
-                                                <td class="capitalize"  style="text-transform:capitalize"> @(ViewBag.applicant.GuardianPhone) </td>
-
-                                            </tr>
-                                            <tr>
-                                                <td class="uppercase" style=""><strong>Guardian Occupation:</strong></td>
-                                                <td class="capitalize"  style="text-transform:capitalize">@(ViewBag.applicant.GuardianOccupation)</td>
-
-                                            </tr>
-
-                                        </table>
-                                    </td>
                                 </tr>
+
+                            </table>
+                            </td>
+
+
+
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <table>
+                                        <tr>
+                                            <td class="uppercase" style=""><strong>Guardian Name:</strong></td>
+                                            <td class="capitalize" style="text-transform:capitalize">@(ViewBag.applicant.GuardianName)</td>
+
+                                        </tr>
+                                        <tr>
+                                            <td class="uppercase" style=""><strong>Guardian Relationship:</strong></td>
+                                            <td class="capitalize" style="text-transform:capitalize">@(ViewBag.applicant.GuardianRelationship)</td>
+
+                                        </tr>
+
+                                    </table>
+                                </td>
+                                <td>
+                                    <table>
+                                        <tr>
+                                            <td class="uppercase" style=""><strong>Guardian Phone:</strong></td>
+                                            <td class="capitalize" style="text-transform:capitalize"> @(ViewBag.applicant.GuardianPhone) </td>
+
+                                        </tr>
+                                        <tr>
+                                            <td class="uppercase" style=""><strong>Guardian Occupation:</strong></td>
+                                            <td class="capitalize" style="text-transform:capitalize">@(ViewBag.applicant.GuardianOccupation)</td>
+
+                                        </tr>
+
+                                    </table>
+                                </td>
+                            </tr>
                             </table>
 
 
@@ -316,7 +331,7 @@
 
                                         </table>
                                     </td>
-                                    
+
 
                                     <td>
                                         <table>
@@ -420,8 +435,58 @@
                             </table>
 
 
-                        </div>
-                        <div id="page3">
+                        </div> 
+                        @if (Array.Find(forms, element => element == ViewBag.applicant.ApplicationUser.Type)!=null)
+                        {
+                    <div id="page3">
+
+                        <p class="ui yellow table"><h4 style="text-transform: uppercase">Exams Results</h4></p>
+
+                        <table class='ui yellow table'>
+                            <thead>
+                                <tr>
+                                    <th data-field="id">NO</th>
+                                    <th data-field="price">INDEXNO</th>
+                                    <th data-field="name">SUBJECT</th>
+                                    <th data-field="price">GRADE</th>
+
+                                    <th data-field="price">VALUE</th>
+                                    <th data-field="price">EXAM TYPE</th>
+                                    <th data-field="price">SITTING</th>
+                                    <th data-field="price">MONTH OF EXAM</th>
+                                    <th data-field="price">YEAR OF EXAM</th>
+                                    <th data-field="price">CENTER</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                @foreach( var result in ViewBag.results) {
+                                    <tr>
+                                        <td>@result.Id</td>
+                                        <td> @result.IndexNo</td>
+                                        <td> @System.Globalization.CultureInfo.CurrentCulture.TextInfo.ToTitleCase(@result.Subject.Name)</td>
+                                        <td> @result.Grade.Name</td>
+                                        <td>  @result.Grade.Value</td>
+                                        <td>  @System.Globalization.CultureInfo.CurrentCulture.TextInfo.ToTitleCase(@result.ExamType)</td>
+                                        <td> @result.Sitting</td>
+                                        <td>  @System.Globalization.CultureInfo.CurrentCulture.TextInfo.ToTitleCase(@result.Month)</td>
+                                        <td> @result.Year</td>
+
+
+                                        <td>  @System.Globalization.CultureInfo.CurrentCulture.TextInfo.ToTitleCase(@result.Center)</td>
+
+
+                                    </tr>
+                                }
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                        }
+                        <div id="page4">
                             <p><h4>CORROBORATIVE DECLARATION</h4></p>
 
                             <p>(Please read the instructions carefully before you endorse this form)</p>
@@ -496,7 +561,7 @@
 
 
 
-                </div>
+                    </div>
 
 
             </div>

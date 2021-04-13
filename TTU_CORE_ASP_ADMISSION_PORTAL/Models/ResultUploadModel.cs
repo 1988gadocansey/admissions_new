@@ -23,9 +23,9 @@ namespace TTU_CORE_ASP_ADMISSION_PORTAL.Models
         [Key]
         public int Id { set; get; }
         public int Applicant { set; get; }
-        public int Subject { set; get; }
-        public int ExamType { set; get; }
-        public int Grade { set; get; }
+        //public int Subject { set; get; }
+        public string ExamType { set; get; }
+        //public int Grade { set; get; }
         public int GradeOld { set; get; }
         public string GradeValueOld { set; get; }
         public string IndexNo { set; get; }
@@ -37,6 +37,11 @@ namespace TTU_CORE_ASP_ADMISSION_PORTAL.Models
         public string OldSubject { set; get; }
         public string InstitutionName { set; get; }
         public int ApplicantModelID { set; get; }
+
+        public virtual SubjectModel Subject { get; set; }
+
+        public virtual GradeModel Grade  { get; set; }
+
 
         public ResultUploadModel()
         {

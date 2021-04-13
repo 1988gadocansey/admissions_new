@@ -134,7 +134,7 @@
         }
         public object GetExamTypes()
         {
-            return new SelectList(_dbContext.ExamModel, "Id", "Name");
+            return new SelectList(_dbContext.ExamModel, "Name", "Name");
         }
 
         public object GetSubjects()
@@ -220,6 +220,10 @@
             }
             return passed;
 
+        }
+        private bool ApplicantModelExists(int id)
+        {
+            return _dbContext.ApplicantModel.Any(e => e.ID == id);
         }
 
     }

@@ -7,6 +7,35 @@ a.navbar-brand {
   word-break: break-all;
 }
 
+@media print {
+    table {
+        float: none !important;
+    }
+
+    div {
+        float: none !important;
+    }
+
+    #page1 {
+        page-break-inside: avoid;
+        page-break-before: always;
+    }
+
+    #page2 {
+        page-break-inside: avoid;
+        page-break-before: always;
+    }
+
+    #page3 {
+        page-break-inside: avoid;
+        page-break-before: always;
+    }
+}
+
+@page {
+    size: A4;
+}
+
 /* Provide sufficient contrast against white background */
 a {
   color: #0366d6;
