@@ -72,8 +72,8 @@ namespace TTU_CORE_ASP_ADMISSION_PORTAL
                 options.User.RequireUniqueEmail = false;
             });
 
-        
 
+            services.AddScoped<IHelper, HelperService>();
             services.ConfigureApplicationCookie(options =>
             {
                 // Cookie settings

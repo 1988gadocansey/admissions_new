@@ -253,8 +253,8 @@
 
                             var applicant = await _dbContext.Users.FindAsync(userId);
 
-                            user.Started = 1;
-                               if( HttpContext.Request.Form["thirdChoice"] != "")
+                            applicant.Started = 1;
+                               if( user.Type=="MTECH" || user.Type == "TOPUP")
                                 {
                                    user.FormCompleted = 1;
                                 }
@@ -283,7 +283,7 @@
 
                                 applicantModel.ApplicationUser = user;
                                 applicantModel.ApplicationUserId = user.Id;
-
+                                
                                 applicantModel.EntryMode = HttpContext.Request.Form["mode"];
                                 applicantModel.PreviousName = HttpContext.Request.Form["previousName"];
                                applicantModel.MiddleName = HttpContext.Request.Form["othernames"];

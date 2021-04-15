@@ -29,90 +29,97 @@
                 <span class="menu_title">Forms</span>
             </a>
         </li>
-        <li title="Forms">
+        @if ((user.Started) == 1)
+        {
+            <li title="Forms">
 
-            <a asp-area="" asp-controller="Result" asp-action="Index">
-
-
-                <span class="menu_icon"><i class="material-icons">upload</i></span>
-                <span class="menu_title">Upload Results</span>
-            </a>
-        </li>
-        <li title="Forms">
-
-            <a asp-area="" asp-controller="Preview" asp-action="Index">
+                <a asp-area="" asp-controller="Result" asp-action="Index">
 
 
-                <span class="menu_icon"><i class="material-icons">account_box</i></span>
-                <span class="menu_title">Preview Form</span>
-            </a>
-        </li>
-    }
-
-    @if ((user.Type) == "MTECH" || user.Type == "MTECH")
-    {
-
-        <li title="Forms">
-
-            <a asp-area="" asp-controller="WorkExperience" asp-action="Index">
-
-
-                <span class="menu_icon"><i class="material-icons">note-plus</i></span>
-                <span class="menu_title">Upload Work Experience</span>
-            </a>
-        </li>
-
-    }
-
-
-
-    @*@if ((user.PictureUploaded) == 1)
-            <li title="Mailbox">
-                <a href="#">
-                    <span class="menu_icon"><i class="material-icons">account_balance</i></span>
-                    <span class="menu_title">Book Accommodation</span>
+                    <span class="menu_icon"><i class="material-icons">upload</i></span>
+                    <span class="menu_title">Upload Results</span>
                 </a>
             </li>
-        }*@
+        }
+            @if ((user.FormCompleted) == 1)
+            {
+
+                <li title="Forms">
+
+                    <a asp-area="" asp-controller="Preview" asp-action="Index">
 
 
-    <li title="Click to Logout">
+                        <span class="menu_icon"><i class="material-icons">account_box</i></span>
+                        <span class="menu_title">Preview Form</span>
+                    </a>
+                </li>
+            }
+        }
+
+        @if ((user.Type) == "MTECH" || user.Type == "MTECH")
+        {
+
+            <li title="Forms">
+
+                <a asp-area="" asp-controller="WorkExperience" asp-action="Index">
 
 
-        <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/", new { area = "" })"
-           onclick="event.preventDefault();
+                    <span class="menu_icon"><i class="material-icons">note-plus</i></span>
+                    <span class="menu_title">Upload Work Experience</span>
+                </a>
+            </li>
+
+        }
+
+
+
+        @*@if ((user.PictureUploaded) == 1)
+                <li title="Mailbox">
+                    <a href="#">
+                        <span class="menu_icon"><i class="material-icons">account_balance</i></span>
+                        <span class="menu_title">Book Accommodation</span>
+                    </a>
+                </li>
+            }*@
+
+
+        <li title="Click to Logout">
+
+
+            <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/", new { area = "" })"
+               onclick="event.preventDefault();
                                                  document.getElementById('logout-form').submit();">
 
 
-            <span class="menu_icon"><i class="material-icons">logout</i></span>
-            <span class="menu_title">Logout</span>
+                <span class="menu_icon"><i class="material-icons">logout</i></span>
+                <span class="menu_title">Logout</span>
 
-        </a>
-
-        <form id="logout-form" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/", new { area = "" })" method="POST" style="display: none;">
-        </form>
-
-    </li>
-
-
-
-    @*<li>
-            <a href="index.html#">
-                <span class="menu_icon"><i class="material-icons">&#xE8C0;</i></span>
-                <span class="menu_title">Settings</span>
             </a>
-            <ul>
-                <li><a href="plugins_calendar.html">Calendar</a></li>
-                <li><a href="plugins_charts.html">Charts</a></li>
-                <li><a href="plugins_code_editor.html">Code Editor</a></li>
-                <li><a href="plugins_crud_table.html">CRUD Table</a></li>
-                <li><a href="plugins_datatables.html">Datatables</a></li>
-                <li><a href="plugins_diff.html">Diff View</a></li>
-                <li><a href="plugins_gantt_chart.html">Gantt Chart</a></li>
-                <li><a href="plugins_google_maps.html">Google Maps</a></li>
-                <li><a href="plugins_tablesorter.html">Tablesorter</a></li>
-                <li><a href="plugins_vector_maps.html">Vector Maps</a></li>
-            </ul>
-        </li>*@
 
-</ul>
+            <form id="logout-form" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/", new { area = "" })" method="POST" style="display: none;">
+            </form>
+
+        </li>
+
+
+
+        @*<li>
+                <a href="index.html#">
+                    <span class="menu_icon"><i class="material-icons">&#xE8C0;</i></span>
+                    <span class="menu_title">Settings</span>
+                </a>
+                <ul>
+                    <li><a href="plugins_calendar.html">Calendar</a></li>
+                    <li><a href="plugins_charts.html">Charts</a></li>
+                    <li><a href="plugins_code_editor.html">Code Editor</a></li>
+                    <li><a href="plugins_crud_table.html">CRUD Table</a></li>
+                    <li><a href="plugins_datatables.html">Datatables</a></li>
+                    <li><a href="plugins_diff.html">Diff View</a></li>
+                    <li><a href="plugins_gantt_chart.html">Gantt Chart</a></li>
+                    <li><a href="plugins_google_maps.html">Google Maps</a></li>
+                    <li><a href="plugins_tablesorter.html">Tablesorter</a></li>
+                    <li><a href="plugins_vector_maps.html">Vector Maps</a></li>
+                </ul>
+            </li>*@
+
+    </ul>

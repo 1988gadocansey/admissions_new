@@ -60,6 +60,7 @@ namespace TTU_CORE_ASP_ADMISSION_PORTAL.Data
 
         public DbSet<TTU_CORE_ASP_ADMISSION_PORTAL.Models.WorkingExperienceModel> WorkingExperienceModel { get; set; }
 
+        public DbSet<TTU_CORE_ASP_ADMISSION_PORTAL.Models.ApplicantIssueModel> ApplicantIssueModel { get; set; }
 
         public override int SaveChanges(bool acceptAllChangesOnSuccess)
         {

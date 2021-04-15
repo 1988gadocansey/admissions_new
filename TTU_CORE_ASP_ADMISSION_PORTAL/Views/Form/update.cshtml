@@ -841,9 +841,10 @@ else
                                         <div class="md-input-wrapper md-input-filled">
                                             <select name="FirstQualification" class="md-input" v-model="FirstQualification" v-form-ctrl="" v-select="FirstQualification">
                                                 <option value="">Select</option>
-                                                <option value="WASSSCE">Mr</option>
-                                                <option value="SSCE">Ms</option>
-                                                <option value="DIPLOMA">Mrs</option>
+                                                <option value="WASSSCE">WASSSCE</option>
+                                                <option value="SSCE">SSCE</option>
+                                                <option value="CERTIFICATE">CERTIFICATE</option>
+                                                <option value="DIPLOMA">DIPLOMA</option>
                                                 <option value="TEU/TECHNICAL CERTIFICATES">TEU/TECHNICAL CERTIFICATES</option>
                                                 <option value="NVTI">NVTI</option>
                                                 <option value="NECO">NECO</option>
@@ -867,6 +868,7 @@ else
                                         <div class="md-input-wrapper md-input-filled">
                                             <select name="SecondQualification" class="md-input" v-model="SecondQualification" v-form-ctrl="" v-select="SecondQualification">
                                                 <option value="">Select</option>
+                                                 
                                                 <option value="HND">HND</option>
                                                 <option value="BACHELOR">BACHELOR</option>
                                                 <option value="MASTERS">MASTERS</option>
@@ -986,6 +988,8 @@ else
 
                 fname: "@(ViewBag.applicant.FirstName)",
                 surname: "@(ViewBag.applicant.LastName)",
+                previousName: "@(ViewBag.applicant.PreviousName)",
+                      othernames: "@(ViewBag.applicant.MiddleName)",
                  gender: "@(ViewBag.applicant.Gender)",
                 title: "@(ViewBag.applicant.Title)",
                 maritalStatus: "@(ViewBag.applicant.MaritalStatus)",
@@ -1004,7 +1008,7 @@ else
                 disability: "@(ViewBag.applicant.Disability)",
                 disabilityType: "@(ViewBag.applicant.DisabilityType)",
                 NationalityName: "@(ViewBag.applicant.NationalIDNo)",
-
+                postGPRS:"@(ViewBag.applicant.PostGPRS)",
                 NationalityId: "@(ViewBag.applicant.NationalIDType)",
 
                 FirstQualification: "@(ViewBag.applicant.FirstQualification)",

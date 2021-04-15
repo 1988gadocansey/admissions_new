@@ -149,6 +149,8 @@ namespace TTU_CORE_ASP_ADMISSION_PORTAL.Models
 
         public virtual ICollection<SMSModel> Sms { get; set; }
 
+        public virtual ICollection<ApplicantIssueModel> ApplicantIssueModel { get; set; }
+
         public bool? FeePaying { get; set; }
         public bool? ReportedInSchool { get; set; }
         public decimal FeesPaid { get; set; }

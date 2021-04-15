@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using TTU_CORE_ASP_ADMISSION_PORTAL.Data;
@@ -9,9 +10,10 @@ using TTU_CORE_ASP_ADMISSION_PORTAL.Data;
 namespace TTU_CORE_ASP_ADMISSION_PORTAL.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210414133757_userDdata")]
+    partial class userDdata
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -207,47 +209,6 @@ namespace TTU_CORE_ASP_ADMISSION_PORTAL.Data.Migrations
                     b.HasIndex("ApplicantModelID");
 
                     b.ToTable("AcademicExperieceModel");
-                });
-
-            modelBuilder.Entity("TTU_CORE_ASP_ADMISSION_PORTAL.Models.ApplicantIssueModel", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
-
-                    b.Property<bool>("Age")
-                        .HasColumnType("boolean");
-
-                    b.Property<int>("ApplicantModelID")
-                        .HasColumnType("integer");
-
-                    b.Property<DateTime>("CreatedOn")
-                        .HasColumnType("timestamp without time zone");
-
-                    b.Property<bool>("FormCompletion")
-                        .HasColumnType("boolean");
-
-                    b.Property<string>("IssuesOne")
-                        .HasColumnType("text");
-
-                    b.Property<bool>("Picture")
-                        .HasColumnType("boolean");
-
-                    b.Property<bool>("Qualification")
-                        .HasColumnType("boolean");
-
-                    b.Property<bool>("Results")
-                        .HasColumnType("boolean");
-
-                    b.Property<DateTime>("UpdatedOn")
-                        .HasColumnType("timestamp without time zone");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ApplicantModelID");
-
-                    b.ToTable("ApplicantIssueModel");
                 });
 
             modelBuilder.Entity("TTU_CORE_ASP_ADMISSION_PORTAL.Models.ApplicantModel", b =>
@@ -1198,15 +1159,6 @@ namespace TTU_CORE_ASP_ADMISSION_PORTAL.Data.Migrations
                         .HasForeignKey("ApplicantModelID");
                 });
 
-            modelBuilder.Entity("TTU_CORE_ASP_ADMISSION_PORTAL.Models.ApplicantIssueModel", b =>
-                {
-                    b.HasOne("TTU_CORE_ASP_ADMISSION_PORTAL.Models.ApplicantModel", null)
-                        .WithMany("ApplicantIssueModel")
-                        .HasForeignKey("ApplicantModelID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("TTU_CORE_ASP_ADMISSION_PORTAL.Models.ApplicantModel", b =>
                 {
                     b.HasOne("TTU_CORE_ASP_ADMISSION_PORTAL.Models.ApplicationUser", "ApplicationUser")
@@ -1314,8 +1266,6 @@ namespace TTU_CORE_ASP_ADMISSION_PORTAL.Data.Migrations
             modelBuilder.Entity("TTU_CORE_ASP_ADMISSION_PORTAL.Models.ApplicantModel", b =>
                 {
                     b.Navigation("AcademicExperience");
-
-                    b.Navigation("ApplicantIssueModel");
 
                     b.Navigation("DocumentUpload");
 

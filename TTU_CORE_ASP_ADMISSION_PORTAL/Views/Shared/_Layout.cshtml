@@ -79,10 +79,10 @@
 
                                     @if (User.Identity.IsAuthenticated)
                                     {
-                                        <img src="~/pictures/@(user.FormNo ).jpg"
+                                        <img src="https://photos.ttuportal.com/public/albums/thumbnails/@(user.FormNo).jpg"
                                              onerror="this.onerror = function my()
-    { return this.src = '~/pictures/@(user.FormNo ).jpeg'; };
-    this.src = '~/pictures/@(user.FormNo ).JPG';"
+    { return this.src = 'https://photos.ttuportal.com/public/albums/thumbnails/@(user.FormNo).jpeg'; };
+    this.src = 'https://photos.ttuportal.com/public/albums/thumbnails/@(user.FormNo).JPG';"
                                              class="md-user-image"
                                              asp-append-version="true" />
                                     }

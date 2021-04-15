@@ -37,6 +37,8 @@ namespace TTU_CORE_ASP_ADMISSION_PORTAL.Models
         public int PictureUploaded { set; get; }
         public int Finalized { set; get; }
         public string Year { get; set; }
+        public bool ResultUploaded { get; set; }
+        public bool Admitted { get; set; }
         public string Pin { get; set; }
         public DateTimeOffset LastLogin { set; get; }
         //public byte[] ProfilePicture { get; set; }

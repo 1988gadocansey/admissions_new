@@ -6,6 +6,7 @@
 @{
     ViewBag.Title = "Dashboard";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    string[] forms = { "HND", "MATURE", "DIPLOMA", "CERTIFICATE", "DEGREE" };
 }
 
 @{ var user = await UserManager.GetUserAsync(User); }
@@ -16,8 +17,51 @@
         <div class="md-card">
             <div class="md-card-content">
                 <div class="uk-float-right uk-margin-top uk-margin-small-right"><span class="peity_sale peity_data">5,3,9,6,5,9,7,3,5,2</span></div>
-                <span class="uk-text-muted uk-text-small">Last Login</span>
-                <h4 class="uk-margin-remove"><span class="countUpMe" style="text-transform:capitalize">  @(user.LastLogin.Humanize())</span></h4>
+
+                @if (Array.Find(forms, element => element == user.Type) != null)
+                {
+
+
+                    <span class="uk-text-muted uk-text-small">Result Uploaded</span>
+                    <h4 class="uk-margin-remove">
+                        <span class="countUpMe" style="text-transform:capitalize">
+
+
+
+                            @if (user.ResultUploaded == false)
+                            {
+                                <span> No</span>
+                            }
+                            else
+                            {
+                                <span> Yes</span>
+                            }
+
+
+
+                        </span>
+                    </h4>
+
+                }
+                else
+                {
+                  
+
+
+                    <span class="uk-text-muted uk-text-small">Last Login</span>
+                    <h4 class="uk-margin-remove">
+                        <span class="countUpMe" style="text-transform:capitalize">
+
+
+
+                            @(user.LastLogin.Humanize())
+
+
+
+                        </span>
+                    </h4>
+                }
+
             </div>
         </div>
     </div>

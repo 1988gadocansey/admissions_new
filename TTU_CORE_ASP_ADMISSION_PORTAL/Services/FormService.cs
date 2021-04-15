@@ -90,6 +90,14 @@ namespace TTU_CORE_ASP_ADMISSION_PORTAL.Services
 
 
             //}
+
+        public string GetProgrammeName(int id )
+            {
+                 
+                var programme = _dbContext.ProgrammeModel.Where(p => p.Id == id).First();
+
+                return System.Globalization.CultureInfo.CurrentCulture.TextInfo.ToTitleCase(programme.Name);
+            }
             public object GetRegions()
             {
                return new SelectList(_dbContext.RegionModel, "Id", "Name");
@@ -143,14 +151,14 @@ namespace TTU_CORE_ASP_ADMISSION_PORTAL.Services
         }
         public object GetYears()
         {
-            int[] year= { };
-
-            for (int a=1970; a<= DateTime.Now.Year; a++)
-            {
-                Array.Fill(year, a);
-            }
-           // Console.WriteLine(year.Min());
-            return year;
+            //var currentYear = DateTime.Today.Year;
+            //for (int i = 2; i >= 0; i--)
+            //{
+            //    // Now just add an entry that's the current year minus the counter
+            //    DropDownList2.Items.Add((currentYear - i).ToString());
+            //}
+            var years= Enumerable.Range(DateTime.Now.Year - 25, ((DateTime.Now.Year)-1996));
+            return years;
         }
 
         public object GetHalls()
@@ -221,28 +229,42 @@ namespace TTU_CORE_ASP_ADMISSION_PORTAL.Services
             return passed;
 
         }
-        public string GradesIssues(int[] Cores, int[] CoreAlt, int[] Electives)
+        
+        public string[] GradesIssues(int[] Cores, int[] CoreAlt, int[] Electives)
         {
-            string error;
+            var error= new  string[4];
+             
+
             if (Cores.Count() + CoreAlt.Count() + Electives.Count() != 6)
             {
-                error = "Results not completed.";
+               var msg = "Results not completed.";
+                Array.Fill(error,msg);
+
+
             }
             else if( Cores.Count()<2)
             {
-                error = "Minimum of two(2) core subjects not met.";
+
+                var msg = "Minimum of two(2) core subjects not met.";
+                Array.Fill(error, msg);
             }
             else if (Electives.Count() <3)
             {
-                error = "Minimum of three(3) elective subjects not met.";
+                var msg = "Minimum of three(3) elective subjects not met.";
+
+                Array.Fill(error, msg);
             }
             else if (CoreAlt.Count() < 1)
             {
-                error = "Social or Science required.";
+                var msg = "Social or Science required.";
+
+                Array.Fill(error, msg);
             }
             else
             {
-                error = "Ok";
+                string msg = null;
+
+                Array.Fill(error, msg);
             }
 
             return error;
@@ -252,30 +274,34 @@ namespace TTU_CORE_ASP_ADMISSION_PORTAL.Services
         }
         public int GetTotalAggregate(int[] Cores, int[] CoreAlt, int[] Electives)
         {
-            if (GradesIssues(Cores, CoreAlt, Electives)=="Ok")
-            {
-                Array.Sort(CoreAlt);
+            Array.Sort(CoreAlt);
 
                 Array.Sort(Cores);
 
                 Array.Sort(Electives);
 
-                int[] SliceElect = (int[])Electives.Take(3);
+                int CstartIndex = 0;
+                int Clenght = 1;
+                IEnumerable<int> SliceCoreAlt = CoreAlt.Skip(CstartIndex).Take(Clenght);
 
-                int[] SliceCoreAlt = (int[])CoreAlt.Take(1);
+
+                int EstartIndex = 0;
+                int Elenght = 3;
+                IEnumerable<int> SliceElect = Electives.Skip(EstartIndex).Take(Elenght);
 
 
-                int grade = Cores.Sum() + SliceElect.Sum() + SliceCoreAlt.Sum();
+            int grade = Cores.Sum() + SliceElect.Sum() + SliceCoreAlt.Sum();
 
-                return grade;
 
-            }
-            else
-            {
-                return 0;
-            }
+
+            return grade;
+             
+
 
         }
+             
+
+        
         private bool ApplicantModelExists(int id)
         {
             return _dbContext.ApplicantModel.Any(e => e.ID == id);
