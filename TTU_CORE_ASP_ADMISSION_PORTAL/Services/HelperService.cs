@@ -21,7 +21,9 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Renci.SshNet;
 using TTU_CORE_ASP_ADMISSION_PORTAL.Data;
-
+using System;
+using Twilio;
+using Twilio.Rest.Api.V2010.Account;
 namespace TTU_CORE_ASP_ADMISSION_PORTAL.Services
 {
     public class HelperService : IHelper
@@ -67,7 +69,31 @@ namespace TTU_CORE_ASP_ADMISSION_PORTAL.Services
             }
         }
 
+         
+
+        void IHelper.SendEmailNotification(string Email)
+        {
+           
+        }
+
         
 
+        public void SendSMSNotification(string PhoneNumber)
+        {
+            //string accountSid = Environment.GetEnvironmentVariable("TWILIO_ACCOUNT_SID");
+            string accountSid = "AC7d8c5201cdd11fe5b8938105e75f77b0";
+            string authToken = "6b5aa307cb7cc857dcae1d98f5159417";
+
+            TwilioClient.Init(accountSid, authToken);
+
+            var message = MessageResource.Create(
+                body: "TTU Admisison notification using Twillo API",
+                from: new Twilio.Types.PhoneNumber("+13476823203"),
+                to: new Twilio.Types.PhoneNumber(PhoneNumber)
+            );
+
+            Console.WriteLine(message.Sid);
+        }
+    
     }
 }

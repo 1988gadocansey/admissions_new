@@ -1,6 +1,7 @@
 ﻿        using System;
         using System.Collections.Generic;
-        using System.Globalization;
+using System.Diagnostics;
+using System.Globalization;
         using System.Linq;
         using System.Security.Claims;
         using System.Threading.Tasks;
@@ -67,7 +68,7 @@
                     ViewData["country"] = _formService.GetCountry();
                     ViewData["religions"] = _formService.GetReligions();
 
-                    ViewData["choices"] = _formService.GetProgrammes();
+                    ViewData["choices"] = _formService.GetProgrammes(applicationUser.Type);
 
                     ViewData["programme"] =_formService.GetSHSProgrammes();
 
@@ -122,9 +123,12 @@
 
                     HallModel hall = await _dbContext.HallModel.FirstOrDefaultAsync(h => h.Id == Convert.ToInt32(HttpContext.Request.Form["hall"]));
 
-                    SchoolModel school = await _dbContext.SchoolModel.FirstOrDefaultAsync(r => r.Id == Convert.ToInt32(HttpContext.Request.Form["school"]));
 
-                    DenominationModel denomination = await _dbContext.DenominationModel.FirstOrDefaultAsync(r => r.ID == Convert.ToInt32(HttpContext.Request.Form["denomination"]));
+            SchoolModel school = await _dbContext.SchoolModel.FirstOrDefaultAsync(r => r.Id ==  HttpContext.Request.Form["school"]);
+
+            Debug.Write(school.ToString());
+
+            DenominationModel denomination = await _dbContext.DenominationModel.FirstOrDefaultAsync(r => r.ID == Convert.ToInt32(HttpContext.Request.Form["denomination"]));
 
                     ReligionModel religion = await _dbContext.ReligionModel.FirstOrDefaultAsync(r => r.Id == Convert.ToInt32(HttpContext.Request.Form["religion"]));
 
@@ -223,7 +227,7 @@
                                 Region = region,
 
                                 School = school,
-                                Grade = 10,
+                                Grade =0,
                                 AdmissionType = "",
                                 AdmittedBy = 0,
                             //DateAdmitted = DateTime.ParseExact(HttpContext.Request.Form["dob"], "dd/MM/yyyy", null),

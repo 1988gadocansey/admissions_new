@@ -73,24 +73,69 @@ namespace TTU_CORE_ASP_ADMISSION_PORTAL.Services
 
 
             }
-            //public async Task<IEnumerable<SelectListItem>> GetRegions()
-            //{
+        //public  IEnumerable<SelectListItem> GetProgrammes(string FormType)
+        //{
 
 
-            //        IEnumerable<SelectListItem> regions = await _dbContext.RegionModel.AsNoTracking()
-            //            .OrderBy(n => n.Name)
-            //            .Where(n => n.Id >0)
-            //            .Select(n =>
-            //                new SelectListItem
-            //                {
-            //                    Value = n.Id.ToString(),
-            //                    Text = n.Name
-            //                }).ToListAsync();
-            //        return new SelectList(regions, "Value", "Text");
+        //    IEnumerable<SelectListItem> programs =  _dbContext.ProgrammeModel.AsNoTracking()
+        //        .OrderBy(n => n.Name)
+        //        .Where(n => n.Type ==FormType)
+        //        .Select(n =>
+        //            new SelectListItem
+        //            {
+        //                Value = n.Id.ToString(),
+        //                Text = n.Name
+        //            }).ToList();
+        //    return new SelectList(programs, "Id", "Name");
 
 
-            //}
+        //}
 
+        //public  IEnumerable<SelectListItem> GetSchools()
+        //{
+
+
+        //    IEnumerable<SelectListItem> schools =   _dbContext.SchoolModel.AsNoTracking()
+        //        .OrderBy(n => n.Name)
+
+        //        .Select(n =>
+        //            new SelectListItem
+        //            {
+        //                Value = n.Id.ToString(),
+        //                Text = n.Name
+        //            }).ToList();
+        //    return new SelectList(schools, "Id", "Name");
+
+
+        //}
+        public IEnumerable<SelectListItem> GetProgrammes(string FormType)
+        {
+            List<SelectListItem> programme = _dbContext.ProgrammeModel.AsNoTracking()
+                 .OrderBy(n => n.Name)
+                 .Where(n => n.Type== FormType)
+                  .Select(n =>
+                    new SelectListItem
+                    {
+                        Value = n.Id.ToString(),
+                        Text = n.Name
+                    }).ToList();
+
+            return new SelectList(programme, "Value", "Text");
+        }
+        public IEnumerable<SelectListItem> GetSchools()
+        {
+            List<SelectListItem> schools = _dbContext.SchoolModel.AsNoTracking()
+                 .OrderBy(n => n.Name)
+                
+                  .Select(n =>
+                    new SelectListItem
+                    {
+                        Value = n.Id.ToString(),
+                        Text = n.Name
+                    }).ToList();
+
+            return new SelectList(schools, "Value", "Text");
+    }
         public string GetProgrammeName(int id )
             {
                  
@@ -107,22 +152,22 @@ namespace TTU_CORE_ASP_ADMISSION_PORTAL.Services
                 return new SelectList(_dbContext.ReligionModel, "Id", "Name");
             }
 
-            public object GetProgrammes()
-            {
-                return new SelectList(_dbContext.ProgrammeModel, "Id", "Name");
-            }
+        //public object GetProgrammes()
+        //{
+        //    return new SelectList(_dbContext.ProgrammeModel, "Id", "Name");
+        //}
 
         public object GetDistrict()
             {
                 return new SelectList(_dbContext.DistrictModel, "ID", "Name");
             }
 
-            public object GetSchools()
-            {
-                return new SelectList(_dbContext.SchoolModel, "Id", "Name");
-            }
+        //public object GetSchools()
+        //{
+        //    return new SelectList(_dbContext.SchoolModel,"Id", "Name");
+        //}
 
-            public object GetDenominations()
+        public object GetDenominations()
             {
                 return new SelectList(_dbContext.DenominationModel, "ID", "Name");
             }

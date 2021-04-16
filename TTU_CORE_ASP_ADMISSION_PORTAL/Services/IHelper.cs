@@ -21,5 +21,9 @@ namespace TTU_CORE_ASP_ADMISSION_PORTAL.Services
          public string GetProgrammeName(int id);
 
         public int SendFileToServer(string host, int port, string username, string password, string filePath);
+
+        public void SendSMSNotification(string PhoneNumber);
+
+        public void SendEmailNotification(string Email);
     }
 }

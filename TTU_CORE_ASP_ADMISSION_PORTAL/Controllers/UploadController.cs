@@ -22,7 +22,8 @@ namespace TTU_CORE_ASP_ADMISSION_PORTAL.Controllers
                     {
                     private readonly ILogger<UploadController> _logger;
                     private string serverUrl = "https://photos.ttuportal.com/public/albums/thumbnails";
-                        private readonly IHostingEnvironment hostingEnvironment;
+        [Obsolete]
+        private readonly IHostingEnvironment hostingEnvironment;
                         private UserManager<ApplicationUser> _userManager;
                         private readonly ApplicationDbContext _dbContext;
                          private readonly IHelper _helper;
@@ -31,7 +32,7 @@ namespace TTU_CORE_ASP_ADMISSION_PORTAL.Controllers
         string username = "tpconnect";
         string password = "0243348522";
 
-
+        [Obsolete]
         public UploadController(ILogger<UploadController> logger, IHostingEnvironment environment, UserManager<ApplicationUser> userManager, ApplicationDbContext dbContext,IHelper helper)
                         {
                            _logger = logger;
@@ -48,7 +49,8 @@ namespace TTU_CORE_ASP_ADMISSION_PORTAL.Controllers
 
          
         [HttpPost]
-                        public async Task<IActionResult> UploadAsync(IFormFile file)
+        [Obsolete]
+        public async Task<IActionResult> UploadAsync(IFormFile file)
                         {
 
                             if (Request.Form.Files.Count > 0)
@@ -90,11 +92,12 @@ namespace TTU_CORE_ASP_ADMISSION_PORTAL.Controllers
                                              * Call the image background service from the ttuportal.com/api/image/check to help test
                                              **/
 
-                                            //image.Save(filePath);
-
+                                            image.Save(filePath);
+                            
                             if (_helper.SendFileToServer(host, port, username, password, filePath) == 1)
                             {
-
+                                var fileInfo = new FileInfo(filePath);
+                                fileInfo.Delete();
                             }
                             else
                             {

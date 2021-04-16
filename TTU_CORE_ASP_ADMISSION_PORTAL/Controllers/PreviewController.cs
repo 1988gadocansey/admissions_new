@@ -65,6 +65,13 @@ using Microsoft.Extensions.Logging;
                 var ApplicantPin = applicationUser?.Pin;
                 var ApplicantFormType = applicationUser?.Type;
 
+            // check if the user completed the form send him sms
+                if (applicationUser.FormCompleted==1)
+                {
+
+                }
+
+
 
             //var applicant = await _dbContext.ApplicantModel.FirstOrDefaultAsync(a => a.ApplicationUserId == ApplicantId);
             var applicant = await _dbContext.ApplicantModel.Include(r=>r.Region).Include(n =>n.Nationality)
