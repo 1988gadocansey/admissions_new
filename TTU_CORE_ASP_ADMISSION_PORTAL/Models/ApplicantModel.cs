@@ -67,7 +67,7 @@ namespace TTU_CORE_ASP_ADMISSION_PORTAL.Models
         public string EmergencyContact { get; set; }
         public string Hometown { get; set; }
 
-        public int DistrictId { get; set; }
+        public int ?DistrictId { get; set; }
         public virtual DistrictModel District { get; set; }
 
         public virtual HallModel Hall { get; set; }
@@ -78,7 +78,7 @@ namespace TTU_CORE_ASP_ADMISSION_PORTAL.Models
         public string NationalIDNo { get; set; }
 
         
-        public int RegionId { get; set; }
+        public int? RegionId { get; set; }
         public virtual RegionModel Region { get; set; }
 
         public int NationalityId { get; set; }
@@ -98,7 +98,7 @@ namespace TTU_CORE_ASP_ADMISSION_PORTAL.Models
         public int ReligionId { get; set; }
         public virtual ReligionModel Religion { get; set; }
 
-        public string Denomination{ get; set; }
+        public string? Denomination{ get; set; }
         public string Referrals { get; set; }
         public string EntryMode { get; set; }
         public string FirstQualification { get; set; }
@@ -106,8 +106,11 @@ namespace TTU_CORE_ASP_ADMISSION_PORTAL.Models
 
         public string ProgrammeStudied { get; set; }
         public string FormerSchool { get; set; }
-        public int SchoolId { get; set; }
-        public virtual SchoolModel School { get; set; }
+       // public int? SchoolId { get; set; }
+       // public virtual SchoolModel School { get; set; }
+
+        public int? FormerSchoolNewId { get; set; }
+        public virtual FormerSchoolModel FormerSchoolNew { get; set; }
 
         public int LastYearInSchool { get; set; }
         public bool? Awaiting { get; set; }
@@ -173,7 +176,7 @@ namespace TTU_CORE_ASP_ADMISSION_PORTAL.Models
         {
             get
             {
-                return LastName + ", " + FirstName + " "+ MiddleName;
+                return Title +" "+ LastName + ", " + FirstName + " "+ MiddleName;
             }
 
         }

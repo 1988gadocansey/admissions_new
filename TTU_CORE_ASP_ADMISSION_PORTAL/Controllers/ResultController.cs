@@ -22,7 +22,8 @@
             using Microsoft.AspNetCore.Identity;
             using Microsoft.AspNetCore.Mvc;
             using Microsoft.AspNetCore.Mvc.Rendering;
-            using Microsoft.EntityFrameworkCore;
+using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
             using Microsoft.Extensions.Logging;
             using TTU_CORE_ASP_ADMISSION_PORTAL.Data;
             using TTU_CORE_ASP_ADMISSION_PORTAL.Models;
@@ -81,8 +82,8 @@
 
 
 
-                    var Core = new int[2];
-                    var CoreAlt = new int[2];
+                    var Core = new int[10];
+                    var CoreAlt = new int[10];
                     var Electives = new int[10];
 
                     foreach (var score in results)
@@ -182,8 +183,8 @@
                 //int[] CoreAlt;
                // int[] Electives;
 
-                var Core = new int[2];
-                var CoreAlt = new int[2];
+                var Core = new int[8];
+                var CoreAlt = new int[7];
                 var Electives= new int[20];
 
                 if (year.Length>= 0 && month.Length >= 0 && grade.Length >= 0 && subject.Length >= 0 && sitting.Length >= 0 && indexno.Length >= 0 && center.Length >= 0 && type.Length >= 0)
@@ -192,45 +193,41 @@
 
 
 
-                    if (applicant.NationalityId == 58)
+                    if (applicant.NationalityId == 58 || applicant.NationalityId != 58)
                     {
 
                         if (applicationUser.Type != "TOPUP" || applicationUser.Type !=  "MTECH")
                         {
-                            for (int i = 0; i < type.Length; i++)
-                            {
+                        for (int i = 0; i < type.Length; i++)
+                        {
 
 
-                                SubjectModel subjects = await _dbContext.SubjectModel.FirstOrDefaultAsync(s => s.Id == Convert.ToInt32(subject[i]));
+                            SubjectModel subjects = await _dbContext.SubjectModel.FirstOrDefaultAsync(s => s.Id == Convert.ToInt32(subject[i]));
 
-                                GradeModel grades = await _dbContext.GradeModel.FirstOrDefaultAsync(g => g.Id == Convert.ToInt32(grade[i]));
+                            GradeModel grades = await _dbContext.GradeModel.FirstOrDefaultAsync(g => g.Id == Convert.ToInt32(grade[i]));
 
-                                await _dbContext.ResultUploadModel.AddRangeAsync(
-                                          new ResultUploadModel
-                                          {
+                            await _dbContext.ResultUploadModel.AddRangeAsync(
+                                      new ResultUploadModel
+                                      {
 
-                                              Applicant = applicant.ID,
-                                              Subject = subjects,
-                                              ApplicantModelID = applicant.ID,
-                                              Sitting = sitting[i],
-                                              ExamType = type[i],
-                                              Center = center[i].ToString(),
-                                              IndexNo = indexno[i].ToString(),
-                                              Month = month[i].ToString(),
-                                              Year = year[i].ToString(),
-                                              Grade = grades
-                                          });
+                                          Applicant = applicant.ID,
+                                          Subject = subjects,
+                                          ApplicantModelID = applicant.ID,
+                                          Sitting = sitting[i],
+                                          ExamType = type[i],
+                                          Center = center[i].ToString(),
+                                          IndexNo = indexno[i].ToString(),
+                                          Month = month[i].ToString(),
+                                          Year = year[i].ToString(),
+                                          Grade = grades
+                                      });
+                            if (await _dbContext.ResultUploadModel.AnyAsync(c => c.Subject == subjects && c.Grade == grades && c.Year == year[i].ToString() && c.ExamType == type[i] && c.IndexNo == indexno[i].ToString() && c.Sitting == sitting[i] && c.Month == month[i].ToString() && c.ApplicantModelID == applicant.ID))
 
+                                TempData["message"] = "Error uploading result!!. Result already uploaded";
+                                TempData["type"] = "error";
+                                return RedirectToAction("Index");
 
-                                await _dbContext.SaveChangesAsync();
-
-
-
-
-
-
-                                }
-
+                             }
 
 
 
@@ -243,18 +240,18 @@
                             {
 
 
-                                if (score.Subject.Type == "Core")
+                                if (score.Subject.Code == "core")
                                 {
                                     Array.Fill(Core, Convert.ToInt32(score.Grade.Value));
 
                                 }
-                                if (score.Subject.Type == "CoreAlt")
+                                if (score.Subject.Code == "core_alt")
                                 {
                                     Array.Fill(CoreAlt, Convert.ToInt32(score.Grade.Value));
 
                                 }
 
-                                if (score.Subject.Type == "Elective")
+                                if (score.Subject.Code == "elective")
                                 {
                                     Array.Fill(Electives, Convert.ToInt32(score.Grade.Value));
 
@@ -321,7 +318,7 @@
 
                                 TempData["message"] = "Result(s) uploaded successfully!!";
                                 TempData["type"] = "success";
-
+                        Console.WriteLine("grade is " + Core.ToString());
                                 ViewData["grade"] = grades_;
 
                         }
@@ -376,7 +373,7 @@
 
 
                     var data = _dbContext.ResultUploadModel.Where(r => r.ApplicantModelID == applicant.ID);
-                    if (data!=null)
+                    if (data==null)
                     {
 
                         var applicantAuth = await _dbContext.Users.FindAsync(userId);
@@ -395,58 +392,16 @@
 
                     }
 
-                }
+               
+            }
+            var result = _dbContext.ResultUploadModel.Where(r=>r.ApplicantModelID== applicant.ID);
+            Console.WriteLine("result is " + result);
+            ViewData["results"] = result;
 
-                return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(Index));
             }
 
-            // POST: Scafford/Delete/5
-            [HttpPost, ActionName("Delete")]
-            [ValidateAntiForgeryToken]
-            public async Task<IActionResult> DeleteConfirmed(int id)
-            {
-                var userId = User.FindFirstValue(ClaimTypes.NameIdentifier); // will give the user's userId
+        
 
-
-                ApplicationUser applicationUser = await _userManager.GetUserAsync(User);
-
-
-                var ApplicantForm = applicationUser?.FormNo;
-
-                var applicant = await _dbContext.ApplicantModel.FirstOrDefaultAsync(n => n.ApplicationNumber == Convert.ToInt32(ApplicantForm));
-
-
-                var resultModel = await _dbContext.ResultUploadModel.FindAsync(id);
-                _dbContext.ResultUploadModel.Remove(resultModel);
-
-                if (await _dbContext.SaveChangesAsync() == 1)
-                {
-
-
-                    var data = _dbContext.ResultUploadModel.Where(r => r.ApplicantModelID == applicant.ID);
-                    if (data != null)
-                    {
-
-                        var applicantAuth = await _dbContext.Users.FindAsync(userId);
-
-                        applicantAuth.ResultUploaded = false;
-
-
-                        await _dbContext.SaveChangesAsync();
-
-                        var applicantInfo = await _dbContext.ApplicantModel.FirstOrDefaultAsync(n => n.ApplicationNumber == Convert.ToInt32(ApplicantForm));
-
-                        applicantInfo.Results = "";
-                        applicantInfo.Grade = 0;
-
-                        await _dbContext.SaveChangesAsync();
-
-                    }
-
-                }
-
-                return RedirectToAction(nameof(Index));
-            }
-
-        }
+    }
                 }

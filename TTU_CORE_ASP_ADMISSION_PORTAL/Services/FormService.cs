@@ -124,7 +124,7 @@ namespace TTU_CORE_ASP_ADMISSION_PORTAL.Services
         }
         public IEnumerable<SelectListItem> GetSchools()
         {
-            List<SelectListItem> schools = _dbContext.SchoolModel.AsNoTracking()
+            List<SelectListItem> schools = _dbContext.FormerSchoolModel.AsNoTracking()
                  .OrderBy(n => n.Name)
                 
                   .Select(n =>
@@ -136,6 +136,22 @@ namespace TTU_CORE_ASP_ADMISSION_PORTAL.Services
 
             return new SelectList(schools, "Value", "Text");
     }
+
+        public object GetSubjects()
+        {
+            List<SelectListItem> schools = _dbContext.SubjectModel.AsNoTracking()
+               .OrderBy(n => n.Name)
+
+                .Select(n =>
+                  new SelectListItem
+                  {
+                      Value = n.Id.ToString(),
+                      Text = n.Name
+                  }).ToList();
+
+            return new SelectList(schools, "Value", "Text");
+
+        }
         public string GetProgrammeName(int id )
             {
                  
@@ -183,17 +199,40 @@ namespace TTU_CORE_ASP_ADMISSION_PORTAL.Services
             }
         public object GetGrades()
         {
-            return new SelectList(_dbContext.GradeModel, "Id", "Name");
+            // return new SelectList(_dbContext.GradeModel, "Id", "Name");
+
+            List<SelectListItem> schools = _dbContext.GradeModel.AsNoTracking()
+               .OrderBy(n => n.Name)
+
+                .Select(n =>
+                  new SelectListItem
+                  {
+                      Value = n.Id.ToString(),
+                      Text = n.Name
+                  }).ToList();
+
+            return new SelectList(schools, "Value", "Text");
         }
         public object GetExamTypes()
         {
-            return new SelectList(_dbContext.ExamModel, "Name", "Name");
+            //return new SelectList(_dbContext.ExamModel, "Name", "Name");
+            List<SelectListItem> schools = _dbContext.ExamModel.AsNoTracking()
+               .OrderBy(n => n.Name)
+
+                .Select(n =>
+                  new SelectListItem
+                  {
+                      Value = n.Name,
+                      Text = n.Name
+                  }).ToList();
+
+            return new SelectList(schools, "Value", "Text");
         }
 
-        public object GetSubjects()
-        {
-            return new SelectList(_dbContext.SubjectModel, "Id", "Name");
-        }
+        //public object GetSubjects()
+        //{
+        //    return new SelectList(_dbContext.SubjectModel, "Id", "Name");
+        //}
         public object GetYears()
         {
             //var currentYear = DateTime.Today.Year;

@@ -14,6 +14,7 @@ using TTU_CORE_ASP_ADMISSION_PORTAL.Services;
 using Renci.SshNet;
 using ConnectionInfo = Renci.SshNet.ConnectionInfo;
 using System.Diagnostics;
+using Microsoft.Extensions.Configuration;
 
 namespace TTU_CORE_ASP_ADMISSION_PORTAL.Controllers
 {
@@ -22,25 +23,24 @@ namespace TTU_CORE_ASP_ADMISSION_PORTAL.Controllers
                     {
                     private readonly ILogger<UploadController> _logger;
                     private string serverUrl = "https://photos.ttuportal.com/public/albums/thumbnails";
+        private readonly IConfiguration Configuration;
         [Obsolete]
         private readonly IHostingEnvironment hostingEnvironment;
                         private UserManager<ApplicationUser> _userManager;
                         private readonly ApplicationDbContext _dbContext;
                          private readonly IHelper _helper;
-        int port = 44444;
-        string host = "45.33.4.164";
-        string username = "tpconnect";
-        string password = "0243348522";
+        
 
         [Obsolete]
-        public UploadController(ILogger<UploadController> logger, IHostingEnvironment environment, UserManager<ApplicationUser> userManager, ApplicationDbContext dbContext,IHelper helper)
+        public UploadController(ILogger<UploadController> logger, IHostingEnvironment environment, UserManager<ApplicationUser> userManager, ApplicationDbContext dbContext,IHelper helper, IConfiguration configuration)
                         {
                            _logger = logger;
                             hostingEnvironment = environment;
                             _userManager = userManager;
                             _dbContext = dbContext;
                              _helper = helper;
-                        }
+            Configuration = configuration;
+        }
 
                         public IActionResult Index()
                         {
@@ -93,7 +93,11 @@ namespace TTU_CORE_ASP_ADMISSION_PORTAL.Controllers
                                              **/
 
                                             image.Save(filePath);
-                            
+
+                            int port = Convert.ToInt32(Configuration["sftpport"]);
+                            string host = Configuration["sftphost"];
+                            string username = Configuration["sftpusername"];
+                            string password = Configuration["sftppassword"];
                             if (_helper.SendFileToServer(host, port, username, password, filePath) == 1)
                             {
                                 var fileInfo = new FileInfo(filePath);

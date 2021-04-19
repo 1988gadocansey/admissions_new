@@ -78,7 +78,7 @@ using Microsoft.Extensions.Logging;
                 .Include(p =>p.Programmes)
                  .Include(h => h.Hall)
                  .Include(rel => rel.Religion)
-                  .Include(s => s.School)
+                  .Include(s => s.FormerSchoolNew)
                    .Include(r => r.ResultUploads)
                   .Include(d => d.District)
 

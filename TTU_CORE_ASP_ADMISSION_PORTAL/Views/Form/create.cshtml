@@ -5,30 +5,30 @@
 @{ var user = await UserManager.GetUserAsync(User); }
 
 @{
-    ViewBag.Title = "Form -  Update";
+    ViewBag.Title = "Form - Create";
 
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @section Style{
     <style>
-      @*  input {
+        input {
             text-transform: uppercase;
         }
         select {
             text-transform: uppercase;
-        }*@
+        } 
     </style>
 
 
 }
 @if ((user.Started) == 1)
 {
-    var date = ViewBag.applicant.DateOfBirth.ToString("yyy-MM-dd");
+    //var date = ViewBag.applicant.DateOfBirth.ToString("yyy-MM-dd");
 
 }
 else
 {
-    var date = "";
+    var date ="";
 }
 @if (TempData["message"] != null)
 {
@@ -98,14 +98,14 @@ else
                                 <div class="parsley-row">
                                     <div class="uk-input-group">
 
-                                        <div class="md-input-wrapper md-input-filled"><label for="wizard_skype">Other Names :</label><input type="text" id="oname" name="othernames" v-form-ctrl class="md-input" v-model="othernames" /><span class="md-input-bar"></span></div>
+                                        <div class="md-input-wrapper md-input-filled"><label for="wizard_skype">Other Names :</label><input type="text" id="oname" name="othernames"  v-form-ctrl class="md-input" v-model="othernames" /><span class="md-input-bar"></span></div>
 
                                     </div>
                                 </div>
                                 <div class="parsley-row">
                                     <div class="uk-input-group">
 
-                                        <div class="md-input-wrapper md-input-filled"><label for="wizard_skype">Previous Name :</label><input type="text" id="previousName" name="previousName" v-form-ctrl class="md-input" v-model="previousName" /><span class="md-input-bar"></span></div>
+                                        <div class="md-input-wrapper md-input-filled"><label for="wizard_skype">Previous Name :</label><input type="text" id="previousName" name="previousName"   v-form-ctrl class="md-input" v-model="previousName" /><span class="md-input-bar"></span></div>
 
                                     </div>
                                 </div>
@@ -206,7 +206,7 @@ else
                                 <div class="parsley-row">
                                     <div class="uk-input-group">
 
-                                        <div class="md-input-wrapper md-input-filled"><label for="wizard_skype">Post GPRS :</label><input type="text" id="postGPRS" name="postGPRS" v-form-ctrl class="md-input" v-model="postGPRS" /><span class="md-input-bar"></span></div>
+                                        <div class="md-input-wrapper md-input-filled"><label for="wizard_skype">Post GPRS :</label><input type="text" id="postGPRS" name="postGPRS"   v-form-ctrl class="md-input" v-model="postGPRS" /><span class="md-input-bar"></span></div>
 
                                     </div>
                                 </div>
@@ -215,7 +215,7 @@ else
                                 <div class="parsley-row">
                                     <div class="uk-input-group">
 
-                                        <div class="md-input-wrapper md-input-filled"><label for="wizard_skype">Hometown :</label><input type="text" id="hometown" name="hometown" required="" v-form-ctrl class="md-input" v-model="hometown" /><span class="md-input-bar"></span></div>
+                                        <div class="md-input-wrapper md-input-filled"><label for="wizard_skype">Hometown :</label><input type="text" id="hometown" name="hometown"  required="" v-form-ctrl class="md-input" v-model="hometown" /><span class="md-input-bar"></span></div>
                                         <p class="uk-text-danger uk-text-small " v-if="updateForm.hometown.$error.required">Hometown is required</p>
 
                                     </div>
@@ -227,7 +227,7 @@ else
                                             <label for="wizard_referer">
                                                 Contact Address
                                                 :
-                                            </label><input type="text" id="address" name="address" class="md-input" required="required" v-model="address" v-form-ctrl><span class="md-input-bar"></span>
+                                            </label><input type="text" id="address" name="address" class="md-input" required="required"  v-model="address" v-form-ctrl><span class="md-input-bar"></span>
                                         </div>
                                         <p class=" uk-text-danger uk-text-small  " v-if="updateForm.address.$error.required">Contact Address is required</p>
                                     </div>
@@ -278,7 +278,7 @@ else
                                 <div class="parsley-row">
                                     <div class="uk-input-group">
 
-                                        <div class="md-input-wrapper md-input-filled"><label for="wizard_referer">Altenative Phone N<u>o</u> :</label><input type="text" id="altPhone" name="altPhone" class="md-input" data-parsley-type="digits" minlength="10" maxlength="10" pattern='^[0-9]{10}$' v-model="altPhone" v-form-ctrl><span class="md-input-bar"></span></div>
+                                        <div class="md-input-wrapper md-input-filled"><label for="wizard_referer">Altenative Phone N<u>o</u> :</label><input type="text" id="altPhone" name="altPhone" class="md-input" data-parsley-type="digits" minlength="10" maxlength="10" pattern='^[0-9]{10}$' v-model="altPhone"   v-form-ctrl><span class="md-input-bar"></span></div>
                                         <p class=" uk-text-danger uk-text-small  " v-if="updateForm.altPhone.$invalid">Please enter a valid phone number of 10 digits</p>
                                     </div>
                                 </div>
@@ -287,7 +287,7 @@ else
                                 <div class="parsley-row">
                                     <div class="uk-input-group">
 
-                                        <div class="md-input-wrapper md-input-filled"><label for="wizard_email">Email :</label><input type="email" id="email" name="email" class="md-input" v-model="email" v-form-ctrl><span class="md-input-bar"></span></div>
+                                        <div class="md-input-wrapper md-input-filled"><label for="wizard_email">Email :</label><input type="email" id="email" name="email" class="md-input"   v-model="email" v-form-ctrl><span class="md-input-bar"></span></div>
                                         <p class="uk-text-danger uk-text-small " v-if="updateForm.email.$invalid">Please enter a valid email address</p>
 
                                     </div>
@@ -298,7 +298,7 @@ else
                                 <div class="parsley-row">
                                     <div class="uk-input-group">
 
-                                        <div class="md-input-wrapper md-input-filled"><label for="wizard_referer">Emergency Contact N<u>o</u> :</label><input type="text" id="emergency" name="emergency" class="md-input" data-parsley-type="digits" minlength="10" required="required" maxlength="10" pattern='^[0-9]{10}$' v-model="emergency" v-form-ctrl><span class="md-input-bar"></span></div>
+                                        <div class="md-input-wrapper md-input-filled"><label for="wizard_referer">Emergency Contact N<u>o</u> :</label><input type="text" id="emergency"  name="emergency" class="md-input" data-parsley-type="digits" minlength="10" required="required" maxlength="10" pattern='^[0-9]{10}$' v-model="emergency" v-form-ctrl><span class="md-input-bar"></span></div>
                                         <p class=" uk-text-danger uk-text-small  " v-if="updateForm.emergency.$invalid">Please enter a valid phone number of 10 digits</p>
                                     </div>
                                 </div>
@@ -378,6 +378,7 @@ else
                                         <div class="md-input-wrapper md-input-filled">
                                             <select name="district" class="md-input" asp-items="@ViewBag.districts" required="required" v-model="district" v-form-ctrl="" v-select="district">
                                                 <option value="">Select</option>
+                                                
                                             </select>
 
                                             <span class="md-input-bar"></span>
@@ -445,7 +446,7 @@ else
                                             <select name="resident" class="md-input" required="required" v-model="resident" v-form-ctrl="" v-select="resident">
                                                 <option value="">Select</option>
                                                 <option value="True">Yes</option>
-                                                @*<option value="False">No</option>*@
+                                                <option value="False">No</option>
 
 
                                             </select>
@@ -463,6 +464,7 @@ else
                                         <label for="">Hall of Residence :</label>
                                         <div class="md-input-wrapper md-input-filled">
                                             <select name="hall" class="md-input" asp-items="@ViewBag.hall" required="required" v-model="hall" v-form-ctrl="" v-select="hall">
+
                                             </select>
 
                                             <span class="md-input-bar"></span>
@@ -484,7 +486,7 @@ else
                                 <div class="parsley-row">
                                     <div class="uk-input-group">
 
-                                        <div class="md-input-wrapper md-input-filled"><label for="wizard_referer">Guardian Name :</label><input type="text" id="guardianName" name="guardianName" class="md-input" required="required" v-model="guardianName" v-form-ctrl><span class="md-input-bar"></span></div>
+                                        <div class="md-input-wrapper md-input-filled"><label for="wizard_referer">Guardian Name :</label><input type="text" id="guardianName"  name="guardianName" class="md-input" required="required" v-model="guardianName" v-form-ctrl><span class="md-input-bar"></span></div>
                                         <p class=" uk-text-danger uk-text-small  " v-if="updateForm.guardianName.$error.required">Please provide your guadian name</p>
                                     </div>
                                 </div>
@@ -492,7 +494,7 @@ else
                                 <div class="parsley-row">
                                     <div class="uk-input-group">
 
-                                        <div class="md-input-wrapper md-input-filled"><label for="wizard_referer">Guardian Phone N<u>o</u> :</label><input type="text" id="guardianPhone" name="guardianPhone" class="md-input" data-parsley-type="digits" minlength="10" required="required" maxlength="10" pattern='^[0-9]{10}$' v-model="guardianPhone" v-form-ctrl><span class="md-input-bar"></span></div>
+                                        <div class="md-input-wrapper md-input-filled"><label for="wizard_referer">Guardian Phone N<u>o</u> :</label><input type="text" id="guardianPhone"  name="guardianPhone" class="md-input" data-parsley-type="digits" minlength="10" required="required" maxlength="10" pattern='^[0-9]{10}$' v-model="guardianPhone" v-form-ctrl><span class="md-input-bar"></span></div>
                                         <p class=" uk-text-danger uk-text-small  " v-if="updateForm.guardianPhone.$invalid">Please enter a valid phone number of 10 digits</p>
                                     </div>
                                 </div>
@@ -500,14 +502,14 @@ else
                                 <div class="parsley-row">
                                     <div class="uk-input-group">
 
-                                        <div class="md-input-wrapper md-input-filled"><label for="wizard_referer">Guardian Occupation :</label><input type="text" id="guardianOccupation" name="guardianOccupation" class="md-input" required="required" v-model="guardianOccupation" v-form-ctrl><span class="md-input-bar"></span></div>
+                                        <div class="md-input-wrapper md-input-filled"><label for="wizard_referer">Guardian Occupation :</label><input type="text" id="guardianOccupation" name="guardianOccupation"  class="md-input" required="required" v-model="guardianOccupation" v-form-ctrl><span class="md-input-bar"></span></div>
                                         <p class=" uk-text-danger uk-text-small  " v-if="updateForm.guardianOccupation.$error.required">Please provide your guadian occupation</p>
                                     </div>
                                 </div>
                                 <div class="parsley-row">
                                     <div class="uk-input-group">
 
-                                        <div class="md-input-wrapper md-input-filled"><label for="wizard_skype">Guardian Relationship :</label><input type="text" id="guardianRelationship" name="guardianRelationship" v-form-ctrl class="md-input" v-model="guardianRelationship" /><span class="md-input-bar"></span></div>
+                                        <div class="md-input-wrapper md-input-filled"><label for="wizard_skype">Guardian Relationship :</label><input type="text" id="guardianRelationship" name="guardianRelationship"  v-form-ctrl class="md-input" v-model="guardianRelationship" /><span class="md-input-bar"></span></div>
 
                                     </div>
                                 </div>
@@ -551,7 +553,7 @@ else
 
                                     <div class="uk-input-group">
 
-                                        <div class="md-input-wrapper md-input-filled"><label for="wizard_referer">Sponsorship Company :</label><input type="text" id="sponsorshipName" name="sponsorshipName" class="md-input" required="required" v-model="sponsorshipName" v-form-ctrl><span class="md-input-bar"></span></div>
+                                        <div class="md-input-wrapper md-input-filled"><label for="wizard_referer">Sponsorship Company :</label><input type="text" id="sponsorshipName" name="sponsorshipName"  class="md-input" required="required" v-model="sponsorshipName" v-form-ctrl><span class="md-input-bar"></span></div>
                                         <p class=" uk-text-danger uk-text-small  " v-if="updateForm.sponsorshipName.$error.required">Please provide Sponsorship Name</p>
                                     </div>
 
@@ -568,7 +570,7 @@ else
 
                                     <div class="uk-input-group" v-if="sponsorship=='True'">
 
-                                        <div class="md-input-wrapper md-input-filled"><label for="wizard_referer">Sponsorship Location :</label><input type="text" id="SponsorShipLocation" name="SponsorShipLocation" class="md-input" required="required" v-model="SponsorShipLocation" v-form-ctrl><span class="md-input-bar"></span></div>
+                                        <div class="md-input-wrapper md-input-filled"><label for="wizard_referer">Sponsorship Location :</label><input type="text" id="SponsorShipLocation" name="SponsorShipLocation"   class="md-input" required="required" v-model="SponsorShipLocation" v-form-ctrl><span class="md-input-bar"></span></div>
                                         <p class=" uk-text-danger uk-text-small  " v-if="updateForm.SponsorShipLocation.$error.required">Please provide Sponsorship Location address</p>
                                     </div>
 
@@ -580,7 +582,7 @@ else
                                 <div class="parsley-row" v-if="sponsorship=='True'">
                                     <div class="uk-input-group">
 
-                                        <div class="md-input-wrapper md-input-filled"><label for="wizard_referer">Sponsorship Phone N<u>o</u> :</label><input type="text" id="SponsorShipCompanyContact" name="SponsorShipCompanyContact" class="md-input" data-parsley-type="digits" minlength="10" required="required" maxlength="10" pattern='^[0-9]{10}$' v-model="SponsorShipCompanyContact" v-form-ctrl><span class="md-input-bar"></span></div>
+                                        <div class="md-input-wrapper md-input-filled"><label for="wizard_referer">Sponsorship Phone N<u>o</u> :</label><input type="text" id="SponsorShipCompanyContact" name="SponsorShipCompanyContact" class="md-input" data-parsley-type="digits" minlength="10" required="required" maxlength="10" pattern='^[0-9]{10}$'  v-model="SponsorShipCompanyContact" v-form-ctrl><span class="md-input-bar"></span></div>
                                         <p class=" uk-text-danger uk-text-small  " v-if="updateForm.SponsorShipCompanyContact.$invalid">Please enter a valid phone number of 10 digits</p>
                                     </div>
                                 </div>
@@ -643,7 +645,7 @@ else
                                 <div class="parsley-row">
                                     <div class="uk-input-group">
 
-                                        <label for="">ID No.:</label>
+                                        <label for=""> ID No.:</label>
                                         <div class="md-input-wrapper md-input-filled">
                                             <select name="NationalityId" class="md-input" required="required" v-model="NationalityId" v-form-ctrl="" v-select="NationalityId">
                                                 <option value="">Select</option>
@@ -668,7 +670,7 @@ else
 
                                     <div class="uk-input-group">
 
-                                        <div class="md-input-wrapper md-input-filled"><label for="wizard_referer">Nationality ID No. :</label><input type="text" id="NationalityName" name="NationalityName" class="md-input" required="required" v-model="NationalityName" v-form-ctrl><span class="md-input-bar"></span></div>
+                                        <div class="md-input-wrapper md-input-filled"><label for="wizard_referer">Nationality ID No. :</label><input type="text" id="NationalityName" name="NationalityName"  class="md-input" required="required" v-model="NationalityName" v-form-ctrl><span class="md-input-bar"></span></div>
                                         <p class=" uk-text-danger uk-text-small  " v-if="updateForm.NationalityName.$error.required">Please provide Nationality Name</p>
                                     </div>
 
@@ -700,7 +702,6 @@ else
 
                                         <label for="">Former School Attended :</label>
                                         <div class="md-input-wrapper md-input-filled">
-                                           
                                             <select name="school" class="md-input" asp-items="@ViewBag.school" v-model="school" v-form-ctrl="" v-select="school">
                                                 <option value="">Select</option>
                                             </select>
@@ -712,13 +713,13 @@ else
                                     </div>
                                 </div>
 
-
                                 <div class="parsley-row">
                                     <div class="uk-input-group">
 
                                         <label for="">First Choice :</label>
                                         <div class="md-input-wrapper md-input-filled">
                                             <select name="firstChoice" class="md-input" asp-items="@ViewBag.choices" v-model="firstChoice" v-form-ctrl="" v-select="firstChoice">
+
                                             </select>
 
                                             <span class="md-input-bar"></span>
@@ -763,6 +764,7 @@ else
                                         <label for="">Programme Studied :</label>
                                         <div class="md-input-wrapper md-input-filled">
                                             <select name="programme" class="md-input" asp-items="@ViewBag.programme" v-model="programme" v-form-ctrl="" v-select="programme">
+                                                <option value="">Select</option>
                                             </select>
 
                                             <span class="md-input-bar"></span>
@@ -796,7 +798,7 @@ else
                                 <div class="parsley-row">
                                     <div class="uk-input-group">
 
-                                        <div class="md-input-wrapper md-input-filled"><label for="wizard_skype">Last Year in school :</label><input type="number" id="year" name="year" v-form-ctrl class="md-input" v-model="year" /><span class="md-input-bar"></span></div>
+                                        <div class="md-input-wrapper md-input-filled"><label for="wizard_skype">Last Year in school :</label><input  type="number" id="year" name="year" v-form-ctrl class="md-input" v-model="year" /><span class="md-input-bar"></span></div>
 
                                     </div>
                                 </div>
@@ -851,7 +853,6 @@ else
                                                 <option value="">Select</option>
                                                 <option value="WASSSCE">WASSSCE</option>
                                                 <option value="SSCE">SSCE</option>
-                                                <option value="CERTIFICATE">CERTIFICATE</option>
                                                 <option value="DIPLOMA">DIPLOMA</option>
                                                 <option value="TEU/TECHNICAL CERTIFICATES">TEU/TECHNICAL CERTIFICATES</option>
                                                 <option value="NVTI">NVTI</option>
@@ -876,7 +877,6 @@ else
                                         <div class="md-input-wrapper md-input-filled">
                                             <select name="SecondQualification" class="md-input" v-model="SecondQualification" v-form-ctrl="" v-select="SecondQualification">
                                                 <option value="">Select</option>
-                                                 
                                                 <option value="HND">HND</option>
                                                 <option value="BACHELOR">BACHELOR</option>
                                                 <option value="MASTERS">MASTERS</option>
@@ -994,75 +994,7 @@ else
             },
             data: {
 
-                fname: "@(ViewBag.applicant.FirstName)",
-                surname: "@(ViewBag.applicant.LastName)",
-                previousName: "@(ViewBag.applicant.PreviousName)",
-                      othernames: "@(ViewBag.applicant.MiddleName)",
-                 gender: "@(ViewBag.applicant.Gender)",
-                title: "@(ViewBag.applicant.Title)",
-                maritalStatus: "@(ViewBag.applicant.MaritalStatus)",
-                Referal: "@(ViewBag.applicant.Referrals)",
-                phone: "@(ViewBag.applicant.Phone)",
-                altPhone: "@(ViewBag.applicant.AltPhone)",
-                awaiting: "@(ViewBag.applicant.Awaiting)",
-                nationality: "@(ViewBag.applicant.Nationality.ID)",
-
-                @*region:@(ViewBag.applicant.RegionId == null ? "" : ViewBag.applicant.Region.Id),*@
-
-                region:@(ViewBag.applicant.Region.Id),
-                district:@(ViewBag.applicant.District.ID),
-
-                religion: "@(ViewBag.applicant.Religion.Id)",
-
-                denomination: "@(ViewBag.applicant.Denomination)",
-
-                resident: "@(ViewBag.applicant.ResidentialStatus)",
-
-
-                hall: "@(ViewBag.applicant.Hall.Id)",
-
-                sponsorship: "@(ViewBag.applicant.SponsorShip)",
-                disability: "@(ViewBag.applicant.Disability)",
-                disabilityType: "@(ViewBag.applicant.DisabilityType)",
-                NationalityName: "@(ViewBag.applicant.NationalIDNo)",
-                postGPRS:"@(ViewBag.applicant.PostGPRS)",
-                NationalityId: "@(ViewBag.applicant.NationalIDType)",
-
-                FirstQualification: "@(ViewBag.applicant.FirstQualification)",
-                SecondQualification: "@(ViewBag.applicant.SecondQualification)",
-
-                mode: "@(ViewBag.applicant.EntryMode)",
-                FeePaying: "@(ViewBag.applicant.FeePaying)",
-                email: "@(ViewBag.applicant.Email)",
-
-                emergency: "@(ViewBag.applicant.EmergencyContact)",
-
-                phone: "@(ViewBag.applicant.Phone)",
-                altPhone: "@(ViewBag.applicant.AltPhone)",
-                      hometown: "@(ViewBag.applicant.Hometown)",
-                        address: "@(ViewBag.applicant.Address)",
-                programme: "@(ViewBag.applicant.ProgrammeStudied)",
-
-                thirdChoice: "@(ViewBag.applicant.ThirdChoiceId)",
-
-                secondChoice: "@(ViewBag.applicant.SecondChoiceId)",
-
-                firstChoice: "@(ViewBag.applicant.FirstChoiceId)",
-
-                school: "@(ViewBag.applicant.FormerSchoolNewId)",
-                year: "@(ViewBag.applicant.LastYearInSchool)",
-
-                SponsorShipCompanyContact: "@(ViewBag.applicant.SponsorShipCompanyContact)",
-                sponsorshipName: "@(ViewBag.applicant.SponsorShipCompany)",
-
-                SponsorShipLocation: "@(ViewBag.applicant.SponsorShipLocation)",
-
-                guardianName: "@(ViewBag.applicant.GuardianName)",
-                guardianOccupation: "@(ViewBag.applicant.GuardianOccupation)",
-                guardianRelationship: "@(ViewBag.applicant.GuardianRelationship)",
-                guardianPhone: "@(ViewBag.applicant.GuardianPhone)",
-
-      finance: "@(ViewBag.applicant.SourceOfFinance)",
+                
                 options: [
                 ],
                 in_payment_section: false,

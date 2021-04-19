@@ -123,10 +123,13 @@ using System.Globalization;
 
                     HallModel hall = await _dbContext.HallModel.FirstOrDefaultAsync(h => h.Id == Convert.ToInt32(HttpContext.Request.Form["hall"]));
 
+            FormerSchoolModel school  = await _dbContext.FormerSchoolModel.FirstOrDefaultAsync(h => h.Id == Convert.ToInt32(HttpContext.Request.Form["school"]));
 
-            SchoolModel school = await _dbContext.SchoolModel.FirstOrDefaultAsync(r => r.Id ==  HttpContext.Request.Form["school"]);
+            //.Write("school is " + HttpContext.Request.Form["school"]);
+            //SchoolModel school = await _dbContext.SchoolModel.FirstOrDefaultAsync(p => p.Id == Convert.ToInt32(HttpContext.Request.Form["school"]));
+            // school.Id = 1;
 
-            Debug.Write(school.ToString());
+            //Debug.Write("school is " +school.ToString());
 
             DenominationModel denomination = await _dbContext.DenominationModel.FirstOrDefaultAsync(r => r.ID == Convert.ToInt32(HttpContext.Request.Form["denomination"]));
 
@@ -225,8 +228,8 @@ using System.Globalization;
                                 Nationality = country,
 
                                 Region = region,
-
-                                School = school,
+                                FormerSchoolNew=school,
+                               // School = school,
                                 Grade =0,
                                 AdmissionType = "",
                                 AdmittedBy = 0,
@@ -346,7 +349,7 @@ using System.Globalization;
 
                                applicantModel.Region = region;
 
-                                applicantModel.School = school;
+                                applicantModel.FormerSchoolNew = school;
 
 
 

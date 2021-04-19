@@ -437,7 +437,7 @@ Designed by Gad Ocansey <gadocansey@gmail.com> +233243348522
                                     <table>
                                         <tr>
                                             <td class="uppercase" style=""><strong>Former School:</strong></td>
-                                            <td class="capitalize" style="text-transform:capitalize">@(ViewBag.applicant.School.Name)</td>
+                                            <td class="capitalize" style="text-transform:capitalize">@(ViewBag.applicant.FormerSchoolNew.Name)</td>
 
                                         </tr>
                                         <tr>
@@ -566,9 +566,8 @@ Designed by Gad Ocansey <gadocansey@gmail.com> +233243348522
                         <p>(Please read the instructions carefully before you endorse this form)</p>
                         <p></p>
                         <p>
-                            1. This declaration should be signed by a person of high integrity and honour who must also endorse
-                            at least one of the candidate's passport size photographs on the reverse side and also satisfy
-                            him/herself that the examination grades indicated
+                            1. This declaration should be signed by a person of high integrity and honour  and also satisfy
+                             that the examination grades indicated
                             on the form by the applicant are true.
                         <p>2. The application will not be valid if the declaration below is not signed</p>
                         <p>
@@ -577,7 +576,7 @@ Designed by Gad Ocansey <gadocansey@gmail.com> +233243348522
                         </p>
 
                         <p>
-                            I hereby declare that the photograph endorsed by me is the true likeness of the applicant  MISS FYNN AUGUSTINA AGGREY who is personally known to me. I have inspected his/her certificates against the
+                            I hereby declare that the photograph endorsed by me is the true likeness of the applicant  @System.Globalization.CultureInfo.CurrentCulture.TextInfo.ToTitleCase(ViewBag.applicant.Title) @System.Globalization.CultureInfo.CurrentCulture.TextInfo.ToTitleCase(ViewBag.applicant.Name) who is personally known to me. I have inspected his/her certificates against the
                             results indicated on the form and I satisfied that they are true and name that appears on them is
                             the same as that by which he/she is officially/personally known to me.
 
