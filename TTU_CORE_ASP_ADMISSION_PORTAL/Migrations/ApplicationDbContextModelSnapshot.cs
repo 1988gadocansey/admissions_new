@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using TTU_CORE_ASP_ADMISSION_PORTAL.Data;
 
-namespace TTU_CORE_ASP_ADMISSION_PORTAL.Data.Migrations
+namespace TTU_CORE_ASP_ADMISSION_PORTAL.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
     partial class ApplicationDbContextModelSnapshot : ModelSnapshot
@@ -1344,7 +1344,5 @@ namespace TTU_CORE_ASP_ADMISSION_PORTAL.Data.Migrations
                 });
 #pragma warning restore 612, 618
         }
-
-
     }
 }

@@ -82,12 +82,12 @@ namespace TTU_CORE_ASP_ADMISSION_PORTAL.Services
         {
             //string accountSid = Environment.GetEnvironmentVariable("TWILIO_ACCOUNT_SID");
             string accountSid = "AC7d8c5201cdd11fe5b8938105e75f77b0";
-            string authToken = "6b5aa307cb7cc857dcae1d98f5159417";
+            string authToken = "96930eca3e7063020e6a29831276a718";
 
             TwilioClient.Init(accountSid, authToken);
 
             var message = MessageResource.Create(
-                body: "TTU Admisison notification using Twillo API",
+                body: "TTU Admisison Testing. Thanks for testing.",
                 from: new Twilio.Types.PhoneNumber("+13476823203"),
                 to: new Twilio.Types.PhoneNumber(PhoneNumber)
             );

@@ -24,15 +24,16 @@ namespace TTU_CORE_ASP_ADMISSION_PORTAL.Controllers
                     private readonly ILogger<UploadController> _logger;
                     private string serverUrl = "https://photos.ttuportal.com/public/albums/thumbnails";
         private readonly IConfiguration Configuration;
-        [Obsolete]
-        private readonly IHostingEnvironment hostingEnvironment;
+ 
+        private readonly IWebHostEnvironment hostingEnvironment;
+
                         private UserManager<ApplicationUser> _userManager;
                         private readonly ApplicationDbContext _dbContext;
                          private readonly IHelper _helper;
         
 
-        [Obsolete]
-        public UploadController(ILogger<UploadController> logger, IHostingEnvironment environment, UserManager<ApplicationUser> userManager, ApplicationDbContext dbContext,IHelper helper, IConfiguration configuration)
+        
+        public UploadController(ILogger<UploadController> logger, IWebHostEnvironment environment, UserManager<ApplicationUser> userManager, ApplicationDbContext dbContext,IHelper helper, IConfiguration configuration)
                         {
                            _logger = logger;
                             hostingEnvironment = environment;
@@ -63,10 +64,11 @@ namespace TTU_CORE_ASP_ADMISSION_PORTAL.Controllers
 
                                 var fileName = file.FileName;
 
-                                var uploads = Path.Combine(hostingEnvironment.WebRootPath, "pictures");
+                               var uploads = Path.Combine(hostingEnvironment.WebRootPath, "pictures");
                 
-
-                                var extension = Path.GetExtension(fileName).ToLower();
+                                 //var uploads= Path.Combine(Directory.GetCurrentDirectory(), "wwwroot");
+            
+                             var extension = Path.GetExtension(fileName).ToLower();
 
                
 
@@ -82,11 +84,11 @@ namespace TTU_CORE_ASP_ADMISSION_PORTAL.Controllers
                                         using var image = Image.Load(file.OpenReadStream());
 
                                         image.Mutate(img => img.AutoOrient());
-                                        image.Mutate(x => x.Resize(413, 531));
+                                        image.Mutate(x => x.Resize(192, 192));
+                        //image.Mutate(x => x.Crop(189, 189));
 
-                               
-                                      try
-                                        {
+                        try
+                        {
                                    
                                             /**
                                              * Call the image background service from the ttuportal.com/api/image/check to help test

@@ -356,7 +356,7 @@ else
                                 </div>
 
                                 <div class="parsley-row">
-                                    <div class="uk-input-group" v-if="nationality=='58'">
+                                    <div class="uk-input-group"  >
 
                                         <label for="">Hometown Region :</label>
                                         <div class="md-input-wrapper md-input-filled">
@@ -371,7 +371,7 @@ else
                                     </div>
                                 </div>
 
-                                <div class="parsley-row" v-if="nationality=='58'">
+                                <div class="parsley-row">
                                     <div class="uk-input-group">
 
                                         <label for="">District :</label>
@@ -1075,7 +1075,7 @@ else
                     })
                 },
                 submit_form: function () {
-                    return (function (modal) { modal = UIkit.modal.blockUI("<div class='uk-text-center'>Saving Data...<br/><img class='uk-thumbnail uk-margin-top' src='https://localhost:5001/assets/img/spinners/spinner_success.gif' /></div>"); setTimeout(function () { modal.hide() }, 50000) })();
+                    return (function (modal) { modal = UIkit.modal.blockUI("<div class='uk-text-center'>Saving Data...<br/><img class='uk-thumbnail uk-margin-top' src='https://apply.ttuportal.com/assets/img/spinners/spinner_success.gif' /></div>"); setTimeout(function () { modal.hide() }, 50000) })();
                 },
 
                 go_to_fill_form_section: function (event) {

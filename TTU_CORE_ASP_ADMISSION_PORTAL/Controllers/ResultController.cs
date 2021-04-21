@@ -90,18 +90,18 @@ using Microsoft.EntityFrameworkCore;
                     {
 
 
-                        if (score.Subject.Type == "Core")
+                        if (score.Subject.Type == "core")
                         {
                             Array.Fill(Core, Convert.ToInt32(score.Grade.Value));
 
                         }
-                        if (score.Subject.Type == "CoreAlt")
+                        if (score.Subject.Type == "core_alt")
                         {
                             Array.Fill(CoreAlt, Convert.ToInt32(score.Grade.Value));
 
                         }
 
-                        if (score.Subject.Type == "Elective")
+                        if (score.Subject.Type == "elective")
                         {
                             Array.Fill(Electives, Convert.ToInt32(score.Grade.Value));
 
@@ -179,10 +179,10 @@ using Microsoft.EntityFrameworkCore;
                     string[] center = HttpContext.Request.Form["items[center]"];
 
                     string[] type = HttpContext.Request.Form["items[type]"];
-                //int[] Core;
-                //int[] CoreAlt;
-               // int[] Electives;
-
+            //int[] Core;
+            //int[] CoreAlt;
+            // int[] Electives;
+            Console.Write("type length is  " + type.Length);
                 var Core = new int[8];
                 var CoreAlt = new int[7];
                 var Electives= new int[20];
@@ -192,13 +192,13 @@ using Microsoft.EntityFrameworkCore;
 
 
 
-
-                    if (applicant.NationalityId == 58 || applicant.NationalityId != 58)
-                    {
+                int i = 0;
+                    //if (applicant.NationalityId == 239 || applicant.NationalityId != 58)
+                    //{
 
                         if (applicationUser.Type != "TOPUP" || applicationUser.Type !=  "MTECH")
                         {
-                        for (int i = 0; i < type.Length; i++)
+                        for (i = 0; i < type.Length; i++)
                         {
 
 
@@ -221,17 +221,25 @@ using Microsoft.EntityFrameworkCore;
                                           Year = year[i].ToString(),
                                           Grade = grades
                                       });
-                            if (await _dbContext.ResultUploadModel.AnyAsync(c => c.Subject == subjects && c.Grade == grades && c.Year == year[i].ToString() && c.ExamType == type[i] && c.IndexNo == indexno[i].ToString() && c.Sitting == sitting[i] && c.Month == month[i].ToString() && c.ApplicantModelID == applicant.ID))
+                        // Console.WriteLine("insert..");
 
-                                TempData["message"] = "Error uploading result!!. Result already uploaded";
-                                TempData["type"] = "error";
-                                return RedirectToAction("Index");
+                        if (await _dbContext.ResultUploadModel.AnyAsync(c => c.Subject == subjects && c.Grade == grades && c.Year == year[i].ToString() && c.ExamType == type[i] && c.IndexNo == indexno[i].ToString() && c.Sitting == sitting[i] && c.Month == month[i].ToString() && c.ApplicantModelID == applicant.ID) == true)
+                        {
 
-                             }
+                            TempData["message"] = "Error uploading result!!. Result already uploaded";
+                            TempData["type"] = "error";
+                            return RedirectToAction("Index");
 
+                        }
+                        else
+                        {
 
+                            await _dbContext.SaveChangesAsync();
+                        }
 
-                            var resultsData = _dbContext.ResultUploadModel.Include(g => g.Grade)
+                }
+
+                    var resultsData = _dbContext.ResultUploadModel.Include(g => g.Grade)
 
                                  .Include(s => s.Subject)
                                  .Where(r => r.ApplicantModelID == applicant.ID);
@@ -240,18 +248,18 @@ using Microsoft.EntityFrameworkCore;
                             {
 
 
-                                if (score.Subject.Code == "core")
+                                if (score.Subject.Type == "core")
                                 {
                                     Array.Fill(Core, Convert.ToInt32(score.Grade.Value));
 
                                 }
-                                if (score.Subject.Code == "core_alt")
+                                if (score.Subject.Type == "core_alt")
                                 {
                                     Array.Fill(CoreAlt, Convert.ToInt32(score.Grade.Value));
 
                                 }
 
-                                if (score.Subject.Code == "elective")
+                                if (score.Subject.Type == "elective")
                                 {
                                     Array.Fill(Electives, Convert.ToInt32(score.Grade.Value));
 
@@ -327,11 +335,11 @@ using Microsoft.EntityFrameworkCore;
 
                         }
 
-                    }
-                    else
-                    {
+                    //}
+                    //else
+                    //{
 
-                    }
+                    //}
 
                     return RedirectToAction("Index");
                     // ViewBag["Model"]= await _dbContext.ResultUploadModel.FirstOrDefaultAsync();

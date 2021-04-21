@@ -21,6 +21,8 @@ namespace TTU_CORE_ASP_ADMISSION_PORTAL
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
+                   
+                   // webBuilder.UseContentRoot(AppContext.BaseDirectory);
                 });
     }
 }

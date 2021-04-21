@@ -14,6 +14,7 @@ namespace TTU_CORE_ASP_ADMISSION_PORTAL.Data
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
+
         }
         public DbSet<TTU_CORE_ASP_ADMISSION_PORTAL.Models.ApplicantModel> ApplicantModel { get; set; }
        public DbSet<TTU_CORE_ASP_ADMISSION_PORTAL.Models.FormNoModel> FormNoModel { get; set; }
@@ -113,7 +114,35 @@ namespace TTU_CORE_ASP_ADMISSION_PORTAL.Data
         }
 
 
+        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        //{
+        //    optionsBuilder.UseNpgsql("Server=localhost;Port=5432;Database=admissions;User Id=admissions;Password=TTU_GAD_KOJO2020_$@;", options =>
+        //    {
+        //        options.SetPostgresVersion(new Version(9,6));
+        //    });
+        //    base.OnConfiguring(optionsBuilder);
+        //}
 
+        //// protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) => optionsBuilder.UseNpgsql("...", o => o.SetPostgresVersion(9, 6));
+
+        //protected override void OnModelCreating(ModelBuilder modelBuilder)
+        //{
+        //    modelBuilder.UseSerialColumns();
+        //    base.OnModelCreating(modelBuilder);
+        //}
+
+    //    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    //=> optionsBuilder.UseNpgsql("Server=localhost;Port=5432;Database=admissions;User Id=admissions;Password=TTU_GAD_KOJO2020_$@;", o => o.SetPostgresVersion(9, 6));
+
+    //    //   protected override void OnModelCreating(ModelBuilder modelBuilder)
+    //    //=> modelBuilder.UseSerialColumns();
+
+    //    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    //    {
+    //        base.OnModelCreating(modelBuilder);
+             
+
+    //    }
 
     }
 }

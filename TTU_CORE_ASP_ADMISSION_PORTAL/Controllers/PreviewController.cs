@@ -37,14 +37,15 @@ using Microsoft.Extensions.Logging;
 
             private readonly IHttpContextAccessor _httpContextAccessor;
             private UserManager<ApplicationUser> _userManager;
-
-            public PreviewController(ILogger<PreviewController> logger, UserManager<ApplicationUser> userManager, ApplicationDbContext dbContext, IHttpContextAccessor httpContextAccessor)
+        private readonly IHelper _helper;
+        public PreviewController(ILogger<PreviewController> logger, IHelper helper, UserManager<ApplicationUser> userManager, ApplicationDbContext dbContext, IHttpContextAccessor httpContextAccessor)
             {
                 _logger = logger;
                 _userManager = userManager;
                 _dbContext = dbContext;
                 _httpContextAccessor = httpContextAccessor;
-            }
+            _helper = helper;
+        }
 
 
             [HttpGet]
@@ -95,6 +96,7 @@ using Microsoft.Extensions.Logging;
 
             ViewData["results"] = results;
 
+            //_helper.SendSMSNotification(applicant.Phone);
             return View();
 
             }

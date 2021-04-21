@@ -28,7 +28,7 @@ namespace TTU_CORE_ASP_ADMISSION_PORTAL.Services
 
             private const int exifOrientationID = 0x112; //274
                                                       
-            public static bool IsImage(IFormFile postedFile)
+            public static bool IsImage(this IFormFile postedFile)
             {
                 //-------------------------------------------
                 //  Check the image mime types
