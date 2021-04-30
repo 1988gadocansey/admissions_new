@@ -29,8 +29,8 @@ using System.Globalization;
 
                 private readonly IHttpContextAccessor _httpContextAccessor;
                 private UserManager<ApplicationUser> _userManager;
-
-                public FormController(ILogger<FormController> logger, UserManager<ApplicationUser> userManager, ApplicationDbContext dbContext, IHttpContextAccessor httpContextAccessor)
+        private readonly IHelper _helper;
+        public FormController(ILogger<FormController> logger, IHelper helper, UserManager<ApplicationUser> userManager, ApplicationDbContext dbContext, IHttpContextAccessor httpContextAccessor)
                 {
                     _logger = logger;
                     _userManager = userManager;
@@ -153,241 +153,279 @@ using System.Globalization;
                     DateTime dateOfBirth = new DateTime(Convert.ToInt32(dobArray[0]), Convert.ToInt32(dobArray[1]), Convert.ToInt32(dobArray[2]), 7, 0, 0);
 
 
-                    // check if the form existed in database or is a new form i.e update or insert
+            // check if the form existed in database or is a new form i.e update or insert
 
-                    var applicantModel = await _dbContext.ApplicantModel.FirstOrDefaultAsync(a => a.ApplicationUserId == userId);
+            if (HttpContext.Request.Form["school"]!="" && HttpContext.Request.Form["firstChoice"] != "" && HttpContext.Request.Form["secondChoice"] != "" && HttpContext.Request.Form["thirdChoice"] != "" && HttpContext.Request.Form["FirstQualification"] != "" &&  HttpContext.Request.Form["SeconfQualification"] != "" && HttpContext.Request.Form["programme"] != "" && HttpContext.Request.Form["year"] != "") {
+
+                // check to make sure 1 and 2 and 3 choices are not the same
+                var choices = new int[10];
+
+                Array.Fill(choices, Convert.ToInt32(HttpContext.Request.Form["secondChoice"]));
+
+                Array.Fill(choices, Convert.ToInt32(HttpContext.Request.Form["firstChoice"]));
+
+                Array.Fill(choices, Convert.ToInt32(HttpContext.Request.Form["thirdChoice"]));
+
+                var tempList = choices.ToList();
+
+                tempList.Add(Convert.ToInt32(HttpContext.Request.Form["secondChoice"]));
+
+                tempList.Add(Convert.ToInt32(HttpContext.Request.Form["firstChoice"]));
+
+                tempList.Add(Convert.ToInt32(HttpContext.Request.Form["thirdChoice"]));
+
+                var programs = tempList.ToArray();   //equiv: myArray.Push(5);
+
+                int  containsDuplicates = programs.Distinct().Count()  ;
+                 
+                //if (containsDuplicates >0)
+                //{
+                //    TempData["message"] = "First Choice must not be same as Second and Third Choice";
+                //    TempData["type"] = "error";
+                //    return RedirectToAction("Create", "Form");
+                //}
+
+
+
+                var applicantModel = await _dbContext.ApplicantModel.FirstOrDefaultAsync(a => a.ApplicationUserId == userId);
 
                 if (applicantModel == null)
+                {
+
+
+                    await _dbContext.ApplicantModel.AddAsync(
+                        new ApplicantModel
+                        {
+                            FirstName = HttpContext.Request.Form["fname"],
+                            LastName = HttpContext.Request.Form["surname"],
+                            DateOfBirth = dateOfBirth,
+
+                            ApplicationUser = user,
+                            ApplicationUserId = user.Id,
+
+                            EntryMode = HttpContext.Request.Form["mode"],
+                            PreviousName = HttpContext.Request.Form["previousName"],
+                            MiddleName = HttpContext.Request.Form["othernames"],
+                            Gender = HttpContext.Request.Form["gender"],
+                            MaritalStatus = HttpContext.Request.Form["maritalStatus"],
+                            Title = HttpContext.Request.Form["title"],
+                            Age = _formService.GetAge(dateOfBirth).ToString(),
+
+                            ApplicationNumber = Convert.ToInt32(ApplicantForm),
+                            EmergencyContact = HttpContext.Request.Form["emergency"],
+                            Phone = HttpContext.Request.Form["phone"],
+                            AltPhone = HttpContext.Request.Form["altPhone"],
+                            Email = HttpContext.Request.Form["email"],
+                            Address = HttpContext.Request.Form["address"],
+                            PostGPRS = HttpContext.Request.Form["postGPRS"],
+                            NationalIDType = HttpContext.Request.Form["NationalityId"],
+                            NationalIDNo = HttpContext.Request.Form["NationalityName"],
+                            Hometown = HttpContext.Request.Form["hometown"],
+                            ResidentialStatus = Convert.ToBoolean(HttpContext.Request.Form["resident"]),
+
+                            GuardianName = HttpContext.Request.Form["guardianName"],
+                            GuardianRelationship = HttpContext.Request.Form["guardianRelationship"],
+
+                            GuardianPhone = HttpContext.Request.Form["guardianPhone"],
+                            GuardianOccupation = HttpContext.Request.Form["guardianOccupation"],
+
+                            Disability = Convert.ToBoolean(HttpContext.Request.Form["disability"]),
+
+                            DisabilityType = HttpContext.Request.Form["disabilityType"],
+
+                            FormerSchool = HttpContext.Request.Form["school"],
+
+                            Denomination = HttpContext.Request.Form["denomination"],
+
+                            Referrals = HttpContext.Request.Form["Referal"],
+                            FirstQualification = HttpContext.Request.Form["FirstQualification"],
+                            SecondQualification = HttpContext.Request.Form["SecondQualification"],
+                            ProgrammeStudied = HttpContext.Request.Form["programme"],
+                            LastYearInSchool = Convert.ToInt32(HttpContext.Request.Form["year"]),
+                            Awaiting = Convert.ToBoolean(HttpContext.Request.Form["awaiting"]),
+                            PreferedHall = HttpContext.Request.Form["hall"],
+                            Status = "Applicant",
+                            SourceOfFinance = HttpContext.Request.Form["finance"],
+
+                            Hall = hall,
+                            SponsorShip = Convert.ToBoolean(HttpContext.Request.Form["sponsorship"]),
+                            SponsorShipCompany = HttpContext.Request.Form["sponsorshipName"],
+                            SponsorShipCompanyContact = HttpContext.Request.Form["SponsorShipCompanyContact"],
+                            SponsorShipLocation = HttpContext.Request.Form["SponsorShipLocation"],
+
+                            District = district,
+                            FirstChoiceId = Convert.ToInt32(HttpContext.Request.Form["firstChoice"]),
+                            SecondChoiceId = Convert.ToInt32(HttpContext.Request.Form["secondChoice"]),
+                            ThirdChoiceId = Convert.ToInt32(HttpContext.Request.Form["thirdChoice"]),
+
+                            Nationality = country,
+
+                            Region = region,
+                            FormerSchoolNew = school,
+                                // School = school,
+                                Grade = 0,
+                            AdmissionType = "",
+                            AdmittedBy = 0,
+                                //DateAdmitted = DateTime.ParseExact(HttpContext.Request.Form["dob"], "dd/MM/yyyy", null),
+                                DateAdmitted = new DateTime(),
+                            HallAdmitted = "",
+                            SectionAdmitted = "",
+                            YearOfAdmission = _formService.GetAdmissionYear(),
+                            Admitted = false,
+                            LetterPrinted = false,
+                            FeePaying = Convert.ToBoolean(HttpContext.Request.Form["FeePaying"]),
+                            ReportedInSchool = false,
+                            FeesPaid = Convert.ToDecimal(0.0),
+                            Reported = false,
+                            Elligible = false,
+                            SMSSent = false,
+                            Religion = religion,
+
+
+
+                        });
+
+                    if (await _dbContext.SaveChangesAsync() == 1)
                     {
-                Console.WriteLine("inserting....");
-                        await _dbContext.ApplicantModel.AddAsync(
-                            new ApplicantModel
-                            {
-                                FirstName = HttpContext.Request.Form["fname"],
-                                LastName = HttpContext.Request.Form["surname"],
-                                DateOfBirth = dateOfBirth,
 
-                                ApplicationUser = user,
-                                ApplicationUserId = user.Id,
+                        TempData["message"] = "Data saved successfully!!";
+                        TempData["type"] = "success";
 
-                                EntryMode = HttpContext.Request.Form["mode"],
-                                PreviousName = HttpContext.Request.Form["previousName"],
-                                MiddleName = HttpContext.Request.Form["othernames"],
-                                Gender = HttpContext.Request.Form["gender"],
-                                MaritalStatus = HttpContext.Request.Form["maritalStatus"],
-                                Title = HttpContext.Request.Form["title"],
-                                Age = _formService.GetAge(dateOfBirth).ToString(),
+                        var applicant = await _dbContext.Users.FindAsync(userId);
 
-                                ApplicationNumber = Convert.ToInt32(ApplicantForm),
-                                EmergencyContact = HttpContext.Request.Form["emergency"],
-                                Phone = HttpContext.Request.Form["phone"],
-                                AltPhone = HttpContext.Request.Form["altPhone"],
-                                Email = HttpContext.Request.Form["email"],
-                                Address = HttpContext.Request.Form["address"],
-                                PostGPRS = HttpContext.Request.Form["postGPRS"],
-                                NationalIDType = HttpContext.Request.Form["NationalityId"],
-                                NationalIDNo = HttpContext.Request.Form["NationalityName"],
-                                Hometown = HttpContext.Request.Form["hometown"],
-                                ResidentialStatus = Convert.ToBoolean(HttpContext.Request.Form["resident"]),
-
-                                GuardianName = HttpContext.Request.Form["guardianName"],
-                                GuardianRelationship = HttpContext.Request.Form["guardianRelationship"],
-
-                                GuardianPhone = HttpContext.Request.Form["guardianPhone"],
-                                GuardianOccupation = HttpContext.Request.Form["guardianOccupation"],
-
-                                Disability = Convert.ToBoolean(HttpContext.Request.Form["disability"]),
-
-                                DisabilityType = HttpContext.Request.Form["disabilityType"],
-
-                                FormerSchool = HttpContext.Request.Form["school"],
-
-                                Denomination = HttpContext.Request.Form["denomination"],
-
-                                Referrals = HttpContext.Request.Form["Referal"],
-                                FirstQualification = HttpContext.Request.Form["FirstQualification"],
-                                SecondQualification = HttpContext.Request.Form["SecondQualification"],
-                                ProgrammeStudied = HttpContext.Request.Form["programme"],
-                                LastYearInSchool = Convert.ToInt32(HttpContext.Request.Form["year"]),
-                                Awaiting = Convert.ToBoolean(HttpContext.Request.Form["awaiting"]),
-                                PreferedHall = HttpContext.Request.Form["hall"],
-                                Status = "Applicant",
-                                SourceOfFinance = HttpContext.Request.Form["finance"],
-
-                                Hall = hall,
-                                SponsorShip = Convert.ToBoolean(HttpContext.Request.Form["sponsorship"]),
-                                SponsorShipCompany = HttpContext.Request.Form["sponsorshipName"],
-                                SponsorShipCompanyContact = HttpContext.Request.Form["SponsorShipCompanyContact"],
-                                SponsorShipLocation = HttpContext.Request.Form["SponsorShipLocation"],
-
-                                District = district,
-                                FirstChoiceId = Convert.ToInt32(HttpContext.Request.Form["firstChoice"]),
-                                SecondChoiceId = Convert.ToInt32(HttpContext.Request.Form["secondChoice"]),
-                                ThirdChoiceId = Convert.ToInt32(HttpContext.Request.Form["thirdChoice"]),
-
-                                Nationality = country,
-
-                                Region = region,
-                                FormerSchoolNew=school,
-                               // School = school,
-                                Grade =0,
-                                AdmissionType = "",
-                                AdmittedBy = 0,
-                            //DateAdmitted = DateTime.ParseExact(HttpContext.Request.Form["dob"], "dd/MM/yyyy", null),
-                            DateAdmitted = new DateTime(),
-                                HallAdmitted = "",
-                                SectionAdmitted = "",
-                                YearOfAdmission = _formService.GetAdmissionYear(),
-                                Admitted = false,
-                                LetterPrinted = false,
-                                FeePaying = Convert.ToBoolean(HttpContext.Request.Form["FeePaying"]),
-                                ReportedInSchool = false,
-                                FeesPaid = Convert.ToDecimal(0.0),
-                                Reported = false,
-                                Elligible = false,
-                                SMSSent = false,
-                                Religion = religion,
-                                
-
-
-                            });
-
-                        if (await _dbContext.SaveChangesAsync() == 1)
+                        applicant.Started = 1;
+                        if (user.Type == "MTECH" || user.Type == "TOPUP")
                         {
-
-                            TempData["message"] = "Data saved successfully!!";
-                            TempData["type"] = "success";
-
-                            var applicant = await _dbContext.Users.FindAsync(userId);
-
-                            applicant.Started = 1;
-                               if( user.Type=="MTECH" || user.Type == "TOPUP")
-                                {
-                                   user.FormCompleted = 1;
-                                }
-
-
-                            await _dbContext.SaveChangesAsync();
-
+                            user.FormCompleted = 1;
                         }
-                        else
-                        {
-                            TempData["message"] = "Error saving data!!";
-                            TempData["type"] = "error";
-                        }
+
+
+                        await _dbContext.SaveChangesAsync();
 
                     }
                     else
                     {
+                        TempData["message"] = "Error saving data!!";
+                        TempData["type"] = "error";
+                    }
 
-                Console.WriteLine("updating....");
-                try
-                            {
+                }
+                else
+                {
+
+                    Console.WriteLine("updating....");
+                    try
+                    {
 
                         applicantModel.FirstName = HttpContext.Request.Form["fname"];
                         applicantModel.LastName = HttpContext.Request.Form["surname"];
-                                applicantModel.DateOfBirth = dateOfBirth;
+                        applicantModel.DateOfBirth = dateOfBirth;
 
-                                applicantModel.ApplicationUser = user;
-                                applicantModel.ApplicationUserId = user.Id;
-                                
-                                applicantModel.EntryMode = HttpContext.Request.Form["mode"];
-                                applicantModel.PreviousName = HttpContext.Request.Form["previousName"];
-                               applicantModel.MiddleName = HttpContext.Request.Form["othernames"];
-                                applicantModel.Gender = HttpContext.Request.Form["gender"];
-                                applicantModel.MaritalStatus = HttpContext.Request.Form["maritalStatus"];
-                                applicantModel.Title = HttpContext.Request.Form["title"];
-                                applicantModel.Age = _formService.GetAge(dateOfBirth).ToString();
+                        applicantModel.ApplicationUser = user;
+                        applicantModel.ApplicationUserId = user.Id;
 
-                                applicantModel.ApplicationNumber = Convert.ToInt32(ApplicantForm);
-                                applicantModel.EmergencyContact = HttpContext.Request.Form["emergency"];
-                                applicantModel.Phone = HttpContext.Request.Form["phone"];
-                                applicantModel.AltPhone = HttpContext.Request.Form["altPhone"];
-                                applicantModel.Email = HttpContext.Request.Form["email"];
-                                applicantModel.Address = HttpContext.Request.Form["address"];
-                                applicantModel.PostGPRS = HttpContext.Request.Form["postGPRS"];
-                                applicantModel.NationalIDType = HttpContext.Request.Form["NationalityId"];
-                                applicantModel.NationalIDNo = HttpContext.Request.Form["NationalityName"];
-                                applicantModel.Hometown = HttpContext.Request.Form["hometown"];
-                                applicantModel.ResidentialStatus = Convert.ToBoolean(HttpContext.Request.Form["resident"]);
+                        applicantModel.EntryMode = HttpContext.Request.Form["mode"];
+                        applicantModel.PreviousName = HttpContext.Request.Form["previousName"];
+                        applicantModel.MiddleName = HttpContext.Request.Form["othernames"];
+                        applicantModel.Gender = HttpContext.Request.Form["gender"];
+                        applicantModel.MaritalStatus = HttpContext.Request.Form["maritalStatus"];
+                        applicantModel.Title = HttpContext.Request.Form["title"];
+                        applicantModel.Age = _formService.GetAge(dateOfBirth).ToString();
 
-                                applicantModel.GuardianName = HttpContext.Request.Form["guardianName"];
-                                applicantModel.GuardianRelationship = HttpContext.Request.Form["guardianRelationship"];
+                        applicantModel.ApplicationNumber = Convert.ToInt32(ApplicantForm);
+                        applicantModel.EmergencyContact = HttpContext.Request.Form["emergency"];
+                        applicantModel.Phone = HttpContext.Request.Form["phone"];
+                        applicantModel.AltPhone = HttpContext.Request.Form["altPhone"];
+                        applicantModel.Email = HttpContext.Request.Form["email"];
+                        applicantModel.Address = HttpContext.Request.Form["address"];
+                        applicantModel.PostGPRS = HttpContext.Request.Form["postGPRS"];
+                        applicantModel.NationalIDType = HttpContext.Request.Form["NationalityId"];
+                        applicantModel.NationalIDNo = HttpContext.Request.Form["NationalityName"];
+                        applicantModel.Hometown = HttpContext.Request.Form["hometown"];
+                        applicantModel.ResidentialStatus = Convert.ToBoolean(HttpContext.Request.Form["resident"]);
 
-                                applicantModel.GuardianPhone = HttpContext.Request.Form["guardianPhone"];
-                                applicantModel.GuardianOccupation = HttpContext.Request.Form["guardianOccupation"];
+                        applicantModel.GuardianName = HttpContext.Request.Form["guardianName"];
+                        applicantModel.GuardianRelationship = HttpContext.Request.Form["guardianRelationship"];
 
-                                applicantModel.Disability = Convert.ToBoolean((HttpContext.Request.Form["disability"]));
+                        applicantModel.GuardianPhone = HttpContext.Request.Form["guardianPhone"];
+                        applicantModel.GuardianOccupation = HttpContext.Request.Form["guardianOccupation"];
 
-                                applicantModel.DisabilityType = HttpContext.Request.Form["disabilityType"];
+                        applicantModel.Disability = Convert.ToBoolean((HttpContext.Request.Form["disability"]));
 
-                                applicantModel.FormerSchool = HttpContext.Request.Form["school"];
+                        applicantModel.DisabilityType = HttpContext.Request.Form["disabilityType"];
 
-                                applicantModel.Denomination = HttpContext.Request.Form["denomination"];
+                        applicantModel.FormerSchool = HttpContext.Request.Form["school"];
 
-                                applicantModel.Referrals = HttpContext.Request.Form["Referal"];
-                           
-                                applicantModel.ProgrammeStudied = HttpContext.Request.Form["programme"];
-                                applicantModel.LastYearInSchool = Convert.ToInt32(HttpContext.Request.Form["year"]);
-                                applicantModel.Awaiting = Convert.ToBoolean(HttpContext.Request.Form["awaiting"]);
-                                applicantModel.PreferedHall = HttpContext.Request.Form["hall"];
-                            
-                                applicantModel.SourceOfFinance = HttpContext.Request.Form["finance"];
+                        applicantModel.Denomination = HttpContext.Request.Form["denomination"];
 
-                                applicantModel.Hall = hall;
-                                applicantModel.SponsorShip = Convert.ToBoolean(HttpContext.Request.Form["sponsorship"]);
-                                applicantModel.SponsorShipCompany = HttpContext.Request.Form["sponsorshipName"];
-                                applicantModel.SponsorShipCompanyContact = HttpContext.Request.Form["SponsorShipCompanyContact"];
-                                applicantModel.SponsorShipLocation = HttpContext.Request.Form["SponsorShipLocation"];
+                        applicantModel.Referrals = HttpContext.Request.Form["Referal"];
 
-                                applicantModel.District = district;
+                        applicantModel.ProgrammeStudied = HttpContext.Request.Form["programme"];
+                        applicantModel.LastYearInSchool = Convert.ToInt32(HttpContext.Request.Form["year"]);
+                        applicantModel.Awaiting = Convert.ToBoolean(HttpContext.Request.Form["awaiting"]);
+                        applicantModel.PreferedHall = HttpContext.Request.Form["hall"];
+
+                        applicantModel.SourceOfFinance = HttpContext.Request.Form["finance"];
+
+                        applicantModel.Hall = hall;
+                        applicantModel.SponsorShip = Convert.ToBoolean(HttpContext.Request.Form["sponsorship"]);
+                        applicantModel.SponsorShipCompany = HttpContext.Request.Form["sponsorshipName"];
+                        applicantModel.SponsorShipCompanyContact = HttpContext.Request.Form["SponsorShipCompanyContact"];
+                        applicantModel.SponsorShipLocation = HttpContext.Request.Form["SponsorShipLocation"];
+
+                        applicantModel.District = district;
                         applicantModel.FirstChoiceId = Convert.ToInt32(HttpContext.Request.Form["firstChoice"]);
                         applicantModel.SecondChoiceId = Convert.ToInt32(HttpContext.Request.Form["secondChoice"]);
                         applicantModel.ThirdChoiceId = Convert.ToInt32(HttpContext.Request.Form["thirdChoice"]);
 
-                                applicantModel.Nationality = country;
+                        applicantModel.Nationality = country;
 
-                               applicantModel.Region = region;
+                        applicantModel.Region = region;
 
-                                applicantModel.FormerSchoolNew = school;
+                        applicantModel.FormerSchoolNew = school;
 
 
 
 
                         applicantModel.FeePaying = Convert.ToBoolean(HttpContext.Request.Form["FeePaying"]);
-                            applicantModel.FirstQualification= HttpContext.Request.Form["FirstQualification"];
-                    applicantModel.SecondQualification = HttpContext.Request.Form["SecondQualification"];
-                    applicantModel.Religion = religion;
+                        applicantModel.FirstQualification = HttpContext.Request.Form["FirstQualification"];
+                        applicantModel.SecondQualification = HttpContext.Request.Form["SecondQualification"];
+                        applicantModel.Religion = religion;
 
-                                //.Update(applicantModel);
+                        //.Update(applicantModel);
 
 
-                                if (await _dbContext.SaveChangesAsync()==1)
-                                {
-                                    TempData["message"] = "Data updated successfully!!";
-                                    TempData["type"] = "success";
-                                }
-                                else
-                                {
-                                    TempData["message"] = "Error updating data!!";
-                                    TempData["type"] = "error";
-                                }
-                        
-                            }
-                            catch (DbUpdateConcurrencyException)
-                            {
-                         
-                         
-                                    throw;
-                        
-                            }
-               
+                        if (await _dbContext.SaveChangesAsync() == 1)
+                        {
+                            TempData["message"] = "Data updated successfully!!";
+                            TempData["type"] = "success";
+                        }
+                        else
+                        {
+                            TempData["message"] = "Error updating data!!";
+                            TempData["type"] = "error";
+                        }
 
+                    }
+                    catch (DbUpdateConcurrencyException)
+                    {
+
+
+                        throw;
+
+                    }
+
+                
 
 
                     }
 
-
+            }
+            else
+            {
+                TempData["message"] = "First choice, second choice, former school, qualification.... required fill all the fields";
+                TempData["type"] = "error";
+            }
 
 
 

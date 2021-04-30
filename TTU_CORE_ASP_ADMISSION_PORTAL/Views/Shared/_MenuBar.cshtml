@@ -31,16 +31,19 @@
         </li>
         @if ((user.Started) == 1)
         {
-            <li title="Forms">
+            @if ((user.Type) != "MTECH" || user.Type != "BRIDGING" || user.Type != "TOPUP")
+            {
+                <li title="Forms">
 
-                <a asp-area="" asp-controller="Result" asp-action="Index">
+                    <a asp-area="" asp-controller="Result" asp-action="Index">
 
 
-                    <span class="menu_icon"><i class="material-icons">upload</i></span>
-                    <span class="menu_title">Upload Results</span>
-                </a>
-            </li>
-        }
+                        <span class="menu_icon"><i class="material-icons">upload</i></span>
+                        <span class="menu_title">Upload Results</span>
+                    </a>
+                </li>
+              }
+         }
             @if ((user.FormCompleted) == 1)
             {
 
@@ -59,15 +62,15 @@
         @if ((user.Type) == "MTECH" || user.Type == "MTECH")
         {
 
-            <li title="Forms">
+            @*<li title="Forms">
 
-                <a asp-area="" asp-controller="WorkExperience" asp-action="Index">
+                    <a asp-area="" asp-controller="WorkExperience" asp-action="Index">
 
 
-                    <span class="menu_icon"><i class="material-icons">note-plus</i></span>
-                    <span class="menu_title">Upload Work Experience</span>
-                </a>
-            </li>
+                        <span class="menu_icon"><i class="material-icons">note-plus</i></span>
+                        <span class="menu_title">Upload Work Experience</span>
+                    </a>
+                </li>*@
 
         }
 

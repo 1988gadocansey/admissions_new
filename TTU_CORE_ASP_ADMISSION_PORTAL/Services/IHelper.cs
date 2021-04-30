@@ -24,6 +24,9 @@ namespace TTU_CORE_ASP_ADMISSION_PORTAL.Services
 
         public void SendSMSNotification(string PhoneNumber);
 
-        public void SendEmailNotification(string Email);
+        public void SendEmailNotification(string Email,string Message);
+
+        public  bool ContainsDuplicates(int[] a);
+         
     }
 }

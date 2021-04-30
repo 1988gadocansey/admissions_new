@@ -74,10 +74,11 @@
 
 
 
-                 
-                <div asp-validation-summary="All" class="form-messages form-errors" data-qa-form-error="">
-                     
+                @if(@ViewBag.ErrorMessage!=""){
+                <div asp-validation-summary="All" style="color:red" class="form-messages" data-qa-form-error="">
+
                 </div>
+                }
 
 
                 <form class="validated" name="form" method="post">
@@ -121,39 +122,39 @@
                             </div>
                             <div class="tpa">
                                 <div class="customizer-content p-2 ps-container ps-theme-dark ps-active-y" data-ps-id="f1a16aca-1b52-cb8c-5503-5e4f59679e2f">
-                                    
+
                                     <p>Applicants needing any help can send their enquiries to the following addresses:</p>
-                                   
-                                   
-                                    
-                                        <h5>Admissions Unit</h5>
-                                        Email: <a href="mailto:admissions@ttu.edu.gh">admissions@ttu.edu.gh</a><br>
-                                        Phone: 0508333992 <br>
-                                        Phone: 0508335033 <br>
-                                        Phone: 0553777777, 0243348522.
+
+
+
+                                    <h5>Admissions Unit</h5>
+                                    Email: <a href="mailto:admissions@ttu.edu.gh">admissions@ttu.edu.gh</a><br>
+                                    Phone: 0508333992 <br>
+                                    Phone: 0508335033 <br>
+                                    Phone: 0553777777, 0243348522.
                                     </p>
                                     <hr>
-                                    
-                                   
 
 
 
-                                  
+
+
+
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-footer text-sm">
+                            <div class="form-footer text-sm">
 
 
 
-                            <p>
+                                <p>
 
 
-                                &copy; @DateTime.Now.Year - Takoradi Technical University - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                                    &copy; @DateTime.Now.Year - Takoradi Technical University - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
 
-                            </p>
+                                </p>
 
 
-                        </div>
+                            </div>
                 </form>
             </main>
         </div>

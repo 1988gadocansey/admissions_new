@@ -60,6 +60,7 @@
     <Folder Include="Views\404\" />
     <Folder Include="Views\500\" />
     <Folder Include="Views\Result\" />
+    <Folder Include="Views\Data\" />
   </ItemGroup>
   <ItemGroup>
     <Content Remove="wwwroot\plugins\css\bootstrap.min.css" />

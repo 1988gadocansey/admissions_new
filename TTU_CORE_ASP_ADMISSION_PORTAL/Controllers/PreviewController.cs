@@ -96,7 +96,9 @@ using Microsoft.Extensions.Logging;
 
             ViewData["results"] = results;
 
-            //_helper.SendSMSNotification(applicant.Phone);
+            var Message = "Thanks for apply to study at Takoradi Technical University.You will hear from us.";
+
+            _helper.SendEmailNotification(applicant.Email,Message);
             return View();
 
             }

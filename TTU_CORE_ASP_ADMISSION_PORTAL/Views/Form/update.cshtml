@@ -45,7 +45,7 @@ else
 
     }
 }
-<h6 class="heading_b uk-margin-bottom">Fill all the required fields</h6>
+<h6 class="heading_b uk-margin-bottom">Fill all fields</h6>
 <div class="uk-width-xLarge-1-10">
     <div class="md-card">
         <div class="md-card-content" style="">
@@ -206,7 +206,7 @@ else
                                 <div class="parsley-row">
                                     <div class="uk-input-group">
 
-                                        <div class="md-input-wrapper md-input-filled"><label for="wizard_skype">Post GPRS :</label><input type="text" id="postGPRS" name="postGPRS" v-form-ctrl class="md-input" v-model="postGPRS" /><span class="md-input-bar"></span></div>
+                                        <div class="md-input-wrapper md-input-filled"><label for="wizard_skype">Post GPS :</label><input type="text" id="postGPRS" name="postGPRS" v-form-ctrl class="md-input" v-model="postGPRS" /><span class="md-input-bar"></span></div>
 
                                     </div>
                                 </div>
@@ -445,7 +445,7 @@ else
                                             <select name="resident" class="md-input" required="required" v-model="resident" v-form-ctrl="" v-select="resident">
                                                 <option value="">Select</option>
                                                 <option value="True">Yes</option>
-                                                @*<option value="False">No</option>*@
+                                                <option value="False">No</option>
 
 
                                             </select>
@@ -643,7 +643,7 @@ else
                                 <div class="parsley-row">
                                     <div class="uk-input-group">
 
-                                        <label for="">ID No.:</label>
+                                        <label for="">ID Type.:</label>
                                         <div class="md-input-wrapper md-input-filled">
                                             <select name="NationalityId" class="md-input" required="required" v-model="NationalityId" v-form-ctrl="" v-select="NationalityId">
                                                 <option value="">Select</option>
@@ -658,7 +658,7 @@ else
                                             <span class="md-input-bar"></span>
                                         </div>
 
-                                        <p class="uk-text-danger uk-text-small" v-if="updateForm.NationalityId.$error.required">NationalityId is required</p>
+                                        <p class="uk-text-danger uk-text-small" v-if="updateForm.NationalityId.$error.required">Nationality type is required</p>
                                     </div>
                                 </div>
 
@@ -796,7 +796,7 @@ else
                                 <div class="parsley-row">
                                     <div class="uk-input-group">
 
-                                        <div class="md-input-wrapper md-input-filled"><label for="wizard_skype">Last Year in school :</label><input type="number" id="year" name="year" v-form-ctrl class="md-input" v-model="year" /><span class="md-input-bar"></span></div>
+                                        <div class="md-input-wrapper md-input-filled"><label for="wizard_skype">Year Completed:</label><input type="number" id="year" name="year" v-form-ctrl class="md-input" v-model="year" /><span class="md-input-bar"></span></div>
 
                                     </div>
                                 </div>
@@ -957,7 +957,7 @@ else
         });</script>*@
     <script src="~/assets/js/select2.full.min.js"></script>
     <script>$(document).ready(function () {
-            $('select').select2({ width: "resolve" });
+    $('select').select2({ dropdownAutoWidth: true });
 
 
         });</script>

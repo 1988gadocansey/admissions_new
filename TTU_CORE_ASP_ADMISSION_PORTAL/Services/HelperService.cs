@@ -24,6 +24,12 @@ using TTU_CORE_ASP_ADMISSION_PORTAL.Data;
 using System;
 using Twilio;
 using Twilio.Rest.Api.V2010.Account;
+using System;
+using System.Net;
+using System.Net.Mail;
+using System.Net.Mime;
+using System.Threading;
+using System.ComponentModel;
 namespace TTU_CORE_ASP_ADMISSION_PORTAL.Services
 {
     public class HelperService : IHelper
@@ -65,15 +71,50 @@ namespace TTU_CORE_ASP_ADMISSION_PORTAL.Services
                 {
                     Debug.WriteLine("I couldn't connect");
                     return 0;
+
                 }
             }
         }
 
          
 
-        void IHelper.SendEmailNotification(string Email)
+        void  IHelper.SendEmailNotification(string Email,string Message)
         {
            
+            // Command-line argument must be the SMTP host.
+            SmtpClient client = new SmtpClient("smtp.google.com");
+
+            client.EnableSsl = true;
+
+            NetworkCredential NetworkCred = new NetworkCredential("gadocansey@gmail.com","031988gadocansey");
+            client.UseDefaultCredentials = true;
+            client.Credentials = NetworkCred;
+            client.Port = 587;
+            // Specify the email sender.
+            // Create a mailing address that includes a UTF8 character
+            // in the display name.
+            MailAddress from = new MailAddress("admissions@ttu.edu.gh",
+               "Admissions " + (char)0xD8 + " TTU",
+            System.Text.Encoding.UTF8);
+           
+            // Set destinations for the email message.
+            MailAddress to = new MailAddress(Email);
+            // Specify the message content.
+            MailMessage message = new MailMessage(from, to);
+            message.Body = Message;
+            // Include some non-ASCII characters in body and subject.
+            string someArrows = new string(new char[] { '\u2190', '\u2191', '\u2192', '\u2193' });
+            message.Body += Environment.NewLine + someArrows;
+            message.BodyEncoding = System.Text.Encoding.UTF8;
+            message.Subject = "From Admissions - Takoradi Technical University" + someArrows;
+            message.SubjectEncoding = System.Text.Encoding.UTF8;
+            string userState = "TTU Admissions";
+            // Set the method that is called back when the send operation ends.
+            client.SendAsync(message, userState);
+
+            // Clean up.
+            message.Dispose();
+
         }
 
         
@@ -94,6 +135,18 @@ namespace TTU_CORE_ASP_ADMISSION_PORTAL.Services
 
             Console.WriteLine(message.Sid);
         }
-    
+
+        bool IHelper. ContainsDuplicates(int[] a)
+        {
+            for (int i = 0; i < a.Length; i++)
+            {
+                for (int j = i + 1; j < a.Length; j++)
+                {
+                    if (a[i] == a[j]) return true;
+                }
+            }
+            return false;
+        }
+
     }
 }

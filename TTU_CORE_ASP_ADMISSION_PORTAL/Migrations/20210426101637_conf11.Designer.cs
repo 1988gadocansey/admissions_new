@@ -10,8 +10,8 @@ using TTU_CORE_ASP_ADMISSION_PORTAL.Data;
 namespace TTU_CORE_ASP_ADMISSION_PORTAL.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210420141051_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20210426101637_conf11")]
+    partial class conf11
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -413,6 +413,9 @@ namespace TTU_CORE_ASP_ADMISSION_PORTAL.Migrations
 
                     b.Property<string>("PreviousName")
                         .HasColumnType("text");
+
+                    b.Property<int?>("ProgrammeAdmittedId")
+                        .HasColumnType("integer");
 
                     b.Property<string>("ProgrammeStudied")
                         .HasColumnType("text");

@@ -112,6 +112,8 @@ namespace TTU_CORE_ASP_ADMISSION_PORTAL.Models
         public int? FormerSchoolNewId { get; set; }
         public virtual FormerSchoolModel FormerSchoolNew { get; set; }
 
+        public int? ProgrammeAdmittedId { get; set; }
+
         public int LastYearInSchool { get; set; }
         public bool? Awaiting { get; set; }
         public int Grade { get; set; }

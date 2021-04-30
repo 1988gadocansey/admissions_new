@@ -45,7 +45,7 @@ else
 
     }
 }
-<h6 class="heading_b uk-margin-bottom">Fill all the required fields</h6>
+<h6 class="heading_b uk-margin-bottom">Fill all fields</h6>
 <div class="uk-width-xLarge-1-10">
     <div class="md-card">
         <div class="md-card-content" style="">
@@ -180,7 +180,7 @@ else
                                     <div class="parsley-row">
                                         <div class="uk-input-group">
 
-                                            <div class="md-input-wrapper md-input-filled"><label for="wizard_twitter">Date of Birth :</label><input type="text" name="dob" class="md-input" data-uk-datepicker="{format:'YYYY-MM-DD'}" value="@date" required="required" v-model="dob" v-form-ctrl><span class="md-input-bar"></span></div>
+                                            <div class="md-input-wrapper md-input-filled"><label for="wizard_twitter"  >Date of Birth  :</label><input type="text" name="dob"  class="md-input masked_input" id="masked_date"  data-inputmask="'alias': 'YYYY/MM/DD'" data-inputmask-showmaskonhover="true"  data-uk-datepicker="{format:'YYYY-MM-DD'}" value="@date" required="required" v-model="dob" v-form-ctrl><span class="md-input-bar"></span></div>
                                             <p class="uk-text-danger uk-text-small " v-if="updateForm.dob.$error.required">Date of birth is required</p>
                                         </div>
                                     </div>
@@ -206,7 +206,7 @@ else
                                 <div class="parsley-row">
                                     <div class="uk-input-group">
 
-                                        <div class="md-input-wrapper md-input-filled"><label for="wizard_skype">Post GPRS :</label><input type="text" id="postGPRS" name="postGPRS"   v-form-ctrl class="md-input" v-model="postGPRS" /><span class="md-input-bar"></span></div>
+                                        <div class="md-input-wrapper md-input-filled"><label for="wizard_skype">Post GPS :</label><input type="text" id="postGPRS" name="postGPRS"   v-form-ctrl class="md-input" v-model="postGPRS" /><span class="md-input-bar"></span></div>
 
                                     </div>
                                 </div>
@@ -645,7 +645,7 @@ else
                                 <div class="parsley-row">
                                     <div class="uk-input-group">
 
-                                        <label for=""> ID No.:</label>
+                                        <label for=""> ID Type.:</label>
                                         <div class="md-input-wrapper md-input-filled">
                                             <select name="NationalityId" class="md-input" required="required" v-model="NationalityId" v-form-ctrl="" v-select="NationalityId">
                                                 <option value="">Select</option>
@@ -660,7 +660,7 @@ else
                                             <span class="md-input-bar"></span>
                                         </div>
 
-                                        <p class="uk-text-danger uk-text-small" v-if="updateForm.NationalityId.$error.required">NationalityId is required</p>
+                                        <p class="uk-text-danger uk-text-small" v-if="updateForm.NationalityId.$error.required">Nationality ID type is required</p>
                                     </div>
                                 </div>
 
@@ -798,7 +798,7 @@ else
                                 <div class="parsley-row">
                                     <div class="uk-input-group">
 
-                                        <div class="md-input-wrapper md-input-filled"><label for="wizard_skype">Last Year in school :</label><input  type="number" id="year" name="year" v-form-ctrl class="md-input" v-model="year" /><span class="md-input-bar"></span></div>
+                                        <div class="md-input-wrapper md-input-filled"><label for="wizard_skype">Year Completed :</label><input  type="number" id="year" name="year" v-form-ctrl class="md-input" v-model="year" /><span class="md-input-bar"></span></div>
 
                                     </div>
                                 </div>
@@ -957,8 +957,8 @@ else
         });</script>*@
     <script src="~/assets/js/select2.full.min.js"></script>
     <script>$(document).ready(function () {
-            $('select').select2({ width: "resolve" });
-
+    $('select').select2({ dropdownAutoWidth: true });
+    
 
         });</script>
 
