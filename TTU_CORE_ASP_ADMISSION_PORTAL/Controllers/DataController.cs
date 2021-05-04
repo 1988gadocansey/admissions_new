@@ -49,6 +49,7 @@ namespace TTU_CORE_ASP_ADMISSION_PORTAL.Controllers
                     //var applicant = await _dbContext.ApplicantModel.FirstOrDefaultAsync(a => a.ApplicationUserId == ApplicantId);
                     var applicant = _dbContext.ApplicantModel.Include(r => r.Region).Include(n => n.Nationality)
                     .Include(p => p.Programmes)
+                    .Include(a => a.ApplicationUser)
                      .Include(h => h.Hall)
                      .Include(rel => rel.Religion)
                       .Include(s => s.FormerSchoolNew)

@@ -275,12 +275,12 @@ using System.Globalization;
                             LetterPrinted = false,
                             FeePaying = Convert.ToBoolean(HttpContext.Request.Form["FeePaying"]),
                             ReportedInSchool = false,
-                            FeesPaid = Convert.ToDecimal(0.0),
+                            FeesPaid = Convert.ToDecimal(000.000),
                             Reported = false,
                             Elligible = false,
                             SMSSent = false,
                             Religion = religion,
-
+                            
 
 
                         });
@@ -384,7 +384,7 @@ using System.Globalization;
 
                         applicantModel.FormerSchoolNew = school;
 
-
+                        
 
 
                         applicantModel.FeePaying = Convert.ToBoolean(HttpContext.Request.Form["FeePaying"]);

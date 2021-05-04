@@ -287,7 +287,7 @@ else
                                 <div class="parsley-row">
                                     <div class="uk-input-group">
 
-                                        <div class="md-input-wrapper md-input-filled"><label for="wizard_email">Email :</label><input type="email" id="email" name="email" class="md-input"   v-model="email" v-form-ctrl><span class="md-input-bar"></span></div>
+                                        <div class="md-input-wrapper md-input-filled"><label for="wizard_email">Email :</label><input type="email" id="email" name="email" class="md-input" required=""  v-model="email" v-form-ctrl><span class="md-input-bar"></span></div>
                                         <p class="uk-text-danger uk-text-small " v-if="updateForm.email.$invalid">Please enter a valid email address</p>
 
                                     </div>
@@ -459,7 +459,7 @@ else
                                 </div>
 
                                 <div class="parsley-row" v-if="resident=='True'">
-                                    <div class="uk-input-group">
+                                    <div class="uk-input-group" >
 
                                         <label for="">Hall of Residence :</label>
                                         <div class="md-input-wrapper md-input-filled">
@@ -702,14 +702,14 @@ else
 
                                         <label for="">Former School Attended :</label>
                                         <div class="md-input-wrapper md-input-filled">
-                                            <select name="school" class="md-input" asp-items="@ViewBag.school" v-model="school" v-form-ctrl="" v-select="school">
+                                            <select name="school" class="md-input" asp-items="@ViewBag.school" required v-model="school" v-form-ctrl="" v-select="school">
                                                 <option value="">Select</option>
                                             </select>
 
                                             <span class="md-input-bar"></span>
                                         </div>
 
-
+                                        <p class="uk-text-danger uk-text-small" v-if="updateForm.school.$error.required">Former School  is required</p>
                                     </div>
                                 </div>
 
@@ -718,12 +718,13 @@ else
 
                                         <label for="">First Choice :</label>
                                         <div class="md-input-wrapper md-input-filled">
-                                            <select name="firstChoice" class="md-input" asp-items="@ViewBag.choices" v-model="firstChoice" v-form-ctrl="" v-select="firstChoice">
-
+                                            <select name="firstChoice" class="md-input" asp-items="@ViewBag.choices" required v-model="firstChoice" v-form-ctrl="" v-select="firstChoice">
                                             </select>
 
                                             <span class="md-input-bar"></span>
                                         </div>
+
+                                        <p class="uk-text-danger uk-text-small" v-if="updateForm.firstChoice.$error.required">First Choice  is required</p>
 
                                     </div>
                                 </div>
@@ -732,11 +733,13 @@ else
 
                                         <label for="">Second Choice :</label>
                                         <div class="md-input-wrapper md-input-filled">
-                                            <select name="secondChoice" class="md-input" asp-items="@ViewBag.choices" v-model="secondChoice" v-form-ctrl="" v-select="secondChoice">
+                                            <select name="secondChoice" class="md-input" asp-items="@ViewBag.choices" required v-model="secondChoice" v-form-ctrl="" v-select="secondChoice">
                                             </select>
 
                                             <span class="md-input-bar"></span>
                                         </div>
+
+                                        <p class="uk-text-danger uk-text-small" v-if="updateForm.secondChoice.$error.required">Second Choice  is required</p>
 
                                     </div>
                                 </div>
@@ -745,11 +748,13 @@ else
 
                                         <label for="">Third Choice :</label>
                                         <div class="md-input-wrapper md-input-filled">
-                                            <select name="thirdChoice" class="md-input" asp-items="@ViewBag.choices" v-model="thirdChoice" v-form-ctrl="" v-select="thirdChoice">
+                                            <select name="thirdChoice" class="md-input" asp-items="@ViewBag.choices" required v-model="thirdChoice" v-form-ctrl="" v-select="thirdChoice">
                                             </select>
 
                                             <span class="md-input-bar"></span>
                                         </div>
+                                        <p class="uk-text-danger uk-text-small" v-if="updateForm.thirdChoice.$error.required">Third Choice  is required</p>
+
 
                                     </div>
                                 </div>
@@ -763,7 +768,7 @@ else
 
                                         <label for="">Programme Studied :</label>
                                         <div class="md-input-wrapper md-input-filled">
-                                            <select name="programme" class="md-input" asp-items="@ViewBag.programme" v-model="programme" v-form-ctrl="" v-select="programme">
+                                            <select name="programme" class="md-input" asp-items="@ViewBag.programme" v-model="programme" required v-form-ctrl="" v-select="programme">
                                                 <option value="">Select</option>
                                             </select>
 
@@ -779,7 +784,7 @@ else
 
                                         <label for="">Apply as Fee Paying? :</label>
                                         <div class="md-input-wrapper md-input-filled">
-                                            <select name="FeePaying" class="md-input" v-model="FeePaying" v-form-ctrl="" v-select="FeePaying">
+                                            <select name="FeePaying" class="md-input" v-model="FeePaying" v-form-ctrl="" v-select="FeePaying" required>
                                                 <option value="">Select</option>
                                                 <option value="True">Yes</option>
                                                 <option value="False">No</option>
@@ -789,6 +794,7 @@ else
 
                                             <span class="md-input-bar"></span>
                                         </div>
+                                        <p class="uk-text-danger uk-text-small" v-if="updateForm.FeePaying.$error.required">Fee Paying  is required</p>
 
 
                                     </div>
@@ -798,19 +804,23 @@ else
                                 <div class="parsley-row">
                                     <div class="uk-input-group">
 
-                                        <div class="md-input-wrapper md-input-filled"><label for="wizard_skype">Year Completed :</label><input  type="number" id="year" name="year" v-form-ctrl class="md-input" v-model="year" /><span class="md-input-bar"></span></div>
+                                        <div class="md-input-wrapper md-input-filled"><label for="wizard_skype">Year Completed :</label><input type="number" id="year" required name="year" v-form-ctrl class="md-input" v-model="year" /><span class="md-input-bar"></span></div>
 
                                     </div>
+                                    <p class="uk-text-danger uk-text-small" v-if="updateForm.year.$error.required">Year Completed is required</p>
+
                                 </div>
 
                                 <div class="parsley-row">
                                     <div class="uk-input-group">
 
 
-                                        <div class="md-input-wrapper md-input-filled"><label for="wizard_referer">Source of Finance :</label><input type="text" id="finance" name="finance" class="md-input" v-model="finance" v-form-ctrl><span class="md-input-bar"></span></div>
+                                        <div class="md-input-wrapper md-input-filled"><label for="wizard_referer">Source of Finance :</label><input type="text" required id="finance" name="finance" class="md-input" v-model="finance" v-form-ctrl><span class="md-input-bar"></span></div>
 
-
+                                        
                                     </div>
+                                    <p class="uk-text-danger uk-text-small" v-if="updateForm.finance.$error.required">Source Finance is required</p>
+
                                 </div>
 
 
@@ -827,7 +837,7 @@ else
 
                                         <label for="">Entry Mode :</label>
                                         <div class="md-input-wrapper md-input-filled">
-                                            <select name="mode" class="md-input" v-model="mode" v-form-ctrl="" v-select="mode">
+                                            <select name="mode" class="md-input" v-model="mode" v-form-ctrl="" v-select="mode" required>
                                                 <option value="">Select</option>
                                                 <option value="Regular">Regular</option>
                                                 <option value="Distance">Distance</option>
@@ -837,6 +847,8 @@ else
 
                                             <span class="md-input-bar"></span>
                                         </div>
+                                        <p class="uk-text-danger uk-text-small" v-if="updateForm.mode.$error.required">Entry Modeis required</p>
+
 
 
                                     </div>
@@ -849,7 +861,7 @@ else
 
                                         <label for="">First Qualification :</label>
                                         <div class="md-input-wrapper md-input-filled">
-                                            <select name="FirstQualification" class="md-input" v-model="FirstQualification" v-form-ctrl="" v-select="FirstQualification">
+                                            <select name="FirstQualification" class="md-input" v-model="FirstQualification" required v-form-ctrl="" v-select="FirstQualification">
                                                 <option value="">Select</option>
                                                 <option value="WASSSCE">WASSSCE</option>
                                                 <option value="SSCE">SSCE</option>
@@ -864,6 +876,9 @@ else
 
                                             <span class="md-input-bar"></span>
                                         </div>
+                                        <p class="uk-text-danger uk-text-small" v-if="updateForm.FirstQualification.$error.required">FirstQualification is required</p>
+
+
 
                                     </div>
                                 </div>
@@ -875,7 +890,7 @@ else
 
                                         <label for="">Second Qualification :</label>
                                         <div class="md-input-wrapper md-input-filled">
-                                            <select name="SecondQualification" class="md-input" v-model="SecondQualification" v-form-ctrl="" v-select="SecondQualification">
+                                            <select name="SecondQualification" class="md-input"  v-model="SecondQualification" v-form-ctrl="" v-select="SecondQualification">
                                                 <option value="">Select</option>
                                                 <option value="HND">HND</option>
                                                 <option value="BACHELOR">BACHELOR</option>
@@ -908,7 +923,7 @@ else
                                     <i class="material-icons"></i> Previous
                                 </a>
                             </li>
-                            <li class="button_next button" v-on:click="go_to_payment_section()" aria-hidden="false" aria-disabled="false" v-show="updateForm.$valid && in_payment_section==false">
+                            <li class="button_next button" v-on:click="go_to_payment_section()" aria-hidden="false" aria-disabled="false" v-show="in_payment_section==false">
                                 <a role="menuitem" href="#next">
                                     Next
                                     <i class="material-icons">
@@ -916,9 +931,11 @@ else
                                     </i>
                                 </a>
                             </li>
-                            <li class="button_finish " aria-hidden="true" v-show="updateForm.$valid && in_payment_section==true">
+                            <li class="button_finish " aria-hidden="true" v-show="updateForm.$valid">
                                 <input class="md-btn md-btn-primary uk-margin-small-top" type="submit" name="submit_order" value="Submit" v-on:click="submit_form" />
                             </li>
+
+
                         </ul>
                     </div>
                 </div>

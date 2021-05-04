@@ -456,8 +456,8 @@ else
                                         <p class="uk-text-danger uk-text-small" v-if="updateForm.resident.$error.required">Residential Status is required</p>
                                     </div>
                                 </div>
-
-                                <div class="parsley-row" v-if="resident=='True'">
+                                  
+                                <div class="parsley-row" v-if="resident=='True'" >
                                     <div class="uk-input-group">
 
                                         <label for="">Hall of Residence :</label>
@@ -1019,11 +1019,13 @@ else
                 resident: "@(ViewBag.applicant.ResidentialStatus)",
 
 
-                hall: "@(ViewBag.applicant.Hall.Id)",
+                
 
                 sponsorship: "@(ViewBag.applicant.SponsorShip)",
                 disability: "@(ViewBag.applicant.Disability)",
-                disabilityType: "@(ViewBag.applicant.DisabilityType)",
+
+                 
+
                 NationalityName: "@(ViewBag.applicant.NationalIDNo)",
                 postGPRS:"@(ViewBag.applicant.PostGPRS)",
                 NationalityId: "@(ViewBag.applicant.NationalIDType)",

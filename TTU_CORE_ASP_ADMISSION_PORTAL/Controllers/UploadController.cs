@@ -89,17 +89,19 @@ namespace TTU_CORE_ASP_ADMISSION_PORTAL.Controllers
 
                         try
                         {
-                                   
-                                            /**
-                                             * Call the image background service from the ttuportal.com/api/image/check to help test
-                                             **/
 
+                            /**
+                             * Call the image background service from the ttuportal.com/api/image/check to help test
+                             **/
+
+                            Console.WriteLine(filePath);
                                             image.Save(filePath);
 
                             int port = Convert.ToInt32(Configuration["sftpport"]);
                             string host = Configuration["sftphost"];
                             string username = Configuration["sftpusername"];
                             string password = Configuration["sftppassword"];
+
                             if (_helper.SendFileToServer(host, port, username, password, filePath) == 1)
                             {
                                 var fileInfo = new FileInfo(filePath);

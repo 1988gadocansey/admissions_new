@@ -77,6 +77,7 @@ using Microsoft.Extensions.Logging;
             //var applicant = await _dbContext.ApplicantModel.FirstOrDefaultAsync(a => a.ApplicationUserId == ApplicantId);
             var applicant = await _dbContext.ApplicantModel.Include(r=>r.Region).Include(n =>n.Nationality)
                 .Include(p =>p.Programmes)
+                .Include(a => a.ApplicationUser)
                  .Include(h => h.Hall)
                  .Include(rel => rel.Religion)
                   .Include(s => s.FormerSchoolNew)
@@ -98,7 +99,7 @@ using Microsoft.Extensions.Logging;
 
             var Message = "Thanks for apply to study at Takoradi Technical University.You will hear from us.";
 
-            _helper.SendEmailNotification(applicant.Email,Message);
+// _helper.SendEmailNotification(applicant.Email,Message);
             return View();
 
             }
