@@ -45,39 +45,52 @@ namespace TTU_CORE_ASP_ADMISSION_PORTAL.Controllers
 
                 try
                 {
-
                     //var applicant = await _dbContext.ApplicantModel.FirstOrDefaultAsync(a => a.ApplicationUserId == ApplicantId);
-                    var applicant = _dbContext.ApplicantModel.Include(r => r.Region).Include(n => n.Nationality)
-                    .Include(p => p.Programmes)
-                    .Include(a => a.ApplicationUser)
-                     .Include(h => h.Hall)
-                     .Include(rel => rel.Religion)
-                      .Include(s => s.FormerSchoolNew)
-                       .Include(r => r.ResultUploads)
-                      .Include(d => d.District)
-
-
-                    .FirstOrDefault(a => a.ApplicationNumber == Form);
-
-                    //Console.WriteLine(applicant.Region.Name);
-
-
-                    if (applicant != null)
+                    string[] LegacyYears = { "2017", "2018", "2019", "2020" };
+                    
+                    if (Array.Find(LegacyYears, element => element == Form.ToString().Substring(0, 4)) != null)
+                       
                     {
-                        ViewData["applicant"] = applicant;
-                        var results = _dbContext.ResultUploadModel.Include(g => g.Grade)
-                               .Include(s => s.Subject).Where(r => r.ApplicantModelID == applicant.ID).OrderBy(s => s.Year);
+                         
+                        var applicanta = _dbContext.ApplicantModel.Include(r => r.Region)
+                          .Include(p => p.Programmes)
+                          
 
 
+                          .FirstOrDefault(a => a.ApplicationNumber == Form);
 
-                        ViewData["results"] = results;
+                        ViewData["applicant"] = applicanta;
 
+                        Console.WriteLine("firstname is " + applicanta.FirstName);
 
-                        return View("form");
+                        
+                        
+                            var ResultsOld = _dbContext.ResultUploadModel
+                           .Include(s => s.Subject)
+
+                           .Where(r => r.Form == applicanta.ApplicationNumber.ToString()||  r.Applicant == applicanta.ID);
+
+                        ViewData["results"] = ResultsOld;
+                        return View("legacy");
+
                     }
                     else
                     {
-                        return NotFound();
+                        var applicant = _dbContext.ApplicantModel.Include(r => r.Region).Include(n => n.Nationality)
+                   .Include(p => p.Programmes)
+                   .Include(a => a.ApplicationUser)
+                    .Include(h => h.Hall)
+                    .Include(rel => rel.Religion)
+                     .Include(s => s.FormerSchoolNew)
+                      .Include(r => r.ResultUploads)
+                     .Include(d => d.District)
+
+                   .FirstOrDefault(a => a.ApplicationNumber == Form);
+                        ViewData["applicant"] = applicant;
+                            var results = _dbContext.ResultUploadModel.Include(g => g.Grade)
+                                   .Include(s => s.Subject).Where(r => r.ApplicantModelID == applicant.ID).OrderBy(s => s.Year);
+                            ViewData["results"] = results;
+                            return View("form");
                     }
                 }
                 catch (Exception)

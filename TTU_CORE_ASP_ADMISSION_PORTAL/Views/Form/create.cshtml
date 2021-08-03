@@ -779,7 +779,7 @@ else
                                     </div>
                                 </div>
 
-                                <div class="parsley-row">
+                                <div class="parsley-row" v-if="residents=='True'">
                                     <div class="uk-input-group">
 
                                         <label for="">Apply as Fee Paying? :</label>
@@ -787,7 +787,7 @@ else
                                             <select name="FeePaying" class="md-input" v-model="FeePaying" v-form-ctrl="" v-select="FeePaying" required>
                                                 <option value="">Select</option>
                                                 <option value="True">Yes</option>
-                                                <option value="False">No</option>
+                                                <option  selected="selected" value="False">No</option>
 
 
                                             </select>

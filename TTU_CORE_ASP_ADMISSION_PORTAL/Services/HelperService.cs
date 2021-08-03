@@ -30,6 +30,11 @@ using System.Net.Mail;
 using System.Net.Mime;
 using System.Threading;
 using System.ComponentModel;
+using System.Web;
+using System.Net.Http;
+using System.Text;
+using System.Net.Http.Headers;
+
 namespace TTU_CORE_ASP_ADMISSION_PORTAL.Services
 {
     public class HelperService : IHelper
@@ -45,6 +50,28 @@ namespace TTU_CORE_ASP_ADMISSION_PORTAL.Services
             var programme = _dbContext.ProgrammeModel.Where(p => p.Id == id).First();
 
             return System.Globalization.CultureInfo.CurrentCulture.TextInfo.ToTitleCase(programme.Name);
+        }
+        
+        public string GetApplicantCodeFromId(int id)
+        {
+            var programme = _dbContext.ProgrammeModel.Where(p => p.Id == id).First();
+
+            return programme.Code;
+        }
+        public double GetHallFee(int hall)
+        {
+            
+            var hallData = _dbContext.HallModel.First(p => p.Id == hall);
+
+            return hallData.Fees;
+        }
+        
+        public string GetHallName(int hall)
+        {
+            
+            var hallData = _dbContext.HallModel.First(p => p.Id == hall);
+
+            return hallData.Name;
         }
 
         
@@ -119,21 +146,57 @@ namespace TTU_CORE_ASP_ADMISSION_PORTAL.Services
 
         
 
-        public void SendSMSNotification(string PhoneNumber)
+        public string SendSMSNotification(string PhoneNumber, string Message)
         {
-            //string accountSid = Environment.GetEnvironmentVariable("TWILIO_ACCOUNT_SID");
-            string accountSid = "AC7d8c5201cdd11fe5b8938105e75f77b0";
-            string authToken = "96930eca3e7063020e6a29831276a718";
 
-            TwilioClient.Init(accountSid, authToken);
+            string _URL = "https://smsc.hubtel.com/v1/messages/send?";
 
-            var message = MessageResource.Create(
-                body: "TTU Admisison Testing. Thanks for testing.",
-                from: new Twilio.Types.PhoneNumber("+13476823203"),
-                to: new Twilio.Types.PhoneNumber(PhoneNumber)
-            );
+            string _senderid = "TTU";   // here assigning sender id 
 
-            Console.WriteLine(message.Sid);
+            string _user = HttpUtility.UrlEncode("ifrzlixd"); // API user name to send SMS
+            string _pass = "zrydysvw";     // API password to send SMS
+            
+
+
+            PhoneNumber = "+233"+PhoneNumber.Substring(1, 9);
+
+
+
+            PhoneNumber = PhoneNumber.Replace(" ", "").Replace("-", "");
+
+
+            string _recipient = PhoneNumber;  // who will receive message
+
+            string _messageText = HttpUtility.UrlEncode(Message); // text message
+
+            string result = "";
+              
+            // Creating URL to send sms
+            string _createURL =_URL +
+            "clientid="+_user+
+               "&clientsecret="+_pass+
+               "&from="+_senderid +
+               "&to="+_recipient +
+               "&content="+_messageText;
+
+            Console.WriteLine("url" + _createURL);
+
+            try
+            {
+
+                HttpClient http = new HttpClient();
+                http.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));//ACCEPT header
+                result = http.GetAsync(_createURL).Result.Content.ReadAsStringAsync().Result;
+
+                Console.WriteLine("result is " + result);
+                // creating web request to send sms 
+                 
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine(e.ToString());//
+            }
+            return result;
         }
 
         bool IHelper. ContainsDuplicates(int[] a)
@@ -148,5 +211,11 @@ namespace TTU_CORE_ASP_ADMISSION_PORTAL.Services
             return false;
         }
 
+        public string GetApplicantIdFromFormNo(string id)
+        {
+            var applicant = _dbContext.ApplicantModel.Where(p => p.ApplicationNumber.ToString() == id).First();
+
+            return applicant.ID.ToString();
+        }
     }
 }

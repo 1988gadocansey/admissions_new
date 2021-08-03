@@ -44,13 +44,13 @@
          
 
 
-               ApplicationUser user = new();
+               //ApplicationUser user = new();
                ApplicationUser applicationUser = new();
                Guid guid = Guid.NewGuid();
                applicationUser.Id = guid.ToString();
-               applicationUser.UserName = Serial;
-               applicationUser.Email = Serial+"@ttu.edu.gh";
-               applicationUser.NormalizedUserName = Serial;
+               applicationUser.UserName = Serial+a;
+               applicationUser.Email = Serial+a+"@ttu.edu.gh";
+               applicationUser.NormalizedUserName = Serial+a;
                applicationUser.Year = (DateTime.Now.Year).ToString();
                applicationUser.Pin = Pin;
                applicationUser.SoldBy = owner.ToUpper();
@@ -58,7 +58,7 @@
                applicationUser.Started = 0;
                applicationUser.Type = type.ToUpper();
                applicationUser.EmailConfirmed = true;
-               applicationUser.NormalizedEmail = Serial + "@ttu.edu.gh";
+               applicationUser.NormalizedEmail = Serial + "@ttu.edu.gh"+a;
 
                var hasedPassword = _passwordHasher.HashPassword(applicationUser, Pin);
                applicationUser.SecurityStamp = Guid.NewGuid().ToString();
@@ -71,13 +71,13 @@
                    {
                     
                    }
-                
 
+                Console.WriteLine("a is " + a);
 
            }
           await  _dbContext.SaveChangesAsync();
 
-            return Ok("FCK OFF!!!");
+            return Ok("Done");
 
         }
             static string GetPin()
@@ -97,7 +97,7 @@
                 var str = "ABCDEFGHJKLMNPRSTUVWXYZ23456789";
 
                 var shuffled = Shuffle(str);
-                var vcode = shuffled.Substring(0, 5);
+                var vcode = shuffled.Substring(0, 4);
 
                 var real = vcode.ToUpper();
 

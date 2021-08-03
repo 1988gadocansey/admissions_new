@@ -50,13 +50,17 @@ using System.Globalization;
                     var ApplicantForm = applicationUser?.FormNo;
 
                     var FormFinalized = applicationUser?.Finalized;
+                    
+                    var admitted = applicationUser?.Admitted;
 
                     var ApplicantPin = applicationUser?.Pin;
                     var ApplicantFormType = applicationUser?.Type;
 
-
-
-                    if (FormFinalized == 1)
+                    if (admitted == true)
+                    {
+                        return RedirectToAction("Index", "Home");
+                    }
+                    else if (FormFinalized == 1)
                     {
                         return RedirectToAction("Index", "Preview");
                  
@@ -268,7 +272,7 @@ using System.Globalization;
                             AdmittedBy = 0,
                                 //DateAdmitted = DateTime.ParseExact(HttpContext.Request.Form["dob"], "dd/MM/yyyy", null),
                                 DateAdmitted = new DateTime(),
-                            HallAdmitted = "",
+                            
                             SectionAdmitted = "",
                             YearOfAdmission = _formService.GetAdmissionYear(),
                             Admitted = false,
@@ -294,7 +298,7 @@ using System.Globalization;
                         var applicant = await _dbContext.Users.FindAsync(userId);
 
                         applicant.Started = 1;
-                        if (user.Type == "MTECH" || user.Type == "TOPUP")
+                        if (user.Type == "MTECH" || user.Type == "TOPUP" ||user.Type == "ACCELERATED"  ||user.Type == "BRIDGING" )
                         {
                             user.FormCompleted = 1;
                         }

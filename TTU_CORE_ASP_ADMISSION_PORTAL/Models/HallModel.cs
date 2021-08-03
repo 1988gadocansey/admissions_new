@@ -22,6 +22,7 @@ namespace TTU_CORE_ASP_ADMISSION_PORTAL.Models
         [Key]
         public int Id { set; get; }
         public int BankAcc { set; get; }
+        public double Fees { set; get; }
         public string Name { set; get; }
 
         public HallModel()

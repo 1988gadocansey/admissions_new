@@ -19,10 +19,18 @@ namespace TTU_CORE_ASP_ADMISSION_PORTAL.Services
     public interface IHelper
     {
          public string GetProgrammeName(int id);
+         
+         public string GetApplicantIdFromFormNo(string id);
+         
+         public string GetApplicantCodeFromId(int id);
+         
+         public string GetHallName(int hall);
+         
+         public double GetHallFee(int hall);
 
         public int SendFileToServer(string host, int port, string username, string password, string filePath);
 
-        public void SendSMSNotification(string PhoneNumber);
+        public string SendSMSNotification(string PhoneNumber, string Message);
 
         public void SendEmailNotification(string Email,string Message);
 

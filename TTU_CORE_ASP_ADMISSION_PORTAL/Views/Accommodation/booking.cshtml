@@ -1,0 +1,234 @@
+@using Microsoft.AspNetCore.Identity
+@using Humanizer
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+@{ var user = await UserManager.GetUserAsync(User); }
+
+@{
+    ViewBag.Title = "Accommodation - Bookings";
+
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Style{
+    <style>
+        input {
+            text-transform: uppercase;
+        }
+        select {
+            text-transform: uppercase;
+        } 
+    </style>
+
+
+}
+
+@if ((user.Started) == 1)
+{
+    //var date = ViewBag.applicant.DateOfBirth.ToString("yyy-MM-dd");
+}
+else
+{
+    var date = "";
+}
+@if (TempData["message"] != null)
+{
+    @if (TempData["type"].ToString() == "success")
+    {
+        <div style="text-align: center" class="uk-alert uk-alert-success" data-uk-alert=""> @TempData["message"] </div>
+    }
+    else
+    {
+        <div style="text-align: center" class="uk-alert uk-alert-danger" data-uk-alert=""> @TempData["message"] </div>
+    }
+}
+<h6 class="heading_b uk-margin-bottom">Room Reservation - Please select all required (T = Top bed, D= Down bed).</h6>
+<div class="uk-width-xLarge-1-10">
+    <div class="md-card">
+        <div class="md-card-content" style="">
+
+            <form novalidate id="wizard_advanced_form" class="uk-form-stacked" method="POST" asp-controller="Accommodation" asp-action="SaveAysnc" accept-charset="utf-8" name="updateForm" v-form>
+                @Html.AntiForgeryToken()
+
+                
+                 <div class="uk-grid" data-uk-grid-margin="">
+                                        <div class="uk-width-medium-2-10" style="margin-top: 16px">
+                
+                
+                                            <select required="required" class="md-input room select" v-model="room" v-form-ctrl=""
+                                                    v-select="room" name="room">
+                                                <option value="">--select room no ---</option>
+                
+                                            </select>
+                                            <p class=" uk-text-danger uk-text-small" v-if="updateForm.room.$error.required">Please
+                                                select room</p>
+                
+                                        </div>
+                
+                                         <div class="uk-width-medium-2-10" style="margin-top: 19px"   v-if="room">
+                                                        
+                                                        
+                                             <select required="required" class="md-input bed select" v-model="bed" v-form-ctrl=""
+                                                     v-select="bed" name="bed">
+                                                 <option value="">--select bed ---</option>
+
+
+                                             </select>
+                                                                                    <p class=" uk-text-danger uk-text-small" v-if="updateForm.bed.$error.required">Please
+                                                                                        select bed </p>
+                                         </div>
+                                         
+                
+                                        <div class="uk-width-medium-2-10" style="margin-top: 19px">
+                
+                                            <input v-show="updateForm.$valid" class="md-btn md-btn-primary uk-margin-small-top"
+                                                   type="submit" name="submit_order" value="Book" v-on:click="submit_form"/>
+                
+                                            <button type="reset" class="md-btn md-btn-flat">Cancel</button>
+                                        </div>
+                
+                                    </div>
+
+            
+                </form>
+
+            <div class="uk-modal" id="confirm_modal">
+                <div class="uk-modal-dialog" v-el:confirm_modal>
+                    <div class="uk-modal-header uk-text-large uk-text-success uk-text-center">Confirm Data</div>
+                    Are you certain of all the info
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+</div>
+
+
+@section Scripts{
+
+    @*<script>$(document).ready(function () {
+            $("#form").on("submit", function (event) {
+                event.preventDefault();
+                UIkit.modal.alert('Saving data...');
+                $(event.target).unbind("submit").submit();
+
+
+            });
+
+
+
+
+        });</script>*@
+    <script src="~/assets/js/select2.full.min.js"></script>
+    <script>$(document).ready(function () {
+    $('select').select2({ dropdownAutoWidth: true });
+    
+
+        });</script>
+
+
+    <script>//code for ensuring vuejs can work with select2 select boxes
+        Vue.directive('select', {
+            twoWay: true,
+            priority: 1000,
+            params: ['options'],
+            bind: function () {
+                var self = this
+                $(this.el)
+                    .select2({
+                        data: this.params.options,
+                        width: "resolve"
+                    })
+                    .on('change', function () {
+                        self.vm.$set(this.name, this.value)
+                        Vue.set(self.vm.$data, this.name, this.value)
+                    })
+            },
+            update: function (newValue, oldValue) {
+                $(this.el).val(newValue).trigger('change')
+            },
+            unbind: function () {
+                $(this.el).off().select2('destroy')
+            }
+        })
+        var vm = new Vue({
+            el: "body",
+            ready: function () {
+            },
+            data: {
+
+                
+                options: [
+                ],
+                in_payment_section: false,
+            },
+            methods: {
+                go_to_payment_section: function (event) {
+                    UIkit.modal.confirm(vm.$els.confirm_modal.innerHTML, function () {
+
+                        vm.$data.in_payment_section = true
+                    })
+                },
+                submit_form: function () {
+                    return (function (modal) { modal = UIkit.modal.blockUI("<div class='uk-text-center'>Booking Room...<br/><img class='uk-thumbnail uk-margin-top' src='https://apply.ttuportal.com/assets/img/spinners/spinner_success.gif' /></div>"); setTimeout(function () { modal.hide() }, 50000) })();
+                },
+
+                go_to_fill_form_section: function (event) {
+                    vm.$data.in_payment_section = false
+                }
+            }
+        })</script>
+       
+    <script type="text/javascript">
+        
+            $(document).ready(function () {
+                
+                 var hall =11;
+                 var gender = "M";
+                 var year =  "2020/2021";
+                  
+                 console.log("Gender" + gender);
+                    
+                    var url = "https://srms.ttuportal.com/api/room/"+hall+"/hall/"+gender+"/gender/"+year+"/year";
+        console.log(url);
+                    $.getJSON(url, function (data) {
+                        $.each(data, function (index, value) {
+                            // APPEND OR INSERT DATA TO SELECT ELEMENT.
+                            $('.room').append('<option value="' + value.room + '">' + value.room + '</option>');
+                        });
+        
+                    });
+                    
+            });
+             
+        
+        $('.room').on('change', function() {
+              var room = this.value;
+              $.ajax({
+                 url: "https://srms.ttuportal.com/api/bed/"+room+"/bed",
+                 type: "POST",
+                 data: {
+                    room: room
+                 },
+                 cache: false,
+                 success: function(result){
+                       $('.bed').empty();
+                   $.each(result, function (index, value) {
+                          
+                          $('.bed').append('<option value="' + value.bed + '">' + value.bed +" - " +value.orientation + '</option>');
+                          
+                         
+                        });
+                    
+        
+                   
+                 }
+              });
+           });   
+        
+        </script>
+
+}

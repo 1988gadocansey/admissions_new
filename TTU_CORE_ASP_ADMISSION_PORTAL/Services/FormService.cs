@@ -110,9 +110,10 @@ namespace TTU_CORE_ASP_ADMISSION_PORTAL.Services
         //}
         public IEnumerable<SelectListItem> GetProgrammes(string FormType)
         {
+            List<SelectListItem> programme;
             if (FormType == "DIPLOMA")
             {
-                FormType = "DipTECH";
+                FormType = "DIPLOMA";
             }
             if (FormType == "MTECH")
             {
@@ -131,10 +132,28 @@ namespace TTU_CORE_ASP_ADMISSION_PORTAL.Services
             {
                 FormType = "BTECH";
             }
+            if (FormType == "MATURE")
+            {
+                FormType = "HND";
+            }
+            if (FormType == "BRIDGING")
+            {
+                FormType = "BTECH";
+            }
+            if (FormType == "ACCELERATED")
+            {
+                FormType = "BTECH";
+            }
+            if (FormType == "TOPUP")
+            {
+                FormType = "HND";
+            }
 
 
 
-            List<SelectListItem> programme = _dbContext.ProgrammeModel.AsNoTracking()
+
+
+            programme = _dbContext.ProgrammeModel.AsNoTracking()
                  .OrderBy(n => n.Name)
                  .Where(n => n.Type== FormType)
                   .Select(n =>

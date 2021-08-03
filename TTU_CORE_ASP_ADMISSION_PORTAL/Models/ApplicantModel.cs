@@ -127,8 +127,10 @@ namespace TTU_CORE_ASP_ADMISSION_PORTAL.Models
 
         public DateTime DateAdmitted { get; set; }
         public string AdmissionType { get; set; }
+        
+        public string leveladmitted { get; set; }
         public string SectionAdmitted { get; set; }
-        public string HallAdmitted { get; set; }
+        public int HallAdmitted { get; set; }
         public string RoomNo { get; set; }
         public string Status { get; set; }
         public bool? SMSSent { get; set; }
@@ -158,7 +160,9 @@ namespace TTU_CORE_ASP_ADMISSION_PORTAL.Models
 
         public bool? FeePaying { get; set; }
         public bool? ReportedInSchool { get; set; }
-        public decimal FeesPaid { get; set; }
+        public decimal? FeesPaid { get; set; }
+        
+        public decimal? HallFeesPaid { get; set; }
         public bool Reported { get; set; }
         //public string WorkPlace { get; set; }
         //public string WorkPlaceContact { get; set; }

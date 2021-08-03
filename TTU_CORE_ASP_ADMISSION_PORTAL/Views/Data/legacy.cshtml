@@ -7,6 +7,7 @@ Designed by Gad Ocansey <gadocansey@gmail.com> +233243348522
     string[] forms = { "HND", "MATURE", "DIPLOMA", "CERTIFICATE", "DEGREE" };
 
 }
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -23,15 +24,15 @@ Designed by Gad Ocansey <gadocansey@gmail.com> +233243348522
 
     <style type="text/css" media="print">
 
-        #print{
-            text-align:right;
+        #print {
+            text-align: right;
         }
+
         .capitalize {
             text-transform: capitalize;
         }
 
         .ui.table td .uppercase {
-            
             text-align: right;
             text-transform: uppercase;
         }
@@ -40,9 +41,11 @@ Designed by Gad Ocansey <gadocansey@gmail.com> +233243348522
             body {
                 height: auto;
             }
+
             img {
                 -webkit-print-color-adjust: exact;
             }
+
             #print {
                 text-align: right;
             }
@@ -56,6 +59,7 @@ Designed by Gad Ocansey <gadocansey@gmail.com> +233243348522
                 text-align: right;
                 text-transform: uppercase;
             }
+
             table {
                 float: none !important;
             }
@@ -76,7 +80,6 @@ Designed by Gad Ocansey <gadocansey@gmail.com> +233243348522
             #page2 {
                 page-break-inside: avoid;
                 page-break-after: always;
-                 
             }
 
             #page3 {
@@ -110,9 +113,6 @@ Designed by Gad Ocansey <gadocansey@gmail.com> +233243348522
             tfoot {
                 display: table-footer-group
             }
-
-            
-
         }
 
         @@page {
@@ -136,7 +136,6 @@ Designed by Gad Ocansey <gadocansey@gmail.com> +233243348522
         }
     </style>
 </head>
-
 <body id="dashboard" class="pushabless">
     <div class="pusher">
 
@@ -145,7 +144,7 @@ Designed by Gad Ocansey <gadocansey@gmail.com> +233243348522
 
             <div class="ui two column stackable grid">
                 <div class="left aligned column" style="margin-left: 769px">
-                    <table> 
+                    <table>
                         <tr>
                             <td>
                                 <a asp-area="" asp-controller="Home" asp-action="Index" class="ui right positive basic button print">
@@ -153,8 +152,6 @@ Designed by Gad Ocansey <gadocansey@gmail.com> +233243348522
                                 </a>
                             </td>
                             <td>&nbsp;</td>
-
-                            
                             <td>
 
                                 <a onclick="javascript:printDiv('print')" class="ui right positive basic button print">
@@ -163,10 +160,10 @@ Designed by Gad Ocansey <gadocansey@gmail.com> +233243348522
                                 </a>
                             </td>
                         </tr>
-                        </table>
+                    </table>
                 </div>
-                
-                 
+
+
             </div>
             <div style="margin-top: 4px;">
             </div>
@@ -176,6 +173,7 @@ Designed by Gad Ocansey <gadocansey@gmail.com> +233243348522
             <div class="ui padded segment">
 
                 <div id="print">
+
                     <div id="page1">
                         <img src='~/assets/header.jpg' style="width:1086px;height: auto"
                              class="ui fluid image" />
@@ -183,8 +181,7 @@ Designed by Gad Ocansey <gadocansey@gmail.com> +233243348522
                         <br />
 
                         <center>
-                            APPLICATION NUMBER - @(ViewBag.applicant.ApplicationNumber) &nbsp;&nbsp;| APPLICATION TYPE -
-                            @(ViewBag.applicant.ApplicationUser.Type), ENTRY MODE - @(ViewBag.applicant.EntryMode.ToUpper())
+                            APPLICATION NUMBER - @(ViewBag.applicant.ApplicationNumber) &nbsp;&nbsp;| ENTRY MODE - @(ViewBag.applicant.EntryMode.ToUpper())
                         </center>
 
                         <p class="ui yellow table"><h4 style="text-transform: uppercase">Bio data</h4></p>
@@ -195,7 +192,7 @@ Designed by Gad Ocansey <gadocansey@gmail.com> +233243348522
                                 <td>
                                     <table class="folder table">
                                         <tr>
-                                            <td width="210"  style="text-transform:uppercase" class="uppercase" align="right"><strong>Title:</strong></td>
+                                            <td width="210" style="text-transform:uppercase" class="uppercase" align="right"><strong>Title:</strong></td>
                                             <td width="408" class="capitalize">
 
 
@@ -212,7 +209,7 @@ Designed by Gad Ocansey <gadocansey@gmail.com> +233243348522
                                         </tr>
                                         <tr>
                                             <td class="uppercase" style="" align="right"><strong>Previous Name:</strong></td>
-                                            <td class="capitalize" >@(ViewBag.applicant.PreviousName)</td>
+                                            <td class="capitalize">@(ViewBag.applicant.PreviousName)</td>
                                         </tr>
                                         <tr>
                                             <td class="uppercase" style="" align="right"><strong style="">Gender:</strong></td>
@@ -254,14 +251,14 @@ Designed by Gad Ocansey <gadocansey@gmail.com> +233243348522
                                 <td valign="top">
                                     <div class='ui medium image'>
 
-                                        
+
                                         <img style="width:266px;height:293px;margin-left: 85px" src="https://photos.ttuportal.com/public/albums/thumbnails/@(ViewBag.applicant.ApplicationNumber).jpg"
                                              onerror="this.onerror = function my()
     { return this.src = 'https://photos.ttuportal.com/public/albums/thumbnails/@(ViewBag.applicant.ApplicationNumber).jpeg'; };
     this.src = 'https://photos.ttuportal.com/public/albums/thumbnails/@(ViewBag.applicant.ApplicationNumber).JPG';"
                                              class="md-user-image"
-                                             asp-append-version="true"  alt="your passport photo"/>
-                                        
+                                             asp-append-version="true" alt="your passport photo" />
+
                                     </div>
                                 </td>
 
@@ -287,14 +284,10 @@ Designed by Gad Ocansey <gadocansey@gmail.com> +233243348522
                                     <table>
                                         <tr>
                                             <td class="uppercase" style=""><strong>Hometown Region:</strong></td>
-                                            <td class="capitalize" style="text-transform:capitalize">@(ViewBag.applicant.Region.Name)</td>
+                                            <td class="capitalize" style="text-transform:capitalize">@( ViewBag.applicant.Region == null ? "" : ViewBag.applicant.Region.Name)</td>
 
-                                        </tr>
-                                        <tr>
-                                            <td class="uppercase" style=""><strong>District:</strong></td>
-                                            <td class="capitalize" style="text-transform:capitalize">@(ViewBag.applicant.District.Name)</td>
+                                        </tr>  
 
-                                        </tr>
 
                                     </table>
                                 </td>
@@ -330,7 +323,19 @@ Designed by Gad Ocansey <gadocansey@gmail.com> +233243348522
                                         <tr>
 
                                             <td class="uppercase" style=""><strong>Nationality:</strong></td>
-                                            <td class="capitalize" style="text-transform:capitalize">@(ViewBag.applicant.Nationality.Name)</td>
+                                            <td class="capitalize" style="text-transform:capitalize">
+
+                                                @if(ViewBag.applicant.Nationality==238)
+                                                {
+                                                    <span>Ghanaian</span>
+                                                }
+                                                else
+                                                {
+                                                    <span>Foriegn</span>
+                                                }
+
+
+                                            </td>
 
                                         </tr>
                             </tr>
@@ -388,7 +393,7 @@ Designed by Gad Ocansey <gadocansey@gmail.com> +233243348522
                                 <td>
                                     <table>
                                         <tr>
-                                             
+
                                             <td class="uppercase" style=""><strong><div style="width: 125px">First Choice:</div></strong></td>
                                             <td class="capitalize" style="text-transform:capitalize">@form.GetProgrammeName(ViewBag.applicant.FirstChoiceId)</td>
 
@@ -441,7 +446,7 @@ Designed by Gad Ocansey <gadocansey@gmail.com> +233243348522
                                     <table>
                                         <tr>
                                             <td class="uppercase" style=""><strong>Former School:</strong></td>
-                                            <td class="capitalize" style="text-transform:capitalize">@(ViewBag.applicant.FormerSchoolNew.Name)</td>
+                                            <td class="capitalize" style="text-transform:capitalize">@(ViewBag.applicant.FormerSchool)</td>
 
                                         </tr>
                                         <tr>
@@ -470,51 +475,15 @@ Designed by Gad Ocansey <gadocansey@gmail.com> +233243348522
                                     </table>
                                 </td>
                             </tr>
-                            <tr>
-                                <td>
-                                    <table>
-                                        <tr>
-                                            <td class="uppercase" style=""><strong>Residential Status:</strong></td>
-                                            <td class="capitalize" style="text-transform:capitalize">@(ViewBag.applicant.ResidentialStatus)</td>
-
-                                        </tr>
-                                        @*<tr>
-                                            <td class="uppercase" style=""><strong>Preferred Hall:</strong></td>
-                                            <td class="capitalize" style="text-transform:capitalize">@(ViewBag.applicant.Hall.Name)</td>
-
-
-                                        </tr>*@
-
-                                    </table>
-                                </td>
-                                <td>
-
-                                    <table>
-                                        <tr>
-                                            <td class="uppercase" style=""><strong>Last Year In School:</strong></td>
-                                            <td class="capitalize" style="text-transform:capitalize">@(ViewBag.applicant.LastYearInSchool)</td>
-
-                                        </tr>
-                                        <tr>
-                                            <td class="uppercase" style=""><strong>Ghana Post GPRS:</strong></td>
-                                            <td class="capitalize" style="text-transform:capitalize">@(ViewBag.applicant.PostGPRS) </td>
-
-                                        </tr>
-
-                                    </table>
-
-
-                                </td>
-                            </tr>
-
+                             
 
 
                         </table>
 
 
                     </div>
-                    @if (Array.Find(forms, element => element == ViewBag.applicant.ApplicationUser.Type) != null)
-                    {
+
+                    
                         <div id="page3">
 
                             <p class="ui yellow table"><h4 style="text-transform: uppercase">Exams Results</h4></p>
@@ -543,9 +512,9 @@ Designed by Gad Ocansey <gadocansey@gmail.com> +233243348522
                                         <tr>
                                             <td>@result.Id</td>
                                             <td> @result.IndexNo</td>
-                                            <td> @System.Globalization.CultureInfo.CurrentCulture.TextInfo.ToTitleCase(@result.Subject.Name)</td>
-                                            <td> @result.Grade.Name</td>
-                                            <td>  @result.Grade.Value</td>
+                                            <td> @System.Globalization.CultureInfo.CurrentCulture.TextInfo.ToTitleCase(@result.OldSubject)</td>
+                                            <td> @result.GradeOld</td>
+                                            <td>  @result.GradeValueOld</td>
                                             <td>  @System.Globalization.CultureInfo.CurrentCulture.TextInfo.ToTitleCase(@result.ExamType)</td>
                                             <td> @result.Sitting</td>
                                             <td>  @System.Globalization.CultureInfo.CurrentCulture.TextInfo.ToTitleCase(@result.Month)</td>
@@ -563,7 +532,7 @@ Designed by Gad Ocansey <gadocansey@gmail.com> +233243348522
 
                         </div>
 
-                    }
+                   
                     <div id="page4" style="text-align:justify">
                         <p><h4>CORROBORATIVE DECLARATION</h4></p>
 
@@ -571,7 +540,7 @@ Designed by Gad Ocansey <gadocansey@gmail.com> +233243348522
                         <p></p>
                         <p>
                             1. This declaration should be signed by a person of high integrity and honour  and also satisfy
-                             that the examination grades indicated
+                            that the examination grades indicated
                             on the form by the applicant are true.
                         <p>2. The application will not be valid if the declaration below is not signed</p>
                         <p>
@@ -635,81 +604,67 @@ Designed by Gad Ocansey <gadocansey@gmail.com> +233243348522
 
 
 
-
-
-
             </div>
-
-
         </div>
 
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 
 
 
 
+        <script>$(document).ready(function () {
+                // Wrap each tr and td's content within a div
+                // (todo: add logic so we only do this when printing)
+                $("table tbody th, table tbody td").wrapInner("<div></div>");
+            })</script>
+        <script language="javascript" type="text/javascript">function printDiv(divID) {
+                //Get the HTML of div
+                var divElements = document.getElementById(divID).innerHTML;
+                //Get the HTML of whole page
+                var oldPage = document.body.innerHTML;
 
-    </div>
+                //Reset the page's HTML with div's HTML only
+                document.body.innerHTML =
+                    "<html><head><title></title></head><body>" +
+                    divElements + "</body>";
 
+                //Print Page
+                window.print();
 
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-
-
-
-
-    <script>$(document).ready(function () {
-            // Wrap each tr and td's content within a div
-            // (todo: add logic so we only do this when printing)
-            $("table tbody th, table tbody td").wrapInner("<div></div>");
-        })</script>
-    <script language="javascript" type="text/javascript">function printDiv(divID) {
-            //Get the HTML of div
-            var divElements = document.getElementById(divID).innerHTML;
-            //Get the HTML of whole page
-            var oldPage = document.body.innerHTML;
-
-            //Reset the page's HTML with div's HTML only
-            document.body.innerHTML =
-                "<html><head><title></title></head><body>" +
-                divElements + "</body>";
-
-            //Print Page
-            window.print();
-
-            //Restore orignal HTML
-            document.body.innerHTML = oldPage;
+                //Restore orignal HTML
+                document.body.innerHTML = oldPage;
 
 
-        }</script>
+            }</script>
 
-    <script>(function () {
-            var beforePrint = function () {
+        <script>(function () {
+                var beforePrint = function () {
 
-            };
-            var afterPrint = function () {
-                // do ajax for insert queries
-                $.ajax({
-                    url: "/form/print/update",
-                    success: function (data) {
-                        $("#responseArea").text(data);
-                    }
-                });
-            };
+                };
+                var afterPrint = function () {
+                    // do ajax for insert queries
+                    $.ajax({
+                        url: "/form/print/update",
+                        success: function (data) {
+                            $("#responseArea").text(data);
+                        }
+                    });
+                };
 
-            if (window.matchMedia) {
-                var mediaQueryList = window.matchMedia('print');
-                mediaQueryList.addListener(function (mql) {
-                    if (mql.matches) {
-                        beforePrint();
-                    } else {
-                        afterPrint();
-                    }
-                });
-            }
+                if (window.matchMedia) {
+                    var mediaQueryList = window.matchMedia('print');
+                    mediaQueryList.addListener(function (mql) {
+                        if (mql.matches) {
+                            beforePrint();
+                        } else {
+                            afterPrint();
+                        }
+                    });
+                }
 
-            window.onbeforeprint = beforePrint;
-            window.onafterprint = afterPrint;
-        }());</script>
+                window.onbeforeprint = beforePrint;
+                window.onafterprint = afterPrint;
+            }());</script>
 
 
 

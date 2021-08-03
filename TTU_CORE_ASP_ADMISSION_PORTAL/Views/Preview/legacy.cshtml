@@ -23,15 +23,15 @@ Designed by Gad Ocansey <gadocansey@gmail.com> +233243348522
 
     <style type="text/css" media="print">
 
-        #print{
-            text-align:right;
+        #print {
+            text-align: right;
         }
+
         .capitalize {
             text-transform: capitalize;
         }
 
         .ui.table td .uppercase {
-            
             text-align: right;
             text-transform: uppercase;
         }
@@ -40,9 +40,11 @@ Designed by Gad Ocansey <gadocansey@gmail.com> +233243348522
             body {
                 height: auto;
             }
+
             img {
                 -webkit-print-color-adjust: exact;
             }
+
             #print {
                 text-align: right;
             }
@@ -56,6 +58,7 @@ Designed by Gad Ocansey <gadocansey@gmail.com> +233243348522
                 text-align: right;
                 text-transform: uppercase;
             }
+
             table {
                 float: none !important;
             }
@@ -76,7 +79,6 @@ Designed by Gad Ocansey <gadocansey@gmail.com> +233243348522
             #page2 {
                 page-break-inside: avoid;
                 page-break-after: always;
-                 
             }
 
             #page3 {
@@ -110,9 +112,6 @@ Designed by Gad Ocansey <gadocansey@gmail.com> +233243348522
             tfoot {
                 display: table-footer-group
             }
-
-            
-
         }
 
         @@page {
@@ -145,7 +144,7 @@ Designed by Gad Ocansey <gadocansey@gmail.com> +233243348522
 
             <div class="ui two column stackable grid">
                 <div class="left aligned column" style="margin-left: 769px">
-                    <table> 
+                    <table>
                         <tr>
                             <td>
                                 <a asp-area="" asp-controller="Home" asp-action="Index" class="ui right positive basic button print">
@@ -154,7 +153,7 @@ Designed by Gad Ocansey <gadocansey@gmail.com> +233243348522
                             </td>
                             <td>&nbsp;</td>
 
-                            
+
                             <td>
 
                                 <a onclick="javascript:printDiv('print')" class="ui right positive basic button print">
@@ -163,10 +162,10 @@ Designed by Gad Ocansey <gadocansey@gmail.com> +233243348522
                                 </a>
                             </td>
                         </tr>
-                        </table>
+                    </table>
                 </div>
-                
-                 
+
+
             </div>
             <div style="margin-top: 4px;">
             </div>
@@ -184,7 +183,7 @@ Designed by Gad Ocansey <gadocansey@gmail.com> +233243348522
 
                         <center>
                             APPLICATION NUMBER - @(ViewBag.applicant.ApplicationNumber) &nbsp;&nbsp;| APPLICATION TYPE -
-                            @(ViewBag.applicant.ApplicationUser.Type), ENTRY MODE - @(ViewBag.applicant.EntryMode.ToUpper())
+                              ENTRY MODE - @(ViewBag.applicant.EntryMode.ToUpper())
                         </center>
 
                         <p class="ui yellow table"><h4 style="text-transform: uppercase">Bio data</h4></p>
@@ -195,7 +194,7 @@ Designed by Gad Ocansey <gadocansey@gmail.com> +233243348522
                                 <td>
                                     <table class="folder table">
                                         <tr>
-                                            <td width="210"  style="text-transform:uppercase" class="uppercase" align="right"><strong>Title:</strong></td>
+                                            <td width="210" style="text-transform:uppercase" class="uppercase" align="right"><strong>Title:</strong></td>
                                             <td width="408" class="capitalize">
 
 
@@ -212,7 +211,7 @@ Designed by Gad Ocansey <gadocansey@gmail.com> +233243348522
                                         </tr>
                                         <tr>
                                             <td class="uppercase" style="" align="right"><strong>Previous Name:</strong></td>
-                                            <td class="capitalize" >@(ViewBag.applicant.PreviousName)</td>
+                                            <td class="capitalize">@(ViewBag.applicant.PreviousName)</td>
                                         </tr>
                                         <tr>
                                             <td class="uppercase" style="" align="right"><strong style="">Gender:</strong></td>
@@ -254,14 +253,14 @@ Designed by Gad Ocansey <gadocansey@gmail.com> +233243348522
                                 <td valign="top">
                                     <div class='ui medium image'>
 
-                                        
+
                                         <img style="width:266px;height:293px;margin-left: 85px" src="https://photos.ttuportal.com/public/albums/thumbnails/@(ViewBag.applicant.ApplicationNumber).jpg"
                                              onerror="this.onerror = function my()
     { return this.src = 'https://photos.ttuportal.com/public/albums/thumbnails/@(ViewBag.applicant.ApplicationNumber).jpeg'; };
     this.src = 'https://photos.ttuportal.com/public/albums/thumbnails/@(ViewBag.applicant.ApplicationNumber).JPG';"
                                              class="md-user-image"
-                                             asp-append-version="true"  alt="your passport photo"/>
-                                        
+                                             asp-append-version="true" alt="your passport photo" />
+
                                     </div>
                                 </td>
 
@@ -287,13 +286,11 @@ Designed by Gad Ocansey <gadocansey@gmail.com> +233243348522
                                     <table>
                                         <tr>
                                             <td class="uppercase" style=""><strong>Hometown Region:</strong></td>
-                                            <td class="capitalize" style="text-transform:capitalize">@(ViewBag.applicant.Region.Name)</td>
-
+                                           
                                         </tr>
                                         <tr>
                                             <td class="uppercase" style=""><strong>District:</strong></td>
-                                            <td class="capitalize" style="text-transform:capitalize">@(ViewBag.applicant.District.Name)</td>
-
+                                           
                                         </tr>
 
                                     </table>
@@ -388,7 +385,7 @@ Designed by Gad Ocansey <gadocansey@gmail.com> +233243348522
                                 <td>
                                     <table>
                                         <tr>
-                                             
+
                                             <td class="uppercase" style=""><strong><div style="width: 125px">First Choice:</div></strong></td>
                                             <td class="capitalize" style="text-transform:capitalize">@form.GetProgrammeName(ViewBag.applicant.FirstChoiceId)</td>
 
@@ -441,8 +438,7 @@ Designed by Gad Ocansey <gadocansey@gmail.com> +233243348522
                                     <table>
                                         <tr>
                                             <td class="uppercase" style=""><strong>Former School:</strong></td>
-                                            <td class="capitalize" style="text-transform:capitalize">@(ViewBag.applicant.FormerSchoolNew.Name)</td>
-
+                                             
                                         </tr>
                                         <tr>
                                             <td class="uppercase" style=""><strong>Programme Studied:</strong></td>
@@ -479,11 +475,11 @@ Designed by Gad Ocansey <gadocansey@gmail.com> +233243348522
 
                                         </tr>
                                         @*<tr>
-                                            <td class="uppercase" style=""><strong>Preferred Hall:</strong></td>
-                                            <td class="capitalize" style="text-transform:capitalize">@(ViewBag.applicant.Hall.Name)</td>
+                                                <td class="uppercase" style=""><strong>Preferred Hall:</strong></td>
+                                                <td class="capitalize" style="text-transform:capitalize">@(ViewBag.applicant.Hall.Name)</td>
 
 
-                                        </tr>*@
+                                            </tr>*@
 
                                     </table>
                                 </td>
@@ -538,25 +534,7 @@ Designed by Gad Ocansey <gadocansey@gmail.com> +233243348522
                                 </thead>
                                 <tbody>
 
-                                    @foreach (var result in ViewBag.results)
-                                    {
-                                        <tr>
-                                            <td>@result.Id</td>
-                                            <td> @result.IndexNo</td>
-                                            <td> @System.Globalization.CultureInfo.CurrentCulture.TextInfo.ToTitleCase(@result.Subject.Name)</td>
-                                            <td> @result.Grade.Name</td>
-                                            <td>  @result.Grade.Value</td>
-                                            <td>  @System.Globalization.CultureInfo.CurrentCulture.TextInfo.ToTitleCase(@result.ExamType)</td>
-                                            <td> @result.Sitting</td>
-                                            <td>  @System.Globalization.CultureInfo.CurrentCulture.TextInfo.ToTitleCase(@result.Month)</td>
-                                            <td> @result.Year</td>
-
-
-                                            <td>  @System.Globalization.CultureInfo.CurrentCulture.TextInfo.ToTitleCase(@result.Center)</td>
-
-
-                                        </tr>
-                                    }
+                                     
                                 </tbody>
 
                             </table>
@@ -571,7 +549,7 @@ Designed by Gad Ocansey <gadocansey@gmail.com> +233243348522
                         <p></p>
                         <p>
                             1. This declaration should be signed by a person of high integrity and honour  and also satisfy
-                             that the examination grades indicated
+                            that the examination grades indicated
                             on the form by the applicant are true.
                         <p>2. The application will not be valid if the declaration below is not signed</p>
                         <p>

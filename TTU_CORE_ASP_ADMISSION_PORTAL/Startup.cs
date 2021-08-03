@@ -23,7 +23,6 @@ namespace TTU_CORE_ASP_ADMISSION_PORTAL
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
-
         }
 
         public IConfiguration Configuration { get; }
@@ -36,17 +35,20 @@ namespace TTU_CORE_ASP_ADMISSION_PORTAL
                     Configuration.GetConnectionString("DefaultConnection")));
             services.AddDatabaseDeveloperPageExceptionFilter();**/
 
-
+            /*services.AddCors(options => options.AddPolicy("ApiCorsPolicy",
+                builder => { builder.WithOrigins("https://srms.ttuportal.com").AllowAnyMethod().AllowAnyHeader(); }));
+                */
+           
+            
             services.AddDbContext<ApplicationDbContext>(options =>
-            options.UseNpgsql(
-            Configuration.GetConnectionString("DefaultConnection")));
+                options.UseNpgsql(
+                    Configuration.GetConnectionString("DefaultConnection")));
 
 
-            _ = services.AddDefaultIdentity<Models.ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
-               
+            _ = services
+                .AddDefaultIdentity<Models.ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultUI()
-
                 .AddDefaultTokenProviders();
             ;
 
@@ -73,7 +75,7 @@ namespace TTU_CORE_ASP_ADMISSION_PORTAL
 
                 // User settings.
                 options.User.AllowedUserNameCharacters =
-                "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+";
+                    "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+";
                 options.User.RequireUniqueEmail = true;
             });
 
@@ -86,19 +88,25 @@ namespace TTU_CORE_ASP_ADMISSION_PORTAL
                 options.ExpireTimeSpan = TimeSpan.FromMinutes(30);
 
                 options.LoginPath = $"/Identity/Account/Login";
-                
+
                 options.LogoutPath = $"/Identity/Account/Logout";
                 options.AccessDeniedPath = $"/Identity/Account/AccessDenied";
             });
             services.Configure<DataProtectionTokenProviderOptions>(o =>
-            o.TokenLifespan = TimeSpan.FromHours(3));
-           
+                o.TokenLifespan = TimeSpan.FromHours(3));
 
+           
+             
+          
             services.AddControllersWithViews();
             services.AddControllers();
+            services.AddCors(c =>
+            {
+                c.AddPolicy("AllowMyOrigin", options => options.WithOrigins(Configuration.GetSection("AllowedOrigins").Get<string[]>()));
+            });
             services.AddRazorPages();
             services.AddHealthChecks();
-            
+
             services.AddAuthentication();
             services.AddAuthorization();
             services.AddHealthChecks();
@@ -107,31 +115,30 @@ namespace TTU_CORE_ASP_ADMISSION_PORTAL
                 options.KnownProxies.Add(IPAddress.Parse("10.0.0.100"));
             });
             services.AddImageSharp(
-            options =>
-            {
-                // You only need to set the options you want to change here
-                // All properties have been listed for demonstration purposes
-                // only.
-                
-                options.MemoryStreamManager = new RecyclableMemoryStreamManager();
-                options.BrowserMaxAge = TimeSpan.FromDays(7);
-               // options.CacheMaxAge = TimeSpan.FromDays(365);
-               // options.CachedNameLength = 8;
-                options.OnParseCommandsAsync = _ => Task.CompletedTask;
-                options.OnBeforeSaveAsync = _ => Task.CompletedTask;
-                options.OnProcessedAsync = _ => Task.CompletedTask;
-                options.OnPrepareResponseAsync = _ => Task.CompletedTask;
-            });
+                options =>
+                {
+                    // You only need to set the options you want to change here
+                    // All properties have been listed for demonstration purposes
+                    // only.
+
+                    options.MemoryStreamManager = new RecyclableMemoryStreamManager();
+                    options.BrowserMaxAge = TimeSpan.FromDays(7);
+                    // options.CacheMaxAge = TimeSpan.FromDays(365);
+                    // options.CachedNameLength = 8;
+                    options.OnParseCommandsAsync = _ => Task.CompletedTask;
+                    options.OnBeforeSaveAsync = _ => Task.CompletedTask;
+                    options.OnProcessedAsync = _ => Task.CompletedTask;
+                    options.OnPrepareResponseAsync = _ => Task.CompletedTask;
+                });
 
             //services.AddImageResizer();
             //services.AddSingleton<IMageService>();
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-
+           
             app.UseForwardedHeaders(new ForwardedHeadersOptions
             {
                 ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
@@ -148,12 +155,12 @@ namespace TTU_CORE_ASP_ADMISSION_PORTAL
                 app.UseHsts();
             }
 
-
+           
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
             app.UseRouting();
-
+            //app.UseCors(options => options.AllowAnyOrigin());
             app.UseAuthentication();
             app.UseAuthorization();
             app.UseImageSharp();
@@ -163,7 +170,7 @@ namespace TTU_CORE_ASP_ADMISSION_PORTAL
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
-                
+
                 endpoints.MapHealthChecks("/health");
 
                 //endpoints.MapGet("/Identity/Account/Register", context => Task.Factory.StartNew(() => context.Response.Redirect("/Identity/Account/Login", true, true)));

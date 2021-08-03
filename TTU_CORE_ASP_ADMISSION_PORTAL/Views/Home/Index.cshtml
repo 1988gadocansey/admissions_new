@@ -6,62 +6,36 @@
 @{
     ViewBag.Title = "Dashboard";
     Layout = "~/Views/Shared/_Layout.cshtml";
-    string[] forms = { "HND", "MATURE", "DIPLOMA", "CERTIFICATE", "DEGREE" };
+    string[] forms = { "HND", "MATURE", "DIPLOMA", "CERTIFICATE", "DEGREE" ,"BTECH","MTECH","ACCELERATED"};
 }
 
 @{ var user = await UserManager.GetUserAsync(User); }
-
+@inject TTU_CORE_ASP_ADMISSION_PORTAL.Services.IHelper form
 <div class="uk-grid uk-grid-width-large-1-4 uk-grid-width-medium-1-2 uk-grid-medium " data-uk-sortable data-uk-grid-margin>
 
     <div>
         <div class="md-card">
             <div class="md-card-content">
                 <div class="uk-float-right uk-margin-top uk-margin-small-right"><span class="peity_sale peity_data">5,3,9,6,5,9,7,3,5,2</span></div>
-
-                @if (Array.Find(forms, element => element == user.Type) != null)
-                {
-
-
-                    <span class="uk-text-muted uk-text-small">Result Uploaded</span>
-                    <h4 class="uk-margin-remove">
-                        <span class="countUpMe" style="text-transform:capitalize">
-
-
-
-                            @if (user.ResultUploaded == false)
-                            {
-                                <span> No</span>
-                            }
-                            else
-                            {
-                                <span> Yes</span>
-                            }
-
-
-
+                <span class="uk-text-muted uk-text-small">Form Status</span>
+                <h4 class="uk-margin-remove">
+                    @if ((user.FormCompleted) == 1 && (user.Finalized) == 0)
+                    {
+                        <span>
+                            <a href="#" id="ama" class="final md-btn md-btn-danger uk-margin-small-top">Finalized Forms</a>
                         </span>
+
+                    }
+                    else if (user.Finalized == 1 && user.Admitted == false)
+                    {
+                        <span>Form Locked - Finalized</span>
+                    }
+                    else if (user.Admitted == true)
+                                        {
+                                            <span class="uk-text-success">Admitted. <a target="_blank" href="https://ttuportal.com/arms/@form.GetApplicantIdFromFormNo(user.FormNo)/letter/print">Click to print letter</a></span>
+                                            
+                                        }
                     </h4>
-
-                }
-                else
-                {
-                  
-
-
-                    <span class="uk-text-muted uk-text-small">Last Login</span>
-                    <h4 class="uk-margin-remove">
-                        <span class="countUpMe" style="text-transform:capitalize">
-
-
-
-                            @(user.LastLogin.Humanize())
-
-
-
-                        </span>
-                    </h4>
-                }
-
             </div>
         </div>
     </div>
@@ -70,11 +44,11 @@
         <div class="md-card">
             <div class="md-card-content">
                 <div class="uk-float-right uk-margin-top uk-margin-small-right"><span class="peity_visitors peity_data">5,3,9,6,5,9,7</span></div>
-                <span class="uk-text-muted uk-text-small">Form Details</span>
+                <span class="uk-text-muted uk-text-small">Form No.</span>
                 <h4 class="uk-margin-remove">
                     <span class="countUpMew">
 
-                        App No:  @(user.FormNo ) -  @(user.Type )
+                         @(user.FormNo ) -  @(user.Type )
 
 
 
@@ -88,23 +62,34 @@
         <div class="md-card">
             <div class="md-card-content">
                 <div class="uk-float-right uk-margin-top uk-margin-small-right"><span class="peity_orders peity_data">64/100</span></div>
-                <span class="uk-text-muted uk-text-small">Picture Upload</span>
+               @if (user.Admitted == true){
+                   <span class="uk-text-muted uk-text-small">Fees Paid</span>
+                   
+                   
 
+               }else{
+                   <span class="uk-text-muted uk-text-small">Photo</span>
+               }
 
+                 @if (user.Admitted == true)
+                 {
+                     <h4 class="uk-margin-remove"><span class="countUpMe">AUF: GHS(@ViewBag.fees)- Hall: GHS(@ViewBag.hallfeespaid)</span></h4>
 
+                 }
+                 else
+                 {
+                     @if ((user.PictureUploaded) == 1)
+                     {
 
-                @if ((user.PictureUploaded) == 1)
-                {
+                         <h4 class="uk-margin-remove"><span class="countUpMe">Uploaded</span></h4>
 
-                    <h4 class="uk-margin-remove"><span class="countUpMe">Yes</span></h4>
+                     }
+                     else
+                     {
+                         <h4 class="uk-margin-remove"><span class="countUpMe">No</span></h4>
+                     }
 
-                }
-                else
-                {
-                    <h4 class="uk-margin-remove"><span class="countUpMe">No</span></h4>
-                }
-
-
+                 }
 
 
 
@@ -115,33 +100,76 @@
         <div class="md-card">
             <div class="md-card-content">
                 <div class="uk-float-right uk-margin-top uk-margin-small-right"><span class="peity_live peity_data">5,3,9,6,5,9,7,3,5,2,5,3,9,6,5,9,7,3,5,2</span></div>
-                <span class="uk-text-muted uk-text-small">Form Completed</span>
-
-
-                @if ((user.FormCompleted) == 1)
+                @if (user.Admitted)
                 {
-
-                    <h4 class="uk-margin-remove" id="peity_live_text">
-                        Yes.
-                    </h4>
-
+                    <span class="uk-text-muted uk-text-small">Accommodation</span>
                 }
                 else
                 {
+                    <span class="uk-text-muted uk-text-small">Form Completed?</span>
+                }
+                
+                 @if (user.Admitted  && ViewBag.fees >1500 &&  ViewBag.room!="")
+                 {
+                     <h4 class="uk-margin-remove" id="peity_live_text">
+                     Hall Fees: (@ViewBag.hallfees):  Room: (@ViewBag.room) Booked.
+                     </h4>
+                 }
+                else if (user.Admitted)
+                {
                     <h4 class="uk-margin-remove" id="peity_live_text">
-                        No.
+                        @ViewBag.hallname - GHS @ViewBag.hallfees
                     </h4>
                 }
+                else if (user.Admitted  && ViewBag.fees >1500 &&  ViewBag.room=="")
+                {
+                    <h4 class="uk-margin-remove" id="peity_live_text">
+                       Pending.
+                    </h4>
+                }
+                 else
+                 {
+                     @if ((user.FormCompleted) == 1)
+                     {
 
+                         <h4 class="uk-margin-remove" id="peity_live_text">
+                            Yes
+                         </h4>
 
+                     }
+                     else
+                     {
+                         <h4 class="uk-margin-remove" id="peity_live_text">
+                             No.
+                         </h4>
+                     }
+                 }
+                </div>
+        </div>
+    </div>
+</div>
+@if (user.Admitted){
+<div class="uk-grid">
+    <div class="uk-width-1-1">
+        <div class="md-card">
 
+            <div class="md-card-content">
 
+                    <center><u>PROVISIONAL FEES AND CHARGES</u></center>
+                                          <p style=""> @Html.Raw(ViewBag.feedata)</p>
+                 
+                                        <p>You can pay your fees at any of the banks listed below.</p>
+                                       <p> <p style="margin-left: -10px"><img src="https://ttuportal.com/static/assets/bank.png"/></p>
+</p>
             </div>
         </div>
     </div>
 </div>
- 
-<div class="uk-grid">
+
+}
+else
+{
+    <div class="uk-grid">
     <div class="uk-width-1-1">
         <div class="md-card">
 
@@ -171,8 +199,7 @@
                                     @if ((user.PictureUploaded) == 1)
                                     {
 
-                                        <a class="md-btn   md-btn-primary uk-margin-small-top" asp-area="" asp-controller="Form" asp-action="Create">Start Application</a>
-
+                                        
 
                                     }
                                     else
@@ -184,7 +211,7 @@
                                     @if ((user.Finalized) == 1)
                                     {
 
-                                        <a class="md-btn   md-btn-primary uk-margin-small-top" asp-area="" asp-controller="Form" asp-action="PreviewForm">Preview Form</a>
+                                        <a class="md-btn   md-btn-primary uk-margin-small-top" asp-area="" asp-controller="Preview" asp-action="Index">Preview Form</a>
 
                                     }
 
@@ -198,3 +225,54 @@
         </div>
     </div>
 </div>
+}
+@section Scripts{
+
+    <script type="text/javascript">
+            $(document).ready(function () {
+
+
+                $(document).ready(function () {
+
+                    $('.final').click(function () {
+
+
+
+                        const name = 1;
+
+                        UIkit.modal.confirm("Are you sure you want to finalized the Admission Form?? "
+
+                            , function () {
+                                modal = UIkit.modal.blockUI("<div class='uk-text-center'>Ok finalizing admission forms...sending sms...  <br/><img class='uk-thumbnail uk-margin-top' src='assets/img/spinners/spinner.gif' /></div>");
+
+
+
+                                $.ajax({
+
+                                    url: "@Url.Action("Finanlized")",
+                                    type: "POST",
+                                    data: { id: name },
+                                    success: function (data) {
+                                        if (data.code === 1) {
+
+                                            UIkit.modal.alert("Form finalized successfully");
+                                            window.document.location = "/";
+                                        }
+                                        if (data.code === 0) {
+
+                                            UIkit.modal.alert("Error finalizing... please try again later");
+                                        }
+                                    }
+                                });//end of update button click function
+                            });
+                    });
+
+                });
+
+
+
+            })
+                ;
+
+    </script>
+}
